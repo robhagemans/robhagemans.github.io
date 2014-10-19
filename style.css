@@ -1,0 +1,197 @@
+/*
+ * Stylesheet by Rob Hagemans 2014
+ * Licence: CC0, if anyone cares.
+ */
+
+html, body {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    background-color: #fffff0;
+    margin: 0;
+    padding: 0;
+}
+
+/* 
+ * top of page content
+ */
+
+#pic {
+    background-color: #ddddff;
+    color: #001144;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow-x: hidden;
+    font-family: monospace;
+    max-height: 3em;
+}    
+
+#top {
+    background-color: #ddddff;
+    color: #001144;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+    overflow-x: hidden;
+    font-family: monospace;
+}    
+
+#top #desc {
+    padding: 0.5em;
+    margin: 0;
+    float: left;
+    padding-left: 6em;
+}
+
+
+#top #desc h1 {
+    margin: 0;
+    font-size: 2em;
+    vertical-align: bottom;
+}
+
+#top #desc a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* navigation bar */
+
+ul.nav{
+    float: right;
+    padding: 0;
+    max-width: 100%;
+    padding-right: 5em;
+    margin: 0;
+}
+
+ul.nav a {
+    float: left;
+    text-decoration: none;
+    font-family: monospace;
+/*    color: white; */
+    background-color: #ddddff;
+    color: #001144;
+    padding: 1em;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #001144;
+}
+
+ul.nav a:hover {
+    color: #004477;
+    background: white; /*#ccccff; */
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+    border-bottom-color: #0077aa;
+}
+
+
+ul.nav li {
+    display:inline;
+}    
+
+/* 
+ *   main content 
+ */
+
+#main {
+    margin: 0;
+    padding: 1em;
+    padding-left: 5em;
+    padding-right: 5em;
+    font-family: "Lucida Sans Unicode", sans;
+    color: #0077aa;
+    min-height: 80%;
+}
+
+/* top abstract */
+
+#main .wide {
+    max-width: 40em;
+    padding:0;
+    margin:0;
+    margin-top: 1em;
+    margin-bottom: 2em;
+    line-height: 150%;
+}
+
+/* download button */
+
+#main .button {
+    border-radius: 0.25em;
+    border-color: #0077aa;
+    background-color: #0077aa;
+    clear: both;
+    color: white;
+    font-size: 1.5em;
+    text-decoration: none;
+    padding: 0.25em;
+    padding-left: 1em;
+    padding-right: 1em;
+    font-weight: bold;
+}
+
+#main .button:hover {
+    background-color: #001144;
+}
+
+/* information cards */
+
+#main .card {
+    border: 1px dotted;
+    border-radius: 0.5em;
+    border-color: #ddddff;
+    padding-left: 1em;
+    padding-right: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    margin-right: 1.5em;
+    max-width: 18em;
+    font-size: 0.8em;
+    line-height: 170%;
+    float: left;
+    color: #001144;
+    min-height: 36em;
+}
+
+#main .card h2 {
+    color: #0077aa;
+    min-height: 2.5em;
+}
+
+#main .card .img {
+    position: relative;
+    min-height: 6em;
+    width: 18em;
+}
+
+#main .card .img img {
+    width: 18em;
+    height: 6em;
+    overflow: hidden;
+}
+
+/* 
+ * bottom notice 
+ */
+ 
+#bottom {
+    background-color: #ddddff;
+    color: #001144;
+    margin: 0;
+    border: 0;
+    left: 0;
+    bottom:0;
+    width: 100%;
+    overflow-x: hidden;
+    padding: 1em;
+    padding-left: 6em;
+    font-family: monospace;
+}    
+
+
