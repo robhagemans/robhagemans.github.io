@@ -19,42 +19,30 @@ body {
  * top of page content
  */
 
-#pic {
-    background-color: #ddddff;
-    color: #001144;
-    padding: 0;
-    margin: 0;
-    width: 100%;
-    overflow-x: hidden;
-    font-family: monospace;
-    max-height: 3em;
-}    
 
 #top {
     background-color: #ddddff;
     color: #001144;
     padding: 0;
+/*     padding-left: 1em; */
     margin: 0;
     width: 100%;
     overflow-x: hidden;
-    font-family: monospace;
+    font-family: 'VT323', monospace;
 }    
 
-#top #desc {
-    padding: 0.5em;
+#top h1 {
+    padding: 0.25em;
     margin: 0;
     float: left;
-    padding-left: 6em;
-}
-
-
-#top #desc h1 {
+    padding-left: 3em;
+    padding-right: 3em;
     margin: 0;
     font-size: 2em;
     vertical-align: bottom;
 }
 
-#top #desc a {
+#top a {
     text-decoration: none;
     color: inherit;
 }
@@ -65,14 +53,14 @@ ul.nav{
     float: right;
     padding: 0;
     max-width: 100%;
-    padding-right: 5em;
+    padding-right: 5em; 
     margin: 0;
 }
 
 ul.nav a {
     float: left;
     text-decoration: none;
-    font-family: monospace;
+    font-family: 'VT323', monospace;
 /*    color: white; */
     background-color: #ddddff;
     color: #001144;
@@ -95,34 +83,35 @@ ul.nav li {
     display:inline;
 }    
 
-/* 
- *   main content 
- */
-
-#main {
-    margin: 0;
-    padding: 1em;
-    padding-left: 5em;
-    padding-right: 5em;
-    font-family: "Lucida Sans Unicode", sans;
-    color: #0077aa;
-    min-height: 80%;
-}
 
 /* top abstract */
 
-#main .wide {
-    max-width: 40em;
-    padding:0;
+#abstract {
+    margin: 0;
+    font-family: 'Dosis', 'Lucida Sans Unicode', sans;
+    color: #0077aa;
+    background-image:url('background-top3.png');
+    background-repeat:no-repeat;
+    overflow:hidden;
+    border-bottom: solid 1px #0077aa;
+    border-top: solid 1px #001144;
+}
+
+
+#abstract .wide {
+    max-width: 21em;
+    float:right;
+    padding-left:1em;
+    padding-right:1.5em;
+    padding-bottom:2em;
     margin:0;
-    margin-top: 1em;
-    margin-bottom: 2em;
     line-height: 150%;
+    background-color: #fffff0;
 }
 
 /* download button */
 
-#main .button {
+#abstract .button {
     border-radius: 0.25em;
     border-color: #0077aa;
     background-color: #0077aa;
@@ -136,11 +125,23 @@ ul.nav li {
     font-weight: bold;
 }
 
-#main .button:hover {
+#abstract .button:hover {
     background-color: #001144;
+    color: #ddddff;
 }
 
 /* information cards */
+
+
+#main {
+    margin: 0;
+    padding: 1em;
+    padding-left: 5em;
+    padding-right: 5em;
+    font-family: 'Dosis', "Lucida Sans Unicode", sans;
+    color: #0077aa;
+    min-height: 80%;
+}
 
 #main .card {
     border: 1px dotted;
@@ -191,7 +192,8 @@ ul.nav li {
     overflow-x: hidden;
     padding: 1em;
     padding-left: 6em;
-    font-family: monospace;
+    font-family: 'VT323', monospace;
+    border-top: 1px solid #001144;
 }    
 
 
