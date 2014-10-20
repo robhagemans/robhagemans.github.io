@@ -24,12 +24,11 @@ body {
     background-color: #ddddff;
     color: #001144;
     padding: 0;
-/*     padding-left: 1em; */
     margin: 0;
     width: 100%;
     overflow-x: hidden;
     font-family: 'VT323', monospace;
-}    
+}
 
 #top h1 {
     padding: 0.25em;
@@ -61,7 +60,6 @@ ul.nav a {
     float: left;
     text-decoration: none;
     font-family: 'VT323', monospace;
-/*    color: white; */
     background-color: #ddddff;
     color: #001144;
     padding: 1em;
@@ -81,7 +79,7 @@ ul.nav a:hover {
 
 ul.nav li {
     display:inline;
-}    
+}
 
 
 /* top abstract */
@@ -135,47 +133,59 @@ ul.nav li {
 
 #main {
     margin: 0;
-    padding: 1em;
-    padding-left: 5em;
-    padding-right: 5em;
     font-family: 'Dosis', "Lucida Sans Unicode", sans;
     color: #0077aa;
     min-height: 80%;
 }
 
 #main .card {
-    border: 1px dotted;
-    border-radius: 0.5em;
+    border-bottom: 1px solid;
     border-color: #ddddff;
-    padding-left: 1em;
-    padding-right: 1em;
+    padding-left: 6em;
+    padding-right: 6em;
     margin-top: 1em;
-    margin-bottom: 1em;
-    margin-right: 1.5em;
-    max-width: 18em;
-    font-size: 0.8em;
+    font-size: 1em;
     line-height: 170%;
-    float: left;
     color: #001144;
-    min-height: 36em;
+    overflow: hidden;
+    vertical-align: middle;
 }
 
 #main .card h2 {
+    float: left;
+    min-height: 2em;
+    padding-top: 1em;
+    max-width: 15em;
+}
+
+#main .card p {
+    float: left;
+    padding-bottom: 4em;
+    max-width: 20em;
+}
+
+#main .card p a {
     color: #0077aa;
-    min-height: 2.5em;
+    font-style: italic;
 }
 
-#main .card .img {
+#main .card p a:visited {
+    color: #001144;
+    font-style: italic;
+}
+
+#main .card img {
     position: relative;
-    min-height: 6em;
     width: 18em;
+    height: auto;
+    float: right;
+    vertical-align: middle;
+    padding: 1em;
+    padding-top: 3em;
+    padding-bottom: 4em;
 }
 
-#main .card .img img {
-    width: 18em;
-    height: 6em;
-    overflow: hidden;
-}
+
 
 /* 
  * bottom notice 
@@ -194,6 +204,6 @@ ul.nav li {
     padding-left: 6em;
     font-family: 'VT323', monospace;
     border-top: 1px solid #001144;
-}    
+}
 
 
