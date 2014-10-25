@@ -162,18 +162,23 @@ ul.nav li {
 #main .card p {
     float: left;
     clear: left;
-    padding-bottom: 4em;
     max-width: 20em;
 }
 
-#main .card p a {
+#main .card a {
     color: #0077aa;
     font-style: italic;
+    text-align: center;
+    float: left;
+    clear: left;
 }
 
-#main .card p a:visited {
+#main .card a:visited {
     color: #001144;
     font-style: italic;
+    text-align: center;
+    float: left;
+    clear: left;
 }
 
 #main .card img {
