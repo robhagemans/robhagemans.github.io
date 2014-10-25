@@ -142,7 +142,6 @@ ul.nav li {
     border-bottom: 1px solid;
     border-color: #ddddff;
     padding-left: 6em;
-    padding-right: 6em;
     margin-top: 1em;
     font-size: 1em;
     line-height: 170%;
@@ -153,6 +152,8 @@ ul.nav li {
 
 #main .card h2 {
     float: left;
+    clear: left;
+    font-size: 1.33em;
     min-height: 2em;
     padding-top: 1em;
     max-width: 15em;
@@ -160,6 +161,7 @@ ul.nav li {
 
 #main .card p {
     float: left;
+    clear: left;
     padding-bottom: 4em;
     max-width: 20em;
 }
@@ -183,6 +185,8 @@ ul.nav li {
     padding: 1em;
     padding-top: 3em;
     padding-bottom: 4em;
+    padding-left: 6em;
+    padding-right: 6em;
 }
 
 
@@ -206,4 +210,10 @@ ul.nav li {
     border-top: 1px solid #001144;
 }
 
+#bottom a {
+	color: #001144;
+}
 
+#bottom a:visited {
+	color: #001144;
+}
