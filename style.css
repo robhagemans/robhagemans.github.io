@@ -26,19 +26,8 @@ body {
     padding: 0;
     margin: 0;
     width: 100%;
-    overflow-x: hidden;
+    overflow-x: hidden; 
     font-family: 'VT323', monospace;
-}
-
-#top h1 {
-    padding: 0.25em;
-    margin: 0;
-    float: left;
-    padding-left: 3em;
-    padding-right: 3em;
-    margin: 0;
-    font-size: 2em;
-    vertical-align: bottom;
 }
 
 #top a {
@@ -46,14 +35,12 @@ body {
     color: inherit;
 }
 
+
 /* navigation bar */
 
-ul.nav{
-    float: right;
+ul.nav {
     padding: 0;
     max-width: 100%;
-    padding-right: 5em; 
-    margin: 0;
 }
 
 ul.nav a {
@@ -81,30 +68,12 @@ ul.nav li {
     display:inline;
 }
 
-
 /* top abstract */
-
 #abstract {
-    margin: 0;
     font-family: 'Dosis', 'Lucida Sans Unicode', sans;
     color: #0077aa;
-    background-image:url('background-top3.png');
-    background-repeat:no-repeat;
-    overflow:hidden;
     border-bottom: solid 1px #0077aa;
     border-top: solid 1px #001144;
-}
-
-
-#abstract .wide {
-    max-width: 21em;
-    float:right;
-    padding-left:1em;
-    padding-right:1.5em;
-    padding-bottom:2em;
-    margin:0;
-    line-height: 150%;
-    background-color: #fffff0;
 }
 
 /* download button */
@@ -128,8 +97,15 @@ ul.nav li {
     color: #ddddff;
 }
 
-/* information cards */
 
+#main .card h2 {
+    float: left;
+    clear: left;
+    font-size: 1.33em;
+    min-height: 2em;
+    padding-top: 1em;
+    max-width: 15em;
+}
 
 #main {
     margin: 0;
@@ -141,23 +117,18 @@ ul.nav li {
 #main .card {
     border-bottom: 1px solid;
     border-color: #ddddff;
-    padding-left: 6em;
     margin-top: 1em;
     font-size: 1em;
     line-height: 170%;
     color: #001144;
     overflow: hidden;
     vertical-align: middle;
+    max-width: 60em;
+    margin-left:auto;
+    margin-right:auto;
 }
 
-#main .card h2 {
-    float: left;
-    clear: left;
-    font-size: 1.33em;
-    min-height: 2em;
-    padding-top: 1em;
-    max-width: 15em;
-}
+
 
 #main .card p {
     float: left;
@@ -181,21 +152,6 @@ ul.nav li {
     clear: left;
 }
 
-#main .card img {
-    position: relative;
-    width: 18em;
-    height: auto;
-    float: right;
-    vertical-align: middle;
-    padding: 1em;
-    padding-top: 3em;
-    padding-bottom: 4em;
-    padding-left: 6em;
-    padding-right: 6em;
-}
-
-
-
 /* 
  * bottom notice 
  */
@@ -209,16 +165,158 @@ ul.nav li {
     bottom:0;
     width: 100%;
     overflow-x: hidden;
-    padding: 1em;
-    padding-left: 6em;
     font-family: 'VT323', monospace;
     border-top: 1px solid #001144;
 }
 
 #bottom a {
-	color: #001144;
+    color: #001144;
 }
 
 #bottom a:visited {
-	color: #001144;
+    color: #001144;
 }
+
+@media (max-width: 58em) {
+
+    #top .header {
+        width: 75%;
+        margin:auto;
+    }
+    
+    #top h1 {
+        padding: 0.25em;
+        padding-left: 0.4em; 
+        max-width: 15em;
+        font-size: 2em;
+        vertical-align: bottom; 
+    }
+    
+    #abstract .wide {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+        line-height: 150%;
+        background-color: #fffff0;
+        padding-left:3em;
+        padding-right:3em;
+        padding-bottom:2em;
+    }
+
+    #abstract .wide p {
+        max-width: 18em;
+
+    }
+    
+    #main {
+        width: 75%;
+        margin-left:auto;
+        margin-right:auto; 
+    }
+     
+    #main .card {
+        padding-bottom: 2em;
+    }
+    
+    #main .card h2 {
+    }
+
+    #main .card p {
+    }
+    
+    #main .card img {
+        float:left;
+        clear:left;
+        position: relative;
+        width: 85%;
+        max-width: 18em;
+        height: auto;
+        padding-left:0;
+        padding-right:0;
+        padding-top:0;
+        padding-bottom:0;
+    }
+    
+    
+    #bottom .footer {
+        width: 75%;
+        margin-left: auto;
+        margin-right: auto;
+        padding-bottom: 1em;
+    }
+}    
+
+
+
+@media (min-width: 58em) {
+
+    ul.nav{
+        float: right;
+        padding-right: 5em; 
+        margin: 0;
+    }
+
+    #top h1 {
+        padding: 0.25em;
+        margin: 0;
+        float: left;
+        padding-left: 3em;
+        padding-right: 3em;
+        margin: 0;
+        font-size: 2em;
+        vertical-align: bottom;
+    }
+
+    #abstract {
+        margin: 0;
+        background-image:url('background-top3.png');
+        background-repeat:no-repeat;
+        overflow:hidden;
+    }
+
+
+
+    #abstract .wide {
+        max-width: 21em;
+        float:right;
+        padding-left:1em;
+        padding-right:1.5em;
+        padding-bottom:2em;
+        margin:0;
+        line-height: 150%;
+        background-color: #fffff0;
+    }
+
+
+    /* information cards */
+
+    #main .card {
+        padding-left: 6em;
+    }
+
+
+
+
+    #main .card img {
+        position: relative;
+        width: 18em;
+        height: auto;
+        float: right;
+        vertical-align: middle;
+    /*    padding: 1em;*/
+        padding-top: 3em;
+        padding-bottom: 4em;
+        padding-left: 6em;
+        padding-right: 6em;
+    }
+
+    #bottom {
+        padding: 1em;
+        padding-left: 6em;
+    }
+
+
+}
+
