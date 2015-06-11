@@ -83,18 +83,39 @@ ul.nav li {
     border-color: #0077aa;
     background-color: #0077aa;
     clear: both;
+    display:inline-block;
     color: white;
-    font-size: 1.5em;
     text-decoration: none;
-    padding: 0.25em;
-    padding-left: 1em;
-    padding-right: 1em;
-    font-weight: bold;
+    border: 0.2em solid #0077aa;
+    padding: 0.3em 2.5em 0.3em 2.5em;
 }
 
-#abstract .button:hover {
-    background-color: #001144;
-    color: #ddddff;
+
+#abstract .button a, .button a:visited {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+#abstract .button:hover a, #abstract .button:hover, #abstract .button a:hover {
+    background-color: #ddddff;
+    color: #0077aa;
+}
+
+#abstract .button a p {
+    line-height: 30%;
+    font-size: 0.5em;
+    font-weight: normal;
+}
+
+#abstract p.small{
+    line-height: 50%;
+    font-size: 0.8em;
+}
+
+#abstract a, a:visited {
+    color: #0077aa;
 }
 
 
@@ -129,7 +150,6 @@ ul.nav li {
 }
 
 
-
 #main .card p {
     float: left;
     clear: left;
@@ -151,6 +171,27 @@ ul.nav li {
     float: left;
     clear: left;
 }
+
+
+/* 
+ * downloasds page 
+ */
+
+#main .wide {
+    border-top: solid 1px #001144;
+    font-size: 1em;
+    line-height: 170%;
+    color: #001144;
+    overflow: hidden;
+    vertical-align: middle;
+    padding-left: 6em;
+    padding-right: 6em;
+}
+
+#main .wide p, #main .wide ul {
+    max-width: 60em;
+}
+
 
 /* 
  * bottom notice 

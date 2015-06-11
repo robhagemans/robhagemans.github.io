@@ -2,20 +2,65 @@
 <html>
 
 <head>
-	<title>PC-BASIC 3.23</title>
+	<title>PC-BASIC</title>
 	<link rel="stylesheet" type="text/css" href="style.css">
 	<link rel="shortcut icon" href="icon.png">
 	<meta charset="utf-8">
 	<link href='http://fonts.googleapis.com/css?family=Dosis:300,700|VT323' rel='stylesheet' type='text/css'>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+    $.getJSON("https://api.github.com/repos/robhagemans/pcbasic/releases/latest", function(result) {
+        var suffix_win32 = '-win32.exe';
+        var plat_win32 = "Windows (32-bit)";
+        var suffix_linux32 = '-linux-i386.tgz';
+        var plat_linux32 = "Linux (32-bit x86)";
+        var suffix_linux64 = '-linux-x86_64.tgz';
+        var plat_linux64 = "Linux (64-bit x86)";
+        var suffix_osx = '-osx.dmg';
+        var plat_osx = "OS X (10.6+)";
+        var suffix_src = '.tgz';
+        
+        switch (window.navigator.platform) {
+        case 'Win32':
+            suffix = suffix_win32;
+            plat = plat_win32;
+            break;
+        case 'Linux i686':
+            suffix = suffix_linux32;
+            plat = plat_linux32;
+            break;
+        case 'Linux x86_64':
+            suffix = suffix_linux64;
+            plat = plat_linux64
+            break;
+        case 'MacIntel':
+            suffix = suffix_osx;
+            plat = plat_osx;
+            break;
+        default:
+            suffix = suffix_src;
+        }
+        var downloadURLbase = "https://github.com/robhagemans/pcbasic/releases/download/" 
+                        + result.tag_name + "/pcbasic-" + result.tag_name;
+        var downloadURL = downloadURLbase + suffix
+        $("p.maindownloaddesc").append("Release " + result.tag_name + " for " + plat);
+        $("a.maindownload").attr('href', downloadURL);
+    });
+});
+
+
+</script>
 </head>
 
 <body>
 	<div id="top">
 	    <div class="header">
-		    <h1><a href="index.html">PC-BASIC 3.23</a></h1>
+		    <h1><a href="index.html">PC-BASIC</a></h1>
 		    <ul class="nav">
-			    <li><a href="https://github.com/robhagemans/pcbasic/releases/latest">Download</a></li>
+			    <li><a href="download.html">Download</a></li>
 			    <li><a href="https://github.com/robhagemans/pcbasic/">Source</a></li>
 			    <li><a href="doc/">Documentation</a></li>
 			    <li><a href="https://sourceforge.net/p/pcbasic/discussion/">Discuss</a></li>
@@ -26,11 +71,16 @@
 	<div id="abstract">
 		<div class="wide">
 			<p><strong>
-			An interpreter for <em>GW-BASIC</em>, <em>BASICA</em>, <em>PCjr Cartridge Basic</em> and <em>Tandy 1000 GW-BASIC</em>.<br />
+			Free, cross-platform emulator for <em>GW-BASIC</em> and related Microsoft BASICs.<br />
 			</strong>
-			Free and open source, PC-BASIC runs on all modern desktop operating systems.
 			</p>
-			<a class="button" href="https://github.com/robhagemans/pcbasic/releases/latest">Get PC-BASIC</a>
+			<div class="button">
+			    <a class="maindownload" href="https://github.com/robhagemans/pcbasic/releases/latest" >Get PC-BASIC
+			    <p class="small maindownloaddesc"></p></a>
+            </div>
+            <p class="small">
+		    <a href="https://github.com/robhagemans/pcbasic/releases/latest">Download PC-BASIC for other operating systems</a>
+		    </p>
 		</div>
 	</div>
 
