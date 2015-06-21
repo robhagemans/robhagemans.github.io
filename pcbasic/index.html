@@ -15,26 +15,15 @@ $(document).ready(function(){
     $.getJSON("https://api.github.com/repos/robhagemans/pcbasic/releases/latest", function(result) {
         var suffix_win32 = '-win32.exe';
         var plat_win32 = "Windows (32-bit)";
-        var suffix_linux32 = '-linux-i386.tgz';
-        var plat_linux32 = "Linux (32-bit x86)";
-        var suffix_linux64 = '-linux-x86_64.tgz';
-        var plat_linux64 = "Linux (64-bit x86)";
         var suffix_osx = '-osx.dmg';
         var plat_osx = "OS X (10.6+)";
         var suffix_src = '.tgz';
+        var plat_src = "Linux and Unix"
         
         switch (window.navigator.platform) {
         case 'Win32':
             suffix = suffix_win32;
             plat = plat_win32;
-            break;
-        case 'Linux i686':
-            suffix = suffix_linux32;
-            plat = plat_linux32;
-            break;
-        case 'Linux x86_64':
-            suffix = suffix_linux64;
-            plat = plat_linux64
             break;
         case 'MacIntel':
             suffix = suffix_osx;
@@ -42,6 +31,7 @@ $(document).ready(function(){
             break;
         default:
             suffix = suffix_src;
+            plat = plat_src
         }
         var downloadURLbase = "https://github.com/robhagemans/pcbasic/releases/download/" 
                         + result.tag_name + "/pcbasic-" + result.tag_name;
