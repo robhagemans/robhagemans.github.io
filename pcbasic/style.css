@@ -174,7 +174,7 @@ ul.nav li {
 
 
 /* 
- * downloasds page 
+ * downloads page
  */
 
 #main .wide {
@@ -193,6 +193,30 @@ ul.nav li {
 }
 
 
+th {
+    text-align: left;
+    background-color: #ccccdd;
+}
+
+table {
+    font-size: 100%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    line-height: 140%;
+    border-bottom: 1px dotted lightblue;
+}
+
+tr:nth-child(odd)		{ background-color:#eeeeff; }
+tr:nth-child(even)		{ background-color:#ffffff; }
+
+td, th {
+    padding-left: 1em;
+    padding-right: 1em;
+    vertical-align: middle;
+    height: 3em;
+}
+
+
 /* 
  * bottom notice 
  */
@@ -208,6 +232,7 @@ ul.nav li {
     overflow-x: hidden;
     font-family: 'VT323', monospace;
     border-top: 1px solid #001144;
+    /*position: absolute;*/
 }
 
 #bottom a {
@@ -217,6 +242,12 @@ ul.nav li {
 #bottom a:visited {
     color: #001144;
 }
+
+
+
+/*
+ * adaptive
+ */
 
 @media (max-width: 58em) {
 

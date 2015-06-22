@@ -14,60 +14,24 @@
 $(document).ready(function(){
     $.getJSON("https://api.github.com/repos/robhagemans/pcbasic/releases/latest", function(result) {
         var suffix_win32 = '-win32.exe';
-        var plat_win32 = "Windows (32-bit)";
-        var suffix_linux32 = '-linux-i386.tgz';
-        var plat_linux32 = "Linux (32-bit x86)";
-        var suffix_linux64 = '-linux-x86_64.tgz';
-        var plat_linux64 = "Linux (64-bit x86)";
+        var plat_win32 = "Windows";
         var suffix_osx = '-osx.dmg';
-        var plat_osx = "OS X (10.6+)";
+        var plat_osx = "OS X";
         var suffix_src = '.tgz';
-        
-        switch (window.navigator.platform) {
-        case 'Win32':
-            suffix = suffix_win32;
-            plat = plat_win32;
-            break;
-        case 'Linux i686':
-            suffix = suffix_linux32;
-            plat = plat_linux32;
-            break;
-        case 'Linux x86_64':
-            suffix = suffix_linux64;
-            plat = plat_linux64
-            break;
-        case 'MacIntel':
-            suffix = suffix_osx;
-            plat = plat_osx;
-            break;
-        default:
-            suffix = suffix_src;
-        }
-        var downloadCount = 0;
-        var downloadURLbase = "https://github.com/robhagemans/pcbasic/releases/download/" 
+        var plat_src = "Linux and Unix";
+        var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
                         + result.tag_name + "/pcbasic-" + result.tag_name;
-        var downloadURL = downloadURLbase + suffix
-        /*
-        for (var i = 0; i < result.assets.length; i++) {
-            downloadCount += result.assets[i].download_count;
-        }
-        var releaseInfo = result.name + " was updated " + result.assets[0].updated_at + " and downloaded " + downloadCount + " times.";
-        */
+        // result.assets[i].updated_at
+        // result.assets[i].download_count
         // windows
-        $("a.win32-link").attr('href', downloadURLbase + suffix_win32);
-        $("a.win32-link").text("PC-BASIC release " + result.tag_name + " for " + plat_win32);
+        $("a.win32-link").attr('href', url_base + suffix_win32);
+        $("a.win32-link").text("PC-BASIC " + result.tag_name + " for " + plat_win32);
         // osx
-        $("a.osx-link").attr('href', downloadURLbase + suffix_osx);
-        $("a.osx-link").text("PC-BASIC release " + result.tag_name + " for " + plat_osx);
-        // i386
-        $("a.linux32-link").attr('href', downloadURLbase + suffix_linux32);
-        $("a.linux32-link").text("PC-BASIC release " + result.tag_name + " for " + plat_linux32);
-        // x86_64
-        $("a.linux64-link").attr('href', downloadURLbase + suffix_linux64);
-        $("a.linux64-link").text("PC-BASIC release " + result.tag_name + " for " + plat_linux64);
+        $("a.osx-link").attr('href', url_base + suffix_osx);
+        $("a.osx-link").text("PC-BASIC " + result.tag_name + " for " + plat_osx);
         // src
-        $("a.src-link").attr('href', downloadURLbase + suffix_src);
-        $("a.src-link").text("PC-BASIC source release " + result.tag_name);
+        $("a.src-link").attr('href', url_base + suffix_src);
+        $("a.src-link").text("PC-BASIC " + result.tag_name + " for " + plat_src);
     });
 });
 
@@ -92,13 +56,19 @@ $(document).ready(function(){
 	    <div class="wide">
 			<h2>Latest development releases</h2>
             <table><tr>
+            <th></th>
+            <th>Release</th>
+            <th>Requirements</th>
+            </tr><tr>
             <td><img src="windows.png" style="width:2em;" alt="Windows"></td>
             <td><a class="win32-link" href="https://github.com/robhagemans/pcbasic/releases/latest">
             PC-BASIC release page on GitHub</a></td>
+            <td>Windows XP and above</td>
             </tr><tr>
             <td><img src="apple.png" style="width:2em;" alt="OS X"></td>
             <td><a class="osx-link" href="https://github.com/robhagemans/pcbasic/releases/latest">
             PC-BASIC release page on GitHub</a></td>
+            <td>OS X 10.6 and above</td>
             </tr><tr>
             <!--
             <td><img src="tux.png" style="width:2em;" alt="Linux 64-bit"
@@ -106,15 +76,11 @@ $(document).ready(function(){
             <td><a class="linux64-link" href="https://github.com/robhagemans/pcbasic/releases/latest">
             PC-BASIC release page on GitHub</a></td>
             </tr><tr>
-            <td><img src="tux.png" style="width:2em;"  alt="Linux 32-bit"
-                    title="Tux logo: Crystal 128 penguin by Everaldo Coelho (YellowIcon)"></td>
-            <td><a class="linux32-link" href="https://github.com/robhagemans/pcbasic/releases/latest">
-            PC-BASIC release page on GitHub</a></td>
-            </tr><tr>
             -->
             <td><img src="python.png" style="width:2em;" alt="Python"/></td>
             <td><a class="src-link" href="https://github.com/robhagemans/pcbasic/releases/latest">
             PC-BASIC release page on GitHub</a></td>
+            <td>Linux, FreeBSD or any other systems supporting Python 2.7</td>
             </tr></table>
             <p>PC-BASIC will run on any system that supports Python. The packaged releases for Windows, OS X run out of the box. So does the source release on Debian, Ubuntu, Mint and Fedora on all architectures. On other Linux and Unix systems, the source distribution will install automatically but you will need to manually install dependencies.        
              See the <a href="https://github.com/robhagemans/pcbasic/blob/release-15.03/README.md">PC-BASIC README</a> for a list of packages and installation instructions.
@@ -124,6 +90,7 @@ $(document).ready(function(){
 	        PC-BASIC is still in beta; there is as of yet no stable release available. However, the development releases are generally very usable. Should you find a bug or wish to request a feature, please post a message on <a href="https://sourceforge.net/p/pcbasic/discussion/">the discussion page</a>.</p>
         </div>
 	</div>
+
 
 	<div id="bottom">
 	    <div class="footer">

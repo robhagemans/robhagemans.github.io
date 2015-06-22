@@ -15,9 +15,9 @@
 $(document).ready(function(){
     $.getJSON("https://api.github.com/repos/robhagemans/pcbasic/releases/latest", function(result) {
         var suffix_win32 = '-win32.exe';
-        var plat_win32 = "Windows (32-bit)";
+        var plat_win32 = "Windows";
         var suffix_osx = '-osx.dmg';
-        var plat_osx = "OS X (10.6+)";
+        var plat_osx = "OS X";
         var suffix_src = '.tgz';
         var plat_src = "Linux and Unix"
         
@@ -35,11 +35,10 @@ $(document).ready(function(){
             suffix = suffix_src;
             plat = plat_src
         }
-        var downloadURLbase = "https://github.com/robhagemans/pcbasic/releases/download/" 
+        var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
                         + result.tag_name + "/pcbasic-" + result.tag_name;
-        var downloadURL = downloadURLbase + suffix
         $("p.maindownloaddesc").append("Release " + result.tag_name + " for " + plat);
-        $("a.maindownload").attr('href', downloadURL);
+        $("a.maindownload").attr('href', url_base + suffix);
     });
 });
 
