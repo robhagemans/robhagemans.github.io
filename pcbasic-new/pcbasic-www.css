@@ -1,0 +1,359 @@
+/*
+    This CSS code is based on the PureCSS code
+    and the examples at http://purecss.io/
+
+    LICENCE:
+    Copyright 2013 Yahoo! Inc. All rights reserved.
+    Copyright 2015 Rob Hagemans.
+
+    Redistribution and use in source and binary forms, with or without modification,
+    are permitted provided that the following conditions are met:
+
+    * Redistributions of source code must retain the above copyright
+      notice, this list of conditions and the following disclaimer.
+
+    * Redistributions in binary form must reproduce the above copyright
+      notice, this list of conditions and the following disclaimer in the
+      documentation and/or other materials provided with the distribution.
+
+    * Neither the name of the Yahoo! Inc. nor the
+      names of its contributors may be used to endorse or promote products
+      derived from this software without specific prior written permission.
+
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+    ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+    WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED.
+    IN NO EVENT SHALL YAHOO! INC. BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+    SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO,
+    PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR
+    BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+    CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
+    IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
+    OF SUCH DAMAGE.
+*/
+
+
+/*
+ * General styling
+ */
+
+/* Use VGA bitfont throughout the page */
+
+@font-face {
+  font-family: vga;
+  src: url('ttf-font/freedos_16.eot'); /* IE9 Compat Modes */
+  src: url('ttf-font/freedos_16.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('ttf-font/freedos_16.woff') format('woff'), /* Pretty Modern Browsers */
+       url('ttf-font/freedos_16.ttf')  format('truetype') /* Safari, Android, iOS */
+}
+
+@font-face {
+    font-family: vga;
+    font-weight: bold;
+    src: url('ttf-font/freedos_08.eot'); /* IE9 Compat Modes */
+    src: url('ttf-font/freedos_08.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+         url('ttf-font/freedos_08.woff') format('woff'), /* Pretty Modern Browsers */
+         url('ttf-font/freedos_08.ttf')  format('truetype') /* Safari, Android, iOS */
+}
+
+* {
+    font-family: vga;
+}
+
+/* Ensure borders don't mess up the grid */
+
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Use wide spacing and grey text by default */
+
+body {
+    line-height: 1.7em;
+    color: #aaaaaa;
+}
+
+/* Dark grey for headers and labels */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+label {
+    color: #555555;
+}
+
+/*
+ * -- LAYOUT STYLES --
+ */
+.l-box {
+    padding: 1em;
+}
+
+.is-center {
+    text-align: center;
+}
+
+
+
+/*
+ * Links and buttons
+ */
+
+a, a:visited {
+    color: #aaaaaa;
+}
+
+a:hover {
+    color: white;
+}
+
+a.pure-button-primary {
+    font-weight: bold;
+    background-color: #008800;
+    color: white;
+}
+
+.note {
+    font-size: 0.6em;
+    display: block;
+    padding: 0.4em;
+    letter-spacing: 0.08em;
+    font-weight: normal;
+}
+
+/*
+ * -- MENU STYLES --
+ */
+
+.pure-menu {
+    border-bottom: 1em solid #aaaaaa;
+}
+
+.home-menu {
+    text-align: center;
+}
+.home-menu {
+    background: #0000aa;
+}
+
+.pure-menu.pure-menu-fixed {
+    /* I need a higher z-index here because of the scroll-over effect. */
+    position: relative;
+    z-index: 1;
+}
+
+.home-menu .pure-menu-heading {
+    color: white;
+    font-weight: bold;
+    font-size: 120%;
+}
+
+/* Navigation links */
+
+.home-menu a {
+    color: #00aaaa;
+}
+.home-menu li a:hover,
+.home-menu li a:focus {
+    background: none;
+    border: none;
+    color: #55ffff;
+}
+
+.home-menu .pure-menu-selected a {
+    color: #aaaaaa;
+}
+
+.home-menu .pure-menu-selected a:hover {
+    color: white;
+}
+
+
+/*
+ * -- SPLASH STYLES --
+ */
+
+
+ .splash-container {
+     width: 100%;
+     height: 100%;
+     position:relative;
+ }
+
+
+.splash {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    position: absolute;
+    top: 7em; left: 0; bottom: 0; right: 0;
+    text-align: center;
+}
+
+.splash-head {
+    color: white;
+    padding: 0.5em 0.8em 1.5em 0.8em;
+    line-height: 1.2em;
+    width: 100%;
+    margin: auto;
+    text-align: center;
+    background-color: rgba(170, 85, 0, 0.5); /*rgba(0,0,255,0.5);*/
+}
+
+
+/*
+ * -- CONTENT STYLES --
+ */
+
+
+/* This is the class used for the main content headers (<h2>) */
+.content-head {
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin: 2em 0 1em;
+}
+
+
+/* This is the class used for the content sub-headers (<h3>) */
+.content-subhead {
+    color: #0000aa; /*#1f8dd6;*/
+}
+
+/* dark background */
+
+.content-dark, .content-dark-2 {
+    background-color:black;
+}
+.content-dark .content-subhead {
+    color: #00aa00; /*#1f8dd6;*/
+}
+.content-dark-2 .content-subhead {
+    color: #00aaaa; /*#1f8dd6;*/
+}
+
+span.icon {
+    color: #5555ff;
+}
+
+
+/* This is the class used for the footer */
+.footer {
+    background: #555555;
+    font-size: 0.7em;
+}
+
+/* HORIZONTAL MENU from pure.io source code, modified to
+   be vertical on mobile, horizontal elsewhere. */
+
+.pure-menu-responsive {
+    width: 100%;
+    white-space: nowrap;
+}
+
+
+
+/*
+ * -- TABLET (AND UP) MEDIA QUERIES --
+ */
+
+@media (min-width: 48em) {
+
+    /* We increase the body font size */
+    body {
+        font-size: 1.2em;
+    }
+
+    /* scrolled-over container */
+
+    .scrollover-container {
+        z-index: 1;
+        overflow: hidden;
+        width: 100%;
+        height: 88%;
+        top: 14.5em;
+        left: 0;
+        position: fixed !important;
+    }
+
+    .content-wrapper {
+        position: absolute;
+        top: 87%;
+        width: 100%;
+        min-height: 12%;
+        z-index: 2;
+        background: white;
+
+    }
+
+
+    /* We want to give the content area some more padding */
+    .content, .content-dark, .content-dark-2 {
+        padding: 1em;
+    }
+
+    /* We can align the menu header to the left, but float the
+    menu items to the right. */
+    .home-menu {
+        text-align: left;
+    }
+        .home-menu ul {
+            float: right;
+        }
+
+    /* We decrease the width of the .splash, since we have more width
+    to work with */
+    .splash {
+        width: 70%;
+        height: 50%;
+        position: absolute;
+        top: 1em; left: 0; bottom: 0; right: 0;
+        margin: auto;
+        text-align: center;
+    }
+
+    /* horizontal menu takes less space */
+    .scrollover-container {
+        top: 3.5em;
+    }
+    .splash-head {
+        color: white;
+        border: 0.35em double white;
+    }
+
+    .pure-menu.pure-menu-fixed {
+        /* menu stays visible on tablet and desktop screens */
+        position: fixed;
+        z-index: 4;
+    }
+
+    /* HORIZONTAL MENU from pure.io source code */
+
+    .pure-menu-responsive .pure-menu-list {
+        display: inline-block;
+    }
+
+    /* Initial menus should be inline-block so that they are horizontal */
+    .pure-menu-responsive .pure-menu-item,
+    .pure-menu-responsive .pure-menu-heading,
+    .pure-menu-responsive .pure-menu-separator {
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+        vertical-align: middle;
+    }
+}
+
+
+/*
+ * -- DESKTOP (AND UP) MEDIA QUERIES --
+ */
+
+@media (min-width: 78em) {
+
+}
