@@ -145,8 +145,6 @@ a.pure-button-primary {
 
 .home-menu {
     text-align: center;
-}
-.home-menu {
     background: #0000aa;
 }
 
@@ -165,6 +163,7 @@ a.pure-button-primary {
 .home-menu a {
     color: #00aaaa;
 }
+
 .home-menu li a:hover,
 .home-menu li a:focus {
     background: none;
@@ -268,7 +267,8 @@ span.icon {
 
 .pure-menu-responsive {
     width: 100%;
-    white-space: nowrap;
+    /* this breaks on Firefox, not sure why it's there anyway */
+    /* white-space: nowrap;*/
 }
 
 
