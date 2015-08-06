@@ -98,8 +98,6 @@ label {
     text-align: center;
 }
 
-
-
 /*
  * Links and buttons
  */
@@ -129,6 +127,13 @@ a.pure-button-primary {
 /*
  * -- MENU STYLES --
  */
+
+ /* page header */
+ h1 {
+     font-size: 1em;
+     display:inline;
+ }
+
 
 .pure-menu {
     border-bottom: 1em solid #aaaaaa;
@@ -171,6 +176,14 @@ a.pure-button-primary {
     color: white;
 }
 
+/*
+ * screenshots
+ */
+
+/* fit screenshot in grid unit but do not scale with text */
+.screenshot {
+    width: 100%;
+}
 
 /*
  * -- SPLASH STYLES --
