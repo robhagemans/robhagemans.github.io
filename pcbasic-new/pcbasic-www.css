@@ -142,9 +142,7 @@ a.pure-button-primary {
 }
 
 .pure-menu.pure-menu-fixed {
-    /* I need a higher z-index here because of the scroll-over effect. */
     position: relative;
-    z-index: 1;
 }
 
 .home-menu .pure-menu-heading {
