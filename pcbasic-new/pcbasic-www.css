@@ -87,6 +87,10 @@ label {
     color: #555555;
 }
 
+hr {
+    display: none;
+}
+
 /*
  * -- LAYOUT STYLES --
  */
