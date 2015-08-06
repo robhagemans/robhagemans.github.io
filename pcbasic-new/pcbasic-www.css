@@ -237,10 +237,15 @@ a.pure-button-primary {
     color: #0000aa; /*#1f8dd6;*/
 }
 
+
+.content {
+    background: white;
+}
+
 /* dark background */
 
 .content-dark, .content-dark-2 {
-    background-color:black;
+    background: black;
 }
 .content-dark .content-subhead {
     color: #00aa00; /*#1f8dd6;*/
@@ -258,6 +263,8 @@ span.icon {
 .footer {
     background: #555555;
     font-size: 0.7em;
+    position: relative;
+    z-index: 2;
 }
 
 /* HORIZONTAL MENU from pure.io source code, modified to
@@ -294,30 +301,16 @@ span.icon {
         position: fixed !important;
     }
 
-/*
-    .content-wrapper {
-        position: absolute;
-        top: 87%;
-        width: 100%;
-        min-height: 12%;
-        z-index: 2;
-        background: white;
-    }
-*/
     .balloon {
-        clear: both;
+        display: block;
         /* may cause issues on iOS 7 tablets? */
-        height: 87vh;
-    }
-
-    .content-wrapper {
-        position: relative;
-        z-index: 2;
-        background: white;
+        height: 82vh;
     }
 
     /* We want to give the content area some more padding */
     .content, .content-dark, .content-dark-2 {
+        position: relative;
+        z-index: 2;
         padding: 1em;
     }
 
