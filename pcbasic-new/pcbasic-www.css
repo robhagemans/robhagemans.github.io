@@ -294,6 +294,7 @@ span.icon {
         position: fixed !important;
     }
 
+/*
     .content-wrapper {
         position: absolute;
         top: 87%;
@@ -302,7 +303,18 @@ span.icon {
         z-index: 2;
         background: white;
     }
+*/
+    .balloon {
+        clear: both;
+        /* may cause issues on iOS 7 tablets? */
+        height: 87vh;
+    }
 
+    .content-wrapper {
+        position: relative;
+        z-index: 2;
+        background: white;
+    }
 
     /* We want to give the content area some more padding */
     .content, .content-dark, .content-dark-2 {
