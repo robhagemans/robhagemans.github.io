@@ -41,18 +41,14 @@
 
 @font-face {
   font-family: vga;
-  src: url('ttf-font/freedos_16.eot'); /* IE9 Compat Modes */
-  src: url('ttf-font/freedos_16.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-       url('ttf-font/freedos_16.woff') format('woff'), /* Pretty Modern Browsers */
+  src: url('ttf-font/freedos_16.woff') format('woff'), /* Pretty Modern Browsers */
        url('ttf-font/freedos_16.ttf')  format('truetype') /* Safari, Android, iOS */
 }
 
 @font-face {
     font-family: vga;
     font-weight: bold;
-    src: url('ttf-font/freedos_08.eot'); /* IE9 Compat Modes */
-    src: url('ttf-font/freedos_08.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
-         url('ttf-font/freedos_08.woff') format('woff'), /* Pretty Modern Browsers */
+    src: url('ttf-font/freedos_08.woff') format('woff'), /* Pretty Modern Browsers */
          url('ttf-font/freedos_08.ttf')  format('truetype') /* Safari, Android, iOS */
 }
 
