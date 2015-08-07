@@ -83,6 +83,7 @@ label {
     color: #555555;
 }
 
+/* these are provided for lynx, IE 8 and the likes */
 hr {
     display: none;
 }
@@ -117,12 +118,6 @@ a.pure-button-primary {
 /*
  * -- MENU STYLES --
  */
-
- /* page header */
- h1 {
-     font-size: 1em;
-     display:inline;
- }
 
 
 .pure-menu {
@@ -180,6 +175,13 @@ a.pure-button-primary {
  * -- SPLASH STYLES --
  */
 
+
+  /* page header */
+  h1 {
+      font-size: 1em;
+      font-weight: normal;
+      color: white;
+  }
 
  .splash-container {
      width: 100%;
@@ -295,7 +297,7 @@ small {
     }
 
     /* scrolled-over container */
-    .visual {
+    header {
         z-index: 1;
         overflow: hidden;
         width: 100%;
@@ -340,7 +342,7 @@ small {
     }
 
     /* horizontal menu takes less space */
-    .visual {
+    header {
         top: 3.5em;
     }
     .splash-head {
