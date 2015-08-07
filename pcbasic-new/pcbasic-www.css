@@ -164,6 +164,11 @@ a.pure-button-primary {
  * screenshots
  */
 
+figure {
+    margin: 0;
+    padding: 0;
+}
+
 /* fit screenshot in grid unit but do not scale with text */
 .screenshot {
     width: 100%;
