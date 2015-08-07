@@ -87,16 +87,6 @@ hr {
     display: none;
 }
 
-/*
- * -- LAYOUT STYLES --
- */
-.l-box {
-    padding: 1em;
-}
-
-.is-center {
-    text-align: center;
-}
 
 /*
  * Links and buttons
@@ -223,48 +213,63 @@ a.pure-button-primary {
  */
 
 
-/* This is the class used for the main content headers (<h2>) */
-.content-head {
+article h2 {
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.1em;
     margin: 2em 0 1em;
+    text-align: center;
 }
 
-
-/* This is the class used for the content sub-headers (<h3>) */
-.content-subhead {
-    color: #0000aa; /*#1f8dd6;*/
+article {
+    background: black;
 }
 
+article section {
+    padding: 1em;
+}
 
-.content {
+/* for thse browsers that don't support n-th-of-type,
+   ll subheaders will be appropriately monochrome green-on-black */
+article h3 {
+    color: #00aa00;
+}
+
+article:nth-of-type(1) {
     background: white;
 }
 
-/* dark background */
-
-.content-dark, .content-dark-2 {
-    background: black;
+article:nth-of-type(1) h3
+{
+    color: #0000aa;
 }
-.content-dark .content-subhead {
+
+/* dark background */
+article:nth-of-type(2) h3
+{
     color: #00aa00; /*#1f8dd6;*/
 }
-.content-dark-2 .content-subhead {
+
+article:nth-of-type(3) h3
+{
     color: #00aaaa; /*#1f8dd6;*/
 }
 
-span.icon {
+.icon {
     color: #5555ff;
 }
 
 
-/* This is the class used for the footer */
-.footer {
+footer {
     background: #555555;
-    font-size: 0.7em;
     position: relative;
     z-index: 2;
+    text-align: center;
+    padding: 1em;
+}
+
+small {
+    font-size: 0.7em;
 }
 
 /* HORIZONTAL MENU from pure.io source code, modified to
@@ -290,8 +295,7 @@ span.icon {
     }
 
     /* scrolled-over container */
-
-    .scrollover-container {
+    .visual {
         z-index: 1;
         overflow: hidden;
         width: 100%;
@@ -301,6 +305,7 @@ span.icon {
         position: fixed !important;
     }
 
+    /* spacer to push scrollover content down the page initially */
     .balloon {
         display: block;
         /* may cause issues on iOS 7 tablets? */
@@ -308,7 +313,7 @@ span.icon {
     }
 
     /* We want to give the content area some more padding */
-    .content, .content-dark, .content-dark-2 {
+    article {
         position: relative;
         z-index: 2;
         padding: 1em;
@@ -335,7 +340,7 @@ span.icon {
     }
 
     /* horizontal menu takes less space */
-    .scrollover-container {
+    .visual {
         top: 3.5em;
     }
     .splash-head {
