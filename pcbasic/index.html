@@ -1,110 +1,228 @@
-<!DOCTYPE html>
+<!doctype html>
 <html>
 
 <head>
-	<title>PC-BASIC</title>
-	<link rel="stylesheet" type="text/css" href="style.css">
-	<link rel="shortcut icon" href="icon.png">
-	<meta charset="utf-8">
-	<link href='http://fonts.googleapis.com/css?family=Dosis:300,700|VT323' rel='stylesheet' type='text/css'>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Free, cross-platform emulator for GW-BASIC and related Microsoft BASICs.">
-    
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Free, cross-platform emulator for the GW-BASIC family of interpreters." />
+    <meta name="keywords" content="BASIC, GW-BASIC, BASICA, PCjr, Tandy, MS-DOS, VGA, EGA, CGA, retro, legacy, emulator, interpreter" />
+
+    <link rel="shortcut icon" href="icons/icon.png" />
+    <!--[if gt IE 8]><!-->
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css" />
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css" />
+    <link rel="stylesheet" href="pcbasic-www.css" />
+    <!--<![endif]-->
+
+    <title>PC-BASIC</title>
+
+
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-<script>
-$(document).ready(function(){
-    $.getJSON("https://api.github.com/repos/robhagemans/pcbasic/releases/latest", function(result) {
-        var suffix_win32 = '-win32.exe';
-        var plat_win32 = "Windows";
-        var suffix_osx = '-osx.dmg';
-        var plat_osx = "OS X";
-        var suffix_src = '.tgz';
-        var plat_src = "Linux and Unix"
-        
-        switch (window.navigator.platform) {
-        case 'Win32':
-        case 'Win64':
-            suffix = suffix_win32;
-            plat = plat_win32;
-            break;
-        case 'MacIntel':
-            suffix = suffix_osx;
-            plat = plat_osx;
-            break;
-        default:
-            suffix = suffix_src;
-            plat = plat_src
-        }
-        var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
-                        + result.tag_name + "/pcbasic-" + result.tag_name;
-        $("p.maindownloaddesc").append("Release " + result.tag_name + " for " + plat);
-        $("a.maindownload").attr('href', url_base + suffix);
-    });
-});
+    <script>
+        $(document).ready(function(){
+            $.getJSON("https://api.github.com/repos/robhagemans/pcbasic/releases/latest", function(result) {
+                var suffix_win32 = '-win32.exe';
+                var plat_win32 = "Windows";
+                var suffix_osx = '-osx.dmg';
+                var plat_osx = "OS X";
+                var suffix_src = '.tgz';
+                var plat_src = "Linux and Unix"
 
-
-</script>
+                switch (window.navigator.platform) {
+                case 'Win32':
+                case 'Win64':
+                    suffix = suffix_win32;
+                    plat = plat_win32;
+                    break;
+                case 'MacIntel':
+                    suffix = suffix_osx;
+                    plat = plat_osx;
+                    break;
+                default:
+                    suffix = suffix_src;
+                    plat = plat_src
+                }
+                var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
+                                + result.tag_name + "/pcbasic-" + result.tag_name;
+                $("small.maindownloaddesc").append("Release " + result.tag_name + " for " + plat);
+                $("a.maindownload").attr('href', url_base + suffix);
+                $("a.otherdownloads").append("[ other operating systems ]")
+            });
+        });
+    </script>
 </head>
 
+
 <body>
-	<div id="top">
-	    <div class="header">
-		    <h1><a href="index.html">PC-BASIC</a></h1>
-		    <ul class="nav">
-			    <li><a href="download.html">Download</a></li>
-			    <li><a href="https://github.com/robhagemans/pcbasic/">Source</a></li>
-			    <li><a href="doc/">Documentation</a></li>
-			    <li><a href="https://sourceforge.net/p/pcbasic/discussion/">Discuss</a></li>
-		    </ul>
-		</div>    
-	</div>
 
-	<div id="abstract">
-		<div class="wide">
-			<p><strong>
-			Free, cross-platform emulator for <em>GW-BASIC</em> and related Microsoft BASICs.<br />
-			</strong>
-			</p>
-			<div class="button">
-			    <a class="maindownload" href="https://github.com/robhagemans/pcbasic/releases/latest" >Get PC-BASIC
-			    <p class="small maindownloaddesc"></p></a>
+    <nav class="home-menu pure-menu pure-menu-responsive pure-menu-fixed">
+        <a class="pure-menu-heading" href="index.html">PC-BASIC</a>
+        <ul class="pure-menu-list">
+            <li class="pure-menu-item pure-menu-selected"><a href="download.html" class="pure-menu-link">Download</a></li>
+            <li class="pure-menu-item"><a href="https://github.com/robhagemans/pcbasic/" class="pure-menu-link">Source</a></li>
+            <li class="pure-menu-item"><a href="doc/" class="pure-menu-link">Documentation</a></li>
+            <li class="pure-menu-item"><a href="https://sourceforge.net/p/pcbasic/discussion/" class="pure-menu-link">Discuss</a></li>
+        </ul>
+    </nav>
+
+    <header class="pure-g">
+        <div class="pure-u-1 pure-u-lg-3-5">
+            <div class="splash-container">
+                <div class="splash">
+                    <div class="splash-head">
+                        <h1>Free, cross-platform emulator for the GW-BASIC family of interpreters.</h1>
+                        <a href="download.html" class="pure-button pure-button-primary maindownload">Get PC-BASIC <small class="note maindownloaddesc"></small></a>
+                        <a href="download.html" class="note otherdownloads"></a>
+                        <hr />
+                    </div>
+                </div>
+                <img src="screenshots/pcbasic.gif" alt="PC-BASIC home screen" />
             </div>
-            <p class="small">
-		    <a href="download.html">Download PC-BASIC for other operating systems</a>
-		    </p>
-		</div>
-	</div>
+        </div>
 
-	<div id="main">
-		<div class="card">
-			<h2>Cross-platform and<br /> embarrassingly compatible</h2>
-			<img src="OSes.png" alt="">
-			<p>PC-BASIC aims for bug-for-bug compatibility with Microsoft GW-BASIC and runs everywhere Python does.</p>
-			<a href="doc/">Find out more</a>
-		</div>
+        <div class="pure-u-1 pure-u-lg-2-5">
+            <div class="pure-g">
+                <figure class="pure-u-1 pure-u-lg-1-2"><img src="screenshots/donkey.png" alt="Sample code" /></figure>
+                <figure class="pure-u-1-2 pure-u-lg-1-2"><img src="screenshots/toad.png" alt="Expo game screen" /></figure>
+                <figure class="pure-u-1-2 pure-u-lg-1-2"><img src="screenshots/art.png" alt="PC-Calc startup screen"  /></figure>
+                <figure class="pure-u-1-3 pure-u-lg-1-2"><img src="screenshots/treefrog.png" alt="Donkey game screen" /></figure>
+                <figure class="pure-u-1-3 pure-u-lg-1-2"><img src="screenshots/bach.png" alt="Mandelbrot set image" /></figure>
+                <figure class="pure-u-1-3 pure-u-lg-1-2"><img src="screenshots/expo.png" alt="Art graphics demo screen" /></figure>
+            </div>
+        </div>
 
-		<div class="card">
-			<h2>The power of 1980s technology — available here and now</h2>
-			<img src="DONKEY-big.png" alt="">
-			<p>Run classic games and legacy BASIC applications. PC&#8209;BASIC supports Microsoft Binary Format floating point
-			for full compatibility with GW-BASIC data files.</p>
-			<a href="https://github.com/robhagemans/pcbasic/releases/latest">Get started</a>
-		</div>
+        <figure class="pure-u-1-5"><img src="screenshots/music.png" alt="Music demo screen" /></figure>
+        <figure class="pure-u-1-5"><img src="screenshots/castle.png" alt="PC-BASIC on OS X" /></figure>
+        <figure class="pure-u-1-5"><img src="screenshots/8puzzle.png" alt="Expo game screen" /></figure>
+        <figure class="pure-u-1-5"><img src="screenshots/sample.png" alt="Donkey game screen" /></figure>
+        <figure class="pure-u-1-5"><img src="screenshots/mandelbrot.png" alt="Art graphics demo screen" /></figure>
+    </header>
 
-		<div class="card">
-			<h2>A range of hardware, <br />a range of BASIC dialects</h2>
-			<img src="EXPO.png" alt="">
-			<p>PC-BASIC interprets GW-BASIC/BASICA and its IBM PCjr and Tandy 1000 extensions. PC-BASIC emulates PC-speaker as well as
-			Tandy 3-voice sound and numerous video cards, including classic CGA, Hercules and Olivetti.</p>
-		</div>
-	</div>
+    <hr class="balloon" />
 
-	<div id="bottom">
-	    <div class="footer">
-		    PC-BASIC is licensed under <a href="http://www.gnu.org/copyleft/gpl.html">GPL version 3</a> and 
-		    brought to you by Rob Hagemans.
-		</div>
-	</div>
+    <article class="pure-g">
+        <hgroup class="pure-u-1">
+            <h2>Technology of the 1980s -- available here and now</h2>
+        </hgroup>
+        <section class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            <h3>
+                <span class="icon">&spades;&nbsp;</span>Classic.
+            </h3>
+            <p>
+                Run classic games and legacy BASIC applications designed for MS-DOS systems, IBM PC, PCjr or Tandy 1000.
+            </p>
+        </section>
+        <section class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            <h3>
+                <span class="icon">&diams;&nbsp;</span>Faithful.
+            </h3>
+            <p>
+                PC-BASIC aims for bug-for-bug compatibility with Microsoft GW-BASIC.
+                It runs ASCII, tokenised and protected BASIC programs and supports the Microsoft Binary Format for full interchangeability of data files.
+            </p>
+        </section>
+        <section class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            <h3>
+                <span class="icon">&clubs;&nbsp;</span>Versatile.
+            </h3>
+            <p>
+                PC-BASIC supports GW-BASIC, BASICA, PCjr Cartridge BASIC and Tandy 1000 BASIC.
+            </p>
+            <p>
+                It runs on every platform that supports Python.
+            </p>
+        </section>
+        <section class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            <h3>
+                <span class="icon">&hearts;&nbsp;</span>Yours.
+            </h3>
+            <p>
+                PC-BASIC is free &amp; open source software, released under the GNU General Public Licence version 3.
+            </p>
+        </section>
+    </article>
+
+    <hr />
+
+    <article class="pure-g">
+        <section class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            <h3>
+                Graphics
+            </h3>
+            <p>
+                MDPA, CGA, EGA, or VGA; PCjr or Tandy; or even Hercules or Olivetti graphics - PC-BASIC can emulate all of them.
+            </p>
+        </section>
+        <section class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            <h3>
+                Music
+            </h3>
+            <p>
+                Tandy and PCjr 3-voice music and noise generation are fully supported. As are IBM PC beeps.
+            </p>
+        </section>
+        <section class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            <h3>
+                Printing
+            </h3>
+            <p>
+                No helper programs or difficult settings needed: printing through LPRINT and LPT1: works out of the box.
+            </p>
+        </section>
+        <section class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            <h3>
+                Communication
+            </h3>
+            <p>
+                Full support for 3 serial ports included -- no matter whether they are real serial ports or emulated through sockets.
+            </p>
+        </section>
+    </article>
+
+    <hr />
+
+    <article class="pure-g">
+        <section class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            <h3>
+                Language support
+            </h3>
+            <p>
+                PC-BASIC understands a large number of MS-DOS code pages and supports all Unicode scripts natively. BASIC program in Chinese? Not a problem for PC-BASIC.
+            </p>
+        </section>
+        <section class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            <h3>
+                Cassette interface
+            </h3>
+            <p>
+                Have old IBM PC or BASICODE audio cassette recordings in WAV format? PC-BASIC will open your files though its CAS1: device.
+            </p>
+        </section>
+        <section class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            <h3>
+                Command-line scripting
+            </h3>
+            <p>
+                Script a quick few lines of BASIC on the Unix or Windows command line with PC-BASIC's command-line interface.
+            </p>
+        </section>
+        <section class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
+            <h3>
+                Check Back for Cool New Stuff
+            </h3>
+            <p>
+                PC-BASIC is under active development and new features are implemented regularly. Comments, requests and suggestions are always welcome!
+            </p>
+        </section>
+    </article>
+
+    <hr class="smallspace" />
+
+    <footer>
+        <small>PC-BASIC is <a href="#GPL">free software</a> and brought to you by Rob Hagemans.
+        Website layout based on code and examples taken from Yahoo's <a href="http://purecss.io">Pure CSS Toolkit</a>.
+        VGA bitmap font based on the <a href="#CPI">FreeDOS CPI pack</a> by Henrique Per&oacute;n.</small>
+    </footer>
 
 </body>
 </html>
