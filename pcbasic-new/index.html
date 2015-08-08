@@ -7,7 +7,7 @@
     <meta name="description" content="Free, cross-platform emulator for the GW-BASIC family of interpreters." />
     <meta name="keywords" content="BASIC, GW-BASIC, BASICA, PCjr, Tandy, MS-DOS, VGA, EGA, CGA, retro, legacy, emulator, interpreter" />
 
-    <link rel="shortcut icon" href="icon.png" />
+    <link rel="shortcut icon" href="icons/icon.png" />
     <!--[if gt IE 8]><!-->
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css" />
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css" />
@@ -15,6 +15,40 @@
     <!--<![endif]-->
 
     <title>PC-BASIC</title>
+
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $.getJSON("https://api.github.com/repos/robhagemans/pcbasic/releases/latest", function(result) {
+                var suffix_win32 = '-win32.exe';
+                var plat_win32 = "Windows";
+                var suffix_osx = '-osx.dmg';
+                var plat_osx = "OS X";
+                var suffix_src = '.tgz';
+                var plat_src = "Linux and Unix"
+
+                switch (window.navigator.platform) {
+                case 'Win32':
+                case 'Win64':
+                    suffix = suffix_win32;
+                    plat = plat_win32;
+                    break;
+                case 'MacIntel':
+                    suffix = suffix_osx;
+                    plat = plat_osx;
+                    break;
+                default:
+                    suffix = suffix_src;
+                    plat = plat_src
+                }
+                var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
+                                + result.tag_name + "/pcbasic-" + result.tag_name;
+                $("small.maindownloaddesc").append("Release " + result.tag_name + " for " + plat);
+                $("a.maindownload").attr('href', url_base + suffix);
+            });
+        });
+    </script>
 </head>
 
 
@@ -23,9 +57,9 @@
     <nav class="home-menu pure-menu pure-menu-responsive pure-menu-fixed">
         <a class="pure-menu-heading" href="index.html">PC-BASIC</a>
         <ul class="pure-menu-list">
-            <li class="pure-menu-item pure-menu-selected"><a href="#" class="pure-menu-link">Download</a></li>
+            <li class="pure-menu-item pure-menu-selected"><a href="download.html" class="pure-menu-link">Download</a></li>
             <li class="pure-menu-item"><a href="https://github.com/robhagemans/pcbasic/" class="pure-menu-link">Source</a></li>
-            <li class="pure-menu-item"><a href="#" class="pure-menu-link">Documentation</a></li>
+            <li class="pure-menu-item"><a href="doc/" class="pure-menu-link">Documentation</a></li>
             <li class="pure-menu-item"><a href="https://sourceforge.net/p/pcbasic/discussion/" class="pure-menu-link">Discuss</a></li>
         </ul>
     </nav>
@@ -36,8 +70,8 @@
                 <div class="splash">
                     <div class="splash-head">
                         <h1>Free, cross-platform emulator for the GW-BASIC family of interpreters.</h1>
-                        <a href="" class="pure-button pure-button-primary">Get PC-BASIC <small class="note">release 15.08 for Windows</small></a>
-                        <a href="" class="note">[ other operating systems ]</a>
+                        <a href="download.html" class="pure-button pure-button-primary maindownload">Get PC-BASIC <small class="note maindownloaddesc"></small></a>
+                        <a href="download.html" class="note">[ other operating systems ]</a>
                         <hr />
                     </div>
                 </div>
@@ -181,7 +215,7 @@
         </section>
     </article>
 
-    <hr />
+    <hr class="smallspace" />
 
     <footer>
         <small>PC-BASIC is <a href="#GPL">free software</a> and brought to you by Rob Hagemans.

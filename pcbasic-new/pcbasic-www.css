@@ -69,6 +69,8 @@
 body {
     line-height: 1.7em;
     color: #aaaaaa;
+    position: relative;
+    min-height: 100vh;
 }
 
 /* Dark grey for headers and labels */
@@ -152,7 +154,9 @@ a.pure-button-primary {
     color: #55ffff;
 }
 
-.home-menu .pure-menu-selected a {
+.home-menu .pure-menu-selected a,
+.home-menu .pure-menu-selected a:visited
+{
     color: #aaaaaa;
 }
 
@@ -269,10 +273,18 @@ article:nth-of-type(3) h3
 
 footer {
     background: #555555;
-    position: relative;
+/*    position: relative;*/
+
+
     z-index: 2;
     text-align: center;
     padding: 1em;
+
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    margin:0;
 }
 
 small {
@@ -289,6 +301,14 @@ small {
 }
 
 
+/* download table */
+
+th {
+    text-align: left;
+}
+td, th {
+    padding: 0.5em;
+}
 
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
@@ -318,6 +338,11 @@ small {
         display: block;
         /* may cause issues on iOS 7 tablets? */
         height: 82vh;
+    }
+
+    .smallspace {
+        display: inline-block;
+        margin-bottom: 1em;
     }
 
     /* We want to give the content area some more padding */
