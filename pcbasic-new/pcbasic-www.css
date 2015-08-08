@@ -310,6 +310,7 @@ small {
         top: 14.5em;
         left: 0;
         position: fixed !important;
+        background: black;
     }
 
     /* spacer to push scrollover content down the page initially */
