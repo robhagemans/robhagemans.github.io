@@ -349,6 +349,28 @@ td, th, td a{
 .space {
     display: inline-block;
     margin-bottom: 1em;}
+
+
+/* narrow mobile screens */
+
+@media (max-width: 29.5em) {
+
+    /* Force table to not be like tables anymore */
+    table, tbody, td, tr {
+        display: block;
+    }
+    th {
+        display: none;
+    }
+    td {
+        border: none;
+        text-align: center;
+    }
+    tr {
+        border-bottom: 0.2em solid #aaaaaa;
+    }
+}
+
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
  */
