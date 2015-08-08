@@ -25,18 +25,21 @@
                 var suffix_src = '.tgz';
                 var plat_src = "Linux and Unix";
                 var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
-                                + result.tag_name + "/pcbasic-" + result.tag_name;
+                                + result.tag_name + '/';
+                var bin_base = url_base + "pcbasic-" + result.tag_name;
                 // result.assets[i].updated_at
                 // result.assets[i].download_count
                 // windows
-                $("a.win32-link").attr('href', url_base + suffix_win32);
+                $("a.win32-link").attr('href', bin_base + suffix_win32);
                 $("a.win32-link").text("PC-BASIC " + result.tag_name + " for " + plat_win32);
                 // osx
-                $("a.osx-link").attr('href', url_base + suffix_osx);
+                $("a.osx-link").attr('href', bin_base + suffix_osx);
                 $("a.osx-link").text("PC-BASIC " + result.tag_name + " for " + plat_osx);
                 // src
-                $("a.src-link").attr('href', url_base + suffix_src);
+                $("a.src-link").attr('href', bin_base + suffix_src);
                 $("a.src-link").text("PC-BASIC " + result.tag_name + " for " + plat_src);
+                // readme
+                $("a.readme-link").attr('href', url_base + 'README.md');
             });
         });
     </script>
@@ -82,7 +85,7 @@
             <p>
                 PC-BASIC will run on any system that supports Python. The packaged releases for Windows and OS X run out of the box. So does the source release on Debian, Ubuntu,
                 Mint and Fedora; on all architectures. On other Linux and Unix systems, the source distribution will install automatically but you will need to manually install dependencies.
-                See the <a href="https://github.com/robhagemans/pcbasic/blob/master/README.md">PC-BASIC README</a> for a list of packages and installation instructions.
+                See the <a href="https://github.com/robhagemans/pcbasic/blob/master/README.md" class="readme-link">PC-BASIC README</a> for a list of packages and installation instructions.
             </p>
             <p>
                 This and older releases can also be found on the <a href="https://github.com/robhagemans/pcbasic/releases/latest">
