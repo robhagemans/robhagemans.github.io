@@ -16,39 +16,48 @@
 
     <title>PC-BASIC</title>
 
-
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
     <script>
-        $(document).ready(function(){
-            $.getJSON("https://api.github.com/repos/robhagemans/pcbasic/releases/latest", function(result) {
-                var suffix_win32 = '-win32.exe';
-                var plat_win32 = "Windows";
-                var suffix_osx = '-osx.dmg';
-                var plat_osx = "OS X";
-                var suffix_src = '.tgz';
-                var plat_src = "Linux and Unix"
+        // insert specific downloads for client OS
+        // without JS, generic links are left which is also OK
+        var suffix_win32 = '-win32.exe';
+        var plat_win32 = "Windows";
+        var suffix_osx = '-osx.dmg';
+        var plat_osx = "OS X";
+        var suffix_src = '.tgz';
+        var plat_src = "Linux and Unix"
 
-                switch (window.navigator.platform) {
-                case 'Win32':
-                case 'Win64':
-                    suffix = suffix_win32;
-                    plat = plat_win32;
-                    break;
-                case 'MacIntel':
-                    suffix = suffix_osx;
-                    plat = plat_osx;
-                    break;
-                default:
-                    suffix = suffix_src;
-                    plat = plat_src
-                }
-                var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
-                                + result.tag_name + "/pcbasic-" + result.tag_name;
-                $("small.maindownloaddesc").append("Release " + result.tag_name + " for " + plat);
-                $("a.maindownload").attr('href', url_base + suffix);
-                $("a.otherdownloads").append("[ other operating systems ]")
-            });
-        });
+        switch (window.navigator.platform) {
+        case 'Win32':
+        case 'Win64':
+            suffix = suffix_win32;
+            plat = plat_win32;
+            break;
+        case 'MacIntel':
+            suffix = suffix_osx;
+            plat = plat_osx;
+            break;
+        default:
+            suffix = suffix_src;
+            plat = plat_src
+        }
+
+        // get latest release form GitHub
+        var json_url = "https://api.github.com/repos/robhagemans/pcbasic/releases/latest";
+        var request = new XMLHttpRequest();
+        request.open('GET', json_url, true);
+
+        request.onload = function() {
+          if (request.status >= 200 && request.status < 400) {
+            var result = JSON.parse(request.responseText);
+            var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
+                            + result.tag_name + "/pcbasic-" + result.tag_name;
+            document.getElementById("maindownloaddesc").innerHTML = "Release " + result.tag_name + " for " + plat;
+            document.getElementById("maindownload").setAttribute('href', url_base + suffix);
+            document.getElementById("otherdownloads").innerHTML = "[ other operating systems ]";
+          }
+        };
+
+        request.send();
     </script>
 </head>
 
@@ -71,8 +80,8 @@
                 <div class="splash">
                     <div class="splash-head">
                         <h1>Free, cross-platform emulator for the GW-BASIC family of interpreters.</h1>
-                        <a href="download.html" class="pure-button pure-button-primary maindownload">Get PC-BASIC <small class="note maindownloaddesc"></small></a>
-                        <a href="download.html" class="note otherdownloads"></a>
+                        <a href="download.html" class="pure-button pure-button-primary" id="maindownload">Get PC-BASIC <small class="note" id="maindownloaddesc"></small></a>
+                        <a href="download.html" class="note" id="otherdownloads"></a>
                         <hr />
                     </div>
                 </div>
