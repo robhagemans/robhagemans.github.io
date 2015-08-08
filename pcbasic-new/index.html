@@ -46,6 +46,7 @@
                                 + result.tag_name + "/pcbasic-" + result.tag_name;
                 $("small.maindownloaddesc").append("Release " + result.tag_name + " for " + plat);
                 $("a.maindownload").attr('href', url_base + suffix);
+                $("a.otherdownloads").append("[ other operating systems ]")
             });
         });
     </script>
@@ -71,7 +72,7 @@
                     <div class="splash-head">
                         <h1>Free, cross-platform emulator for the GW-BASIC family of interpreters.</h1>
                         <a href="download.html" class="pure-button pure-button-primary maindownload">Get PC-BASIC <small class="note maindownloaddesc"></small></a>
-                        <a href="download.html" class="note">[ other operating systems ]</a>
+                        <a href="download.html" class="note otherdownloads"></a>
                         <hr />
                     </div>
                 </div>
