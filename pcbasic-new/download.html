@@ -2,44 +2,44 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="shortcut icon" href="icons/icon.png" />
+    <link rel="shortcut icon" href="icons/icon.png" />
     <!--[if gt IE 8]><!-->
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css" />
     <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css" />
     <link rel="stylesheet" href="pcbasic-www.css" />
     <!--<![endif]-->
 
-	<title>PC-BASIC Downloads</title>
+    <title>PC-BASIC Downloads</title>
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-	<script>
-		$(document).ready(function(){
-		    $.getJSON("https://api.github.com/repos/robhagemans/pcbasic/releases/latest", function(result) {
-		        var suffix_win32 = '-win32.exe';
-		        var plat_win32 = "Windows";
-		        var suffix_osx = '-osx.dmg';
-		        var plat_osx = "OS X";
-		        var suffix_src = '.tgz';
-		        var plat_src = "Linux and Unix";
-		        var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
-		                        + result.tag_name + "/pcbasic-" + result.tag_name;
-		        // result.assets[i].updated_at
-		        // result.assets[i].download_count
-		        // windows
-		        $("a.win32-link").attr('href', url_base + suffix_win32);
-		        $("a.win32-link").text("PC-BASIC " + result.tag_name + " for " + plat_win32);
-		        // osx
-		        $("a.osx-link").attr('href', url_base + suffix_osx);
-		        $("a.osx-link").text("PC-BASIC " + result.tag_name + " for " + plat_osx);
-		        // src
-		        $("a.src-link").attr('href', url_base + suffix_src);
-		        $("a.src-link").text("PC-BASIC " + result.tag_name + " for " + plat_src);
-		    });
-		});
-	</script>
+    <script>
+        $(document).ready(function(){
+            $.getJSON("https://api.github.com/repos/robhagemans/pcbasic/releases/latest", function(result) {
+                var suffix_win32 = '-win32.exe';
+                var plat_win32 = "Windows";
+                var suffix_osx = '-osx.dmg';
+                var plat_osx = "OS X";
+                var suffix_src = '.tgz';
+                var plat_src = "Linux and Unix";
+                var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
+                                + result.tag_name + "/pcbasic-" + result.tag_name;
+                // result.assets[i].updated_at
+                // result.assets[i].download_count
+                // windows
+                $("a.win32-link").attr('href', url_base + suffix_win32);
+                $("a.win32-link").text("PC-BASIC " + result.tag_name + " for " + plat_win32);
+                // osx
+                $("a.osx-link").attr('href', url_base + suffix_osx);
+                $("a.osx-link").text("PC-BASIC " + result.tag_name + " for " + plat_osx);
+                // src
+                $("a.src-link").attr('href', url_base + suffix_src);
+                $("a.src-link").text("PC-BASIC " + result.tag_name + " for " + plat_src);
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -54,11 +54,11 @@
         </ul>
     </nav>
 
-	<hr />
+    <hr />
 
-	<article class="pure-g">
-	    <section class="pure-u-1">
-			<h2>Latest development releases</h2>
+    <article class="pure-g">
+        <section class="pure-u-1">
+            <h2>Latest development releases</h2>
             <table><tr>
             <th></th>
             <th>Release</th>
@@ -74,26 +74,26 @@
             PC-BASIC release page on GitHub</a></td>
             <td>OS X 10.6 and above</td>
             </tr><tr>
-            <!--
-            <td><img src="tux.png" style="width:2em;" alt="Linux 64-bit"
-                    title="Tux logo: Crystal 128 penguin by Everaldo Coelho (YellowIcon)"></td>
-            <td><a class="linux64-link" href="https://github.com/robhagemans/pcbasic/releases/latest">
-            PC-BASIC release page on GitHub</a></td>
-            </tr><tr>
-            -->
             <td><img src="icons/python.png" style="width:2em;" alt="Python"/></td>
             <td><a class="src-link" href="https://github.com/robhagemans/pcbasic/releases/latest">
             PC-BASIC release page on GitHub</a></td>
             <td>Linux, FreeBSD or any other systems supporting Python 2.7</td>
             </tr></table>
-            <p>PC-BASIC will run on any system that supports Python. The packaged releases for Windows, OS X run out of the box. So does the source release on Debian, Ubuntu, Mint and Fedora on all architectures. On other Linux and Unix systems, the source distribution will install automatically but you will need to manually install dependencies.
-             See the <a href="https://github.com/robhagemans/pcbasic/blob/release-15.03/README.md">PC-BASIC README</a> for a list of packages and installation instructions.
-            <p>This and older releases can also be found on the <a href="https://github.com/robhagemans/pcbasic/releases/latest">
-            PC-BASIC release page on GitHub</a>.
-	        <p>
-	        PC-BASIC is still in beta; there is as of yet no stable release available. However, the development releases are generally very usable. Should you find a bug or wish to request a feature, please post a message on <a href="https://sourceforge.net/p/pcbasic/discussion/">the discussion page</a>.</p>
+            <p>
+                PC-BASIC will run on any system that supports Python. The packaged releases for Windows and OS X run out of the box. So does the source release on Debian, Ubuntu,
+                Mint and Fedora; on all architectures. On other Linux and Unix systems, the source distribution will install automatically but you will need to manually install dependencies.
+                See the <a href="https://github.com/robhagemans/pcbasic/blob/master/README.md">PC-BASIC README</a> for a list of packages and installation instructions.
+            </p>
+            <p>
+                This and older releases can also be found on the <a href="https://github.com/robhagemans/pcbasic/releases/latest">
+                PC-BASIC release page on GitHub</a>.
+            </p>
+            <p>
+                PC-BASIC is still in beta; there is as of yet no stable release available. However, the development releases are generally very usable.
+                Should you find a bug or wish to request a feature, please post a message on <a href="https://sourceforge.net/p/pcbasic/discussion/">the discussion page</a>.
+            </p>
         </section>
-	</article>
+    </article>
 
     <hr class="smallspace" />
 
