@@ -332,6 +332,9 @@ td, th, td a{
     margin-bottom: 6em;
 }
 
+.space {
+    display: inline-block;
+    margin-bottom: 1em;}
 /*
  * -- TABLET (AND UP) MEDIA QUERIES --
  */
