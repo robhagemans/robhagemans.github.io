@@ -278,10 +278,8 @@ article:nth-of-type(3) h3
 }
 
 footer {
-    b*/ackground: #555555;
+    background: #555555;
 /*    position: relative;*/
-
-
     z-index: 2;
     text-align: center;
     padding: 1em;
