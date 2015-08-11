@@ -17,18 +17,19 @@ https://github.com/yahoo/pure/blob/master/LICENSE.md
  */
 
 /* Use VGA bitfont throughout the page */
-
+/* supply woff for most modern browsers, TTF for old versions of Safari
+and iOS/Android browsers. Ignore old IE as we're not serving them this CSS anyway. */
 @font-face {
   font-family: vga;
-  src: url('ttf-font/freedos_16.woff') format('woff'), /* Pretty Modern Browsers */
-       url('ttf-font/freedos_16.ttf')  format('truetype') /* Safari, Android, iOS */
+  src: url('fonts/freedos_16.woff') format('woff'),
+       url('fonts/freedos_16.ttf')  format('truetype')
 }
 
 @font-face {
     font-family: vga;
     font-weight: bold;
-    src: url('ttf-font/freedos_08.woff') format('woff'), /* Pretty Modern Browsers */
-         url('ttf-font/freedos_08.ttf')  format('truetype') /* Safari, Android, iOS */
+    src: url('fonts/freedos_08.woff') format('woff'),
+         url('fonts/freedos_08.ttf')  format('truetype')
 }
 
 * {
