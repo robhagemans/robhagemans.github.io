@@ -154,3 +154,14 @@ pre {
     border-bottom: 1px dotted;
     padding: 0.1em 0.5em 0.1em 0.5em;
 }
+
+
+/* tablets and desktops */
+
+@media (min-width: 55em) {
+
+    .documentation {
+        /* make space for scroll-under menu */
+        margin-top: 3.5em;
+    }
+}
