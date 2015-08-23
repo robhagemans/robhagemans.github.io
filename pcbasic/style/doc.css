@@ -1,0 +1,156 @@
+/*!
+PC-BASIC doc.css
+Copyright (c) 2015 Rob Hagemans.
+This work is licensed under a Creative Commons Attribution 4.0 International License.
+http://creativecommons.org/licenses/by/4.0/
+*/
+
+
+html {
+    background-color: #eeeeff;
+}
+
+
+
+:target:before {
+    display: block;
+    content: " ";
+    height: 6em;
+}
+
+.documentation {
+    margin-left: 2em;
+    margin-right: 2em;
+    max-width: 40em;
+    max-width: 40em;
+    background-color: white;
+    padding: 1em;
+    line-height: 1.4em;
+}
+
+h1 {
+    font-size: 130%;
+    border-bottom: 2px solid #333333;
+}
+h2 {
+    margin-top: 2em;
+    margin-bottom: 0em;
+    font-size: 120%;
+    border-bottom: 2px solid #333333;
+}
+
+h3:before {
+    display: block;
+    content: " ";
+    border-bottom: 1px solid black;
+}
+
+h3 {
+    /*
+    border-top: 1px solid #333333;
+    border-top: 1em dashed red;
+    */
+    margin-top: 2.5em;
+    margin-bottom: 0em;
+    font-size: 110%;
+}
+h4 {
+    margin-top: 0em;
+    margin-bottom: 0em;
+    font-weight: 600;
+}
+
+
+ul {
+    margin-top: 0em;
+    padding-left: 1em;
+}
+
+/* compact list */
+.compact li {
+    display: inline-block;
+    width: 5em;
+}
+
+/* horizontal list */
+.horizontal {
+    padding-left: 0;
+}
+
+.horizontal li {
+    display: inline-block;
+}
+
+p {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+
+dl {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin-bottom: 1em;
+    padding-right: 1em;
+}
+
+code, samp {
+    font-size: 80%;
+    word-break: keep-all;
+    white-space: nowrap;
+}
+
+dd>code, p>code, dt>code, li>code,
+dd>samp, p>samp, dt>samp, li>samp,
+ {
+    background-color: #eeeeff;
+    border-radius: 0.2em;
+    padding: 0.1em 0.5em 0.1em 0.5em;
+}
+
+th {
+    text-align: left;
+    background-color: #ccccdd;
+}
+
+table {
+    font-size: 100%;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    line-height: 140%;
+    border-bottom: 1px dotted lightblue;
+}
+
+tr:nth-child(odd)		{ background-color:#eeeeff; }
+tr:nth-child(even)		{ background-color:#ffffff; }
+
+td, th {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    vertical-align: top;
+}
+
+kbd {
+    font-size: 70%;
+    word-break: keep-all;
+    white-space: nowrap;
+    background-color: gray;
+    color: white;
+    border-radius: 0.2em;
+    padding: 0.1em 0.5em 0.1em 0.5em;
+    margin: 0px 1px 0px 1px;
+}
+pre {
+    font-size: 80%;
+    background-color: #eeeeff;
+    margin-top: 0.5em;
+    border-top: 1px dotted;
+    border-bottom: 1px dotted;
+    padding: 0.1em 0.5em 0.1em 0.5em;
+}
