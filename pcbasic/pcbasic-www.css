@@ -1,14 +1,8 @@
 /*!
-PC-BASIC web site CSS
-Copyright 2015 Rob Hagemans.
-Licenced under PureCSS BSD licence, see below.
-This document incorporates some code from Yahoo's PureCSS.
-*/
-/*!
-Pure v0.6.0
-Copyright 2014 Yahoo! Inc. All rights reserved.
-Licensed under the BSD License.
-https://github.com/yahoo/pure/blob/master/LICENSE.md
+PC-BASIC front.css
+Copyright (c) 2015 Rob Hagemans.
+This work is licensed under a Creative Commons Attribution 4.0 International License.
+http://creativecommons.org/licenses/by/4.0/
 */
 
 
@@ -49,8 +43,6 @@ and iOS/Android browsers. Ignore old IE as we're not serving them this CSS anywa
 body {
     line-height: 1.7em;
     color: #aaaaaa;
-    position: relative;
-    min-height: 100vh;
 }
 
 /* Dark grey for headers and labels */
@@ -103,53 +95,6 @@ a.pure-button-primary {
 }
 
 /*
- * -- MENU STYLES --
- */
-
-
-.pure-menu {
-    border-bottom: 1em solid #aaaaaa;
-}
-
-.home-menu {
-    text-align: center;
-    background: #0000aa;
-}
-
-.pure-menu.pure-menu-fixed {
-    position: relative;
-}
-
-.home-menu .pure-menu-heading {
-    color: white;
-    font-weight: bold;
-    font-size: 120%;
-}
-
-/* Navigation links */
-
-.home-menu a {
-    color: #00aaaa;
-}
-
-.home-menu li a:hover,
-.home-menu li a:focus {
-    background: none;
-    border: none;
-    color: #55ffff;
-}
-
-.home-menu .pure-menu-selected a,
-.home-menu .pure-menu-selected a:visited
-{
-    color: #aaaaaa;
-}
-
-.home-menu .pure-menu-selected a:hover {
-    color: white;
-}
-
-/*
  * screenshots
  */
 
@@ -166,7 +111,7 @@ img {
 }
 
 /*
- * -- SPLASH STYLES --
+ * Splash header
  */
 
 
@@ -203,7 +148,7 @@ h1 {
 
 
 /*
- * -- CONTENT STYLES --
+ * Content articles
  */
 
 
@@ -275,14 +220,6 @@ small {
     font-size: 0.7em;
 }
 
-/* HORIZONTAL MENU from pure.io source code, modified to
-   be vertical on mobile, horizontal elsewhere. */
-
-.pure-menu-responsive {
-    width: 100%;
-    /* this breaks on Firefox, not sure why it's there anyway */
-    /* white-space: nowrap;*/
-}
 
 
 /* download table */
@@ -330,6 +267,13 @@ td, th, td a{
     margin-bottom: 1em;}
 
 
+/* media queries - sizes used:
+   narrow mobile: up to 29.5em
+   default mobile: up to 55em (PureCSS uses 48em).
+   tablet: 55em-78em
+   desktop: 78em and above
+*/
+
 /* narrow mobile screens */
 
 @media (max-width: 29.5em) {
@@ -350,13 +294,9 @@ td, th, td a{
     }
 }
 
-/*
- * -- TABLET (AND UP) MEDIA QUERIES --
- */
+/* tablets and desktops */
 
 @media (min-width: 55em) {
-    /* was: 48em */
-
 
     /* We increase the body font size */
     body {
@@ -369,13 +309,11 @@ td, th, td a{
         overflow: hidden;
         width: 100%;
         height: 88%;
-        top: 14.5em;
+        top: 3.5em;
         left: 0;
         position: fixed !important;
         background: black;
     }
-
-
 
     /* spacer to push scrollover content down the page initially */
     .balloon {
@@ -389,21 +327,6 @@ td, th, td a{
         position: relative;
         z-index: 2;
         padding: 1em;
-    }
-
-    /* We can align the menu header to the left, but float the
-    menu items to the right. */
-    .home-menu {
-        text-align: left;
-    }
-        .home-menu ul {
-            float: right;
-        }
-
-
-    /* horizontal menu takes less space */
-    header {
-        top: 3.5em;
     }
 
     .splash {
@@ -420,41 +343,8 @@ td, th, td a{
         width: 100%;
     }
 
-    .pure-menu.pure-menu-fixed {
-        /* menu stays visible on tablet and desktop screens */
-        position: fixed;
-        z-index: 4;
-    }
-
     /* footer needs less vertical space than on mobile */
     .footspace {
         height: 7em;
     }
-
-    /* HORIZONTAL MENU from pure.io source code */
-
-    .pure-menu-responsive .pure-menu-list {
-        display: inline-block;
-    }
-
-    /* Initial menus should be inline-block so that they are horizontal */
-    .pure-menu-responsive .pure-menu-item,
-    .pure-menu-responsive .pure-menu-heading,
-    .pure-menu-responsive .pure-menu-separator {
-        display: inline-block;
-        *display: inline;
-        zoom: 1;
-        vertical-align: middle;
-    }
 }
-
-
-/*
- * -- DESKTOP (AND UP) MEDIA QUERIES --
- *
-
-@media (min-width: 78em) {
-
-}
-
- */

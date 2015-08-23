@@ -1,0 +1,129 @@
+/*!
+PC-BASIC menu.css
+Copyright (c) 2015 Rob Hagemans.
+This work is licensed under a Creative Commons Attribution 4.0 International License.
+http://creativecommons.org/licenses/by/4.0/
+*/
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+
+/* supply woff for most modern browsers, TTF for old versions of Safari
+and iOS/Android browsers. Ignore old IE as we're not serving them this CSS anyway. */
+@font-face {
+  font-family: vga;
+  src: url('fonts/freedos_16.woff') format('woff'),
+       url('fonts/freedos_16.ttf')  format('truetype');
+}
+
+@font-face {
+    font-family: vga;
+    font-weight: bold;
+    src: url('fonts/freedos_08.woff') format('woff'),
+         url('fonts/freedos_08.ttf')  format('truetype');
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+}
+
+.home-menu, .home-menu * {
+    font-family: vga;
+    line-height: 1.7rem;
+}
+
+.pure-menu {
+    border-bottom: 1em solid #aaaaaa;
+}
+
+.home-menu {
+    text-align: center;
+    background: #0000aa;
+}
+
+.pure-menu.pure-menu-fixed {
+    position: relative;
+}
+
+.home-menu .pure-menu-heading {
+    color: white;
+    font-weight: bold;
+    font-size: 120%;
+}
+
+/* Navigation links */
+
+.home-menu a {
+    color: #00aaaa;
+}
+
+.home-menu li a:hover,
+.home-menu li a:focus {
+    background: none;
+    border: none;
+    color: #55ffff;
+}
+
+.home-menu .pure-menu-selected a,
+.home-menu .pure-menu-selected a:visited
+{
+    color: #aaaaaa;
+}
+
+.home-menu .pure-menu-selected a:hover {
+    color: white;
+}
+
+/* HORIZONTAL MENU from pure.io source code, modified to
+   be vertical on mobile, horizontal elsewhere. */
+
+.pure-menu-responsive {
+    width: 100%;
+    /* this breaks on Firefox, not sure why it's there anyway */
+    /* white-space: nowrap;*/
+}
+
+
+/*
+ * -- TABLET (AND UP) MEDIA QUERIES --
+ */
+
+@media (min-width: 55em) {
+    /* was: 48em */
+
+    /* We can align the menu header to the left, but float the
+    menu items to the right. */
+    .home-menu {
+        text-align: left;
+        font-size: 1.2rem;
+    }
+        .home-menu ul {
+            float: right;
+        }
+
+    .pure-menu.pure-menu-fixed {
+        /* menu stays visible on tablet and desktop screens */
+        position: fixed;
+        z-index: 4;
+    }
+
+    /* HORIZONTAL MENU from pure.io source code */
+
+    .pure-menu-responsive .pure-menu-list {
+        display: inline-block;
+    }
+
+    /* Initial menus should be inline-block so that they are horizontal */
+    .pure-menu-responsive .pure-menu-item,
+    .pure-menu-responsive .pure-menu-heading,
+    .pure-menu-responsive .pure-menu-separator {
+        display: inline-block;
+        *display: inline;
+        zoom: 1;
+        vertical-align: middle;
+    }
+}
