@@ -7,54 +7,48 @@ http://creativecommons.org/licenses/by/4.0/
 
 
 html {
-    background-color: #eeeeff;
+    background-color: white;
 }
 
 
-
-:target:before {
-    display: block;
-    content: " ";
-    height: 6em;
-}
-
-.documentation {
-    margin-left: 2em;
-    margin-right: 2em;
-    max-width: 40em;
-    max-width: 40em;
+article, header, nav.toc, footer {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 45em;
+    max-width: 45em;
     background-color: white;
     padding: 1em;
     line-height: 1.4em;
+    font-family: sans;
 }
 
-h1 {
-    font-size: 130%;
+h1, h2 {
+    font-size: 1.3em;
     border-bottom: 2px solid #333333;
 }
-h2 {
-    margin-top: 2em;
-    margin-bottom: 0em;
-    font-size: 120%;
+h3 {
+    margin-top: 2rem;
+    margin-bottom: 0;
+    font-size: 1.2em;
     border-bottom: 2px solid #333333;
 }
 
-h3:before {
+h4:before {
     display: block;
     content: " ";
     border-bottom: 1px solid black;
 }
 
-h3 {
+h4 {
     /*
     border-top: 1px solid #333333;
     border-top: 1em dashed red;
     */
     margin-top: 2.5em;
     margin-bottom: 0em;
-    font-size: 110%;
+    font-size: 1.1em;
 }
-h4 {
+h5 {
     margin-top: 0em;
     margin-bottom: 0em;
     font-weight: 600;
@@ -101,14 +95,14 @@ dd {
 }
 
 code, samp {
-    font-size: 80%;
+    font-size: 0.8em;
     word-break: keep-all;
     white-space: nowrap;
 }
 
 dd>code, p>code, dt>code, li>code,
-dd>samp, p>samp, dt>samp, li>samp,
- {
+dd>samp, p>samp, dt>samp, li>samp
+{
     background-color: #eeeeff;
     border-radius: 0.2em;
     padding: 0.1em 0.5em 0.1em 0.5em;
@@ -120,7 +114,7 @@ th {
 }
 
 table {
-    font-size: 100%;
+    font-size: 1em;
     margin-top: 1em;
     margin-bottom: 1em;
     line-height: 140%;
@@ -137,7 +131,7 @@ td, th {
 }
 
 kbd {
-    font-size: 70%;
+    font-size: 0.7em;
     word-break: keep-all;
     white-space: nowrap;
     background-color: gray;
@@ -147,7 +141,7 @@ kbd {
     margin: 0px 1px 0px 1px;
 }
 pre {
-    font-size: 80%;
+    font-size: 0.8em;
     background-color: #eeeeff;
     margin-top: 0.5em;
     border-top: 1px dotted;
@@ -160,8 +154,52 @@ pre {
 
 @media (min-width: 55em) {
 
-    .documentation {
+    /* push link target below fixed menu */
+    :target:before {
+        display: block;
+        content: " ";
+        height: 6em;
+    }
+
+    header {
+        margin-top: 4rem;
+    }
+
+    article, header, footer {
         /* make space for scroll-under menu */
-        margin-top: 3.5em;
+        position: relative;
+        margin-left: 20rem;
+        line-height: 1.5em;
+    }
+
+    nav.toc {
+        position: fixed;
+        overflow-y: scroll;
+        left: 0;
+        top: 0;
+        padding: 5rem 1em 0 1em;
+        width: 18rem;
+        background: black;
+        height: 90vh;
+    }
+    nav.toc h2 {
+        display: none;
+    }
+    nav.toc li {
+        color: grey;
+    }
+
+    nav.toc a, nav.toc a:visited {
+        color: grey;
+        text-decoration: none;
+    }
+    nav.toc a:hover {
+        color: white;
+    }
+    nav.toc>ul>li, nav.toc>ul>li>a, nav.toc>ul>li>a:visited  {
+        color: white;
+    }
+    nav.toc>ul>li>a, nav.toc>ul>li>a:visited  {
+        font-weight: bold;
     }
 }
