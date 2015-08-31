@@ -8,8 +8,28 @@ http://creativecommons.org/licenses/by/4.0/
 
 html {
     background-color: white;
+    overflow-x: hidden;
 }
 
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1em;
+}
+
+figure, .scrollable {
+    max-width: 45em;
+    width: 100%;
+    overflow-x: auto;
+}
+
+figure {
+    margin: 0;
+    padding: 0;
+
+}
 
 article, header, nav.toc, footer {
     margin-left: 0;
@@ -22,10 +42,62 @@ article, header, nav.toc, footer {
     font-family: sans;
 }
 
+/* screenshot image */
+img {
+    max-width: 45em;
+    width: 100%;
+}
+
+nav.toc {
+    line-height: 2em;
+}
+
+nav.toc li {
+    border-top: 1px solid #eeeeee;
+    list-style: none;
+    padding-left: 0;
+}
+nav.toc ul {
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+}
+
+a, nav.toc a:visited {
+    color: inherit;
+}
+
+nav.toc a, nav.toc a:visited {
+    text-decoration: none;
+}
+
+nav.toc>ul  {
+    font-weight: bold;
+    color: black;
+}
+nav.toc>ul>li>ul  {
+    font-weight: normal;
+}
+nav.toc>ul>li>ul>li>ul  {
+    color: #444444;
+}
+nav.toc>ul>li>ul>li>ul>li>ul  {
+    color: grey;
+}
+nav.toc a:hover {
+    color: black;
+    text-decoration: underline;
+}
 h1, h2 {
     font-size: 1.3em;
-    border-bottom: 2px solid #333333;
+    background: #000044;
+    padding: 0.2em;
+    color: white;
 }
+h2 {
+    background: #444444;
+    margin-top: 3rem;
+}
+
 h3 {
     margin-top: 2rem;
     margin-bottom: 0;
@@ -33,21 +105,11 @@ h3 {
     border-bottom: 2px solid #333333;
 }
 
-h4:before {
-    display: block;
-    content: " ";
-    border-bottom: 1px solid black;
-}
-
 h4 {
-    /*
-    border-top: 1px solid #333333;
-    border-top: 1em dashed red;
-    */
-    margin-top: 2.5em;
     margin-bottom: 0em;
     font-size: 1.1em;
 }
+
 h5 {
     margin-top: 0em;
     margin-bottom: 0em;
@@ -60,10 +122,33 @@ ul {
     padding-left: 1em;
 }
 
+/* compact def lists */
+dl .compact {
+    display: inline-block;
+    width: 100%;
+}
+.compact dt {
+    float: left;
+    clear: left;
+    width: 6em;
+    margin: 0;
+    margin-right: 1em;
+}
+.compact dd {
+    float: left;
+    clear: right;
+    margin: 0;
+}
+
 /* compact list */
 .compact li {
     display: inline-block;
     width: 5em;
+}
+
+.compact10 li {
+    display: inline-block;
+    width: 10em;
 }
 
 /* horizontal list */
@@ -119,6 +204,8 @@ table {
     margin-bottom: 1em;
     line-height: 140%;
     border-bottom: 1px dotted lightblue;
+    width: 100%;
+    max-width: 45em;
 }
 
 tr:nth-child(odd)		{ background-color:#eeeeff; }
@@ -153,15 +240,57 @@ pre {
 /* tablets and desktops */
 
 @media (min-width: 55em) {
+    /* header on offline docs */
 
-    /* push link target below fixed menu */
-    :target:before {
-        display: block;
-        content: " ";
-        height: 6em;
+    .standalone header {
+        backgound: yellow;
+        position:fixed;
+        z-index:4;
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: 100%;
+        height: 3.2rem;
+        background: #0000aa;
+        border-bottom: 1em solid grey;
+        font-family: sans;
+        margin: 0;
+        padding: 0;
+    }
+    .standalone header h1, .standalone header small {
+        background: none;
+        color: white;
+        margin: 0.5rem 0 0 1rem;
+        display: inline-block;
+    }
+    .standalone header small {
+        color: grey;
+        float: right;
+        margin: 0.7rem 1rem 0 0;
     }
 
-    header {
+    /* push link target below fixed menu */
+    :target::before {
+        display: block;
+        content: "";
+        height: 5rem;
+        background: white;
+        /* we need to cut off the padding to :target
+           so we don't get a box. this compensates a bot */
+        margin-bottom: 0.2em;
+    }
+    :target {
+        margin-top: -3rem;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 0;
+    }
+
+    /*
+        we need the space in between or the ::before block will
+        go over the last bit of the previous article. Somehow, fortunately,
+        doesn't happen with sections... */
+    article, header, footer {
         margin-top: 4rem;
     }
 
@@ -179,27 +308,34 @@ pre {
         top: 0;
         padding: 5rem 1em 0 1em;
         width: 18rem;
-        background: black;
+        background: #000044;
         height: 90vh;
+        line-height: 1.4em;
     }
     nav.toc h2 {
         display: none;
     }
-    nav.toc li {
-        color: grey;
-    }
-
-    nav.toc a, nav.toc a:visited {
-        color: grey;
-        text-decoration: none;
-    }
     nav.toc a:hover {
         color: white;
     }
-    nav.toc>ul>li, nav.toc>ul>li>a, nav.toc>ul>li>a:visited  {
+
+    nav.toc li {
+        border: none;
+    }
+    nav.toc ul  {
+        padding-right: none;
+    }
+
+    nav.toc>ul  {
         color: white;
     }
-    nav.toc>ul>li>a, nav.toc>ul>li>a:visited  {
-        font-weight: bold;
+    nav.toc>ul>li>ul {
+        color: lightsteelblue;
     }
+    nav.toc>ul>li>ul>li>ul  {
+        color: steelblue;
+    }
+
+
+
 }
