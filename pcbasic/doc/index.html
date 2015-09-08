@@ -1,3 +1,10 @@
+<!--
+    PC-BASIC documentation
+    (c) 2014-2015 Rob Hagemans
+    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    http://creativecommons.org/licenses/by-sa/4.0/legalcode
+-->
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,7 +31,7 @@
 </nav>
 <header>
 <h1>PC-BASIC 15.08 documentation</h1>
-<small>Documentation compiled on Mon Sep  7 08:18:49 UTC 2015.</small>
+<small>Documentation compiled on Tue Sep  8 20:21:30 UTC 2015.</small>
 </header>
 <nav class="toc">
     <h2 id="toc">Table of Contents</h2>
@@ -341,120 +348,115 @@
 <article>
 <h1 id="pc-basic">Overview</h1>
 <p><em>A free, cross-platform emulator for the GW-BASIC family of interpreters.</em></p>
-<p>PC-BASIC is a free, cross-platform interpreter for GW-BASIC, Advanced BASIC (BASICA), PCjr Cartridge Basic and Tandy 1000 GW-BASIC. It interprets these BASIC dialects with a high degree of accuracy, aiming for bug-for-bug compatibility. PC-BASIC emulates the most common video and audio hardware on which these BASICs used to run. PC-BASIC runs ASCII, bytecode and protected .BAS files. It implements floating-point arithmetic in the Microsoft Binary Format (MBF) and can therefore read and write binary data files created by GW-BASIC.</p>
-<p>PC-BASIC is free and open source software released under the GPL version 3.</p>
+<p>PC-BASIC is a free, cross-platform interpreter for GW-BASIC, Advanced BASIC (BASICA), PCjr Cartridge Basic and Tandy 1000 GW-BASIC.
+It interprets these BASIC dialects with a high degree of accuracy, aiming for bug-for-bug compatibility.
+PC-BASIC emulates the most common video and audio hardware on which these BASICs used to run.
+PC-BASIC runs ASCII, bytecode and protected .BAS files.
+It implements floating-point arithmetic in the Microsoft Binary Format (MBF) and can therefore
+read and write binary data files created by GW-BASIC.  </p>
+<p>PC-BASIC is free and open source software released under the GPL version 3.  </p>
 <p>See also the <a href="http://robhagemans.github.io/pcbasic/">PC-BASIC home page</a>.</p>
-<figure>
-<img src="https://robhagemans.github.io/pcbasic/screenshots/pcbasic.png" alt="" />
-</figure>
-<hr />
+<p><img alt="" src="https://robhagemans.github.io/pcbasic/screenshots/pcbasic.png"></p>
+<hr>
 <h1 id="quick-start-guide">Quick Start Guide</h1>
 <p>This quick start guide covers installation and elementary use of PC-BASIC. For more information, please refer to the <a href="http://robhagemans.github.io/pcbasic/doc/">full PC-BASIC documentation</a> which covers usage, command-line options and a full GW-BASIC language reference. This documentation is also included with the current PC-BASIC release.</p>
-<p>If you find bugs, please report them on the SourceForge discussion page at <a href="https://sourceforge.net/p/pcbasic/discussion/bugs/" class="uri">https://sourceforge.net/p/pcbasic/discussion/bugs/</a>. It would be most helpful if you could include a short bit of BASIC code that triggers the bug.</p>
+<p>If you find bugs, please report them on the SourceForge discussion page at <a href="https://sourceforge.net/p/pcbasic/discussion/bugs/">https://sourceforge.net/p/pcbasic/discussion/bugs/</a>. It would be most helpful if you could include a short bit of BASIC code that triggers the bug.</p>
 <h2 id="installation">Installation</h2>
 <p>Packaged distributions are currently available for Windows XP and above and Mac OSX 10.6 and above. For Debian, Ubuntu, Mint and Fedora Linux an install script is provided in the source distribution.</p>
-<p>They can be downloaded from one of the following locations:</p>
+<p>They can be downloaded from one of the following locations:  </p>
 <ul>
-<li>GitHub at <a href="https://github.com/robhagemans/pcbasic/releases" class="uri">https://github.com/robhagemans/pcbasic/releases</a>.<br />
-</li>
-<li>SourceForge at <a href="https://sourceforge.net/projects/pcbasic/files/" class="uri">https://sourceforge.net/projects/pcbasic/files/</a>.</li>
+<li>GitHub at <a href="https://github.com/robhagemans/pcbasic/releases">https://github.com/robhagemans/pcbasic/releases</a>.  </li>
+<li>SourceForge at <a href="https://sourceforge.net/projects/pcbasic/files/">https://sourceforge.net/projects/pcbasic/files/</a>.  </li>
 </ul>
-<p>On <strong>Windows</strong>:</p>
+<p>On <strong>Windows</strong>:  </p>
 <ul>
-<li>run the installer<br />
-</li>
-<li>to start, click PC-BASIC in your Start menu</li>
+<li>run the installer  </li>
+<li>to start, click PC-BASIC in your Start menu  </li>
 </ul>
-<p>On <strong>OS X</strong>:</p>
+<p>On <strong>OS X</strong>:  </p>
 <ul>
-<li>mount the disk image<br />
-</li>
-<li>move <code>PC-BASIC.app</code> to your Applications folder<br />
-</li>
-<li>to start, double click the PC-BASIC app</li>
+<li>mount the disk image  </li>
+<li>move <code>PC-BASIC.app</code> to your Applications folder  </li>
+<li>to start, double click the PC-BASIC app  </li>
 </ul>
-<p>On <strong>Linux</strong>:</p>
+<p>On <strong>Linux</strong>:  </p>
 <ul>
-<li>untar the archive<br />
-</li>
-<li>run <code>sudo ./install.sh</code><br />
-</li>
-<li>to start, click PC-BASIC in your Applications menu or run <code>pcbasic</code> on the command line.</li>
+<li>untar the archive  </li>
+<li>run <code>sudo ./install.sh</code>  </li>
+<li>to start, click PC-BASIC in your Applications menu or run <code>pcbasic</code> on the command line.  </li>
 </ul>
-<p>If the options above are not applicable or you prefer to install from source, please consult <code>SOURCE.md</code> for instructions.</p>
+<p>If the options above are not applicable or you prefer to install from source, please
+consult <code>SOURCE.md</code> for instructions.</p>
 <h2 id="usage-essentials">Usage essentials</h2>
-<p>Double-click on <code>pcbasic</code> or run <code>pcbasic</code> on the command line to start in interactive mode with no programs.<br />
-A few selected command-line options:<br />
-<code>pcbasic PROGRAM.BAS</code> runs PROGRAM.BAS directly.<br />
-<code>pcbasic -h</code> shows all available command line options.</p>
+<p>Double-click on <code>pcbasic</code> or run <code>pcbasic</code> on the command line to start in interactive mode with no programs.<br>
+A few selected command-line options:<br>
+<code>pcbasic PROGRAM.BAS</code> runs PROGRAM.BAS directly.<br>
+<code>pcbasic -h</code> shows all available command line options.  </p>
 <p>If you're running PC-BASIC from a GUI, you can set the required options in the configuration file instead. The configuration file is a file named <code>PCBASIC.INI</code>, stored in the following location:</p>
 <table>
 <thead>
-<tr class="header">
-<th style="text-align: left;">OS</th>
-<th style="text-align: left;">Configuration file location</th>
+<tr>
+<th>OS</th>
+<th>Configuration file location</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td style="text-align: left;">Windows XP</td>
-<td style="text-align: left;"><code>C:\Documents and Settings\</code> (your username) <code>\Application Data\pcbasic</code></td>
+<tr>
+<td>Windows XP</td>
+<td><code>C:\Documents and Settings\</code> (your username) <code>\Application Data\pcbasic</code></td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">Windows 7</td>
-<td style="text-align: left;"><code>C:\Users\</code> (your username) <code>\AppData\Roaming\pcbasic</code></td>
+<tr>
+<td>Windows 7</td>
+<td><code>C:\Users\</code> (your username) <code>\AppData\Roaming\pcbasic</code></td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">OS X</td>
-<td style="text-align: left;"><code>~/Library/Application Support/pcbasic</code></td>
+<tr>
+<td>OS X</td>
+<td><code>~/Library/Application Support/pcbasic</code></td>
 </tr>
-<tr class="even">
-<td style="text-align: left;">Linux</td>
-<td style="text-align: left;"><code>~/.config/pcbasic</code></td>
+<tr>
+<td>Linux</td>
+<td><code>~/.config/pcbasic</code></td>
 </tr>
 </tbody>
 </table>
 <p>For example, you could include the following line in <code>PCBASIC.INI</code> to emulate IBM PCjr Cartridge Basic instead of GW-BASIC 3.23:</p>
-<pre><code>preset=pcjr  </code></pre>
-<p>For a full list of options, run <code>pcbasic -h</code> or consult the <a href="http://pc-basic.org/doc#settings">PC-BASIC usage documentation</a> included with PC-BASIC and available online.</p>
+<pre><code>preset=pcjr
+</code></pre>
+<p>For a full list of options, run <code>pcbasic -h</code> or consult the
+<a href="http://pc-basic.org/doc#settings">PC-BASIC usage documentation</a>
+included with PC-BASIC and available online.</p>
 <h2 id="basic-basic-commands">Basic BASIC commands</h2>
-<p>PC-BASIC starts in interactive mode, where you can execute BASIC statements directly. A few essential statements:<br />
-<code>SYSTEM</code> exits PC-BASIC.<br />
-<code>LOAD &quot;PROGRAM&quot;</code> loads <code>PROGRAM.BAS</code> but does not start it.<br />
-<code>RUN</code> starts the currently loaded program.<br />
-<code>RUN &quot;PROGRAM&quot;</code> loads and starts <code>PROGRAM.BAS</code>.</p>
-<p>For more information, please consult the comprehensive <a href="http://pc-basic.org/doc#reference">PC-BASIC language reference</a> included with PC-BASIC and available online.</p>
+<p>PC-BASIC starts in interactive mode, where you can execute BASIC statements directly.
+A few essential statements:<br>
+<code>SYSTEM</code> exits PC-BASIC.<br>
+<code>LOAD "PROGRAM"</code> loads <code>PROGRAM.BAS</code> but does not start it.<br>
+<code>RUN</code> starts the currently loaded program.<br>
+<code>RUN "PROGRAM"</code> loads and starts <code>PROGRAM.BAS</code>.  </p>
+<p>For more information, please consult the comprehensive
+<a href="http://pc-basic.org/doc#reference">PC-BASIC language reference</a>
+included with PC-BASIC and available online.</p>
 <h2 id="gw-basic-links-and-downloads">GW-BASIC links and downloads</h2>
-<p>BASIC program downloads and further links can be found on the following pages.</p>
+<p>BASIC program downloads and further links can be found on the following pages.  </p>
 <ul>
-<li><a href="http://www.oocities.org/KindlyRat/GWBASIC.html">KindlyRat's geocities page</a><br />
-</li>
-<li><a href="http://archive.is/AUm6G">PeatSoft GW-BASIC documentation</a><br />
-</li>
-<li><a href="http://www.gw-basic.com/">Neil C. Obremski's gw-basic.com</a><br />
-</li>
-<li><a href="http://peyre.x10.mx/GWBASIC/">Leon Peyre</a> has a nice collection of GW-BASIC programs including the original IBM PC-DOS 1.1 samples and the (in)famous DONKEY.BAS<br />
-</li>
-<li><a href="http://www.scn.org/~bh162/basic_programs.html">Phillip Bigelow's scientific programs written in BASIC</a><br />
-</li>
-<li><a href="http://www.garypeek.com/basic/gwprograms.htm">Gary Peek's BASIC source code archive</a><br />
-</li>
-<li><a href="http://www.moorecad.com/classicbasic/index.html">S.A. Moore's Classic BASIC Games</a><br />
-</li>
-<li><a href="http://www.geocities.ws/joseph_sixpack/btoc.html">Joseph Sixpack's Last Book of GW-BASIC</a> has lots of GW-BASIC office and utility programs, including the PC-CALC spreadsheet.<br />
-</li>
-<li><a href="http://cd.textfiles.com">cd.textfiles.com</a> has tons of old shareware, among which some good GW-BASIC games. Click on the image to enter, like in the olden days. Have fun digging.<br />
-</li>
-<li><a href="http://www.brooksdeforest.com/tandy1000/">Brooks deForest</a>'s collection of amazing Tandy BASIC games.<br />
-</li>
-<li><a href="http://www.oldskool.org/guides/tvdog/">TVDog's Archive</a> has lots of Tandy 1000 information and BASIC programs.</li>
-</ul>
-</article>
+<li><a href="http://www.oocities.org/KindlyRat/GWBASIC.html">KindlyRat's geocities page</a>  </li>
+<li><a href="http://archive.is/AUm6G">PeatSoft GW-BASIC documentation</a>  </li>
+<li><a href="http://www.gw-basic.com/">Neil C. Obremski's gw-basic.com</a>  </li>
+<li><a href="http://peyre.x10.mx/GWBASIC/">Leon Peyre</a> has a nice collection of GW-BASIC programs including the original IBM PC-DOS 1.1 samples and the (in)famous DONKEY.BAS  </li>
+<li><a href="http://www.scn.org/~bh162/basic_programs.html">Phillip Bigelow's scientific programs written in BASIC</a>  </li>
+<li><a href="http://www.garypeek.com/basic/gwprograms.htm">Gary Peek's BASIC source code archive</a>  </li>
+<li><a href="http://www.moorecad.com/classicbasic/index.html">S.A. Moore's Classic BASIC Games</a>  </li>
+<li><a href="http://www.geocities.ws/joseph_sixpack/btoc.html">Joseph Sixpack's Last Book of GW-BASIC</a> has lots of GW-BASIC office and utility programs, including the PC-CALC spreadsheet.  </li>
+<li><a href="http://cd.textfiles.com">cd.textfiles.com</a> has tons of old shareware, among which some good GW-BASIC games. Click on the image to enter, like in the olden days. Have fun digging.  </li>
+<li><a href="http://www.brooksdeforest.com/tandy1000/">Brooks deForest</a>'s collection of amazing Tandy BASIC games.  </li>
+<li><a href="http://www.oldskool.org/guides/tvdog/">TVDog's Archive</a> has lots of Tandy 1000 information and BASIC programs.  </li>
+</ul></article>
 <!--
     PC-BASIC documentation
     (c) 2014-2015 Rob Hagemans
-    This file is released under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
+
 <article>
     <h1 id="using">User's guide</h1>
 
@@ -1643,6 +1645,13 @@ me@mybox$
     </section>
 </article>
 <article>
+<!--
+    PC-BASIC documentation
+    (c) 2014-2015 Rob Hagemans
+    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    http://creativecommons.org/licenses/by-sa/4.0/legalcode
+-->
+
 <h1 id="settings">Settings and options</h1>
 <p>
     PC-BASIC has a number of settings that change the way it operates.
@@ -1695,7 +1704,8 @@ me@mybox$
 <!--
     PC-BASIC documentation
     (c) 2014-2015 Rob Hagemans
-    This file is released under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
 
 <section>
@@ -2923,7 +2933,8 @@ me@mybox$
 <!--
     PC-BASIC documentation
     (c) 2014-2015 Rob Hagemans
-    This file is released under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
 
 <section>
@@ -3008,7 +3019,8 @@ me@mybox$
 <!--
     PC-BASIC documentation
     (c) 2014-2015 Rob Hagemans
-    This file is released under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
 
 <article>
@@ -3033,7 +3045,7 @@ me@mybox$
     <h4>String literals</h4>
     <p>
         String literals are of the following form:
-        <code class="block">[<var>characters</var>][<code>NUL</code>|<code>CR</code>|<code>EOF</code>|"]</code>
+        <code class="block">"[<var>characters</var>][<code>NUL</code>|<code>CR</code>|<code>EOF</code>|"]</code>
         where <code><var>characters</var></code> is a string of characters. Any
         character from the current code page can be used, with the following
         exceptions, all of which terminate the string literal (aside from other effects they may have):
@@ -12532,6 +12544,12 @@ me@mybox$
 </section>
 
 </article>
+<!--
+    PC-BASIC documentation
+    (c) 2014-2015 Rob Hagemans
+    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    http://creativecommons.org/licenses/by-sa/4.0/legalcode
+-->
 
 <article>
     <h1 id="technical">Technical reference</h1>
@@ -13227,7 +13245,8 @@ me@mybox$
 <!--
     PC-BASIC documentation
     (c) 2014-2015 Rob Hagemans
-    This file is released under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
 
 <article>
@@ -13344,14 +13363,20 @@ me@mybox$
 <footer>
 <h1 id="licence">Licences</h1>
 <h2 id="pc-basic-interpreter">PC-BASIC interpreter</h2>
-<p>Copyright © 2013—2015 Rob Hagemans.</p>
-<p>Source code available at <a href="https://github.com/robhagemans/pcbasic" class="uri">https://github.com/robhagemans/pcbasic</a>.</p>
-<p>This program is free software; you can redistribute it and/or modify it under the terms of the <a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License, Version 3</a>, as published by the Free Software Foundation.</p>
-<p>This program is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.</p>
-<p>You should have received a copy of the GNU General Public License along with this program; if not, write to the Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p>
-<h2 id="pc-basic-documentation">PC-BASIC documentation</h2>
-<p>Copyright © 2014—2015 Rob Hagemans.</p>
-<p>This work is licensed under a <a href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
-</footer>
+<p>Copyright © 2013—2015 Rob Hagemans.  </p>
+<p>Source code available at <a href="https://github.com/robhagemans/pcbasic">https://github.com/robhagemans/pcbasic</a>.</p>
+<p>This program is free software; you can redistribute it and/or modify
+it under the terms of the <a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License, Version 3</a>,
+as published by the Free Software Foundation.</p>
+<p>This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.</p>
+<p>You should have received a copy of the GNU General Public License along
+with this program; if not, write to the Free Software Foundation, Inc.,
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p><h2 id="pc-basic-documentation">PC-BASIC documentation</h2>
+<p>Copyright © 2014—2015 Rob Hagemans.  </p>
+<p>This work is licensed under a
+<a href="http://creativecommons.org/licenses/by-sa/4.0/legalcode">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p></footer>
 </body>
 </html>
