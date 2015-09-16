@@ -31,10 +31,11 @@
 </nav>
 <header>
 <h1>PC-BASIC 15.08 documentation</h1>
-<small>Documentation compiled on Tue Sep  8 21:54:25 UTC 2015.</small>
+<small>Documentation compiled on 2015-09-16 21:52:58.</small>
 </header>
 <nav class="toc">
     <h2 id="toc">Table of Contents</h2>
+
             <ul>
                 <li><a href="#pc-basic">Overview</a></li>
                 <li><a href="#quick-start-guide">Quick Start Guide</a>
@@ -69,6 +70,7 @@
                             <ul>
                                 <li><a href="#printing">Printing</a></li>
                                 <li><a href="#ports">Serial and parallel ports</a></li>
+                                <li><a href="#cassette">Cassette interface and BASICODE</a></li>
                             </ul>
                         </li>
                         <li><a href="#interface">Changing the interface</a>
@@ -327,15 +329,15 @@
                         <li><a href="#colours">Colours</a></li>
                     </ul>
                 </li>
-                <li><a href="#acknowledgements">Acknowledgements</a>
+                <li><a href="#acks_acknowledgements">Acknowledgements</a>
                     <ul>
-                        <li><a href="#contributors">Contributors</a></li>
-                        <li><a href="#dependencies">Shoulders of Giants</a></li>
-                        <li><a href="#techref">Technical Documentation</a></li>
-                        <li><a href="#font-src">Fonts</a></li>
-                        <li><a href="#unicode">Unicode codepage mapping tables</a></li>
-                        <li><a href="#packaging">Packaging</a></li>
-                        <li><a href="#emulators">Emulators</a></li>
+                        <li><a href="#acks_contributors">Contributors</a></li>
+                        <li><a href="#acks_shoulders-of-giants">Shoulders of Giants</a></li>
+                        <li><a href="#acks_technical-documentation">Technical Documentation</a></li>
+                        <li><a href="#acks_fonts">Fonts</a></li>
+                        <li><a href="#acks_unicode-codepage-mapping-tables">Unicode codepage mapping tables</a></li>
+                        <li><a href="#acks_development-tools">Development tools</a></li>
+                        <li><a href="#acks_emulators">Emulators</a></li>
                     </ul>
                 </li>
                 <li><a href="#licence">Licences</a>
@@ -359,14 +361,14 @@ read and write binary data files created by GW-BASIC.  </p>
 <p><img alt="" src="https://robhagemans.github.io/pcbasic/screenshots/pcbasic.png"></p>
 <hr>
 <h2 id="quick-start-guide">Quick Start Guide</h2>
-<p>This quick start guide covers installation and elementary use of PC-BASIC. For more information, please refer to the <a href="http://robhagemans.github.io/pcbasic/doc/">full PC-BASIC documentation</a> which covers usage, command-line options and a full GW-BASIC language reference. This documentation is also included with the current PC-BASIC release.</p>
-<p>If you find bugs, please report them on the SourceForge discussion page at <a href="https://sourceforge.net/p/pcbasic/discussion/bugs/">https://sourceforge.net/p/pcbasic/discussion/bugs/</a>. It would be most helpful if you could include a short bit of BASIC code that triggers the bug.</p>
+<p>This quick start guide covers installation and elementary use of PC-BASIC. For more information, please refer to the <a href="#">full PC-BASIC documentation</a> which covers usage, command-line options and a full GW-BASIC language reference. This documentation is also included with the current PC-BASIC release.</p>
+<p>If you find bugs, please report them on the <a href="https://sourceforge.net/p/pcbasic/discussion/bugs/">SourceForge discussion page</a>. It would be most helpful if you could include a short bit of BASIC code that triggers the bug.</p>
 <h3 id="installation">Installation</h3>
 <p>Packaged distributions are currently available for Windows XP and above and Mac OSX 10.6 and above. For Debian, Ubuntu, Mint and Fedora Linux an install script is provided in the source distribution.</p>
 <p>They can be downloaded from one of the following locations:  </p>
 <ul>
-<li>GitHub at <a href="https://github.com/robhagemans/pcbasic/releases">https://github.com/robhagemans/pcbasic/releases</a>.  </li>
-<li>SourceForge at <a href="https://sourceforge.net/projects/pcbasic/files/">https://sourceforge.net/projects/pcbasic/files/</a>.  </li>
+<li><a href="https://github.com/robhagemans/pcbasic/releases">PC-BASIC releases on GitHub</a>  </li>
+<li><a href="https://sourceforge.net/projects/pcbasic/files/">PC-BASIC releases on SourceForge</a>  </li>
 </ul>
 <p>On <strong>Windows</strong>:  </p>
 <ul>
@@ -423,7 +425,7 @@ A few selected command-line options:<br>
 <pre><code>preset=pcjr
 </code></pre>
 <p>For a full list of options, run <code>pcbasic -h</code> or consult the
-<a href="http://pc-basic.org/doc#settings">PC-BASIC usage documentation</a>
+<a href="#settings">PC-BASIC usage documentation</a>
 included with PC-BASIC and available online.</p>
 <h3 id="basic-basic-commands">Basic BASIC commands</h3>
 <p>PC-BASIC starts in interactive mode, where you can execute BASIC statements directly.
@@ -433,7 +435,7 @@ A few essential statements:<br>
 <code>RUN</code> starts the currently loaded program.<br>
 <code>RUN "PROGRAM"</code> loads and starts <code>PROGRAM.BAS</code>.  </p>
 <p>For more information, please consult the comprehensive
-<a href="http://pc-basic.org/doc#reference">PC-BASIC language reference</a>
+<a href="#reference">PC-BASIC language reference</a>
 included with PC-BASIC and available online.</p>
 <h3 id="gw-basic-links-and-downloads">GW-BASIC links and downloads</h3>
 <p>BASIC program downloads and further links can be found on the following pages.  </p>
@@ -1219,6 +1221,49 @@ included with PC-BASIC and available online.</p>
             </p>
         </section>
         <hr />
+
+        <section>
+            <h4 id="cassette">Cassette interface and BASICODE</h4>
+            <p>
+                The <code>CAS1</code> device interfaces with the cassette tape emulator.
+                Tapes were never very popular on the IBM PC, and indeed only available with the
+                original PC and the PCjr. There are not many IBM PC cassettes in the wild.
+                However, should you come across one, all you have to do to read it with PC-BASIC
+                is record it into a <code>.WAV</code> (RIFF WAVE) file and attach it to the <code>CAS1:</code>
+                device with the <code><a href="#--cas1">--cas1</a>=WAV:<var>filename</var></code> option.
+                You can also generate your own tape images and store your programs on it. <code>WAV</code>
+                files generated by PC-BASIC are large but very easily compressed in a <code>ZIP</code>
+                archive; this works better and leads to smaller files than transcoding to a lossy
+                audio format like <code>MP3</code>.
+            </p>
+            <p>
+                As an alternative to <code>.WAV</code>, you can store tapes in <code>CAS</code>
+                format. This is simply a bit-dump of the tape and is interchangeable
+                with tape images for the <a href="http://www.hampa.ch/pce/">PCE</a> IBM PC emulator.
+            </p>
+            <p>
+                BASICODE was a considerably more common audio encoding format, which enjoyed
+                huge popularity in particular in the Netherlands, the UK and East Germany.
+                BASICODE was distributed through tapes or as audio broadcast over radio.
+                Reading it into a PC required special hardware, usually hooking up a tape
+                recorder to a serial or parallel port.
+                In PC-BASIC, BASICODE tapes are read through the <code>CAS1</code> device instead,
+                by attaching a <code>.WAV</code> file with the <code><a href="#--cas1">--cas1</a>=BC:<var>filename</var></code>
+                option. PC-BASIC will load the BASICODE, inserting the necessary spaces
+                between keywords where the BASICODE standard leaves these out.
+                Note that you will need a Bascoder program to run the BASICODE, and this is not
+                currently distributed with PC-BASIC.
+            </p>
+            <p>
+                If you have a Bascoder named <code>BASCODER.BAS</code>, the way to run
+                a BASICODE program named <code>PROGRAM</code> from tape is:
+            </p>
+            <code class="block">
+                LOAD "BASCODER"<br />
+                CHAIN MERGE "CAS1:PROGRAM"
+            </code>
+        </section>
+        <hr />
     </section>
 
     <section>
@@ -1722,7 +1767,6 @@ me@mybox$
     You also cannot leave out the expression <code><b>=True</b></code>.
 </p>
 <hr />
-
 <!--
     PC-BASIC documentation
     Copyright (c) 2014-2015 Rob Hagemans
@@ -1736,7 +1780,7 @@ me@mybox$
         <b>pcbasic</b>
         [<var><a href="#p-program">program</a></var>|<var><a href="#p-package">package</a></var>
         [<var><a href="#p-output">output</a></var>]]
-        <span id="placeholder-options">[<var><a href="#options">option</a></var> ... ]</span>
+        <span id="placeholder-options">[<var><a href="#options">option</a></var>] ...</span>
     </code>
 </section>
 <hr />
@@ -2989,9 +3033,7 @@ me@mybox$
             UTF-8.
         </dd>
 
-        <dt>
-            <code><b>pcbasic MYPROG.BAS --mount=A:./files,B:./morefiles</b></code>
-        </dt>
+        <dt><code><b>pcbasic MYPROG.BAS --mount=A:./files,B:./morefiles</b></code></dt>
         <dd>
             Mount the current directory's subdirectory <code>files</code>
             as drive <code>A:</code> and subdirectory <code>morefiles</code> as
@@ -5839,7 +5881,7 @@ me@mybox$
     <section>
         <h4 id="FN"><code>FN</code> function</h4>
         <code class="block">
-            <var>result</var> <b>= FN</b>[ ]<var>name</var> <b>(</b><var>arg_0</var> [<b>,</b> <var>arg_1</var>] ...<b>)</b>
+            <var>result</var> <b>= FN</b>[ ]<var>name</var> [<b>(</b><var>arg_0</var> [<b>,</b> <var>arg_1</var>] ...<b>)</b>]F
         </code>
         <p>
             Evaluates the user-defined function previously defined with <code><a href="#DEF-FN">DEF FN</a> <var>name</var></code>.
@@ -6217,15 +6259,15 @@ me@mybox$
                 Any number of optional spaces is allowed between <code>GO</code> and <code>TO</code>, but they will
                 not be retained in the program.
             </li>
+            <li>
+                If <code><var>line_number</var></code> is greater than <code>65529</code>, only the first 4 characters are
+                read (e.g. <code>GOTO 65530</code> is executed as <code>GOTO 6553</code>)
+            </li>
         </ul>
         <h5>Errors</h5>
         <ul>
             <li>
                 <code><var>line_number</var></code> does not exist: <samp>Undefined line number</samp>.
-            </li>
-            <li>
-                If <code><var>line_number</var></code> is greater than <code>65529</code>, only the first 4 characters are
-                read (e.g. <code>6553</code>)
             </li>
         </ul>
     </section>
@@ -6267,19 +6309,37 @@ me@mybox$
        </code>
         <p>
             If <code><var>truth_value</var></code> is non-zero, executes <code><var>statements_1</var></code> or jumps to <code><var>line_number_1</var></code> .
-            If it is zero, executes <code><var>statements_0</var></code> or jumps to <code><var>line_number_0</var></code> . <code><var>truth_value</var></code>
-            is a numeric expression. The comma is optional and ignored.
-            <code><var>line_number_0</var></code> and <code><var>line_number_1</var></code> are existing line numbers.
-            Statements <code><var>statements_0</var></code> and <code><var>statements_1</var></code> can be compound statements with
-            one or more colons (<code>:</code>) separating single statements. The compound statements
-            can contain nested <code>IF&#8212;THEN&#8212;ELSE</code> statements.
-            <code><a href="#ELSE">ELSE</a></code> clauses are optional; they
-            are bound to the innermost free <code>IF</code> statement if nested. Additional <code>ELSE</code>
-            clauses that have no matching <code>IF</code> are ignored. All clauses must be on the same
-            program line.
+            If it is zero, executes <code><var>statements_0</var></code> or jumps to <code><var>line_number_0</var></code> .
         </p>
+        <h5>Parameters</h5>
+        <ul>
+            <li>
+                <code><var>truth_value</var></code>
+                is a numeric expression.
+            </li>
+            <li>
+                <code><var>line_number_0</var></code> and <code><var>line_number_1</var></code> are existing line numbers.
+            </li>
+            <li>
+                Statements <code><var>statements_0</var></code> and <code><var>statements_1</var></code> can be compound statements with
+                one or more colons (<code>:</code>) separating single statements. The compound statements
+                can contain nested <code>IF&#8212;THEN&#8212;ELSE</code> statements.
+            </li>
+        </ul>
         <h5>Notes</h5>
         <ul>
+            <li>
+                The comma is optional and ignored.
+            </li>
+            <li>
+                <code><a href="#ELSE">ELSE</a></code> clauses are optional; they
+                are bound to the innermost free <code>IF</code> statement if nested. Additional <code>ELSE</code>
+                clauses that have no matching <code>IF</code> are ignored.
+            </li>
+            <li>
+                All clauses must be on the same
+                program line.
+            </li>
             <li>
                <code>THEN</code> and <code>GOTO</code> are interchangeable; which one is chosen is independent
                 of whether a statement or a line number is given. <code>GOTO PRINT 1</code> is fine.
@@ -6287,8 +6347,17 @@ me@mybox$
             <li>
                 As in <code><a href="#GOTO">GOTO</a></code>, anything after the line number is ignored.
             </li>
+        </ul>
+        <h5>Errors</h5>
+        <ul>
             <li>
                If <code><var>truth_value</var></code> has a string value: <samp>Type mismatch</samp>.
+            </li>
+            <li>
+                <code><var>truth_value</var></code> equals <code>0</code> and <code><var>line_number_0</var></code> is a non-existing line number,
+                or
+                <code><var>truth_value</var></code> equals <code>1</code> and <code><var>line_number_1</var></code> is a non-existing line number:
+                <samp>Undefined line number</samp>.
             </li>
         </ul>
     </section>
@@ -13473,131 +13542,112 @@ me@mybox$
     </section>
     <hr />
 </article>
-<!--
-    PC-BASIC documentation
-    Copyright (c) 2014-2015 Rob Hagemans
-    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
-    http://creativecommons.org/licenses/by-sa/4.0/legalcode
--->
-
 <article>
-    <h2 id="acknowledgements">Acknowledgements</h2>
-
-    <section>
-        <h3 id="contributors">Contributors</h3>
-        <p>PC-BASIC would not exist without those contributing code, reporting bugs,
-        sending in patches, and documenting GW-BASIC's behaviour. Thank you all!</p>
-
-        <dl>
-            <dt>Rob Hagemans</dt><dd>Lead author</dd>
-            <dt>Wengier Wu</dt><dd>Bug fixes and advice for CJK support</dd>
-            <dt>WJB</dt><dd>Bug fixes</dd>
-        </dl>
-    </section>
-    <hr />
-
-    <section>
-        <h3 id="dependencies">Shoulders of Giants</h3>
-
-        <p>PC-BASIC depends on the following open-source projects:</p>
-
-        <ul>
-            <li><a href="http://www.python.org">Python</a></li>
-            <li><a href="http://www.pygame.org">PyGame</a></li>
-            <li><a href="http://www.libsdl.org">Simple DirectMedia Layer (SDL)</a></li>
-            <li><a href="http://www.numpy.org">NumPy</a></li>
-            <li><a href="http://freedesktop.org/wiki/Software/pyxdg/">PyXDG</a></li>
-            <li><a href="https://sourceforge.net/projects/pywin32/">Python for Windows Extensions (PyWin32)</a></li>
-            <li><a href="http://pyserial.sourceforge.net/pyserial.html">PySerial</a></li>
-            <li><a href="http://pexpect.readthedocs.org/en/latest/">PExpect</a></li>
-            <li><a href="https://github.com/robhagemans/ansipipe">ANSI|pipe</a></li>
-        </ul>
-    </section>
-    <hr />
-
-    <section>
-        <h3 id="techref">Technical Documentation</h3>
-        <p>
-            Some of the technical documentation that has proved most useful when building
-            PC-BASIC was provided by the following people:
-        </p>
-        <dl>
-            <dt>Norman De Forest</dt>
-            <dd><a href="http://www.chebucto.ns.ca/~af380/GW-BASIC-tokens.html">GW-BASIC tokenised file format</a></dd>
-            <dt>Dan Vanderkam</dt>
-            <dd><a href="http://www.danvk.org/wp/2008-02-03/reading-old-gw-basic-programs/">GW-BASIC tokenised file format</a></dd>
-            <dt>Paul Kocher</dt>
-            <dd>GW-BASIC protected file format:
-                 <em>The Cryptogram computer supplement</em> <strong>19</strong>, American Cryptogram Association,
-                 Summer 1994</dd>
-            <dt>John Elliott</dt>
-            <dd><a href="http://www.seasip.info/VintagePC/">Vintage video card documentation</a></dd>
-            <dt>Dan Rollins</dt>
-            <dd><a href="http://webpages.charter.net/danrollins/techhelp/0089.HTM">PC video memory layout</a></dd>
-            <dt>Julian Bucknall</dt>
-            <dd><a href="http://www.boyet.com/Articles/MBFSinglePrecision.html">Microsoft Binary Format</a></dd>
-            <dt>Adam Burgoyne</dt>
-            <dd><a href="http://www.experts-exchange.com/Programming/Languages/Pascal/Delphi/Q_20245266.html">Microsoft Binary Format</a></dd>
-            <dt>Andries Brouwer</dt>
-            <dd><a href="http://www.win.tue.nl/~aeb/linux/kbd/font-formats-3.html">CPI font file format</a>
-            <dt>Dan Tobias</dt>
-            <dd><a href="http://fileformats.archiveteam.org/wiki/IBM_PC_data_cassette">IBM PC Data cassette format</a>
-            <dt>Mike Brutman</dt>
-            <dd><a href="http://www.brutman.com/Cassette_Waveforms/Cassette_Waveforms.html">IBM PC Data cassette format</a>
-            <dt>Janny Looyenga</dt>
-            <dd><a href="http://www.nostalgia8.nl/basicode.htm">BASICODE format</a>
-        </dl>
-    </section>
-    <hr />
-
-    <section>
-        <h3 id="font-src">Fonts</h3>
-        <ul>
-            <li><a href="http://www.freedos.org/software/?prog=cpidos">Henrique Peron's CPIDOS codepage pack</a></li>
-            <li><a href="http://www.inp.nsk.su/~bolkhov/files/fonts/univga/">Dmitry Bolkhovityanov's Uni-VGA font</a></li>
-            <li><a href="https://savannah.gnu.org/projects/unifont">GNU UniFont</a></li>
-            <li><a href="http://www.dosbox.com">DOSBox</a> VGA fonts</li>
-        </ul>
-    </section>
-    <hr />
-
-    <section>
-        <h3 id="unicode">Unicode codepage mapping tables</h3>
-        <ul>
-            <li><a href="http://www.unicode.org/Public/MAPPINGS/VENDORS">The Unicode Consortium and contributors</a></li>
-            <li><a href="https://www.gnu.org/software/libiconv/">GNU libiconv Project</a></li>
-            <li><a href="http://www.aivosto.com/vbtips/charsets-codepages.html">Aivosto Oy</a></li>
-            <li><a href="http://www.kostis.net/charsets/">Kosta Kostis</a></li>
-            <li><a href="http://www-01.ibm.com/software/globalization/cdra/">IBM CDRA</a></li>
-            <li><a href="https://github.com/mtojo/camellia">Camellia</a></li>
-        </ul>
-    </section>
-    <hr />
-
-    <section>
-        <h3 id="packaging">Packaging</h3>
-        <ul>
-            <li><a href="http://www.pyinstaller.org">PyInstaller</a></li>
-            <li><a href="http://nsis.sourceforge.net">Nullsoft Scriptable Install System</a></li>
-            <li><a href="http://www.7-zip.org">7-Zip</a></li>
-            <li><a href="http://www.gnu.org/software/tar">GNU Tar</a></li>
-            <li><a href="http://pygame.renpy.org">Pygame Subset for Android</a></li>
-        </ul>
-    </section>
-    <hr />
-
-    <section>
-        <h3 id="emulators">Emulators</h3>
-        <p>A special mention for the following excellent emulators, which have been indispensable tools in
-        documenting the behaviour of various Microsoft BASIC dialects.</p>
-        <ul>
-            <li><a href="http://www.dosbox.com">DOSBox</a></li>
-            <li><a href="http://www.mess.org">MESS</a></li>
-            <li><a href="http://www.hampa.ch/pce/">PCE PC Emulator</a></li>
-        </ul>
-    </section>
-    <hr />
-</article>
+<h2 id="acks_acknowledgements">Acknowledgements</h2>
+<h3 id="acks_contributors">Contributors</h3>
+<p>PC-BASIC would not exist without those contributing code, reporting bugs,
+sending in patches, and documenting GW-BASIC's behaviour. Thank you all!</p>
+<ul>
+<li><strong>Rob Hagemans</strong>,   lead author</li>
+<li><strong>Wengier Wu</strong>,     bug fixes and advice for CJK support</li>
+<li><strong>WJB</strong>,            bug fixes</li>
+</ul>
+<h3 id="acks_shoulders-of-giants">Shoulders of Giants</h3>
+<p>PC-BASIC depends on the following open-source projects:</p>
+<ul>
+<li><a href="http://www.python.org">Python</a></li>
+<li><a href="http://www.pygame.org">PyGame</a></li>
+<li><a href="http://www.libsdl.org">Simple DirectMedia Layer (SDL)</a></li>
+<li><a href="http://www.numpy.org">NumPy</a></li>
+<li><a href="http://freedesktop.org/wiki/Software/pyxdg/">PyXDG</a></li>
+<li><a href="https://sourceforge.net/projects/pywin32/">Python for Windows Extensions (PyWin32)</a></li>
+<li><a href="http://pyserial.sourceforge.net/pyserial.html">PySerial</a></li>
+<li><a href="http://pexpect.readthedocs.org/en/latest/">PExpect</a></li>
+<li><a href="https://github.com/robhagemans/ansipipe">ANSI|pipe</a></li>
+</ul>
+<h3 id="acks_technical-documentation">Technical Documentation</h3>
+<p>Building PC-BASIC would have been impossible without the immense amounts of
+technical documentation that has been made available online. It has proven not
+to be feasible to compile a complete list of the documentation used. Many
+thanks to all those who make technical information freely available, and
+apologies to those whose contribution I have failed to acknowledge here.</p>
+<h5 id="acks_gw-basic-tokenised-file-format">GW-BASIC tokenised file format</h5>
+<ul>
+<li><strong>Norman De Forest</strong>'s seminal <a href="http://www.chebucto.ns.ca/~af380/GW-BASIC-tokens.html">documentation of GW-BASIC tokens</a>.
+    <em>This documentation was the starting point for the development of PC-BASIC.</em></li>
+<li><strong>Dan Vanderkam</strong>'s <a href="http://www.danvk.org/wp/2008-02-03/reading-old-gw-basic-programs/">online GW-BASIC decoder</a></li>
+</ul>
+<h5 id="acks_gw-basic-protected-file-format">GW-BASIC protected file format</h5>
+<ul>
+<li><strong>Paul Kocher</strong>, <em>The Cryptogram computer supplement</em> <strong>19</strong>, American Cryptogram Association, Summer 1994</li>
+</ul>
+<h5 id="acks_video-hardware">Video hardware</h5>
+<ul>
+<li><strong>John Elliott</strong>'s <a href="http://www.seasip.info/VintagePC/">Vintage PC pages</a></li>
+<li><strong>Dan Rollins</strong>' <a href="http://webpages.charter.net/danrollins/techhelp/0089.HTM">TechHelp</a> pages on PC video memory layout</li>
+<li><strong>Great Hierophant</strong>'s <a href="http://nerdlypleasures.blogspot.com">Nerdly Pleasures Blog</a></li>
+</ul>
+<h5 id="acks_microsoft-binary-format">Microsoft Binary Format</h5>
+<ul>
+<li>Forum contributions by <strong><a href="http://www.boyet.com/Articles/MBFSinglePrecision.html">Julian Brucknall</a></strong> and <strong><a href="http://www.experts-exchange.com/Programming/Languages/Pascal/Delphi/Q_20245266.html">Adam Burgoyne</a></strong></li>
+</ul>
+<h5 id="acks_font-documentation">Font documentation</h5>
+<ul>
+<li><strong>Andries Brouwer</strong>'s <a href="http://www.win.tue.nl/~aeb/linux/kbd/font-formats-3.html">CPI font file format documentation</a></li>
+</ul>
+<h5 id="acks_data-cassette-format">Data cassette format</h5>
+<ul>
+<li><strong>Mike Brutman</strong>'s <a href="http://www.brutman.com/Cassette_Waveforms/Cassette_Waveforms.html">Analysis of the IBM PC Data cassette format</a></li>
+<li><strong>Dan Tobias</strong>' <a href="http://fileformats.archiveteam.org/wiki/IBM_PC_data_cassette">IBM PC Data cassette format documentation</a></li>
+</ul>
+<h5 id="acks_basicode">BASICODE</h5>
+<ul>
+<li><strong>Janny Looyenga</strong>'s documentation of the <a href="http://www.nostalgia8.nl/basicode.htm">BASICODE format</a></li>
+</ul>
+<h5 id="acks_technical-information-on-many-topics">Technical information on many topics</h5>
+<ul>
+<li><a href="http://www.vogons.org/">VOGONS</a></li>
+<li><strong>Erik S. Klein</strong>'s <a href="http://www.vintage-computer.com">Vintage computer forums</a></li>
+</ul>
+<h3 id="acks_fonts">Fonts</h3>
+<ul>
+<li><strong>Henrique Peron</strong>'s <a href="http://www.freedos.org/software/?prog=cpidos">CPIDOS codepage pack</a></li>
+<li><strong>Dmitry Bolkhovityanov</strong>'s <a href="http://www.inp.nsk.su/~bolkhov/files/fonts/univga/">Uni-VGA font</a></li>
+<li><strong>Roman Czyborra</strong>, <strong>Qianqian Fang</strong> and others' <a href="https://savannah.gnu.org/projects/unifont">GNU UniFont</a></li>
+<li><a href="http://www.dosbox.com">DOSBox</a> VGA fonts</li>
+</ul>
+<h3 id="acks_unicode-codepage-mapping-tables">Unicode codepage mapping tables</h3>
+<ul>
+<li><a href="http://www.unicode.org/Public/MAPPINGS/VENDORS">The Unicode Consortium and contributors</a></li>
+<li><a href="https://www.gnu.org/software/libiconv/">GNU libiconv Project</a></li>
+<li><a href="http://www.aivosto.com/vbtips/charsets-codepages.html">Aivosto</a></li>
+<li><strong>Konstantinos Kostis</strong>' <a href="http://www.kostis.net/charsets/">Charsets Index</a></li>
+<li><a href="http://www-01.ibm.com/software/globalization/cdra/">IBM CDRA</a></li>
+<li><strong>Masaki Tojo</strong>'s <a href="https://github.com/mtojo/camellia">Camellia</a></li>
+</ul>
+<h3 id="acks_development-tools">Development tools</h3>
+<p>PC-BASIC is developed using <a href="https://git-scm.com/">Git</a> source control,
+<a href="https://wiki.gnome.org/Apps/Gedit">GEdit</a> and <a href="https://atom.io/">Atom</a> text
+editors on an <a href="http://www.ubuntu.com/">Ubuntu</a> Linux system and hosted on
+<a href="https://github.com/">GitHub</a> and <a href="https://sourceforge.net/">SourceForge</a>.</p>
+<p>Packaging and documentation depends on the following projects:</p>
+<ul>
+<li><a href="http://www.pyinstaller.org">PyInstaller</a></li>
+<li><a href="http://nsis.sourceforge.net">Nullsoft Scriptable Install System</a></li>
+<li><a href="http://www.7-zip.org">7-Zip</a></li>
+<li><a href="http://www.gnu.org/">The GNU Base System</a></li>
+<li><strong>Tom Rothamel</strong>'s <a href="https://web.archive.org/web/20150712040220/http://pygame.renpy.org/">Pygame Subset for Android</a> (superseded by <a href="http://www.renpy.org/doc/html/android.html">RAPT</a>)</li>
+<li><a href="http://lxml.de">LXML</a></li>
+<li><a href="https://pypi.python.org/pypi/Markdown">Markdown</a></li>
+</ul>
+<h3 id="acks_emulators">Emulators</h3>
+<p>These excellent emulators have been indispensable tools in documenting the
+behaviour of various Microsoft BASIC dialects.</p>
+<ul>
+<li><a href="http://www.dosbox.com">DOSBox</a></li>
+<li><a href="http://www.mess.org">MESS</a></li>
+<li><a href="http://www.hampa.ch/pce/">PCE PC Emulator</a></li>
+</ul></article>
 <footer>
 <h2 id="licence">Licences</h2>
 <h3 id="pc-basic-interpreter">PC-BASIC interpreter</h3>
@@ -13613,7 +13663,6 @@ GNU General Public License for more details.</p>
 <p>You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p><hr />
-
 <h3 id="pc-basic-documentation">PC-BASIC documentation</h3>
 <p><strong>Copyright © 2014—2015 Rob Hagemans.</strong></p>
 <p>This work is licensed under a
