@@ -4,17 +4,15 @@
     Copyright (c) 2014-2015 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
--->
-
-<html>
+--><html>
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="shortcut icon" href="../icons/icon.png" />
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../icons/icon.png">
     <!--[if gt IE 8]><!-->
-    <link rel="stylesheet" href="../style/pure-min.css" />
-    <link rel="stylesheet" href="../style/menu.css" />
-    <link rel="stylesheet" href="../style/doc.css" />
+    <link rel="stylesheet" href="../style/pure-min.css">
+    <link rel="stylesheet" href="../style/menu.css">
+    <link rel="stylesheet" href="../style/doc.css">
     <!--<![endif]-->
     <title>PC-BASIC Documentation</title>
 </head>
@@ -30,8 +28,8 @@
     </ul>
 </nav>
 <header>
-<h1>PC-BASIC 15.08 documentation</h1>
-<small>Documentation compiled on 2015-09-16 21:52:58.</small>
+<h1>PC-BASIC 15.08.1 documentation</h1>
+<small>Documentation compiled on 2015-11-15 16:45:35.</small>
 </header>
 <nav class="toc">
     <h2 id="toc">Table of Contents</h2>
@@ -135,7 +133,7 @@
                                 <li><a href="#CDBL"><code>CDBL</code> function</a></li>
                                 <li><a href="#CHAIN"><code>CHAIN</code> statement</a></li>
                                 <li><a href="#CHDIR"><code>CHDIR</code> statement</a></li>
-                                <li><a href="#CHR$"><code>CHR$</code> function</a></li>
+                                <li><a href="#CHR%24"><code>CHR$</code> function</a></li>
                                 <li><a href="#CINT"><code>CINT</code> function</a></li>
                                 <li><a href="#CIRCLE"><code>CIRCLE</code> statement</a></li>
                                 <li><a href="#CLEAR"><code>CLEAR</code> statement</a></li>
@@ -154,8 +152,8 @@
                                 <li><a href="#CVS"><code>CVS</code> function</a></li>
                                 <li><a href="#CVD"><code>CVD</code> function</a></li>
                                 <li><a href="#DATA"><code>DATA</code> statement</a></li>
-                                <li><a href="#DATE$"><code>DATE$</code> function</a></li>
-                                <li><a href="#DATE$-statement"><code>DATE$</code> statement</a></li>
+                                <li><a href="#DATE%24"><code>DATE$</code> function</a></li>
+                                <li><a href="#DATE%24-statement"><code>DATE$</code> statement</a></li>
                                 <li><a href="#DEF-FN"><code>DEF FN</code> statement</a></li>
                                 <li><a href="#DEFINT"><code>DEFINT</code>, <code>DEFDBL</code>, <code>DEFSNG</code>, <code>DEFSTR</code> statements</a></li>
                                 <li><a href="#DEF-SEG"><code>DEF SEG</code> statement</a></li>
@@ -167,11 +165,11 @@
                                 <li><a href="#ELSE"><code>ELSE</code> statement</a></li>
                                 <li><a href="#END"><code>END</code> statement</a></li>
                                 <li><a href="#ENVIRON"><code>ENVIRON</code> statement</a></li>
-                                <li><a href="#ENVIRON$"><code>ENVIRON$</code> function</a></li>
+                                <li><a href="#ENVIRON%24"><code>ENVIRON$</code> function</a></li>
                                 <li><a href="#EOF"><code>EOF</code> function</a></li>
                                 <li><a href="#ERASE"><code>ERASE</code> statement</a></li>
                                 <li><a href="#ERDEV"><code>ERDEV</code> function</a></li>
-                                <li><a href="#ERDEV$"><code>ERDEV$</code> function</a></li>
+                                <li><a href="#ERDEV%24"><code>ERDEV$</code> function</a></li>
                                 <li><a href="#ERL"><code>ERL</code> function</a></li>
                                 <li><a href="#ERR"><code>ERR</code> function</a></li>
                                 <li><a href="#ERROR"><code>ERROR</code> statement</a></li>
@@ -188,24 +186,24 @@
                                 <li><a href="#GET-graphics"><code>GET</code> statement (graphics)</a></li>
                                 <li><a href="#GOSUB"><code>GOSUB</code> statement</a></li>
                                 <li><a href="#GOTO"><code>GOTO</code> statement</a></li>
-                                <li><a href="#HEX$"><code>HEX$</code> function</a></li>
+                                <li><a href="#HEX%24"><code>HEX$</code> function</a></li>
                                 <li><a href="#IF"><code>IF</code> statement</a></li>
-                                <li><a href="#INKEY$"><code>INKEY$</code> function</a></li>
+                                <li><a href="#INKEY%24"><code>INKEY$</code> function</a></li>
                                 <li><a href="#INP"><code>INP</code> function</a></li>
                                 <li><a href="#INPUT"><code>INPUT</code> statement (console)</a></li>
                                 <li><a href="#INPUT-file"><code>INPUT</code> statement (devices and files)</a></li>
-                                <li><a href="#INPUT$"><code>INPUT$</code> function</a></li>
+                                <li><a href="#INPUT%24"><code>INPUT$</code> function</a></li>
                                 <li><a href="#INSTR"><code>INSTR</code> function</a></li>
                                 <li><a href="#INT"><code>INT</code> function</a></li>
                                 <li><a href="#IOCTL"><code>IOCTL</code> statement</a></li>
-                                <li><a href="#IOCTL$"><code>IOCTL$</code> function</a></li>
+                                <li><a href="#IOCTL%24"><code>IOCTL$</code> function</a></li>
                                 <li><a href="#KEY-list"><code>KEY</code> statement (function-key macro list)</a></li>
                                 <li><a href="#KEY-def"><code>KEY</code> statement (function-key macro definition)</a></li>
                                 <li><a href="#KEY-event"><code>KEY</code> statement (event-trapping switch)</a></li>
                                 <li><a href="#KEY-event-def"><code>KEY</code> statement (event-trapping key definition)</a></li>
                                 <li><a href="#KILL"><code>KILL</code> statement</a></li>
                                 <li><a href="#LCOPY"><code>LCOPY</code> statement</a></li>
-                                <li><a href="#LEFT$"><code>LEFT$</code> function</a></li>
+                                <li><a href="#LEFT%24"><code>LEFT$</code> function</a></li>
                                 <li><a href="#LEN"><code>LEN</code> function</a></li>
                                 <li><a href="#LET"><code>LET</code> statement</a></li>
                                 <li><a href="#LINE"><code>LINE</code> statement</a></li>
@@ -223,18 +221,18 @@
                                 <li><a href="#LPRINT"><code>LPRINT</code> statement</a></li>
                                 <li><a href="#LSET"><code>LSET</code> and <code>RSET</code> statements</a></li>
                                 <li><a href="#MERGE"><code>MERGE</code> statement</a></li>
-                                <li><a href="#MID$"><code>MID$</code> function</a></li>
-                                <li><a href="#MID$-statement"><code>MID$</code> statement</a></li>
+                                <li><a href="#MID%24"><code>MID$</code> function</a></li>
+                                <li><a href="#MID%24-statement"><code>MID$</code> statement</a></li>
                                 <li><a href="#MKDIR"><code>MKDIR</code> statement</a></li>
-                                <li><a href="#MKD$"><code>MKD$</code> function</a></li>
-                                <li><a href="#MKI$"><code>MKI$</code> function</a></li>
-                                <li><a href="#MKS$"><code>MKS$</code> function</a></li>
+                                <li><a href="#MKD%24"><code>MKD$</code> function</a></li>
+                                <li><a href="#MKI%24"><code>MKI$</code> function</a></li>
+                                <li><a href="#MKS%24"><code>MKS$</code> function</a></li>
                                 <li><a href="#MOTOR"><code>MOTOR</code> statement</a></li>
                                 <li><a href="#NAME"><code>NAME</code> statement</a></li>
                                 <li><a href="#NEW"><code>NEW</code> statement</a></li>
                                 <li><a href="#NEXT"><code>NEXT</code> statement</a></li>
                                 <li><a href="#NOISE"><code>NOISE</code> statement</a></li>
-                                <li><a href="#OCT$"><code>OCT$</code> function</a></li>
+                                <li><a href="#OCT%24"><code>OCT$</code> function</a></li>
                                 <li><a href="#ON-jump"><code>ON</code> statement (calculated jump)</a></li>
                                 <li><a href="#ON-event"><code>ON</code> statement (event trapping)</a></li>
                                 <li><a href="#ON-ERROR"><code>ON ERROR</code> statement</a></li>
@@ -269,7 +267,7 @@
                                 <li><a href="#RESTORE"><code>RESTORE</code> statement</a></li>
                                 <li><a href="#RESUME"><code>RESUME</code> statement</a></li>
                                 <li><a href="#RETURN"><code>RETURN</code> statement</a></li>
-                                <li><a href="#RIGHT$"><code>RIGHT$</code> function</a></li>
+                                <li><a href="#RIGHT%24"><code>RIGHT$</code> function</a></li>
                                 <li><a href="#RMDIR"><code>RMDIR</code> statement</a></li>
                                 <li><a href="#RND"><code>RND</code> function</a></li>
                                 <li><a href="#RSET"><code>RSET</code> statement</a></li>
@@ -282,21 +280,21 @@
                                 <li><a href="#SIN"><code>SIN</code> function</a></li>
                                 <li><a href="#SOUND"><code>SOUND</code> statement</a></li>
                                 <li><a href="#SOUND-switch"><code>SOUND</code> statement (switch)</a></li>
-                                <li><a href="#SPACE$"><code>SPACE$</code> function</a></li>
+                                <li><a href="#SPACE%24"><code>SPACE$</code> function</a></li>
                                 <li><a href="#SQR"><code>SQR</code> function</a></li>
                                 <li><a href="#STICK"><code>STICK</code> function</a></li>
                                 <li><a href="#STOP"><code>STOP</code> statement</a></li>
-                                <li><a href="#STR$"><code>STR$</code> function</a></li>
+                                <li><a href="#STR%24"><code>STR$</code> function</a></li>
                                 <li><a href="#STRIG-switch"><code>STRIG</code> statement</a></li>
                                 <li><a href="#STRIG-events"><code>STRIG</code> statement (events)</a></li>
                                 <li><a href="#STRIG-function"><code>STRIG</code> function</a></li>
-                                <li><a href="#STRING$"><code>STRING$</code> function</a></li>
+                                <li><a href="#STRING%24"><code>STRING$</code> function</a></li>
                                 <li><a href="#SWAP"><code>SWAP</code> statement</a></li>
                                 <li><a href="#SYSTEM"><code>SYSTEM</code> statement</a></li>
                                 <li><a href="#TAN"><code>TAN</code> function</a></li>
                                 <li><a href="#TERM"><code>TERM</code> statement</a></li>
-                                <li><a href="#TIME$-function"><code>TIME$</code> function</a></li>
-                                <li><a href="#TIME$-statement"><code>TIME$</code> statement</a></li>
+                                <li><a href="#TIME%24-function"><code>TIME$</code> function</a></li>
+                                <li><a href="#TIME%24-statement"><code>TIME$</code> statement</a></li>
                                 <li><a href="#TIMER-event"><code>TIMER</code> statement</a></li>
                                 <li><a href="#TIMER"><code>TIMER</code> function</a></li>
                                 <li><a href="#TRON"><code>TRON</code> and <code>TROFF</code> statements</a></li>
@@ -304,7 +302,7 @@
                                 <li><a href="#USR"><code>USR</code> function</a></li>
                                 <li><a href="#VAL"><code>VAL</code> function</a></li>
                                 <li><a href="#VARPTR"><code>VARPTR</code> function</a></li>
-                                <li><a href="#VARPTR$"><code>VARPTR$</code> function</a></li>
+                                <li><a href="#VARPTR%24"><code>VARPTR$</code> function</a></li>
                                 <li><a href="#VIEW"><code>VIEW</code> statement</a></li>
                                 <li><a href="#VIEW-PRINT"><code>VIEW PRINT</code> statement</a></li>
                                 <li><a href="#WAIT"><code>WAIT</code> statement</a></li>
@@ -345,7 +343,7 @@
                         <li><a href="#pc-basic-interpreter">PC-BASIC interpreter</a></li>
                         <li><a href="#pc-basic-documentation">PC-BASIC documentation</a></li>
                     </ul>
-            </ul>
+            </li></ul>
 </nav>
 <article>
 <h2 id="pc-basic">Overview</h2>
@@ -689,7 +687,7 @@ included with PC-BASIC and available online.</p>
                 </table>
             </div>
         </section>
-        <hr />
+        <hr>
 
         <section>
             <h4 id="shortcuts">Keyboard shortcuts</h4>
@@ -759,7 +757,7 @@ included with PC-BASIC and available online.</p>
                 <li><code><a href="#ELSE">ELSE</a></code></li>
                 <li><code><a href="#FOR">FOR</a></code></li>
                 <li><code><a href="#GOTO">GOTO</a></code></li>
-                <li><code><a href="#HEX$">HEX$</a></code></li>
+                <li><code><a href="#HEX%24">HEX$</a></code></li>
 
                 <li><code><a href="#INPUT">INPUT</a></code></li>
                 <li><code><a href="#KEY-list">KEY</a></code></li>
@@ -780,7 +778,7 @@ included with PC-BASIC and available online.</p>
                 <li><code><a href="#XOR">XOR</a></code></li>
             </ul>
         </section>
-        <hr />
+        <hr>
 
         <section>
             <h4 id="alternative-keys">Alternative keys</h4>
@@ -821,7 +819,7 @@ included with PC-BASIC and available online.</p>
                 ASCII code on the numeric keypad, then releasing the <kbd>Alt</kbd> key.
             </p>
         </section>
-        <hr />
+        <hr>
 
         <section>
             <h4 id="clipboard-operations">Clipboard operations</h4>
@@ -860,7 +858,7 @@ included with PC-BASIC and available online.</p>
                 </table>
             </div>
         </section>
-        <hr />
+        <hr>
 
         <section>
             <h4 id="emulator-keys">Emulator control keys</h4>
@@ -868,7 +866,7 @@ included with PC-BASIC and available online.</p>
                 In PC-BASIC, <kbd>F11</kbd>+<kbd>F</kbd> toggles fullscreen mode.
             </p>
         </section>
-        <hr />
+        <hr>
     </section>
 
     <section>
@@ -987,7 +985,7 @@ included with PC-BASIC and available online.</p>
                 longer than 8.3 or ends in a dot.
             </p>
         </section>
-        <hr />
+        <hr>
 
         <section>
             <h4 id="mounting">Accessing your drives</h4>
@@ -1012,7 +1010,7 @@ included with PC-BASIC and available online.</p>
                 allows you access to.
             </p>
         </section>
-        <hr />
+        <hr>
 
         <section>
             <h4 id="program-files">Compatible BASIC files</h4>
@@ -1043,7 +1041,7 @@ included with PC-BASIC and available online.</p>
                 PC-BASIC always uses the DOS conventions.
             </p>
         </section>
-        <hr />
+        <hr>
 
         <section>
             <h4 id="packages">Packages</h4>
@@ -1064,7 +1062,7 @@ included with PC-BASIC and available online.</p>
                 not possible to save files and re-open them on the next run of the package.
             </p>
         </section>
-        <hr />
+        <hr>
 
         <section>
             <h4 id="security">Security</h4>
@@ -1076,7 +1074,7 @@ included with PC-BASIC and available online.</p>
                 <code><a href="#--convert">--convert</a>=A</code> on the command line. You wouldn't just download
                 an executable from the internet and run it either, right?</p>
         </section>
-        <hr />
+        <hr>
     </section>
 
     <section>
@@ -1111,7 +1109,7 @@ included with PC-BASIC and available online.</p>
                         The keyboard. Input read from <code>KYBD:</code> is not echoed
                         to the screen. Special keys like arrow keys are
                         registered differently than when using <code><a href="#INPUT">INPUT</a></code>
-                        or <code><a href="#INPUT$">INPUT$</a></code> straight.
+                        or <code><a href="#INPUT%24">INPUT$</a></code> straight.
                     </td>
                 </tr><tr>
                     <td><code>LPT1:</code> <code>LPT2:</code> <code>LPT3:</code></td>
@@ -1198,7 +1196,7 @@ included with PC-BASIC and available online.</p>
                 automatically select fonts that support the characters you need.
             </p>
         </section>
-        <hr />
+        <hr>
 
         <section>
             <h4 id="ports">Serial and parallel ports</h4>
@@ -1220,7 +1218,7 @@ included with PC-BASIC and available online.</p>
                 parallel port to <code>LPT2:</code>.
             </p>
         </section>
-        <hr />
+        <hr>
 
         <section>
             <h4 id="cassette">Cassette interface and BASICODE</h4>
@@ -1259,11 +1257,11 @@ included with PC-BASIC and available online.</p>
                 a BASICODE program named <code>PROGRAM</code> from tape is:
             </p>
             <code class="block">
-                LOAD "BASCODER"<br />
+                LOAD "BASCODER"<br>
                 CHAIN MERGE "CAS1:PROGRAM"
             </code>
         </section>
-        <hr />
+        <hr>
     </section>
 
     <section>
@@ -1321,6 +1319,11 @@ included with PC-BASIC and available online.</p>
                             monochrome monitor.
                         </td>
                     </tr>
+                    <tr>
+                        <td><code>strict</code></td>
+                        <td>Choose strict compatibility with GW-BASIC over convenience,
+                        security, rhyme or reason.</td>
+                    </tr>
                 </table>
             </div>
             <p>
@@ -1329,15 +1332,15 @@ included with PC-BASIC and available online.</p>
                 file with the name of the new preset, followed by the options you want to apply. For example,
                 if you define:
                 <code class="block">
-                    [my_preset]<br />
-                    video=vga<br/>
+                    [my_preset]<br>
+                    video=vga<br>
                     syntax=pcjr<br>
                 </code>
                 you can now run <code><b>pcbasic --preset=my_preset</b></code> to start an emulation of
                 a hypothetical machine with a VGA video card running PCjr Cartridge BASIC.
             </p>
         </section>
-        <hr />
+        <hr>
 
         <section>
             <h4 id="codepages">Codepages</h4>
@@ -1356,587 +1359,9 @@ included with PC-BASIC and available online.</p>
                 standard UTF-8 encoding. Please note that you will still need to select a
                 codepage that provides all the Unicode characters that your program needs.
             </p>
-        </section>
-        <hr />
-
-        <section>
-            <h4 id="fonts">Fonts</h4>
             <p>
-                PC-BASIC emulates the distinctive raster fonts of IBM-compatible machines. The ROM
-                fonts of the original IBM and Tandy adapters (which are in the public
-                domain in a number of countries) have been included in PC-BASIC. These provide the most
-                accurate emulation. However, the font ROMs only included a single code page &#8211;
-                US-ASCII 437.
+                The following codepages are available:
             </p>
-            <p>
-                To support code pages beyond 437, PC-BASIC defaults to the <strong>CPIDOS</strong> font used by
-                default in FreeDOS and DOSBox. This font is very similar in style to the IBM VGA
-                font but has support for many more code pages, in particular Western and Middle
-                Eastern alphabets. If CPIDOS does not include the characters you need, PC-BASIC
-                tries to find them in <strong>UNI-VGA</strong>, which is also very similar in style to VGA.
-                If that does not suffice, PC-BASIC falls back to <strong>GNU UniFont</strong> for the
-                missing characters. UniFont's Western glyphs are less similar to the VGA font, but
-                it provides support for the full Unicode Basic Multilingual Plane. For example, all Chinese,
-                Japanese and Korean glyphs in PC-BASIC are taken from UniFont.
-            </p>
-            <p>
-                It is possible to change the choice of font using the <code><a href="#--font">font=</a></code> option.
-                You can provide a list of fonts, where the last font specified is the
-                most preferred one.
-            </p>
-            <p>
-                PC-BASIC reads fonts in the <code>.hex</code> format introduced by UniFont. It's
-                easy to define custom fonts in this format: it can be edited in a regular text editor.
-                See the UniFont project for an authoring tool. You can add custom fonts to PC-BASIC by
-                installing them into the <code>font/</code> subdirectory of PC-BASIC's installation
-                directory.
-            </p>
-        </section>
-        <hr />
-
-        <section>
-        <h4 id="redirecting">Redirecting input and output</h4>
-            <p>
-                PC-BASIC supports redirecting input and output the GW-BASIC way: output redirected
-                with the <code><a href="#--output">output</a>=</code> option will be sent to the screen as well as
-                the specified file, while input redirected with <code><a href="#--input">input=</a></code> is taken
-                only from the specified file. Note that screen output through the
-                <code>SCRN:</code> device and keyboard input through the <code>KYBD:</code>
-                device are not redirected. Files are read and written in the codepage set with
-                PC-BASIC.
-            </p>
-
-            <p>
-                Note that it is also possible to use your operating system's facility to
-                redirect console output using the <code>&lt;</code> and <code>&gt;</code>
-                operators. It's best to set <code><b><a href="#--interface">interface</a>=none</b></code> so that I/O is
-                redirected through the console. This will produce files in UTF-8 encoding.
-            </p>
-        </section>
-        <hr />
-
-        <section>
-            <h4 id="cli">Command-line interface</h4>
-            <p>
-                You can run PC-BASIC as a
-                command-line interface by setting the <code><a href="#--interface">interface</a>=cli</code> (or
-                <code><a href="#-b">-b</a></code>) option. No window will be opened: you can type BASIC commands
-                straight into your Command Prompt/Terminal. Use the horizontal arrow keys to
-                move on the current line you're editing; use the vertical arrow keys to show
-                screen rows above and below. Copy and paste are available only if the calling
-                shell provides them. On Windows, <kbd>Ctrl</kbd>+<kbd>Break</kbd> will
-                terminate PC-BASIC immediately. You can use <kbd>Ctrl</kbd>+<kbd>C</kbd> to
-                interrupt the program. The end-of-file key combination
-                (<kbd>Ctrl</kbd>+<kbd>D</kbd> on Unix, <kbd>Ctrl</kbd>+<kbd>Z</kbd> on Windows)
-                will exit PC-BASIC.
-            </p>
-            <p>
-                You can use the command-line interface to run one or a few BASIC commands directly, like so:
-            </p>
-<pre><samp>me@mybox$ <b>pcbasic -bqe="?1+1"</b>
- <b>2</b>
-me@mybox$
-</samp></pre>
-            <p>
-                For scripting purposes, it is also possible to run PC-BASIC without any
-                interface by setting <code><a href="#--interface">interface</a>=none</code> or
-                <code><a href="#-n">-n</a></code>. If this is
-                set, PC-BASIC will take input from and send output to the console as UTF-8
-                without further modification. This is useful in combination with redirection and
-                pipes.
-            </p>
-        </section>
-        <hr />
-
-        <section>
-            <h4 id="curses">Text-based interface</h4>
-            <p>
-                There is also a full-screen text interface available: enable it
-                by setting <code><a href="#--interface">interface</a>=text</code> (or <code><a href="#-t">-t</a></code>). The text-based
-                interface is very similar to the default graphical interface, but runs in your
-                Command Prompt or Terminal window.
-            </p>
-
-            <p>
-                In the text-based and command-line interfaces, graphics are not available.
-                Attempting to open a graphical screen mode will lead to an <samp>Illegal
-                function call</samp> error. Furthermore, many <kbd>Ctrl</kbd> and <kbd>Alt</kbd>
-                key combinations are not available.
-            </p>
-
-            <p>
-                On Unix systems only, you can get sound in the text and command-line
-                interfaces over the PC speaker if you install the <code>beep</code> utility and
-                enable the legacy PC-speaker driver or emulation.
-            </p>
-        </section>
-        <hr />
-    </section>
-
-    <section>
-        <h3 id="gwbasic">Differences with GW-BASIC</h3>
-        <p>
-            GW-BASIC was a real-mode DOS program, which means that it had full control
-            over an IBM-compatible 8086 computer. It had direct access to all areas of
-            memory and all devices. Some BASIC programs used this fact, by using
-            <code><a href="#POKE">POKE</a></code> and <code><a href="#OUT">OUT</a></code>
-            statements as well as <code><a href="#CALL">CALL</a></code>
-            and <code><a href="#USR">USR</a></code> machine-code subroutines to perform tasks for which BASIC
-            did not provide support. PC-BASIC runs on modern machines which may be based on
-            completely different architectures and anyway do not allow applications to
-            directly access memory or devices. Therefore, it is not possible to run machine
-            code on PC-BASIC. If you need machine code, you'll need to use full CPU
-            emulation such as provided by DOSBox, Bochs or VirtualBox.
-        </p>
-
-        <section>
-            <h4 id="gwbasic-language">Language differences</h4>
-            <p>
-                PC-BASIC <em>does</em> provide limited support for the <code><a href="#POKE">POKE</a></code> and <code><a
-                href="#PEEK">PEEK</a></code> statements: some of the most commonly accessed
-                regions of memory are emulated and can be read and (sometimes) written. There is
-                read and write support for video memory, font RAM and selected locations of the
-                low memory segment, including the keyboard buffer. Additionally, there is read
-                support for font ROM, variable, array and string memory, <code><a href="#FIELD">FIELD</a></code>
-                buffers as well as the program code itself. Writing into the program code is
-                disabled by default, but can be enabled with the <code><a href="--allow-code-poke">allow-code-poke</a></code>
-                option. Use with care. A number of machine ports related to keyboard input and
-                video modes are supported as well.
-            </p>
-            <p>
-                The <code><a href="SHELL">SHELL</a></code> statement is, by default,
-                disabled; this is to avoid unpleasant surprises. In GW-BASIC under MS-DOS,
-                <code>SHELL</code> opens a DOS prompt or executes commands in it. The command
-                shells of modern operating systems work differently than those of DOS; in
-                particular, it is impossible to retrieve changes in the environment variables,
-                so that many use cases of <code>SHELL</code> simply would not work; for
-                example, changing the current drive on Windows. Moreover, Unix shells have a
-                syntax that is completely different from that of DOS. You can, however, enable
-                <code>SHELL</code> by setting the <code><b><a href="#--shell">shell</a>=native</b></code> option. Use with
-                care.
-            </p>
-            <div class="scrollable">
-                <table>
-                    <tr>
-                        <th>Statement</th>
-                        <th>Support level</th>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#BLOAD">BLOAD</a></code></td>
-                        <td>Selected memory areas supported.</td>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#BSAVE">BSAVE</a></code></td>
-                        <td>Selected memory areas supported.</td>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#CALL">CALL</a></code></td>
-                        <td>Not supported.</td>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#CALLS">CALLS</a></code></td>
-                        <td>Not supported.</td>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#DEF-USR">DEF USR</a></code></td>
-                        <td>Not supported.</td>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#ERDEV">ERDEV</a></code></td>
-                        <td>Not supported.</td>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#EXTERR">EXTERR</a></code></td>
-                        <td>Not supported.</td>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#INP">INP</a></code></td>
-                        <td>Selected ports supported.</td>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#IOCTL">IOCTL</a></code>, <code><a href="#IOCTL$">IOCTL$</a></code></td>
-                        <td>Not supported.</td>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#OUT">OUT</a></code></td>
-                        <td>Selected ports supported.</td>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#PEEK">PEEK</a></code></td>
-                        <td>Selected memory areas supported.</td>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#POKE">POKE</a></code></td>
-                        <td>Selected memory areas supported.</td>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#SHELL">SHELL</a></code></td>
-                        <td>Supported through OS-native shell if <code><b><a href="#--shell">shell</a>=native</b></code> is set.</td>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#USR">USR</a></code></td>
-                        <td>Not supported.</td>
-                    </tr>
-                    <tr>
-                        <td><code><a href="#WAIT">WAIT</a></code></td>
-                        <td>Selected ports supported.</td>
-                    </tr>
-                </table>
-            </div>
-            <p>
-                The highest level of compatibility with GW-BASIC can be attained by setting
-                <code><a href="#--preset">preset</a>=strict</code>,
-                which switches off all convenience and security features that cause differences with
-                GWBASIC.
-            </p>
-        </section>
-        <hr />
-
-        <section>
-            <h4 id="gwbasic-devices">Devices</h4>
-            <p>
-                GW-BASIC additionally recognises the following little-used device, which is not implemented in PC-BASIC.
-            </p>
-            <div class="scrollable">
-                <table>
-                    <tr>
-                        <th>Device</th>
-                        <th>Allowed modes</th>
-                        <th>Description</th>
-                    </tr>
-                    <tr>
-                        <td><code>CONS:</code></td>
-                        <td><code>OUTPUT</code></td>
-                        <td>
-                            The screen (console). Output to <code>CONS:</code> is displayed
-                            directly at the cursor position when <kbd>Enter</kbd> is
-                            pressed. It does not update the end-of-line value
-                            for the interpreter, which means that it does not
-                            move with <kbd>Backspace</kbd> or <kbd>Del</kbd> and is not
-                            stored in program lines if it appears beyond the
-                            end of the existing line. <code>CONS:</code> can be opened with
-                            any access mode, but the effect is always to open
-                            it for <code>OUTPUT</code>.
-                        </td>
-                    </tr>
-                </table>
-            </div>
-        </section>
-        <hr />
-
-        <section>
-            <h4 id="gwbasic-options">Command-line options</h4>
-            <p>
-                GW-BASIC recognised a number of options on the command-line.
-                These are matched by PC-BASIC with only minor modifications:
-            </p>
-            <div class="scrollable">
-                <table>
-                    <tr>
-                        <th>
-                        GW-BASIC option
-                        </th>
-                        <th>
-                        PC-BASIC short option
-                        </th>
-                        <th>
-                        PC-BASIC option
-                        </th>
-                        <th>
-                        Effect
-                        </th>
-                    </tr>
-                    <tr>
-                        <td><code>/d</code></td>
-                        <td><code><b><a href="#-d">-d</a></b></code></td>
-                        <td><code><b><a href="#--double">--double</a></b></code></td>
-                        <td>Enable double-precision floating-point math functions.</td>
-                    </tr>
-                    <tr>
-                        <td><code>/f:<var>n</var></code></td>
-                        <td><code><b><a href="#-f">-f</a>=</b><var>n</var></code></td>
-                        <td><code><b><a href="#--max-files">--max-files</a>=</b><var>n</var></code></td>
-                        <td>Set the maximum number of open files.</td>
-                    </tr>
-                    <tr>
-                        <td><code>/s:<var>n</var></code></td>
-                        <td><code><b><a href="#-s">-s</a>=</b><var>n</var></code></td>
-                        <td><code><b><a href="#--max-reclen">--max-reclen</a>=</b><var>n</var></code></td>
-                        <td>Set the maximum record length for <code>RANDOM</code> files.</td>
-                    </tr>
-                    <tr>
-                        <td><code>/c:<var>n</var></code></td>
-                        <td><code><b><a href="#-c">-c</a>=</b><var>n</var></code></td>
-                        <td><code><b><a href="#--serial-buffer-size">--serial-buffer-size</a>=</b><var>n</var></code></td>
-                        <td>Set the size of the receive buffer for <code>COM</code> devices.</td>
-                    </tr>
-                    <tr>
-                        <td><code>/i:<var>n</var></code></td>
-                        <td><code><b><a href="#-i">-i</a>=</b><var>n</var></code></td>
-                        <td></td>
-                        <td>No effect.</td>
-                    </tr>
-                    <tr>
-                        <td><code>/m:<var>n</var>,<var>m</var></code></td>
-                        <td><code><b><a href="#-m">-m</a>=</b><var>n</var>,<var>m</var></code></td>
-                        <td><code><b><a href="#--max-memory">--max-memory</a>=</b><var>n</var>,<var>m</var></code></td>
-                        <td>
-                            Set the highest memory location to <code><var>n</var></code> and maximum
-                            BASIC memory size to <code><var>m</var>*16</code> bytes.
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><code>&gt;<var>filename</var></code></td>
-                        <td></td>
-                        <td><code><b><a href="#--output">--output</a>=</b><var>filename</var></code></td>
-                        <td>Write screen output to <code><var>filename</var></code>.</td>
-                    </tr>
-                    <tr>
-                        <td><code>&gt;&gt;<var>filename</var></code></td>
-                        <td></td>
-                        <td><code><b>--output=</b><var>filename</var> <b><a href="#--append">--append</a></b></code></td>
-                        <td>Append screen output to <code><var>filename</var></code>.</td>
-                    </tr>
-                    <tr>
-                        <td><code>&lt;<var>filename</var></code></td>
-                        <td></td>
-                        <td><code><b><a href="#--input">--input</a>=</b><var>filename</var></code></td>
-                        <td>Read keyboard input from <code><var>filename</var></code>.</td>
-                    </tr>
-                </table>
-            </div>
-        </section>
-        <hr />
-    </section>
-</article>
-<article>
-<!--
-    PC-BASIC documentation
-    Copyright (c) 2014-2015 Rob Hagemans
-    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
-    http://creativecommons.org/licenses/by-sa/4.0/legalcode
--->
-
-<h2 id="settings">Settings and options</h2>
-<p>
-    PC-BASIC has a number of settings that change the way it operates.
-    These settings can be changed by setting options on the command line
-    or through editing the configuration file.
-</p>
-<p>
-    In either method, the options have the same name and syntax. In what follows, we will often refer to
-    a particular option setting; remember that you can set this from the command line as well as from the configuration file.
-</p>
-<h5>Command-line options</h5>
-<p>
-    You can enter command-line options if you start PC-BASIC from the console
-    (also known as the <em>Command Prompt</em> or <em>Terminal</em>;
-    this is normally <code>CMD</code> or <code>PowerShell</code> on Windows),
-    by preceding the name of the option
-    with two dashes, like so:
-</p>
-<code class="block"><b>pcbasic <a href="#--preset">--preset</a>=tandy <a href="#--ctrl-c-break">--ctrl-c-break</a>=True</b></code>
-<p>
-    On the command line, you can leave out the expression <code><b>=True</b></code>
-    that is common in switching options.
-    Some options have an alternative, short name consisting of a single
-    letter preceded by a single dash, which you can use on the command line.
-    You can combine multiple short options with a single dash.
-</p>
-<h5>Configuration files</h5>
-<p>
-    You can change options by adding or removing lines in your local configuration file,
-    which can be found in the following location:
-</p>
-<dl>
-    <dt>Windows</dt><dd><code>%AppData%\pcbasic\PCBASIC.INI</code></dd>
-    <dt>OS X</dt><dd><code>~/Library/Application Support/pcbasic/PCBASIC.INI</code></dd>
-    <dt>Linux</dt><dd><code>~/.config/pcbasic/PCBASIC.INI</code></dd>
-</dl>
-<p>
-    Change an option in the configuration file by adding a line in the section named <code>[pcbasic]</code>, like so:
-</p>
-<code class="block">
-    [pcbasic]<br/>
-    <a href="#--preset">preset</a>=tandy<br/>
-    <a href="#--ctrl-c-break">ctrl-c-break</a>=True
-</code>
-<p>
-    You cannot use  <a href="#parameters">positional arguments</a> or
-    the short name of options in the configuration file.
-    You also cannot leave out the expression <code><b>=True</b></code>.
-</p>
-<hr />
-<!--
-    PC-BASIC documentation
-    Copyright (c) 2014-2015 Rob Hagemans
-    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
-    http://creativecommons.org/licenses/by-sa/4.0/legalcode
--->
-
-<section>
-    <h3 id="synopsis">Synopsis</h3>
-    <code class="block">
-        <b>pcbasic</b>
-        [<var><a href="#p-program">program</a></var>|<var><a href="#p-package">package</a></var>
-        [<var><a href="#p-output">output</a></var>]]
-        <span id="placeholder-options">[<var><a href="#options">option</a></var>] ...</span>
-    </code>
-</section>
-<hr />
-
-<section>
-    <h3 id="parameters">Positional arguments</h3>
-    <dl>
-        <dt id="p-program"><code><var>program</var></code></dt>
-        <dd>
-            If a <code>.BAS</code> program is specified as the first positional argument,
-            it will be run.
-            The
-            <code><b><a href="#--run">--run</a></b></code>,
-            <code><b><a href="#--load">--load</a></b></code> and
-            <code><b><a href="#--convert">--convert</a></b></code> options
-            override this behaviour.
-        </dd>
-
-        <dt id="p-package"><code><var>package</var></code></dt>
-        <dd>
-            If a zipfile <a href="#packages">package</a> or directory is specified as the first positional argument,
-            any contained <a href="#settings">configuration file <code>PCBASIC.INI</code></a>
-            will be loaded; usually, it will run a program file in the package.
-            All other command-line options will override the package configuration file,
-            note in particular the potential of the
-            <code><b><a href="#--run">--run</a></b></code>,
-            <code><b><a href="#--load">--load</a></b></code> and
-            <code><b><a href="#--convert">--convert</a></b></code> options
-            to alter the behaviour of the package.
-        </dd>
-
-        <dt id="p-output"><code><var>output</var></code></dt>
-        <dd>
-            If a second positional argument is specified, it sets the output file for file format conversion.
-            This argument is ignored unless the <code><a href="#--convert">--convert</a></code> option is given.
-        </dd>
-    </dl>
-</section>
-<hr />
-
-<section>
-    <h3 id="options">Options</h3>
-    <dl>
-        <dt id="--allow-code-poke">
-            <code><b>--allow-code-poke</b>[<b>=True</b>|<b>=False</b>]</code>
-        </dt>
-        <dd>
-            Allow programs to <code><a href="#POKE">POKE</a></code> into code memory.
-        </dd>
-
-        <dt id="--altgr">
-            <code><b>--altgr</b>[<b>=True</b>|<b>=False</b>]</code>
-        </dt>
-        <dd>
-            If <code><b>True</b></code> (default), interpret the right
-            <kbd>Alt</kbd> key as <kbd>Alt Gr</kbd> instead of <kbd>Alt</kbd>.
-            The left <kbd>Alt</kbd> key is always seen as <kbd>Alt</kbd>.
-        </dd>
-
-        <dt id="--append">
-            <code><b>--append</b>[<b>=True</b>|<b>=False</b>]</code>
-        </dt>
-        <dd>
-            If used with
-            <code><b><a href="#--output">--output</a>=</b><var>output_file</var></code>,
-            the <code><var>output_file</var></code> is appended to rather than overwritten.
-        </dd>
-
-        <dt id="--aspect">
-            <code><b>--aspect=</b><var>x</var>,<var>y</var></code>
-        </dt>
-        <dd>
-            Set the display aspect ratio to <code><var>x</var></code>:<code><var>y</var></code>.
-            Only has an effect if combined with <code><b><a href="#--interface">--interface</a>=graphical</b></code>.
-        </dd>
-
-        <dt id="-b">
-            <code><b>-b</b></code>
-        </dt>
-        <dd>
-            Use the command-line interface. This is identical to
-            <code><b><a href="#--interface">--interface</a>=cli</b></code>.
-        </dd>
-
-        <dt id="--border">
-            <code><b>--border=</b><var>width</var></code>
-        </dt>
-        <dd>
-            Set the width of the screen border as a
-            percentage from 0&#8212;100. The percentage refers to the total
-            width of the borders on both sides as a fraction of the usable
-            screen width.
-            Only has an effect if combined with <code><b><a href="#--interface">--interface</a>=graphical</b></code>.
-        </dd>
-
-        <dt id="--caption">
-            <code><b>--caption=</b><var>title</var></code>
-        </dt>
-        <dd>
-            Set the title bar caption of the PC-BASIC window.
-            Default <code><var>title</var></code> is <em>PC-BASIC</em>.
-        </dd>
-
-        <dt id="--capture-caps">
-            <code><b>--capture-caps</b>[<b>=True</b>|<b>=False</b>]</code>
-        </dt>
-        <dd>
-            Let PC-BASIC handle the <kbd>Caps Lock</kbd> key. This
-            may or may not interfere with the operating system's own handling of that key.
-            Only has an effect if combined with <code><b><a href="#--interface">--interface</a>=graphical</b></code>.
-        </dd>
-
-        <dt id="--cas1">
-            <code><b>--cas1=</b><var>type</var><b>:</b><var>value</var>[<b>:</b><var>loc</var>]</code>
-        </dt>
-        <dd>
-            Attach a resource to the <code>CAS1:</code> cassette device
-            and wind the virtual tape to <code><var>loc</var></code> seconds.
-            <code><var>type</var><b>:</b><var>value</var></code> can be
-            <dl>
-                <dt><code><b>WAV:</b><var>wav_file</var></code></dt>
-                <dd>
-                    Connect to the RIFF Wave file <code><var>wav_file</var></code>
-                    with data modulated in IBM PC cassette format.
-                </dd>
-
-                <dt><code><b>CAS:</b><var>cas_file</var></code></dt>
-                <dd>
-                    Connect to the PCE/PC-BASIC CAS tape image
-                    <code><var>cas_file</var></code>.
-                </dd>
-
-                <dt><code><b>BC:</b><var>wav_file</var></code></dt>
-                <dd>
-                    Connect to the RIFF Wave file <code><var>wav_file</var></code>
-                    with data modulated in BASICODE format.
-                </dd>
-            </dl>
-        </dd>
-
-        <dt id="--cga-low">
-            <code><b>--cga-low</b>[<b>=True</b>|<b>=False</b>]</code>
-        </dt>
-        <dd>
-            Use low-intensity palettes in CGA modes.
-            Only has an effect if combined with <code><b><a href="#--video">--video</a>=</b>{<b>cga</b>|<b>cga_old</b>|<b>ega</b>|<b>vga</b>}</code>.
-        </dd>
-
-        <dt id="--codepage">
-            <code><b>--codepage=</b><var>codepage_id</var></code>
-        </dt>
-        <dd>
-            Load the specified codepage. The codepage determines which
-            characters are associated to a given character byte or, in the case
-            of double-byte codepages, two character bytes.
-            The following codepages are available:
             <div class="scrollable"><table>
                 <tr>
                     <th><code><var>codepage_id</var></code></th>
@@ -2165,8 +1590,746 @@ me@mybox$
                     <td>VISCII</td><td>Vietnamese</td>
                 </tr>
             </table></div>
-            You can add custom codepages to PC-BASIC, by adding a file with
-            its mapping to Unicode to the <code>encodings/</code> directory.
+            <p>
+                You can add custom codepages to PC-BASIC, by adding a file with
+                its mapping to Unicode to the <code>encodings/</code> directory.
+            </p>
+        </section>
+        <hr>
+
+        <section>
+            <h4 id="fonts">Fonts</h4>
+            <p>
+                PC-BASIC emulates the distinctive raster fonts of IBM-compatible machines. The ROM
+                fonts of the original IBM and Tandy adapters (which are in the public
+                domain in a number of countries) have been included in PC-BASIC. These provide the most
+                accurate emulation. However, the font ROMs only included a single code page &#8211;
+                US-ASCII 437.
+            </p>
+            <p>
+                To support code pages beyond 437, PC-BASIC defaults to the <strong>CPIDOS</strong> font used by
+                default in FreeDOS and DOSBox. This font is very similar in style to the IBM VGA
+                font but has support for many more code pages, in particular Western and Middle
+                Eastern alphabets. If CPIDOS does not include the characters you need, PC-BASIC
+                tries to find them in <strong>UNI-VGA</strong>, which is also very similar in style to VGA.
+                If that does not suffice, PC-BASIC falls back to <strong>GNU UniFont</strong> for the
+                missing characters. UniFont's Western glyphs are less similar to the VGA font, but
+                it provides support for the full Unicode Basic Multilingual Plane. For example, all Chinese,
+                Japanese and Korean glyphs in PC-BASIC are taken from UniFont.
+            </p>
+            <p>
+                It is possible to change the choice of font using the <code><a href="#--font">font=</a></code> option.
+                You can provide a list of fonts, where the last font specified is the
+                most preferred one.
+            </p>
+            <p>
+                PC-BASIC reads fonts in the <code>.hex</code> format introduced by UniFont. It's
+                easy to define custom fonts in this format: it can be edited in a regular text editor.
+                See the UniFont project for an authoring tool. You can add custom fonts to PC-BASIC by
+                installing them into the <code>font/</code> subdirectory of PC-BASIC's installation
+                directory.
+            </p>
+            <p>
+                By default, the following fonts
+                are available:
+            </p>
+            <div class="scrollable"><table>
+                <tr>
+                    <th><code><var>font_name</var></code></th>
+                    <th>Name</th>
+                    <th>Sizes</th>
+                    <th>Codepages</th>
+                </tr>
+                <tr>
+                    <td><code>unifont</code></td>
+                    <td>GNU UniFont</td>
+                    <td>16</td>
+                    <td>all</td>
+                </tr>
+                <tr>
+                    <td><code>univga</code></td>
+                    <td>Uni-VGA font</td>
+                    <td>16</td>
+                    <td>many</td>
+                </tr>
+                <tr>
+                    <td><code>freedos</code></td>
+                    <td>FreeDOS CPIDOS font</td>
+                    <td>8, 14, 16</td>
+                    <td>many</td>
+                </tr>
+                <tr>
+                    <td><code>cga</code></td>
+                    <td>IBM Colour/Graphics Adapter font</td>
+                    <td>8</td>
+                    <td>437 only</td>
+                </tr>
+                <tr>
+                    <td><code>mda</code></td>
+                    <td>IBM Monochrome Display Adapter font</td>
+                    <td>14</td>
+                    <td>437 only</td>
+                </tr>
+                <tr>
+                    <td><code>vga</code></td>
+                    <td>IBM Video Graphics Array font</td>
+                    <td>8, 14, 16</td>
+                    <td>437 only</td>
+                </tr>
+                <tr>
+                    <td><code>olivetti</code></td>
+                    <td>Olivetti/AT&amp;T font</td>
+                    <td>16</td>
+                    <td>437 only</td>
+                </tr>
+                <tr>
+                    <td><code>tandy1</code></td>
+                    <td>Tandy-1000 font old version</td>
+                    <td>8</td>
+                    <td>437 only</td>
+                </tr>
+                <tr>
+                    <td><code>tandy2</code></td>
+                    <td>Tandy-1000 font new version</td>
+                    <td>8</td>
+                    <td>437 only</td>
+                </tr>
+            </table></div>
+            <p>
+                GNU UniFont contains glyphs for all the defined code points of the
+                Basic Multilingual Plane of Unicode 7.0, which makes it an
+                excellent fallback font. Its glyphs are not, however, very similar
+                to those that were used on DOS machines; both Uni-VGA and the
+                FreeDOS CPIDOS fonts are therefore more suitable, when they have
+                the required glyphs.
+            </p>
+        </section>
+        <hr>
+
+        <section>
+        <h4 id="redirecting">Redirecting input and output</h4>
+            <p>
+                PC-BASIC supports redirecting input and output the GW-BASIC way: output redirected
+                with the <code><a href="#--output">output</a>=</code> option will be sent to the screen as well as
+                the specified file, while input redirected with <code><a href="#--input">input=</a></code> is taken
+                only from the specified file. Note that screen output through the
+                <code>SCRN:</code> device and keyboard input through the <code>KYBD:</code>
+                device are not redirected. Files are read and written in the codepage set with
+                PC-BASIC.
+            </p>
+
+            <p>
+                Note that it is also possible to use your operating system's facility to
+                redirect console output using the <code>&lt;</code> and <code>&gt;</code>
+                operators. It's best to set <code><b><a href="#--interface">interface</a>=none</b></code> so that I/O is
+                redirected through the console. This will produce files in UTF-8 encoding.
+            </p>
+        </section>
+        <hr>
+
+        <section>
+            <h4 id="cli">Command-line interface</h4>
+            <p>
+                You can run PC-BASIC as a
+                command-line interface by setting the <code><a href="#--interface">interface</a>=cli</code> (or
+                <code><a href="#-b">-b</a></code>) option. No window will be opened: you can type BASIC commands
+                straight into your Command Prompt/Terminal. Use the horizontal arrow keys to
+                move on the current line you're editing; use the vertical arrow keys to show
+                screen rows above and below. Copy and paste are available only if the calling
+                shell provides them. On Windows, <kbd>Ctrl</kbd>+<kbd>Break</kbd> will
+                terminate PC-BASIC immediately. You can use <kbd>Ctrl</kbd>+<kbd>C</kbd> to
+                interrupt the program. The end-of-file key combination
+                (<kbd>Ctrl</kbd>+<kbd>D</kbd> on Unix, <kbd>Ctrl</kbd>+<kbd>Z</kbd> on Windows)
+                will exit PC-BASIC.
+            </p>
+            <p>
+                You can use the command-line interface to run one or a few BASIC commands directly, like so:
+            </p>
+<pre><samp>me@mybox$ <b>pcbasic -bqe="?1+1"</b>
+ <b>2</b>
+me@mybox$
+</samp></pre>
+            <p>
+                For scripting purposes, it is also possible to run PC-BASIC without any
+                interface by setting <code><a href="#--interface">interface</a>=none</code> or
+                <code><a href="#-n">-n</a></code>. If this is
+                set, PC-BASIC will take input from and send output to the console as UTF-8
+                without further modification. This is useful in combination with redirection and
+                pipes.
+            </p>
+        </section>
+        <hr>
+
+        <section>
+            <h4 id="curses">Text-based interface</h4>
+            <p>
+                There is also a full-screen text interface available: enable it
+                by setting <code><a href="#--interface">interface</a>=text</code> (or <code><a href="#-t">-t</a></code>). The text-based
+                interface is very similar to the default graphical interface, but runs in your
+                Command Prompt or Terminal window.
+            </p>
+
+            <p>
+                In the text-based and command-line interfaces, graphics are not available.
+                Attempting to open a graphical screen mode will lead to an <samp>Illegal
+                function call</samp> error. Furthermore, many <kbd>Ctrl</kbd> and <kbd>Alt</kbd>
+                key combinations are not available.
+            </p>
+
+            <p>
+                On Unix systems only, you can get sound in the text and command-line
+                interfaces over the PC speaker if you install the <code>beep</code> utility and
+                enable the legacy PC-speaker driver or emulation.
+            </p>
+        </section>
+        <hr>
+    </section>
+
+    <section>
+        <h3 id="gwbasic">Differences with GW-BASIC</h3>
+        <p>
+            GW-BASIC was a real-mode DOS program, which means that it had full control
+            over an IBM-compatible 8086 computer. It had direct access to all areas of
+            memory and all devices. Some BASIC programs used this fact, by using
+            <code><a href="#POKE">POKE</a></code> and <code><a href="#OUT">OUT</a></code>
+            statements as well as <code><a href="#CALL">CALL</a></code>
+            and <code><a href="#USR">USR</a></code> machine-code subroutines to perform tasks for which BASIC
+            did not provide support. PC-BASIC runs on modern machines which may be based on
+            completely different architectures and anyway do not allow applications to
+            directly access memory or devices. Therefore, it is not possible to run machine
+            code on PC-BASIC. If you need machine code, you'll need to use full CPU
+            emulation such as provided by DOSBox, Bochs or VirtualBox.
+        </p>
+
+        <section>
+            <h4 id="gwbasic-language">Language differences</h4>
+            <p>
+                PC-BASIC <em>does</em> provide limited support for the <code><a href="#POKE">POKE</a></code> and <code><a href="#PEEK">PEEK</a></code> statements: some of the most commonly accessed
+                regions of memory are emulated and can be read and (sometimes) written. There is
+                read and write support for video memory, font RAM and selected locations of the
+                low memory segment, including the keyboard buffer. Additionally, there is read
+                support for font ROM, variable, array and string memory, <code><a href="#FIELD">FIELD</a></code>
+                buffers as well as the program code itself. Writing into the program code is
+                disabled by default, but can be enabled with the <code><a href="--allow-code-poke">allow-code-poke</a></code>
+                option. Use with care. A number of machine ports related to keyboard input and
+                video modes are supported as well.
+            </p>
+            <p>
+                The <code><a href="SHELL">SHELL</a></code> statement is, by default,
+                disabled; this is to avoid unpleasant surprises. In GW-BASIC under MS-DOS,
+                <code>SHELL</code> opens a DOS prompt or executes commands in it. The command
+                shells of modern operating systems work differently than those of DOS; in
+                particular, it is impossible to retrieve changes in the environment variables,
+                so that many use cases of <code>SHELL</code> simply would not work; for
+                example, changing the current drive on Windows. Moreover, Unix shells have a
+                syntax that is completely different from that of DOS. You can, however, enable
+                <code>SHELL</code> by setting the <code><b><a href="#--shell">shell</a>=native</b></code> option. Use with
+                care.
+            </p>
+            <div class="scrollable">
+                <table>
+                    <tr>
+                        <th>Statement</th>
+                        <th>Support level</th>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#BLOAD">BLOAD</a></code></td>
+                        <td>Selected memory areas supported.</td>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#BSAVE">BSAVE</a></code></td>
+                        <td>Selected memory areas supported.</td>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#CALL">CALL</a></code></td>
+                        <td>Not supported.</td>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#CALLS">CALLS</a></code></td>
+                        <td>Not supported.</td>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#DEF-USR">DEF USR</a></code></td>
+                        <td>Not supported.</td>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#ERDEV">ERDEV</a></code></td>
+                        <td>Not supported.</td>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#EXTERR">EXTERR</a></code></td>
+                        <td>Not supported.</td>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#INP">INP</a></code></td>
+                        <td>Selected ports supported.</td>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#IOCTL">IOCTL</a></code>, <code><a href="#IOCTL%24">IOCTL$</a></code></td>
+                        <td>Not supported.</td>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#OUT">OUT</a></code></td>
+                        <td>Selected ports supported.</td>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#PEEK">PEEK</a></code></td>
+                        <td>Selected memory areas supported.</td>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#POKE">POKE</a></code></td>
+                        <td>Selected memory areas supported.</td>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#SHELL">SHELL</a></code></td>
+                        <td>Supported through OS-native shell if <code><b><a href="#--shell">shell</a>=native</b></code> is set.</td>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#USR">USR</a></code></td>
+                        <td>Not supported.</td>
+                    </tr>
+                    <tr>
+                        <td><code><a href="#WAIT">WAIT</a></code></td>
+                        <td>Selected ports supported.</td>
+                    </tr>
+                </table>
+            </div>
+            <p>
+                The highest level of compatibility with GW-BASIC can be attained by setting
+                <code><a href="#--preset">preset</a>=strict</code>,
+                which switches off all convenience and security features that cause differences with
+                GWBASIC.
+            </p>
+        </section>
+        <hr>
+
+        <section>
+            <h4 id="gwbasic-devices">Devices</h4>
+            <p>
+                GW-BASIC additionally recognises the following little-used device, which is not implemented in PC-BASIC.
+            </p>
+            <div class="scrollable">
+                <table>
+                    <tr>
+                        <th>Device</th>
+                        <th>Allowed modes</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td><code>CONS:</code></td>
+                        <td><code>OUTPUT</code></td>
+                        <td>
+                            The screen (console). Output to <code>CONS:</code> is displayed
+                            directly at the cursor position when <kbd>Enter</kbd> is
+                            pressed. It does not update the end-of-line value
+                            for the interpreter, which means that it does not
+                            move with <kbd>Backspace</kbd> or <kbd>Del</kbd> and is not
+                            stored in program lines if it appears beyond the
+                            end of the existing line. <code>CONS:</code> can be opened with
+                            any access mode, but the effect is always to open
+                            it for <code>OUTPUT</code>.
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <hr>
+
+        <section>
+            <h4 id="gwbasic-options">Command-line options</h4>
+            <p>
+                GW-BASIC recognised a number of options on the command-line.
+                These are matched by PC-BASIC with only minor modifications:
+            </p>
+            <div class="scrollable">
+                <table>
+                    <tr>
+                        <th>
+                        GW-BASIC option
+                        </th>
+                        <th>
+                        PC-BASIC short option
+                        </th>
+                        <th>
+                        PC-BASIC option
+                        </th>
+                        <th>
+                        Effect
+                        </th>
+                    </tr>
+                    <tr>
+                        <td><code>/d</code></td>
+                        <td><code><b><a href="#-d">-d</a></b></code></td>
+                        <td><code><b><a href="#--double">--double</a></b></code></td>
+                        <td>Enable double-precision floating-point math functions.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/f:<var>n</var></code></td>
+                        <td><code><b><a href="#-f">-f</a>=</b><var>n</var></code></td>
+                        <td><code><b><a href="#--max-files">--max-files</a>=</b><var>n</var></code></td>
+                        <td>Set the maximum number of open files.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/s:<var>n</var></code></td>
+                        <td><code><b><a href="#-s">-s</a>=</b><var>n</var></code></td>
+                        <td><code><b><a href="#--max-reclen">--max-reclen</a>=</b><var>n</var></code></td>
+                        <td>Set the maximum record length for <code>RANDOM</code> files.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/c:<var>n</var></code></td>
+                        <td><code><b><a href="#-c">-c</a>=</b><var>n</var></code></td>
+                        <td><code><b><a href="#--serial-buffer-size">--serial-buffer-size</a>=</b><var>n</var></code></td>
+                        <td>Set the size of the receive buffer for <code>COM</code> devices.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/i:<var>n</var></code></td>
+                        <td><code><b><a href="#-i">-i</a>=</b><var>n</var></code></td>
+                        <td></td>
+                        <td>No effect.</td>
+                    </tr>
+                    <tr>
+                        <td><code>/m:<var>n</var>,<var>m</var></code></td>
+                        <td><code><b><a href="#-m">-m</a>=</b><var>n</var>,<var>m</var></code></td>
+                        <td><code><b><a href="#--max-memory">--max-memory</a>=</b><var>n</var>,<var>m</var></code></td>
+                        <td>
+                            Set the highest memory location to <code><var>n</var></code> and maximum
+                            BASIC memory size to <code><var>m</var>*16</code> bytes.
+                        </td>
+                    </tr>
+                    <tr>
+                        <td><code>&gt;<var>filename</var></code></td>
+                        <td></td>
+                        <td><code><b><a href="#--output">--output</a>=</b><var>filename</var></code></td>
+                        <td>Write screen output to <code><var>filename</var></code>.</td>
+                    </tr>
+                    <tr>
+                        <td><code>&gt;&gt;<var>filename</var></code></td>
+                        <td></td>
+                        <td><code><b>--output=</b><var>filename</var> <b><a href="#--append">--append</a></b></code></td>
+                        <td>Append screen output to <code><var>filename</var></code>.</td>
+                    </tr>
+                    <tr>
+                        <td><code>&lt;<var>filename</var></code></td>
+                        <td></td>
+                        <td><code><b><a href="#--input">--input</a>=</b><var>filename</var></code></td>
+                        <td>Read keyboard input from <code><var>filename</var></code>.</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <hr>
+    </section>
+</article>
+<article>
+<!--
+    PC-BASIC documentation
+    Copyright (c) 2014-2015 Rob Hagemans
+    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    http://creativecommons.org/licenses/by-sa/4.0/legalcode
+-->
+
+<h2 id="settings">Settings and options</h2>
+<p>
+    PC-BASIC has a number of settings that change the way it operates.
+    These settings can be changed by setting options on the command line
+    or through editing the configuration file.
+</p>
+<p>
+    In either method, the options have the same name and syntax. In what follows, we will often refer to
+    a particular option setting; remember that you can set this from the command line as well as from the configuration file.
+</p>
+<h5>Command-line options</h5>
+<p>
+    You can enter command-line options if you start PC-BASIC from the console
+    (also known as the <em>Command Prompt</em> or <em>Terminal</em>;
+    this is normally <code>CMD</code> or <code>PowerShell</code> on Windows),
+    by preceding the name of the option
+    with two dashes, like so:
+</p>
+<code class="block"><b>pcbasic <a href="#--preset">--preset</a>=tandy <a href="#--ctrl-c-break">--ctrl-c-break</a>=True</b></code>
+<p>
+    On the command line, you can leave out the expression <code><b>=True</b></code>
+    that is common in switching options.
+    Some options have an alternative, short name consisting of a single
+    letter preceded by a single dash, which you can use on the command line.
+    You can combine multiple short options with a single dash.
+</p>
+<h5>Configuration files</h5>
+<p>
+    You can change options by adding or removing lines in your local configuration file,
+    which can be found in the following location:
+</p>
+<dl>
+    <dt>Windows</dt><dd><code>%AppData%\pcbasic\PCBASIC.INI</code></dd>
+    <dt>OS X</dt><dd><code>~/Library/Application Support/pcbasic/PCBASIC.INI</code></dd>
+    <dt>Linux</dt><dd><code>~/.config/pcbasic/PCBASIC.INI</code></dd>
+</dl>
+<p>
+    Change an option in the configuration file by adding a line in the section named <code>[pcbasic]</code>, like so:
+</p>
+<code class="block">
+    [pcbasic]<br>
+    <a href="#--preset">preset</a>=tandy<br>
+    <a href="#--ctrl-c-break">ctrl-c-break</a>=True
+</code>
+<p>
+    You cannot use  <a href="#parameters">positional arguments</a> or
+    the short name of options in the configuration file.
+    You also cannot leave out the expression <code><b>=True</b></code>.
+</p>
+<hr>
+<!--
+    PC-BASIC documentation
+    Copyright (c) 2014-2015 Rob Hagemans
+    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    http://creativecommons.org/licenses/by-sa/4.0/legalcode
+-->
+
+<section>
+    <h3 id="synopsis">Synopsis</h3>
+    <code class="block">
+        <b>pcbasic</b>
+        [<var><a href="#p-program">program</a></var>|<var><a href="#p-package">package</a></var>
+        [<var><a href="#p-output">output</a></var>]]
+        <span><a href="#--allow-code-poke">[<b>--allow-code-poke</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--altgr">[<b>--altgr</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--append">[<b>--append</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--aspect">[<b>--aspect=</b><var>x</var>,<var>y</var>]</a>
+<a href="#-b">[<b>-b</b>]</a>
+<a href="#--border">[<b>--border=</b><var>width</var>]</a>
+<a href="#--caption">[<b>--caption=</b><var>title</var>]</a>
+<a href="#--capture-caps">[<b>--capture-caps</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--cas1">[<b>--cas1=</b><var>type</var><b>:</b><var>value</var>[<b>:</b><var>loc</var>]]</a>
+<a href="#--cga-low">[<b>--cga-low</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--codepage">[<b>--codepage=</b><var>codepage_id</var>]</a>
+<a href="#--config">[<b>--config=</b><var>config_file</var>]</a>
+<a href="#--com1">[<b>--com1=</b><var>type</var><b>:</b><var>value</var>]</a>
+<a href="#--com2">[<b>--com2=</b><var>type</var><b>:</b><var>value</var>]</a>
+<a href="#--convert">[<b>--convert=</b>{<b>A</b>|<b>B</b>|<b>P</b>}]</a>
+<a href="#--copy-paste">[<b>--copy-paste=</b><var>copy_button</var><b>,</b><var>paste_button</var>]</a>
+<a href="#--ctrl-c-break">[<b>--ctrl-c-break</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--current-device">[<b>--current-device=</b>{<b>A</b>|<b>B</b> ... |<b>Z</b>}]</a>
+<a href="#--dimensions">[<b>--dimensions=</b><var>x</var>,<var>y</var>]</a>
+<a href="#--double">[<b>-d</b>]</a>
+<a href="#--double">[<b>--double</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--exec">[<b>-e=</b><var>command_line</var>]</a>
+<a href="#--exec">[<b>--exec=</b><var>command_line</var>]</a>
+<a href="#--font">[<b>--font=</b><var>font_name</var>[<b>,</b><var>font_name</var> ... ]]</a>
+<a href="#--fullscreen">[<b>--fullscreen</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--help">[<b>-h</b>]</a>
+<a href="#--help">[<b>--help</b>]</a>
+<a href="#-i">[<b>-i</b>]</a>
+<a href="#--input">[<b>--input=</b><var>input_file</var>]</a>
+<a href="#--interface">[<b>--interface=</b>{<b>none</b>|<b>cli</b>|<b>text</b>|<b>graphical</b>}]</a>
+<a href="#--keys">[<b>-k=</b><var>keystring</var>]</a>
+<a href="#--keys">[<b>--keys=</b><var>keystring</var>]</a>
+<a href="#--load">[<b>-l=</b><var>program</var>]</a>
+<a href="#--load">[<b>--load=</b><var>program</var>]</a>
+<a href="#--logfile">[<b>--logfile=</b><var>log_file</var>]</a>
+<a href="#--lpt1">[<b>--lpt1=</b><var>type</var><b>:</b><var>value</var>]</a>
+<a href="#--lpt2">[<b>--lpt2=</b><var>type</var>:<var>value</var>]</a>
+<a href="#--lpt3">[<b>--lpt3=</b><var>type</var>:<var>value</var>]</a>
+<a href="#--map-drives">[<b>--map-drives</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--max-files">[<b>-f=</b><var>number_of_files</var>]</a>
+<a href="#--max-files">[<b>--max-files=</b><var>number_of_files</var>]</a>
+<a href="#--max-memory">[<b>-m=</b><var>max_memory</var>[<b>,</b><var>basic_memory_blocks</var>]]</a>
+<a href="#--max-memory">[<b>--max-memory=</b><var>max_memory</var>[<b>,</b><var>basic_memory_blocks</var>]]</a>
+<a href="#--max-reclen">[<b>-s=</b><var>record_length</var>]</a>
+<a href="#--max-reclen">[<b>--max-reclen=</b><var>record_length</var>]</a>
+<a href="#--monitor">[<b>--monitor=</b>{<b>rgb</b>|<b>composite</b>|<b>mono</b>}]</a>
+<a href="#--mono-tint">[<b>--mono-tint=</b><var>r</var><b>,</b><var>g</var><b>,</b><var>b</var>]</a>
+<a href="#--mount">[<b>--mount=</b><var>drive</var><b>:</b><var>path</var><b>,</b>[<var>drive</var><b>:</b><var>path</var> ... ]]</a>
+<a href="#-n">[<b>-n</b>]</a>
+<a href="#--nobox">[<b>--nobox</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--nokill">[<b>--nokill</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--nosound">[<b>--nosound</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--output">[<b>--output=</b><var>output_file</var>]</a>
+<a href="#--pcjr-term">[<b>--pcjr-term=</b><var>terminal_program</var>]</a>
+<a href="#--peek">[<b>--peek=</b>[<var>seg</var><b>:</b><var>addr</var><b>:</b><var>val</var>[<b>,</b><var>seg</var><b>:</b><var>addr</var><b>:</b><var>val</var> ... ]]]</a>
+<a href="#--pen">[<b>--pen=</b>{<b>left</b>|<b>middle</b>|<b>right</b>|<b>none</b>}]</a>
+<a href="#--preset">[<b>--preset=</b><var>option_block</var>]</a>
+<a href="#--print-trigger">[<b>--print-trigger=</b>{<b>line</b>|<b>page</b>|<b>close</b>}]</a>
+<a href="#--quit">[<b>-q</b>]</a>
+<a href="#--quit">[<b>--quit</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--reserved-memory">[<b>--reserved-memory=</b><var>number_of_bytes</var>]</a>
+<a href="#--resume">[<b>--resume</b>[<b>=True</b>|<b>=False</b>]</a>
+<a href="#--run">[<b>-r=</b><var>program</var>]</a>
+<a href="#--run">[<b>--run=</b><var>program</var>]</a>
+<a href="#--scaling">[<b>--scaling=</b>{<b>smooth</b>|<b>crisp</b>|<b>native</b>}]</a>
+<a href="#--serial-buffer-size">[<b>-c=</b><var>size</var>]</a>
+<a href="#--serial-buffer-size">[<b>--serial-buffer-size=</b><var>size</var>]</a>
+<a href="#--shell">[<b>--shell=</b>{<b>none</b>|<b>native</b>|<var>command</var>]]</a>
+<a href="#--state">[<b>--state=</b><var>state_file</var>]</a>
+<a href="#--strict-hidden-lines">[<b>--strict-hidden-lines</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--strict-newline">[<b>--strict-newline</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--strict-protect">[<b>--strict-protect</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--syntax">[<b>--syntax=</b>{<b>advanced</b>|<b>pcjr</b>|<b>tandy</b>}]</a>
+<a href="#-t">[<b>-t</b>]</a>
+<a href="#--text-width">[<b>--text-width=</b>{<b>40</b>|<b>80</b>}]</a>
+<a href="#--utf-8">[<b>--utf8</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--version">[<b>-v</b>]</a>
+<a href="#--version">[<b>--version</b>]</a>
+<a href="#--video">[<b>--video=</b><var>card</var>]</a>
+<a href="#--video-memory">[<b>--video-memory=</b><var>size</var>]</a>
+<a href="#--wait">[<b>-w</b>]</a>
+<a href="#--wait">[<b>--wait</b>[<b>=True</b>|<b>=False</b>]]</a>
+</span></code>
+</section>
+<hr>
+
+<section>
+    <h3 id="parameters">Positional arguments</h3>
+    <dl>
+        <dt id="p-program"><code><var>program</var></code></dt>
+        <dd>
+            If a <code>.BAS</code> program is specified as the first positional argument,
+            it will be run.
+            The
+            <code><b><a href="#--run">--run</a></b></code>,
+            <code><b><a href="#--load">--load</a></b></code> and
+            <code><b><a href="#--convert">--convert</a></b></code> options
+            override this behaviour.
+        </dd>
+
+        <dt id="p-package"><code><var>package</var></code></dt>
+        <dd>
+            If a zipfile <a href="#packages">package</a> or directory is specified as the first positional argument,
+            any contained <a href="#settings">configuration file <code>PCBASIC.INI</code></a>
+            will be loaded; usually, it will run a program file in the package.
+            All other command-line options will override the package configuration file,
+            note in particular the potential of the
+            <code><b><a href="#--run">--run</a></b></code>,
+            <code><b><a href="#--load">--load</a></b></code> and
+            <code><b><a href="#--convert">--convert</a></b></code> options
+            to alter the behaviour of the package.
+        </dd>
+
+        <dt id="p-output"><code><var>output</var></code></dt>
+        <dd>
+            If a second positional argument is specified, it sets the output file for file format conversion.
+            This argument is ignored unless the <code><a href="#--convert">--convert</a></code> option is given.
+        </dd>
+    </dl>
+</section>
+<hr>
+
+<section>
+    <h3 id="options">Options</h3>
+    <dl>
+        <dt id="--allow-code-poke">
+            <code><b>--allow-code-poke</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            Allow programs to <code><a href="#POKE">POKE</a></code> into code memory.
+        </dd>
+
+        <dt id="--altgr">
+            <code><b>--altgr</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            If <code><b>True</b></code> (default), interpret the right
+            <kbd>Alt</kbd> key as <kbd>Alt Gr</kbd> instead of <kbd>Alt</kbd>.
+            The left <kbd>Alt</kbd> key is always seen as <kbd>Alt</kbd>.
+        </dd>
+
+        <dt id="--append">
+            <code><b>--append</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            If used with
+            <code><b><a href="#--output">--output</a>=</b><var>output_file</var></code>,
+            the <code><var>output_file</var></code> is appended to rather than overwritten.
+        </dd>
+
+        <dt id="--aspect">
+            <code><b>--aspect=</b><var>x</var>,<var>y</var></code>
+        </dt>
+        <dd>
+            Set the display aspect ratio to <code><var>x</var></code>:<code><var>y</var></code>.
+            Only has an effect if combined with <code><b><a href="#--interface">--interface</a>=graphical</b></code>.
+        </dd>
+
+        <dt id="-b">
+            <code><b>-b</b></code>
+        </dt>
+        <dd>
+            Use the command-line interface. This is identical to
+            <code><b><a href="#--interface">--interface</a>=cli</b></code>.
+        </dd>
+
+        <dt id="--border">
+            <code><b>--border=</b><var>width</var></code>
+        </dt>
+        <dd>
+            Set the width of the screen border as a
+            percentage from 0&#8212;100. The percentage refers to the total
+            width of the borders on both sides as a fraction of the usable
+            screen width.
+            Only has an effect if combined with <code><b><a href="#--interface">--interface</a>=graphical</b></code>.
+        </dd>
+
+        <dt id="--caption">
+            <code><b>--caption=</b><var>title</var></code>
+        </dt>
+        <dd>
+            Set the title bar caption of the PC-BASIC window.
+            Default <code><var>title</var></code> is <em>PC-BASIC</em>.
+        </dd>
+
+        <dt id="--capture-caps">
+            <code><b>--capture-caps</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            Let PC-BASIC handle the <kbd>Caps Lock</kbd> key. This
+            may or may not interfere with the operating system's own handling of that key.
+            Only has an effect if combined with <code><b><a href="#--interface">--interface</a>=graphical</b></code>.
+        </dd>
+
+        <dt id="--cas1">
+            <code><b>--cas1=</b><var>type</var><b>:</b><var>value</var>[<b>:</b><var>loc</var>]</code>
+        </dt>
+        <dd>
+            Attach a resource to the <code>CAS1:</code> cassette device
+            and wind the virtual tape to <code><var>loc</var></code> seconds.
+            <code><var>type</var><b>:</b><var>value</var></code> can be
+            <dl>
+                <dt><code><b>WAV:</b><var>wav_file</var></code></dt>
+                <dd>
+                    Connect to the RIFF Wave file <code><var>wav_file</var></code>
+                    with data modulated in IBM PC cassette format.
+                </dd>
+
+                <dt><code><b>CAS:</b><var>cas_file</var></code></dt>
+                <dd>
+                    Connect to the PCE/PC-BASIC CAS tape image
+                    <code><var>cas_file</var></code>.
+                </dd>
+
+                <dt><code><b>BC:</b><var>wav_file</var></code></dt>
+                <dd>
+                    Connect to the RIFF Wave file <code><var>wav_file</var></code>
+                    with data modulated in BASICODE format.
+                </dd>
+            </dl>
+        </dd>
+
+        <dt id="--cga-low">
+            <code><b>--cga-low</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            Use low-intensity palettes in CGA modes.
+            Only has an effect if combined with <code><b><a href="#--video">--video</a>=</b>{<b>cga</b>|<b>cga_old</b>|<b>ega</b>|<b>vga</b>}</code>.
+        </dd>
+
+        <dt id="--codepage">
+            <code><b>--codepage=</b><var>codepage_id</var></code>
+        </dt>
+        <dd>
+            Load the specified codepage. The codepage determines which
+            characters are associated to a given character byte or, in the case
+            of double-byte codepages, two character bytes. The available codepages are
+            stored in the <code>encodings</code> directory.
+            See the <a href="#codepages">list of default available codepages</a> in the User's Guide.
         </dd>
 
         <dt id="--config">
@@ -2262,14 +2425,14 @@ me@mybox$
             If <code><b>False</b></code>, follow GW-BASIC behaviour
             where <kbd>Ctrl</kbd>+<kbd>C</kbd> breaks <code><a href="#AUTO">AUTO</a></code>
             and <code><a href="#INPUT">INPUT</a></code> but not program execution or
-            <code><a href="#LIST">LIST</a></code>.<br/>
+            <code><a href="#LIST">LIST</a></code>.<br>
             If <code><b>True</b></code>, treat
             <kbd>Ctrl</kbd>+<kbd>C</kbd> exactly like
             <kbd>Ctrl</kbd>+<kbd>Break</kbd> and
-            <kbd>Ctrl</kbd>+<kbd>Scroll Lock</kbd> when <code><b><a href="#--interface">--interface</a>=graphical</b></code>.<br/>
+            <kbd>Ctrl</kbd>+<kbd>Scroll Lock</kbd> when <code><b><a href="#--interface">--interface</a>=graphical</b></code>.<br>
             With <code><b><a href="#--interface">--interface</a>=</b>{<b>text</b>|<b>cli</b>}</code>,
             <kbd>Ctrl</kbd>+<kbd>C</kbd> is always treated like
-            <kbd>Ctrl</kbd>+<kbd>Break</kbd>.<br/>
+            <kbd>Ctrl</kbd>+<kbd>Break</kbd>.<br>
             Default is <code><b>True</b></code>.
         </dd>
 
@@ -2320,80 +2483,11 @@ me@mybox$
             fonts. The last fonts specified take precedence, previous ones are
             fallback. Default is <code><b>unifont,univga,freedos</b></code> (i.e. the
             <code>freedos.hex</code> font has preference). The available fonts
-            depend on what is stored in <code>font/</code>. By default, the following fonts
-            are available:
-            <div class="scrollable"><table>
-                <tr>
-                    <th><code><var>font_name</var></code></th>
-                    <th>Name</th>
-                    <th>Sizes</th>
-                    <th>Codepages</th>
-                </tr>
-                <tr>
-                    <td><code>unifont</code></td>
-                    <td>GNU UniFont</td>
-                    <td>16</td>
-                    <td>all</td>
-                </tr>
-                <tr>
-                    <td><code>univga</code></td>
-                    <td>Uni-VGA font</td>
-                    <td>16</td>
-                    <td>many</td>
-                </tr>
-                <tr>
-                    <td><code>freedos</code></td>
-                    <td>FreeDOS CPIDOS font</td>
-                    <td>8, 14, 16</td>
-                    <td>many</td>
-                </tr>
-                <tr>
-                    <td><code>cga</code></td>
-                    <td>IBM Colour/Graphics Adapter font</td>
-                    <td>8</td>
-                    <td>437 only</td>
-                </tr>
-                <tr>
-                    <td><code>mda</code></td>
-                    <td>IBM Monochrome Display Adapter font</td>
-                    <td>14</td>
-                    <td>437 only</td>
-                </tr>
-                <tr>
-                    <td><code>vga</code></td>
-                    <td>IBM Video Graphics Array font</td>
-                    <td>8, 14, 16</td>
-                    <td>437 only</td>
-                </tr>
-                <tr>
-                    <td><code>olivetti</code></td>
-                    <td>Olivetti/AT&amp;T font</td>
-                    <td>16</td>
-                    <td>437 only</td>
-                </tr>
-                <tr>
-                    <td><code>tandy1</code></td>
-                    <td>Tandy-1000 font old version</td>
-                    <td>8</td>
-                    <td>437 only</td>
-                </tr>
-                <tr>
-                    <td><code>tandy2</code></td>
-                    <td>Tandy-1000 font new version</td>
-                    <td>8</td>
-                    <td>437 only</td>
-                </tr>
-            </table></div>
-            GNU UniFont contains glyphs for all the defined code points of the
-            Basic Multilingual Plane of Unicode 7.0, which makes it an
-            excellent fallback font. Its glyphs are not, however, very similar
-            to those that were used on DOS machines; both Uni-VGA and the
-            FreeDOS CPIDOS fonts are therefore more suitable, when they have
-            the required glyphs.
+            depend on what is stored in <code>font/</code>.
         </dd>
 
-        <dt>
-            <code id="--fullscreen"><b>--fullscreen</b>[<b>=True</b>|<b>=False</b>]</code>
+        <dt id="--fullscreen">
+            <code><b>--fullscreen</b>[<b>=True</b>|<b>=False</b>]</code>
         </dt>
         <dd>
             Fullscreen mode.
@@ -2701,49 +2795,7 @@ me@mybox$
             section defined in a config file by a name between square brackets,
             like <code class="block">[this]</code> <code><b>--preset=this</b></code> will load all
             settings defined in that section. Available presets depend on your
-            configuration file. By default, the following presets are
-            available, which specify different emulation targets:
-            <div class="scrollable"><table>
-                <tr>
-                    <td><code>pcjr</code></td>
-                    <td>IBM PCjr with Cartridge BASIC.</td>
-                </tr>
-                <tr>
-                    <td><code>tandy</code></td>
-                    <td>Tandy 1000.</td>
-                </tr>
-                <tr>
-                    <td><code>olivetti</code></td>
-                    <td>Olivetti M24 or AT&amp;T PC 6300.</td>
-                </tr>
-                <tr>
-                    <td><code>cga</code></td>
-                    <td>IBM or compatible with Color/Graphics Adapter.</td>
-                </tr>
-                <tr>
-                    <td><code>ega</code></td>
-                    <td>IBM or compatible with Extended Graphics Adapter.</td>
-                </tr>
-                <tr>
-                    <td><code>vga</code></td>
-                    <td>IBM or compatible with Video Graphics Array.</td>
-                </tr>
-                <tr>
-                    <td><code>mda</code></td>
-                    <td>IBM or compatible with Monochrome Display Adapter and
-                    green-tinted monochrome monitor.</td>
-                </tr>
-                <tr>
-                    <td><code>hercules</code></td>
-                    <td>IBM compatible with Hercules Graphics Adapter and green-tinted
-                    monochrome monitor.</td>
-                </tr>
-                <tr>
-                    <td><code>strict</code></td>
-                    <td>Choose strict compatibility with GW-BASIC over convenience,
-                    security, rhyme or reason.</td>
-                </tr>
-            </table></div>
+            configuration file. See the <a href="#presets">list of default presets</a> in the User's Guide.
         </dd>
 
         <dt id="--print-trigger">
@@ -2753,16 +2805,16 @@ me@mybox$
             Set the trigger to flush the print buffer to the printer.
             <dl class="compact">
                 <dt><code><b>line</b></code>
-                <dd>The printer is activated after every line break.</dd>
+                </dt><dd>The printer is activated after every line break.</dd>
                 <dt><code><b>page</b></code>
-                <dd>The printer is activated after every page break.</dd>
+                </dt><dd>The printer is activated after every page break.</dd>
                 <dt><code><b>close</b></code>
-                <dd>The printer is activated only when PC-BASIC exits.</dd>
+                </dt><dd>The printer is activated only when PC-BASIC exits.</dd>
             </dl>
             Default is <code><b>close</b></code>.
         </dd>
 
-        <dt  id="--quit">
+        <dt id="--quit">
             <code id="-q"><b>-q</b></code>
             <code><b>--quit</b>[<b>=True</b>|<b>=False</b>]</code>
         </dt>
@@ -2838,7 +2890,7 @@ me@mybox$
             <code>256</code>. If set to <code>0</code>, serial communications are disabled.
         </dd>
 
-        <dt  id="--shell">
+        <dt id="--shell">
             <code><b>--shell=</b>{<b>none</b>|<b>native</b>|<var>command</var>]</code>
         </dt>
         <dd>
@@ -2998,7 +3050,7 @@ me@mybox$
         </dd>
     </dl>
 </section>
-<hr />
+<hr>
 <!--
     PC-BASIC documentation
     Copyright (c) 2014-2015 Rob Hagemans
@@ -3082,7 +3134,7 @@ me@mybox$
         </dd>
     </dl>
 </section>
-<hr />
+<hr>
 </article>
 <!--
     PC-BASIC documentation
@@ -3126,10 +3178,10 @@ me@mybox$
     </ul>
     <p>
         Apart from these, string literals should not contain any of the characters
-        in the ASCII range <code>13&mdash;31</code>, which lead to unpredictable results.
+        in the ASCII range <code>13&#8212;31</code>, which lead to unpredictable results.
         There is no escaping mechanism. To include one of the above
         characters in a string, use <a href="#string-operators">string concatenation</a> and
-        the <code><a href="#CHR$">CHR$</a></code> function.
+        the <code><a href="#CHR%24">CHR$</a></code> function.
     </p>
 
     <h5>Numeric literals</h5>
@@ -3179,7 +3231,7 @@ me@mybox$
         </li>
     </ul>
 </section>
-<hr />
+<hr>
 
 <section>
     <h3 id="variables">Variables</h3>
@@ -3204,7 +3256,7 @@ me@mybox$
         variables of the same name.
     </p>
 </section>
-<hr />
+<hr>
 
 <section>
     <h3 id="arrays">Arrays</h3>
@@ -3227,7 +3279,7 @@ me@mybox$
         <code><a href="#ERASE">ERASE</a></code>.
     </p>
 </section>
-<hr />
+<hr>
 
 
 <section>
@@ -3286,7 +3338,7 @@ me@mybox$
         </li>
     </ul>
 </section>
-<hr />
+<hr>
 
 <section>
     <h3 id="operators">Operators</h3>
@@ -3652,7 +3704,7 @@ me@mybox$
         </table>
     </div>
 </section>
-<hr />
+<hr>
 
 <section>
     <h3 id="statements-functions">Statements and functions</h3>
@@ -3678,7 +3730,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="ASC"><code>ASC</code> function</h4>
@@ -3704,7 +3756,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="ATN"><code>ATN</code> function</h4>
@@ -3738,7 +3790,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="AUTO"><code>AUTO</code> statement</h4>
@@ -3780,9 +3832,9 @@ me@mybox$
             <li>
                 <code><var>increment</var></code> is <code>0</code>:
                 <samp>Illegal function call</samp>.
-        </ul>
+        </li></ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="BEEP"><code>BEEP</code> statement</h4>
@@ -3799,7 +3851,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="BEEP-switch"><code>BEEP</code> statement (switch)</h4>
@@ -3821,7 +3873,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="BLOAD"><code>BLOAD</code> statement</h4>
@@ -3857,7 +3909,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="BSAVE"><code>BSAVE</code> statement</h4>
@@ -3899,7 +3951,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
     <h4 id="CALL"><code>CALL</code> statement</h4>
@@ -3937,7 +3989,7 @@ me@mybox$
         </li>
     </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CALLS"><code>CALLS</code> statement</h4>
@@ -3973,7 +4025,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CDBL"><code>CDBL</code> function</h4>
@@ -3990,7 +4042,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
     <h4 id="CHAIN"><code>CHAIN</code> statement</h4>
@@ -4073,7 +4125,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CHDIR"><code>CHDIR</code> statement</h4>
@@ -4112,7 +4164,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CHR$"><code>CHR$</code> function</h4>
@@ -4141,7 +4193,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CINT"><code>CINT</code> function</h4>
@@ -4161,7 +4213,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CIRCLE"><code>CIRCLE</code> statement</h4>
@@ -4216,7 +4268,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CLEAR"><code>CLEAR</code> statement</h4>
@@ -4284,7 +4336,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CLOSE"><code>CLOSE</code> statement</h4>
@@ -4327,7 +4379,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CLS"><code>CLS</code> statement</h4>
@@ -4377,7 +4429,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="COLOR"><code>COLOR</code> statement (text mode)</h4>
@@ -4429,7 +4481,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="COLOR-1"><code>COLOR</code> statement (<code>SCREEN 1</code>)</h4>
@@ -4478,7 +4530,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="COLOR-3-9"><code>COLOR</code> statement (<code>SCREEN 3&#8212;9</code>)</h4>
@@ -4523,7 +4575,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="COM"><code>COM</code> statement</h4>
@@ -4550,7 +4602,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="COMMON"><code>COMMON</code> statement</h4>
@@ -4570,7 +4622,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CONT"><code>CONT</code> statement</h4>
@@ -4611,7 +4663,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="COS"><code>COS</code> function</h4>
@@ -4644,7 +4696,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CSNG"><code>CSNG</code> function</h4>
@@ -4661,7 +4713,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CSRLIN"><code>CSRLIN</code> function</h4>
@@ -4679,7 +4731,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CVI"><code>CVI</code> function</h4>
@@ -4703,7 +4755,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CVS"><code>CVS</code> function</h4>
@@ -4727,7 +4779,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="CVD"><code>CVD</code> function</h4>
@@ -4751,7 +4803,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="DATA"><code>DATA</code> statement</h4>
@@ -4779,7 +4831,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="DATE$"><code>DATE$</code> function</h4>
@@ -4796,7 +4848,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="DATE$-statement"><code>DATE$</code> statement</h4>
@@ -4855,7 +4907,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="DEF-FN"><code>DEF FN</code> statement</h4>
@@ -4896,7 +4948,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="DEFINT"><code>DEFINT</code>, <code>DEFDBL</code>, <code>DEFSNG</code>, <code>DEFSTR</code> statements</h4>
@@ -4934,7 +4986,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="DEF-SEG"><code>DEF SEG</code> statement</h4>
@@ -4966,7 +5018,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="DEF-USR"><code>DEF USR</code> statement</h4>
@@ -5010,7 +5062,7 @@ me@mybox$
         </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="DELETE"><code>DELETE</code> statement</h4>
@@ -5051,7 +5103,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="DIM"><code>DIM</code> statement</h4>
@@ -5118,7 +5170,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="DRAW"><code>DRAW</code> statement</h4>
@@ -5255,7 +5307,7 @@ me@mybox$
                 <p><code><var>s</var></code> is one of the following:</p>
                 <ul>
                     <li>a string variable name followed by semicolon (<code>;</code>)</li>
-                    <li>the result of <code><a href="#VARPTR$">VARPTR$()</a></code> on a string variable</li>
+                    <li>the result of <code><a href="#VARPTR%24">VARPTR$()</a></code> on a string variable</li>
                 </ul>
             </dd>
         </dl>
@@ -5298,7 +5350,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="EDIT"><code>EDIT</code> statement</h4>
@@ -5326,7 +5378,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="ELSE"><code>ELSE</code> statement</h4>
@@ -5339,7 +5391,7 @@ me@mybox$
             the <code>ELSE</code> statement is necessary. See <code><a href="#IF">IF</a></code> for normal usage.
         </p>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="END"><code>END</code> statement</h4>
@@ -5352,7 +5404,7 @@ me@mybox$
             using <code><a href="#CONT">CONT</a></code>.
         </p>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="ENVIRON"><code>ENVIRON</code> statement</h4>
@@ -5394,7 +5446,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="ENVIRON$"><code>ENVIRON$</code> function</h4>
@@ -5431,7 +5483,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="EOF"><code>EOF</code> function</h4>
@@ -5471,7 +5523,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="ERASE"><code>ERASE</code> statement</h4>
@@ -5502,7 +5554,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="ERDEV"><code>ERDEV</code> function</h4>
@@ -5525,7 +5577,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="ERDEV$"><code>ERDEV$</code> function</h4>
@@ -5548,7 +5600,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="ERL"><code>ERL</code> function</h4>
@@ -5573,7 +5625,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="ERR"><code>ERR</code> function</h4>
@@ -5596,7 +5648,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="ERROR"><code>ERROR</code> statement</h4>
@@ -5626,7 +5678,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="EXP"><code>EXP</code> function</h4>
@@ -5665,7 +5717,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="EXTERR"><code>EXTERR</code> function</h4>
@@ -5703,7 +5755,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="FIELD"><code>FIELD</code> statement</h4>
@@ -5728,7 +5780,7 @@ me@mybox$
                 same file buffer; all mappings will be in effect simultaneously.
             </li>
             <li>
-                A subsequent assignment or <code><a href="#LET">LET</a></code> or <code><a href="#MID$">MID$</a></code> statement on <code><var>name_0</var> , <var>name_1</var> ...</code> will dis-
+                A subsequent assignment or <code><a href="#LET">LET</a></code> or <code><a href="#MID%24">MID$</a></code> statement on <code><var>name_0</var> , <var>name_1</var> ...</code> will dis-
                 associate the string variable from the field buffer.
             </li>
             <li>
@@ -5784,7 +5836,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="FILES"><code>FILES</code> statement</h4>
@@ -5846,7 +5898,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="FIX"><code>FIX</code> function</h4>
@@ -5876,7 +5928,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="FN"><code>FN</code> function</h4>
@@ -5912,7 +5964,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="FOR"><code>FOR</code> statement</h4>
@@ -5955,7 +6007,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="FRE"><code>FRE</code> function</h4>
@@ -5978,7 +6030,7 @@ me@mybox$
                 before returning available memory.
         </li></ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="GET-files"><code>GET</code> statement (files)</h4>
@@ -5989,7 +6041,7 @@ me@mybox$
             Read a record from the random-access file <code><var>file_number</var></code> at position
             <code><var>record_number</var></code>.
             The record can be accessed through the <code><a href="#FIELD">FIELD</a></code>
-            variables or through <code><a href="#INPUT$">INPUT$</a></code>,
+            variables or through <code><a href="#INPUT%24">INPUT$</a></code>,
             <code><a href="#INPUT">INPUT</a></code> or
             <code><a href="#LINE-INPUT">LINE INPUT</a></code>.
         </p>
@@ -6031,7 +6083,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="GET-serial"><code>GET</code> statement (communications)</h4>
@@ -6042,7 +6094,7 @@ me@mybox$
             Read <code><var>number_bytes</var></code> bytes from the communications buffer opened under file
             number <code><var>com_file_number</var></code>.
             The record can be accessed through the <code><a href="#FIELD">FIELD</a></code>
-            variables or through <code><a href="#INPUT$">INPUT$</a></code>,
+            variables or through <code><a href="#INPUT%24">INPUT$</a></code>,
             <code><a href="#INPUT">INPUT</a></code> or
             <code><a href="#LINE-INPUT">LINE INPUT</a></code>.
         </p>
@@ -6096,7 +6148,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="GET-graphics"><code>GET</code> statement (graphics)</h4>
@@ -6187,7 +6239,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="GOSUB"><code>GOSUB</code> statement</h4>
@@ -6232,7 +6284,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="GOTO"><code>GOTO</code> statement</h4>
@@ -6271,7 +6323,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="HEX$"><code>HEX$</code> function</h4>
@@ -6299,7 +6351,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="IF"><code>IF</code> statement</h4>
@@ -6361,7 +6413,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="INKEY$"><code>INKEY$</code> function</h4>
@@ -6513,7 +6565,7 @@ me@mybox$
             </table>
         </div>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="INP"><code>INP</code> function</h4>
@@ -6957,7 +7009,7 @@ me@mybox$
             </table>
         </div>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="INPUT"><code>INPUT</code> statement (console)</h4>
@@ -7029,7 +7081,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="INPUT-file"><code>INPUT</code> statement (devices and files)</h4>
@@ -7080,7 +7132,7 @@ me@mybox$
             <li>
                 If <code><var>file_num</var></code> is open to <code>KYBD:</code>, <code>INPUT#</code> reads from the keyboard until a
                 return or comma is encountered (as in a file). Arrow keys and delete are
-                passed as their control characters (<em>not</em> scancodes!) preceded by <code><a href="#CHR$">CHR$</a>(&amp;HFF)</code>.
+                passed as their control characters (<em>not</em> scancodes!) preceded by <code><a href="#CHR%24">CHR$</a>(&amp;HFF)</code>.
             </li>
         </ul>
         <h5>Errors</h5>
@@ -7109,13 +7161,13 @@ me@mybox$
             </li>
             <li>
                 <code><var>file_num</var></code> is open to a <code>COM</code> port and this is the
-                first <code><a href="#INPUT-file">INPUT</a></code>, <code><a href="#LINE-INPUT-file">LINE INPUT</a></code> or <code><a href="#INPUT$">INPUT$</a></code> call on that port
+                first <code><a href="#INPUT-file">INPUT</a></code>, <code><a href="#LINE-INPUT-file">LINE INPUT</a></code> or <code><a href="#INPUT%24">INPUT$</a></code> call on that port
                 since the buffer has filled up completely (i.e. <code><a href="#LOF">LOF</a>(<var>file_num</var>)</code> has become zero):
                 <samp>Communication buffer overflow</samp>.
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="INPUT$"><code>INPUT$</code> function</h4>
@@ -7179,13 +7231,13 @@ me@mybox$
             </li>
             <li>
                 <code><var>file_num</var></code> is open to a <code>COM</code> port and this is the
-                first <code><a href="#INPUT-file">INPUT</a></code>, <code><a href="#LINE-INPUT-file">LINE INPUT</a></code> or <code><a href="#INPUT$">INPUT$</a></code> call on that port
+                first <code><a href="#INPUT-file">INPUT</a></code>, <code><a href="#LINE-INPUT-file">LINE INPUT</a></code> or <code><a href="#INPUT%24">INPUT$</a></code> call on that port
                 since the buffer has filled up completely (i.e. <code><a href="#LOF">LOF</a>(<var>file_num</var>)</code> has become zero):
                 <samp>Communication buffer overflow</samp>.
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="INSTR"><code>INSTR</code> function</h4>
@@ -7227,7 +7279,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="INT"><code>INT</code> function</h4>
@@ -7258,7 +7310,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="IOCTL"><code>IOCTL</code> statement</h4>
@@ -7293,7 +7345,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="IOCTL$"><code>IOCTL$</code> function</h4>
@@ -7329,7 +7381,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="KEY-list"><code>KEY</code> statement (function-key macro list)</h4>
@@ -7341,11 +7393,11 @@ me@mybox$
             If <code>LIST</code> is specified, prints a list of
             the 10 function keys with the function-key macros defined for those keys to the console. Special
             characters are represented by their symbol equivalent in the loaded codepage.
-            Some characters get a special representation: e.g. <code><a href="#CHR$">CHR$</a>(13)</code> is represented
+            Some characters get a special representation: e.g. <code><a href="#CHR%24">CHR$</a>(13)</code> is represented
             as a back arrow.
         </p>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="KEY-def"><code>KEY</code> statement (function-key macro definition)</h4>
@@ -7386,7 +7438,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="KEY-event"><code>KEY</code> statement (event-trapping switch)</h4>
@@ -7491,7 +7543,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="KEY-event-def"><code>KEY</code> statement (event-trapping key definition)</h4>
@@ -7577,7 +7629,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="KILL"><code>KILL</code> statement</h4>
@@ -7614,7 +7666,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LCOPY"><code>LCOPY</code> statement</h4>
@@ -7651,7 +7703,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LEFT$"><code>LEFT$</code> function</h4>
@@ -7694,7 +7746,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LEN"><code>LEN</code> function</h4>
@@ -7718,7 +7770,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LET"><code>LET</code> statement</h4>
@@ -7746,7 +7798,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LINE"><code>LINE</code> statement</h4>
@@ -7809,7 +7861,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LINE-INPUT"><code>LINE INPUT</code> statement (console)</h4>
@@ -7845,7 +7897,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LINE-INPUT-file"><code>LINE INPUT</code> statement (files)</h4>
@@ -7904,13 +7956,13 @@ me@mybox$
             </li>
             <li>
                 <code><var>file_num</var></code> is open to a <code>COM</code> port and this is the
-                first <code><a href="#INPUT-file">INPUT</a></code>, <code><a href="#LINE-INPUT-file">LINE INPUT</a></code> or <code><a href="#INPUT$">INPUT$</a></code> call on that port
+                first <code><a href="#INPUT-file">INPUT</a></code>, <code><a href="#LINE-INPUT-file">LINE INPUT</a></code> or <code><a href="#INPUT%24">INPUT$</a></code> call on that port
                 since the buffer has filled up completely (i.e. <code><a href="#LOF">LOF</a>(<var>file_num</var>)</code> has become zero):
                 <samp>Communication buffer overflow</samp>.
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LIST"><code>LIST</code> statement</h4>
@@ -7949,7 +8001,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LLIST"><code>LLIST</code> statement</h4>
@@ -7977,7 +8029,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LOAD"><code>LOAD</code> statement</h4>
@@ -8014,7 +8066,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LOC"><code>LOC</code> function</h4>
@@ -8080,7 +8132,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LOCATE"><code>LOCATE</code> statement</h4>
@@ -8132,13 +8184,13 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LOCK"><code>LOCK</code> statement</h4>
         <code class="block">
             <b>LOCK</b> [<b>#</b>] <var>file_number</var> [<b>,</b> <var>record_0</var>]
-            <br/>
+            <br>
             <b>LOCK</b> [<b>#</b>] <var>file_number</var><b>,</b> [<var>record_0</var>] <b>TO</b> <var>record_1</var>
         </code>
         <p>
@@ -8195,7 +8247,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LOF"><code>LOF</code> function</h4>
@@ -8237,7 +8289,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LOG"><code>LOG</code> function</h4>
@@ -8273,7 +8325,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LPOS"><code>LPOS</code> function</h4>
@@ -8312,7 +8364,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LPRINT"><code>LPRINT</code> statement</h4>
@@ -8320,7 +8372,7 @@ me@mybox$
             See <code><a href="#PRINT">PRINT</a></code>.
         </p>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="LSET"><code>LSET</code> and <code>RSET</code> statements</h4>
@@ -8365,7 +8417,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="MERGE"><code>MERGE</code> statement</h4>
@@ -8397,7 +8449,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="MID$"><code>MID$</code> function</h4>
@@ -8436,7 +8488,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="MID$-statement"><code>MID$</code> statement</h4>
@@ -8486,7 +8538,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="MKDIR"><code>MKDIR</code> statement</h4>
@@ -8525,7 +8577,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="MKD$"><code>MKD$</code> function</h4>
@@ -8543,7 +8595,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="MKI$"><code>MKI$</code> function</h4>
@@ -8563,7 +8615,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="MKS$"><code>MKS$</code> function</h4>
@@ -8581,7 +8633,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="MOTOR"><code>MOTOR</code> statement</h4>
@@ -8618,7 +8670,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="NAME"><code>NAME</code> statement</h4>
@@ -8656,7 +8708,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="NEW"><code>NEW</code> statement</h4>
@@ -8669,7 +8721,7 @@ me@mybox$
             and returns control to the user.
         </p>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="NEXT"><code>NEXT</code> statement</h4>
@@ -8701,7 +8753,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="NOISE"><code>NOISE</code> statement</h4>
@@ -8798,7 +8850,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="OCT$"><code>OCT$</code> function</h4>
@@ -8826,7 +8878,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="ON-jump"><code>ON</code> statement (calculated jump)</h4>
@@ -8863,7 +8915,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="ON-event"><code>ON</code> statement (event trapping)</h4>
@@ -8954,7 +9006,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="ON-ERROR"><code>ON ERROR</code> statement</h4>
@@ -8990,13 +9042,13 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="OPEN"><code>OPEN</code> statement</h4>
         <code class="block">
-            <b>OPEN</b> <var>mode_char</var><b>,</b> [<b>#</b>] <var>file_num</var><b>,</b> <var>file_name</var> [<b>,</b> <var>rec_len</var>]
-            <br />
+            <b>OPEN</b> <var>mode_char</var><b>,</b> [<b>#</b>] <var>file_num</var><b>,</b> <var>file_spec</var> [<b>,</b> <var>rec_len</var>]
+            <br>
             <b>OPEN</b> <var>file_name</var> [<b>FOR</b> {<b>INPUT</b>|<b>OUTPUT</b>|<b>APPEND</b>|<b>RANDOM</b>}]
                        [<b>ACCESS</b> {<b>READ</b>|<b>WRITE</b>|<b>READ WRITE</b>}]
                        [<b>SHARED</b>|<b>LOCK</b> {<b>READ</b>|<b>WRITE</b>|<b>READ WRITE</b>}]
@@ -9008,7 +9060,11 @@ me@mybox$
         <h5>Parameters</h5>
         <ul>
             <li>
-                <code><var>file_name</var></code> is a string expression: the name of the file or device.
+                <code><var>file_spec</var></code> is a string expression of the form
+                <code><b>"</b><var>device</var><b>:</b><var>parameters</var><b>"</b></code>
+                where <code><var>device</var></code> is
+                a PC-BASIC device and device-specific <code><var>parameters</var></code>
+                can be given on some devices (e.g. a file path on a disk device).
             </li>
             <li>
                 <code><var>file_num</var></code> is a numeric expression in <code>[1&#8212;3]</code>.
@@ -9114,11 +9170,11 @@ me@mybox$
             If <code>SHARED</code>, <code>LOCK READ</code>, <code>LOCK WRITE</code> or <code>LOCK READ WRITE</code> is specified, whether
             two <code>OPEN</code> statements may access the same file depends on one's <code>LOCK</code> status
             and the other's <code>ACCESS</code> status and vice versa.
-            Assuming the following:
+            For two <code>OPEN</code> statements as follows:
             <code class="block">
-                OPEN "file" ACCESS <var>acc_1</var> <var>lock_1</var> AS 1
-                <br />
-                OPEN "file" ACCESS <var>acc_2</var> <var>lock_2</var> AS 2
+                <b>OPEN "file"</b> <var>lock_1</var> <b>AS 1</b>
+                <br>
+                <b>OPEN "file" ACCESS</b> <var>acc_2</var> <b>AS 2</b>
             </code>
             the following combinations are allowed:
         </p>
@@ -9126,13 +9182,13 @@ me@mybox$
             <table>
                 <tr>
                     <th rowspan="2" colspan="2">Access allowed</th>
-                    <th colspan="3"><code>acc_2</code></th>
+                    <th colspan="3"><code><var>acc_2</var></code></th>
                 </tr><tr>
                     <th><code>READ</code></th>
                     <th><code>WRITE</code></th>
                     <th><code>READ WRITE</code></th>
                 </tr><tr>
-                    <th rowspan="4"><code>lock_1</code></th>
+                    <th rowspan="4"><code><var>lock_1</var></code></th>
                     <th><code>SHARED</code></th>
                     <td>yes</td>
                     <td>yes</td>
@@ -9156,150 +9212,180 @@ me@mybox$
             </table>
         </div>
         <p>
-            and vice versa for <code><var>acc_1</var></code> and <code><var>lock_2</var></code>.
-        </p>
-        <p>
-            In GW-BASIC under MS-DOS with <code>SHARE.EXE</code> active, these locks should be functioning
-            across a network as well as inside a single BASIC process. Without <code>SHARED</code> and <code>LOCK</code>, the file is locked exclusively for use by the
-            GW-BASIC process. By contrast, in PC-BASIC,
+            In GW-BASIC under MS-DOS with <code>SHARE.EXE</code> active, these locks should be enforced
+            across a network as well as inside a single BASIC process. Without
+            <code>SHARED</code> and <code>LOCK</code>, the file is locked exclusively
+            for use by the GW-BASIC process. By contrast, in PC-BASIC,
             the locks are only implemented internally. Whether other processes may access
             the file will depend on the host OS.
         </p>
-        <h5>Serial port (<code>COM1:</code>) access</h5>
+        <h5>Device-specific parameters</h5>
         <p>
-            If a <code>COM</code> port is opened for <code>RANDOM</code>, access is
-            byte-for-byte rather than through <code>FIELD</code> records; <code>PRINT#</code> and <code>INPUT#</code> access
-            the port directly. <code><var>rec_len</var></code> sets the number of bytes read by the <code>GET</code> and
-            <code>PUT</code> statements.
+            On some devices, the <code><var>file_spec</var></code> is just the device name; on others,
+            in particular disk, cassette and serial devices, further parameters may be given.
         </p>
-        <p>
-            When opening a <code>COM</code> port, additional expressions may be included following the
-            colon of the device name. These specify parameters for the serial
-            connection. This string has the form
-            <code class="block"><b>"COMn:</b>[<var>speed</var>[<b>,</b><var>parity</var>[<b>,</b><var>data</var>[<b>,</b><var>stop</var>[<b>,RS</b>][<b>,CS</b>[<var>n</var>]][<b>,DS</b>[<var>n</var>]][<b>,CD</b>[<var>n</var>]][<b>,LF</b>][<b>,PE</b>]]]]]<b>"</b></code>
-            The first four parameters must be given in that order but the named parameters
-            can be given in any order.
-            The meaning of the parameters is:
-        </p>
-        <div class="scrollable">
-            <table>
-                <tr>
-                    <th>Parameter</th>
-                    <th>Default</th>
-                    <th>Meaning</th>
-                </tr>
-                <tr>
-                    <td><code><var>speed</var></code></td>
-                    <td><code>300</code></td>
-                    <td>
-                        Baud (bps) rate for the connection. <code><var>speed</var></code> is one of
-                        <code>[75, 110, 150, 300, 600, 1200, 1800, 2400, 4800, 9600]</code>.
-                    </td>
-                </tr>
-                <tr>
-                    <td><code><var>parity</var></code></td>
-                    <td><code>E</code></td>
-                    <td>
-                        Parity bit convention. <code><var>parity</var></code> is one of <code>[S, M, O, E, N]</code>.
-                        <table>
-                            <tr>
-                                <th><code><var>parity</var></code></th>
-                                <th>Meaning</th>
-                                <th>Effect</th>
-                            </tr>
-                            <tr>
-                                <td><code>S</code></td>
-                                <td>SPACE</td>
-                                <td>Parity bit always set to 0.</td>
-                            </tr>
-                            <tr>
-                                <td><code>M</code></td>
-                                <td>MARK</td>
-                                <td>Parity bit always set to 1.</td>
-                            </tr>
-                            <tr>
-                                <td><code>O</code></td>
-                                <td>ODD</td>
-                                <td>Parity bit set so that character parity is odd.</td>
-                            </tr>
-                            <tr>
-                                <td><code>E</code></td>
-                                <td>EVEN</td>
-                                <td>Parity bit set so that character parity is even.</td>
-                            </tr>
-                            <tr>
-                                <td><code>N</code></td>
-                                <td>NONE</td>
-                                <td>No parity bit transmitted or received.</td>
-                            </tr>
-                        </table>
-                    </td>
-                </tr>
-                <tr>
-                    <td><code><var>data</var></code></td>
-                    <td><code>7</code></td>
-                    <td>
-                        Data bits per byte. <code><var>data</var></code> must be one of <code>[4, 5, 6, 7, 8]</code>.
-                        A byte consists of the data bits plus parity bit, if
-                        any. Byte size must be in the range <code>[5&#8212;8]</code>:
-                        if <code><var>data</var></code> is <code>4</code>,
-                        <code><var>parity</var></code> must not be <code>N</code>;
-                        if <code><var>data</var></code> is <code>8</code>,
-                        <code><var>parity</var></code> must be <code>N</code>.
-                    </td>
-                </tr>
-                <tr>
-                    <td><code><var>stop</var></code></td>
-                    <td><code>1</code></td>
-                    <td>
-                        The number of stop bits. <code><var>stop</var></code> must be <code>1</code> or <code>2</code>.
-                        Default is <code>2</code> if <code><var>speed</var></code> is <code>75</code> or <code>110</code>; <code>1</code> otherwise.
-                    </td>
-                </tr>
-                <tr>
-                    <td><code>RS</code></td>
-                    <td>no</td>
-                    <td>Suppress <em>Request To Send</em>.</td>
-                </tr>
-                <tr>
-                    <td><code>CS[<var>n</var>]</code></td>
-                    <td><code>CS1000</code></td>
-                    <td>
-                        Set <em>Clear To Send</em> timeout to <code><var>n</var></code> milliseconds.
-                        If <code><var>n</var></code> is not given, set timeout to <code>0</code>.
-                        Default is <code>CS0</code> if <code>RS</code> is set; <code>CS1000</code> otherwise.
-                    </td>
-                </tr>
-                <tr>
-                    <td><code>DS[<var>n</var>]</code></td>
-                    <td><code>DS1000</code></td>
-                    <td>
-                        Set <em>Data Set Ready</em> timeout to <code><var>n</var></code> milliseconds.
-                        If <code><var>n</var></code> is not given, set timeout to <code>0</code>.
-                    </td>
-                </tr>
-                <tr>
-                    <td><code>CD[<var>n</var>]</code></td>
-                    <td><code>CD0</code></td>
-                    <td>
-                        Set <em>Carrier Detect</em> timeout to <code><var>n</var></code> milliseconds.
-                        If <code><var>n</var></code> is not given, set timeout to <code>0</code>.
-                    </td>
-                </tr>
-                <tr>
-                    <td><code>LF</code></td>
-                    <td>no</td>
-                    <td>Send a line feed after each carriage return.</td>
-                </tr>
-                <tr>
-                    <td><code>PE</code></td>
-                    <td>no</td>
-                    <td>Enable parity checking (This setting is ignored by PC-BASIC).</td>
-                </tr>
-            </table>
-        </div>
+        <dl>
+            <dt>
+                Disk devices <code>A:</code>&#8212;<code>Z:</code> and <code>@:</code>
+            </dt>
+            <dd>
+                <code><var>parameters</var></code> must specify a valid file path on the disk.
+                See <a href="#eightpointthree">MS-DOS 8.3 filenames</a> for interpretation of path specifications.
+            </dd>
+            <dt>
+                Cassette device <code>CAS1:<code>
+            </code></code></dt>
+            <dd>
+                <code><var>parameters</var></code> can be a file name of up to eight characters.
+                Cassette file names have no path or extension, may be empty and do not need to be unique.
+            </dd>
+            <dt>
+                Console and parallel devices <code>SCRN:</code>, <code>KYBD:</code>, and <code>LPT<var>n</var>:</code>
+            </dt>
+            <dd>
+                These devices do not allow futher device parameters.
+            </dd>
+            <dt>
+                Serial devices <code>COM<var>n</var>:<code>
+            </code></code></dt>
+            <dd>
+                <p>
+                    When opening a <code>COM</code> port, the <code><var>file_spec</var></code> has the form
+                    <code class="block"><b>"COM</b><var>n</var><b>:</b>[<var>speed</var>[<b>,</b><var>parity</var>[<b>,</b><var>data</var>[<b>,</b><var>stop</var>[<b>,RS</b>][<b>,CS</b>[<var>n</var>]][<b>,DS</b>[<var>n</var>]][<b>,CD</b>[<var>n</var>]][<b>,LF</b>][<b>,PE</b>]]]]]<b>"</b></code>
+                    The first four parameters after the device colon must be given
+                    in the order specified but the named parameters
+                    can be given in any order.
+                    The meaning of the parameters is:
+                </p>
+                <div class="scrollable">
+                    <table>
+                        <tr>
+                            <th>Parameter</th>
+                            <th>Default</th>
+                            <th>Meaning</th>
+                        </tr>
+                        <tr>
+                            <td><code><var>speed</var></code></td>
+                            <td><code>300</code></td>
+                            <td>
+                                Baud (bps) rate for the connection. <code><var>speed</var></code> is one of
+                                <code>[75, 110, 150, 300, 600, 1200, 1800, 2400, 4800, 9600]</code>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code><var>parity</var></code></td>
+                            <td><code>E</code></td>
+                            <td>
+                                Parity bit convention. <code><var>parity</var></code> is one of <code>[S, M, O, E, N]</code>.
+                                <table>
+                                    <tr>
+                                        <th><code><var>parity</var></code></th>
+                                        <th>Meaning</th>
+                                        <th>Effect</th>
+                                    </tr>
+                                    <tr>
+                                        <td><code>S</code></td>
+                                        <td>SPACE</td>
+                                        <td>Parity bit always set to 0.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>M</code></td>
+                                        <td>MARK</td>
+                                        <td>Parity bit always set to 1.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>O</code></td>
+                                        <td>ODD</td>
+                                        <td>Parity bit set so that character parity is odd.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>E</code></td>
+                                        <td>EVEN</td>
+                                        <td>Parity bit set so that character parity is even.</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code>N</code></td>
+                                        <td>NONE</td>
+                                        <td>No parity bit transmitted or received.</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code><var>data</var></code></td>
+                            <td><code>7</code></td>
+                            <td>
+                                Data bits per byte. <code><var>data</var></code> must be one of <code>[4, 5, 6, 7, 8]</code>.
+                                A byte consists of the data bits plus parity bit, if
+                                any. Byte size must be in the range <code>[5&#8212;8]</code>:
+                                if <code><var>data</var></code> is <code>4</code>,
+                                <code><var>parity</var></code> must not be <code>N</code>;
+                                if <code><var>data</var></code> is <code>8</code>,
+                                <code><var>parity</var></code> must be <code>N</code>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code><var>stop</var></code></td>
+                            <td><code>1</code></td>
+                            <td>
+                                The number of stop bits. <code><var>stop</var></code> must be <code>1</code> or <code>2</code>.
+                                Default is <code>2</code> if <code><var>speed</var></code> is <code>75</code> or <code>110</code>; <code>1</code> otherwise.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>RS</code></td>
+                            <td>no</td>
+                            <td>Suppress <em>Request To Send</em>.</td>
+                        </tr>
+                        <tr>
+                            <td><code>CS[<var>n</var>]</code></td>
+                            <td><code>CS1000</code></td>
+                            <td>
+                                Set <em>Clear To Send</em> timeout to <code><var>n</var></code> milliseconds.
+                                If <code><var>n</var></code> is not given, set timeout to <code>0</code>.
+                                Default is <code>CS0</code> if <code>RS</code> is set; <code>CS1000</code> otherwise.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>DS[<var>n</var>]</code></td>
+                            <td><code>DS1000</code></td>
+                            <td>
+                                Set <em>Data Set Ready</em> timeout to <code><var>n</var></code> milliseconds.
+                                If <code><var>n</var></code> is not given, set timeout to <code>0</code>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>CD[<var>n</var>]</code></td>
+                            <td><code>CD0</code></td>
+                            <td>
+                                Set <em>Carrier Detect</em> timeout to <code><var>n</var></code> milliseconds.
+                                If <code><var>n</var></code> is not given, set timeout to <code>0</code>.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><code>LF</code></td>
+                            <td>no</td>
+                            <td>Send a line feed after each carriage return.</td>
+                        </tr>
+                        <tr>
+                            <td><code>PE</code></td>
+                            <td>no</td>
+                            <td>Enable parity checking (This setting is ignored by PC-BASIC).</td>
+                        </tr>
+                    </table>
+                </div>
+            </dd>
+
+        </dl>
+
         <h5>Notes</h5>
         <ul>
+            <li>
+                If a <code>COM</code> port is opened for <code>RANDOM</code>, access is
+                byte-for-byte rather than through <code>FIELD</code> records; <code>PRINT#</code> and <code>INPUT#</code> access
+                the port directly. <code><var>rec_len</var></code> sets the number of bytes read by the <code>GET</code> and
+                <code>PUT</code> statements.
+            </li>
             <li>
                 For <code>INPUT</code>, <code>OUTPUT</code> and <code>APPEND</code> modes, <code>LEN</code> may be specified but is ignored.
             </li>
@@ -9320,7 +9406,7 @@ me@mybox$
         <h5>Errors</h5>
         <ul>
             <li>
-                <code><var>file_name</var></code> is empty or a non-existent device: <samp>Bad file number</samp>.
+                <code><var>file_spec</var></code> is empty or a non-existent device: <samp>Bad file number</samp>.
             </li>
             <li>
                 <code>FOR APPEND ACCESS WRITE</code> is specified: <samp>Path/File access error</samp>.
@@ -9329,7 +9415,7 @@ me@mybox$
                 <code>FOR</code> and <code>ACCESS</code> mismatch in other ways: <samp>Syntax error</samp>.
             </li>
             <li>
-                The <code>COM:</code> <code><var>file_name</var></code> parameters do not follow the specification:
+                The <code>COM:</code> <code><var>file_spec</var></code> parameters do not follow the specification:
                 <samp>Bad file name</samp>.
             </li>
             <li>
@@ -9340,7 +9426,7 @@ me@mybox$
                 <code><var>rec_len</var></code> or <code><var>file_num</var></code> have string values: <samp>Type mismatch</samp>.
             </li>
             <li>
-                <code><var>file_name</var></code> or <code><var>mode_char</var></code> have number values: <samp>Type mismatch</samp>.
+                <code><var>file_spec</var></code> or <code><var>mode_char</var></code> have number values: <samp>Type mismatch</samp>.
             </li>
             <li>
                 <code><var>file_num</var></code> is not in <code>[-32768&#8212;32767]</code>: <samp>Overflow</samp>.
@@ -9364,7 +9450,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="OPTION-BASE"><code>OPTION BASE</code> statement</h4>
@@ -9401,7 +9487,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="OUT"><code>OUT</code> statement</h4>
@@ -9436,8 +9522,8 @@ me@mybox$
                 <tr>
                     <td><code>&amp;h3D8</code></td>
                     <td>
-                        if <code><var>value</var> = &amp;h1A</code>, enable composite colorburst.<br/>
-                        if <code><var>value</var> = &amp;h1E</code>, disable composite colorburst.<br/>
+                        if <code><var>value</var> = &amp;h1A</code>, enable composite colorburst.<br>
+                        if <code><var>value</var> = &amp;h1E</code>, disable composite colorburst.<br>
                         Requires <code><a href="#--video">--video</a>={cga, tandy, pcjr}</code>.
                     </td>
                 </tr>
@@ -9451,12 +9537,12 @@ me@mybox$
             <li>
                 In GW-BASIC under MS-DOS, the sequence needed to set the colour plane mask is:
                 <code class="block">
-                    OUT &amp;h3C4, 2<br />
+                    OUT &amp;h3C4, 2<br>
                     OUT &amp;h3C5, 2 ^ <var>plane</var>
                 </code>
                 The sequence needed to set the colour plane is:
                 <code class="block">
-                    OUT &amp;h3CE, 4<br />
+                    OUT &amp;h3CE, 4<br>
                     OUT &amp;h3CF, <var>plane</var>
                 </code>
                 The initial <code>OUT</code> statements currently have no effect in PC-BASIC.
@@ -9487,7 +9573,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PAINT"><code>PAINT</code> statement</h4>
@@ -9635,7 +9721,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PALETTE"><code>PALETTE</code> statement</h4>
@@ -9672,7 +9758,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PALETTE-USING"><code>PALETTE USING</code> statement</h4>
@@ -9719,7 +9805,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PCOPY"><code>PCOPY</code> statement</h4>
@@ -9750,7 +9836,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PEEK"><code>PEEK</code> function</h4>
@@ -9791,7 +9877,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PEN-statement"><code>PEN</code> statement</h4>
@@ -9805,7 +9891,7 @@ me@mybox$
             suspension is handled immediately after the next <code>PEN ON</code> statement.
         </p>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PEN"><code>PEN</code> function</h4>
@@ -9887,7 +9973,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PLAY-event"><code>PLAY</code> statement (event-trapping control)</h4>
@@ -9909,13 +9995,13 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PLAY"><code>PLAY</code> statement (music)</h4>
         <code class="block">
-            <b>PLAY</b> <var>mml_string_0</var><br />
-            <b>PLAY</b> [<var>mml_string_0</var>] <b>,</b>  <var>mml_string_1</var><br />
+            <b>PLAY</b> <var>mml_string_0</var><br>
+            <b>PLAY</b> [<var>mml_string_0</var>] <b>,</b>  <var>mml_string_1</var><br>
             <b>PLAY</b> [<var>mml_string_0</var>] <b>,</b> [<var>mml_string_1</var>] <b>,</b> <var>mml_string_2</var>
         </code>
         <p>
@@ -9946,16 +10032,16 @@ me@mybox$
                 <tr>
                     <td><code>{<b>A</b>|<b>B</b>|<b>C</b>|<b>D</b>|<b>E</b>|<b>F</b>|<b>G</b>}[<b>#</b>|<b>+</b>|<b>-</b>][<var>n</var>]</code></td>
                     <td>
-                        Play a note. <br/>
-                        <code>+</code> or <code>#</code> indicates sharp. <br/>
-                        <code>-</code> indicates flat. <br/>
+                        Play a note. <br>
+                        <code>+</code> or <code>#</code> indicates sharp. <br>
+                        <code>-</code> indicates flat. <br>
                         <code><var>n</var></code>
                         indicates duration of an <code><var>n</var></code>th note.
                     </td>
                 </tr>
                 <tr>
                     <td><code><b>N</b><var>n</var></code></td>
-                    <td>Play note <code><var>n</var></code>, in the range <code>[0&#8212;84]</code> (7 octaves).<br/>
+                    <td>Play note <code><var>n</var></code>, in the range <code>[0&#8212;84]</code> (7 octaves).<br>
                         <code><var>n</var> = 0</code> means rest.</td>
                 </tr>
                 <tr>
@@ -10054,7 +10140,7 @@ me@mybox$
                                 a string variable name followed by a<code>;</code>
                             </li>
                             <li>
-                                the result of <code><a href="#VARPTR$">VARPTR$()</a></code> on a string variable
+                                the result of <code><a href="#VARPTR%24">VARPTR$()</a></code> on a string variable
                             </li>
                         </ul>
                     </td>
@@ -10118,7 +10204,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PLAY-function"><code>PLAY</code> function</h4>
@@ -10159,7 +10245,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PMAP"><code>PMAP</code> function</h4>
@@ -10231,7 +10317,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="POINT-coord"><code>POINT</code> function (current coordinate)</h4>
@@ -10297,7 +10383,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="POINT-attr"><code>POINT</code> function (pixel attribute)</h4>
@@ -10333,7 +10419,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="POKE"><code>POKE</code> statement</h4>
@@ -10379,7 +10465,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="POS"><code>POS</code> function</h4>
@@ -10396,7 +10482,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PSET"><code>PSET</code> and <code>PRESET</code> statements</h4>
@@ -10437,7 +10523,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PRINT"><code>PRINT</code> and <code>LPRINT</code> statements</h4>
@@ -10687,7 +10773,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PUT-files"><code>PUT</code> statement (files)</h4>
@@ -10729,7 +10815,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PUT-serial"><code>PUT</code> statement (communications)</h4>
@@ -10774,7 +10860,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="PUT-graphics"><code>PUT</code> statement (graphics)</h4>
@@ -10842,7 +10928,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="RANDOMIZE"><code>RANDOMIZE</code> statement</h4>
@@ -10883,7 +10969,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="READ"><code>READ</code> statement</h4>
@@ -10914,7 +11000,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="REM"><code>REM</code> statement</h4>
@@ -10928,7 +11014,7 @@ me@mybox$
             point in the program line and will ensure that the rest of the line is ignored.
         </p>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="RENUM"><code>RENUM</code> statement</h4>
@@ -10989,7 +11075,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="RESET"><code>RESET</code> statement</h4>
@@ -11000,7 +11086,7 @@ me@mybox$
             Closes all open files.
         </p>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="RESTORE"><code>RESTORE</code> statement</h4>
@@ -11021,7 +11107,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="RESUME"><code>RESUME</code> statement</h4>
@@ -11049,7 +11135,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="RETURN"><code>RETURN</code> statement</h4>
@@ -11072,7 +11158,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="RIGHT$"><code>RIGHT$</code> function</h4>
@@ -11107,7 +11193,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="RMDIR"><code>RMDIR</code> statement</h4>
@@ -11137,7 +11223,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="RND"><code>RND</code> function</h4>
@@ -11159,7 +11245,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="RSET"><code>RSET</code> statement</h4>
@@ -11167,7 +11253,7 @@ me@mybox$
             See <code><a href="#LSET">LSET</a></code>.
         </p>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="RUN"><code>RUN</code> statement</h4>
@@ -11207,7 +11293,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="SAVE"><code>SAVE</code> statement</h4>
@@ -11221,8 +11307,8 @@ me@mybox$
             be added. If the resulting file name already exists, it will be overwritten.
         </p>
         <p>
-            If <code>,A</code> is specified, the program will be saved as plain ASCII text. <br/>
-            If <code>,P</code> is specified, the program will be saved in protected form.<br/>
+            If <code>,A</code> is specified, the program will be saved as plain ASCII text. <br>
+            If <code>,P</code> is specified, the program will be saved in protected form.<br>
             When a protected program is loaded in GW-BASIC, it cannot be <code>LIST</code>ed or <code>SAVE</code>d in non-protected
             form.
         </p>
@@ -11240,7 +11326,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="SCREEN-function"><code>SCREEN</code> function</h4>
@@ -11288,7 +11374,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="SCREEN-statement"><code>SCREEN</code> statement</h4>
@@ -11430,7 +11516,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="SGN"><code>SGN</code> function</h4>
@@ -11453,7 +11539,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="SHELL"><code>SHELL</code> statement</h4>
@@ -11493,7 +11579,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="SIN"><code>SIN</code> function</h4>
@@ -11528,7 +11614,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="SOUND"><code>SOUND</code> statement</h4>
@@ -11621,7 +11707,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="SOUND-switch"><code>SOUND</code> statement (switch)</h4>
@@ -11652,7 +11738,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="SPACE$"><code>SPACE$</code> function</h4>
@@ -11681,7 +11767,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="SQR"><code>SQR</code> function</h4>
@@ -11711,7 +11797,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="STICK"><code>STICK</code> function</h4>
@@ -11765,7 +11851,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="STOP"><code>STOP</code> statement</h4>
@@ -11779,7 +11865,7 @@ me@mybox$
             <code><a href="#CONT">CONT</a></code>.
         </p>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="STR$"><code>STR$</code> function</h4>
@@ -11802,7 +11888,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="STRIG-switch"><code>STRIG</code> statement</h4>
@@ -11813,7 +11899,7 @@ me@mybox$
             Has no effect.
         </p>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="STRIG-events"><code>STRIG</code> statement (events)</h4>
@@ -11872,7 +11958,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
     <h4 id="STRIG-function"><code>STRIG</code> function</h4>
@@ -11952,7 +12038,7 @@ me@mybox$
         </li>
     </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="STRING$"><code>STRING$</code> function</h4>
@@ -11988,7 +12074,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="SWAP"><code>SWAP</code> statement</h4>
@@ -12024,7 +12110,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="SYSTEM"><code>SYSTEM</code> statement</h4>
@@ -12042,7 +12128,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="TAN"><code>TAN</code> function</h4>
@@ -12080,7 +12166,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="TERM"><code>TERM</code> statement</h4>
@@ -12107,7 +12193,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="TIME$-function"><code>TIME$</code> function</h4>
@@ -12124,7 +12210,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="TIME$-statement"><code>TIME$</code> statement</h4>
@@ -12146,8 +12232,8 @@ me@mybox$
         <ul>
             <li>
                 PC-BASIC stores an offset to the system time and uses this for future
-                calls to <code><a href="TIME$-function">TIME$</a></code> and
-                <code><a href="DATE$-function">DATE$</a></code> functions in the same interpreter session.
+                calls to <code><a href="TIME%24-function">TIME$</a></code> and
+                <code><a href="DATE%24-function">DATE$</a></code> functions in the same interpreter session.
                 The system time is not changed, unlike GW-BASIC under MS-DOS.
             </li>
         </ul>
@@ -12161,7 +12247,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="TIMER-event"><code>TIMER</code> statement</h4>
@@ -12183,7 +12269,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="TIMER"><code>TIMER</code> function</h4>
@@ -12211,7 +12297,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="TRON"><code>TRON</code> and <code>TROFF</code> statements</h4>
@@ -12230,13 +12316,13 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="UNLOCK"><code>UNLOCK</code> statement</h4>
         <code class="block">
             <b>UNLOCK</b> [<b>#</b>] <var>file_number</var> [<b>,</b> <var>record_0</var>]
-            <br/>
+            <br>
             <b>UNLOCK</b> [<b>#</b>] <var>file_number</var><b>,</b> [<var>record_0</var>] <b>TO</b> <var>record_1</var>
         </code>
         <p>
@@ -12277,7 +12363,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="USR"><code>USR</code> function</h4>
@@ -12312,7 +12398,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="VAL"><code>VAL</code> function</h4>
@@ -12349,7 +12435,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="VARPTR"><code>VARPTR</code> function</h4>
@@ -12394,7 +12480,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="VARPTR$"><code>VARPTR$</code> function</h4>
@@ -12429,7 +12515,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="VIEW"><code>VIEW</code> statement</h4>
@@ -12471,7 +12557,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="VIEW-PRINT"><code>VIEW PRINT</code> statement</h4>
@@ -12505,7 +12591,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="WAIT"><code>WAIT</code> statement</h4>
@@ -12539,7 +12625,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="WEND"><code>WEND</code> statement</h4>
@@ -12567,7 +12653,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="WHILE"><code>WHILE</code> statement</h4>
@@ -12596,7 +12682,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="WIDTH"><code>WIDTH</code> statement (console)</h4>
@@ -12610,18 +12696,18 @@ me@mybox$
         <ul>
             <li>
                 When changing screen width in graphics mode, the video mode is changed.
-                The following changes occur:<br/>
-                <code>SCREEN 1</code> (40)  &#8596;  <code>SCREEN 2</code> (80)<br/>
-                <code>SCREEN 7</code> (40)  &#8596;  <code>SCREEN 8</code> (80)<br/>
-                <code>SCREEN 7</code> (40)  &#8592;  <code>SCREEN 9</code> (80)<br/>
+                The following changes occur:<br>
+                <code>SCREEN 1</code> (40)  &#8596;  <code>SCREEN 2</code> (80)<br>
+                <code>SCREEN 7</code> (40)  &#8596;  <code>SCREEN 8</code> (80)<br>
+                <code>SCREEN 7</code> (40)  &#8592;  <code>SCREEN 9</code> (80)<br>
             </li>
             <li>
                 Screen width value 20 is only allowed on Tandy and PCjr. Changing to this width
-                changes to <code>SCREEN 3</code>. Additionally, the following changes occur:<br/>
-                <code>SCREEN 3</code> (20)  &#8594;  <code>SCREEN 1</code> (40)<br/>
-                <code>SCREEN 3</code> (20)  &#8594;  <code>SCREEN 2</code> (80)<br/>
-                <code>SCREEN 4</code> (40)  &#8594;  <code>SCREEN 2</code> (80)<br/>
-                <code>SCREEN 5</code> (40)  &#8596;  <code>SCREEN 6</code> (80)<br/>
+                changes to <code>SCREEN 3</code>. Additionally, the following changes occur:<br>
+                <code>SCREEN 3</code> (20)  &#8594;  <code>SCREEN 1</code> (40)<br>
+                <code>SCREEN 3</code> (20)  &#8594;  <code>SCREEN 2</code> (80)<br>
+                <code>SCREEN 4</code> (40)  &#8594;  <code>SCREEN 2</code> (80)<br>
+                <code>SCREEN 5</code> (40)  &#8596;  <code>SCREEN 6</code> (80)<br>
             </li>
         </ul>
         <h5>Parameters</h5>
@@ -12656,7 +12742,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="WIDTH-files"><code>WIDTH</code> statement (devices and files)</h4>
@@ -12720,7 +12806,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
 
     <section>
@@ -12757,7 +12843,7 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
     <section>
         <h4 id="WRITE"><code>WRITE</code> statement</h4>
@@ -12785,10 +12871,10 @@ me@mybox$
             </li>
         </ul>
     </section>
-<hr />
+<hr>
 
 </section>
-<hr />
+<hr>
 
 <section>
     <h3 id="error-trapping">Error trapping</h3>
@@ -12809,7 +12895,7 @@ me@mybox$
         an error message is shown.
     </p>
 </section>
-<hr />
+<hr>
 
 <section>
     <h3 id="event-trapping">Event trapping</h3>
@@ -12836,7 +12922,7 @@ me@mybox$
         paused, then the event is triggered immediately when event trapping is resumed.
     </p>
 </section>
-<hr />
+<hr>
 
 </article>
 <!--
@@ -12945,7 +13031,7 @@ me@mybox$
             while a double-precision MBF float has 55 bits of precision.
         </p>
     </section>
-    <hr />
+    <hr>
 
     <section>
         <h3 id="keywords">Keyword tokens</h3>
@@ -13160,7 +13246,7 @@ me@mybox$
             <li><code>FFFF</code> <code>DEBUG</code></li>
         </ul>
     </section>
-    <hr />
+    <hr>
 
     <section>
         <h3 id="errors">Error codes</h3>
@@ -13231,7 +13317,7 @@ me@mybox$
             the message <samp>Unprintable error</samp>.
         </p>
     </section>
-    <hr />
+    <hr>
 
     <section>
         <h3 id="videomodes">Video modes</h3>
@@ -13239,70 +13325,70 @@ me@mybox$
         <dl>
             <dt><code>SCREEN 0</code> Text mode</dt>
             <dd>
-                80x25 or 40x25 characters of 8x16 pixels<br/>
-                16 attributes picked from 64 colours<br/>
-                Attributes 16-31 are blinking versions of 0-15<br/>
+                80x25 or 40x25 characters of 8x16 pixels<br>
+                16 attributes picked from 64 colours<br>
+                Attributes 16-31 are blinking versions of 0-15<br>
                 4 pages <code>ega</code>
             </dd>
             <dt><code>SCREEN 1</code> CGA colour</dt>
             <dd>
-                320x200 pixels<br/>
-                40x25 characters of 8x8 pixels<br/>
-                4 attributes picked from 16 colours; 2 bits per pixel<br/>
-                1 page <code>ega</code> 2 pages <code>pcjr</code> <code>tandy</code><br/>
+                320x200 pixels<br>
+                40x25 characters of 8x8 pixels<br>
+                4 attributes picked from 16 colours; 2 bits per pixel<br>
+                1 page <code>ega</code> 2 pages <code>pcjr</code> <code>tandy</code><br>
             </dd>
             <dt><code>SCREEN 2</code> CGA monochrome</dt>
             <dd>
-                640x200 pixels<br/>
-                80x25 characters of 8x8 pixels<br/>
-                2 attributes picked from 16 colours; 1 bit per pixel<br/>
-                1 page <code>ega</code> 2 pages <code>pcjr</code> <code>tandy</code><br/>
+                640x200 pixels<br>
+                80x25 characters of 8x8 pixels<br>
+                2 attributes picked from 16 colours; 1 bit per pixel<br>
+                1 page <code>ega</code> 2 pages <code>pcjr</code> <code>tandy</code><br>
             </dd>
             <dt><code>SCREEN 3</code> Low-res 16-colour <code>pcjr</code> <code>tandy</code></dt>
             <dd>
-                160x200 pixels<br/>
-                20x25 characters of 8x8 pixels<br/>
-                16 attributes picked from 16 colours; 4 bits per pixel<br/>
-                2 pages<br/>
-            </dd><dt><code>SCREEN 3</code> Hercules monochrome <code>hercules</code><br/></dt>
+                160x200 pixels<br>
+                20x25 characters of 8x8 pixels<br>
+                16 attributes picked from 16 colours; 4 bits per pixel<br>
+                2 pages<br>
+            </dd><dt><code>SCREEN 3</code> Hercules monochrome <code>hercules</code><br></dt>
             <dd>
-                720x348 pixels<br/>
-                80x25 characters of 9x14 pixels (with bottom line truncated by 2 px)<br/>
-                2 attributes; 1 bit per pixel<br/>
-                2 pages<br/>
+                720x348 pixels<br>
+                80x25 characters of 9x14 pixels (with bottom line truncated by 2 px)<br>
+                2 attributes; 1 bit per pixel<br>
+                2 pages<br>
             </dd>
-            <dt><code>SCREEN 3&#8212;255</code> Altissima risoluzione <code>olivetti</code><br/></dt>
+            <dt><code>SCREEN 3&#8212;255</code> Altissima risoluzione <code>olivetti</code><br></dt>
             <dd>
-                640x400 pixels<br/>
-                80x25 characters of 8x16 pixels<br/>
-                2 attributes of which one picked from 16 colours; 2 bits per pixel<br/>
-                1 page<br/>
+                640x400 pixels<br>
+                80x25 characters of 8x16 pixels<br>
+                2 attributes of which one picked from 16 colours; 2 bits per pixel<br>
+                1 page<br>
             </dd>
-            <dt><code>SCREEN 4</code> Med-res 4-colour <code>pcjr</code> <code>tandy</code><br/></dt>
+            <dt><code>SCREEN 4</code> Med-res 4-colour <code>pcjr</code> <code>tandy</code><br></dt>
             <dd>
-                320x200 pixels<br/>
-                40x25 characters of 8x8 pixels<br/>
-                4 attributes picked from 16 colours; 2 bits per pixel<br/>
-                2 pages<br/>
+                320x200 pixels<br>
+                40x25 characters of 8x8 pixels<br>
+                4 attributes picked from 16 colours; 2 bits per pixel<br>
+                2 pages<br>
             </dd>
-            <dt><code>SCREEN 5</code> Med-res 16-colour <code>pcjr</code> <code>tandy</code><br/></dt>
+            <dt><code>SCREEN 5</code> Med-res 16-colour <code>pcjr</code> <code>tandy</code><br></dt>
             <dd>
-                320x200 pixels<br/>
-                40x25 characters of 8x8 pixels<br/>
-                16 attributes picked from 16 colours; 4 bits per pixel<br/>
-                1 page<br/>
+                320x200 pixels<br>
+                40x25 characters of 8x8 pixels<br>
+                16 attributes picked from 16 colours; 4 bits per pixel<br>
+                1 page<br>
                 <p><em>Note: a minimum of 32768 bytes of video memory must be
                 reserved to use this video mode.</em> Use the statement
                 <code><a href="#CLEAR">CLEAR</a> ,,,32768!</code>
                 or the option
                 <code><a href="#--video-memory">video-memory</a>=32768</code>.</p>
             </dd>
-            <dt><code>SCREEN 6</code> High-res 4-colour <code>pcjr</code> <code>tandy</code><br/></dt>
+            <dt><code>SCREEN 6</code> High-res 4-colour <code>pcjr</code> <code>tandy</code><br></dt>
             <dd>
-                640x200 pixels<br/>
-                80x25 characters of 8x8 pixels<br/>
-                4 attributes picked from 16 colours; 2 bits per pixel<br/>
-                1 page<br/>
+                640x200 pixels<br>
+                80x25 characters of 8x8 pixels<br>
+                4 attributes picked from 16 colours; 2 bits per pixel<br>
+                1 page<br>
                 <p><em>Note: a minimum of 32768 bytes of video memory must be
                 reserved to use this video mode.</em> Use the statement
                 <code><a href="#CLEAR">CLEAR</a> ,,,32768!</code>
@@ -13311,35 +13397,35 @@ me@mybox$
             </dd>
             <dt><code>SCREEN 7</code> EGA colour <code>ega</code></dt>
             <dd>
-                320x200 pixels<br/>
-                40x25 characters of 8x8 pixels<br/>
-                16 attributes picked from 16 colours; 4 bits per pixel<br/>
-                8 pages<br/>
+                320x200 pixels<br>
+                40x25 characters of 8x8 pixels<br>
+                16 attributes picked from 16 colours; 4 bits per pixel<br>
+                8 pages<br>
             </dd>
             <dt><code>SCREEN 8</code> EGA colour <code>ega</code></dt>
             <dd>
-                640x200 pixels<br/>
-                80x25 characters of 8x8 pixels<br/>
-                16 attributes picked from 16 colours; 4 bits per pixel<br/>
-                4 pages<br/>
+                640x200 pixels<br>
+                80x25 characters of 8x8 pixels<br>
+                16 attributes picked from 16 colours; 4 bits per pixel<br>
+                4 pages<br>
             </dd>
             <dt><code>SCREEN 9</code> EGA colour <code>ega</code></dt>
             <dd>
-                640x350 pixels<br/>
-                80x25 characters of 8x14 pixels<br/>
-                16 attributes picked from 64 colours; 4 bits per pixel<br/>
-                2 pages<br/>
+                640x350 pixels<br>
+                80x25 characters of 8x14 pixels<br>
+                16 attributes picked from 64 colours; 4 bits per pixel<br>
+                2 pages<br>
             </dd>
             <dt><code>SCREEN 10</code> EGA monochrome <code>ega</code> <code>monitor=mono</code></dt>
             <dd>
-                640x350 pixels<br/>
-                80x25 characters of 8x14 pixels<br/>
-                4 attributes picked from 9 pseudocolours; 2 bits per pixel<br/>
-                2 pages<br/>
+                640x350 pixels<br>
+                80x25 characters of 8x14 pixels<br>
+                4 attributes picked from 9 pseudocolours; 2 bits per pixel<br>
+                2 pages<br>
             </dd>
         </dl>
     </section>
-    <hr />
+    <hr>
 
     <section>
         <h3 id="colours">Colours</h3>
@@ -13540,7 +13626,7 @@ me@mybox$
             </table>
         </div>
     </section>
-    <hr />
+    <hr>
 </article>
 <article>
 <h2 id="acks_acknowledgements">Acknowledgements</h2>
@@ -13651,7 +13737,7 @@ behaviour of various Microsoft BASIC dialects.</p>
 <footer>
 <h2 id="licence">Licences</h2>
 <h3 id="pc-basic-interpreter">PC-BASIC interpreter</h3>
-<p><strong>Copyright © 2013—2015 Rob Hagemans.</strong></p>
+<p><strong>Copyright &#169; 2013&#8212;2015 Rob Hagemans.</strong></p>
 <p><em>Source code available at <a href="https://github.com/robhagemans/pcbasic">https://github.com/robhagemans/pcbasic</a>.</em></p>
 <p>This program is free software; you can redistribute it and/or modify
 it under the terms of the <a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License, Version 3</a>,
@@ -13662,9 +13748,9 @@ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 GNU General Public License for more details.</p>
 <p>You should have received a copy of the GNU General Public License along
 with this program; if not, write to the Free Software Foundation, Inc.,
-51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p><hr />
+51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p><hr>
 <h3 id="pc-basic-documentation">PC-BASIC documentation</h3>
-<p><strong>Copyright © 2014—2015 Rob Hagemans.</strong></p>
+<p><strong>Copyright &#169; 2014&#8212;2015 Rob Hagemans.</strong></p>
 <p>This work is licensed under a
 <a href="http://creativecommons.org/licenses/by-sa/4.0/legalcode">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
 </footer>
