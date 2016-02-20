@@ -29,7 +29,7 @@
 </nav>
 <header>
 <h1>PC-BASIC 15.08.4 documentation</h1>
-<small>Documentation compiled on 2016-02-14 13:45:34.</small>
+<small>Documentation compiled on 2016-02-20 14:39:50.</small>
 </header>
 <nav class="toc">
     <h2 id="toc">Table of Contents</h2>
@@ -330,7 +330,7 @@
                                 <li><a href="#SOUND"><code>SOUND</code> (tone)</a></li>
                                 <li><a href="#SOUND-switch"><code>SOUND</code> (switch)</a></li>
                                 <li><a href="#STOP"><code>STOP</code></a></li>
-                                <li><a href="#STRIG-switch"><code>STRIG</code> (statement)</a></li>
+                                <li><a href="#STRIG-switch"><code>STRIG</code> (switch)</a></li>
                                 <li><a href="#STRIG-events"><code>STRIG</code> (event switch)</a></li>
                                 <li><a href="#SWAP"><code>SWAP</code></a></li>
                                 <li><a href="#SYSTEM"><code>SYSTEM</code></a></li>
@@ -389,6 +389,7 @@
                         <li><a href="#acks_technical-documentation">Technical Documentation</a></li>
                         <li><a href="#acks_fonts">Fonts</a></li>
                         <li><a href="#acks_unicode-codepage-mappings">Unicode-codepage mappings</a></li>
+                        <li><a href="#acks_bibliography">Bibliography</a></li>
                         <li><a href="#acks_development-tools">Development tools</a></li>
                         <li><a href="#acks_emulators">Emulators</a></li>
                     </ul>
@@ -1050,29 +1051,29 @@ to interrupt a running program and return to direct mode.  </p>
             </p>
             <ul>
                 <li>GW-BASIC files stored as text are plain text files with line numbers.</li>
-                <li>Tokenised files are binary files that start with magic byte <code>FF</code>.</li>
-                <li>Protected files are binary files that start with magic byte <code>FE</code>.</li>
+                <li>Tokenised files are binary files that start with magic byte <code>&amp;hFF</code>.</li>
+                <li>Protected files are binary files that start with magic byte <code>&amp;hFE</code>.</li>
             </ul>
             <p>
                 In particular, QBASIC files (which have no line numbers) and QuickBASIC files
-                (magic byte <code>FC</code>) will not run.
+                (magic byte <code>&amp;hFC</code>) will not run.
             </p>
             <p>
                 PC-BASIC will accept both DOS and Unix newline conventions for programs
                 stored as plain text. Any line not starting with a number will be considered a
-                continuation (through <code>LF</code>) of the previous line.
+                continuation (through <code><i>LF</i></code>) of the previous line.
                 This behaviour is different from GW-BASIC, which only
-                accepts text files with <code>CR LF</code> line endings.
-                As a consequence, in exceptional cases where a program line is continued through <code>LF</code>
+                accepts text files with <code><i>CR LF</i></code> line endings.
+                As a consequence, in exceptional cases where a program line is continued through <code><i>LF</i></code>
                 just before a number, correct GW-BASIC text files may not be loaded correctly.
                 If you encounter such a case, use
                 the <code><a href="#--strict-newline">strict-newline</a></code> option to enable GW-BASIC behaviour. If
                 <code>strict-newline</code> is enabled, text files in standard Unix format
-                (<code>LF</code> line endings, no end-of-file character) will fail to load. On
+                (<code><i>LF</i></code> line endings, no end-of-file character) will fail to load. On
                 Linux or Mac, use a utility such as
                 <a href="http://waterlan.home.xs4all.nl/dos2unix.html"><code>unix2dos</code></a>
                 to convert programs saved as text files before loading them. When saving as text,
-                PC-BASIC always uses <code>CR LF</code> line endings and <code>^Z</code> (<code>CHR$(26)</code>) at end-of-file.
+                PC-BASIC always uses <code><i>CR LF</i></code> line endings and <code>&amp;h1A</code> at end-of-file.
             </p>
         </section>
         <hr>
@@ -1106,7 +1107,7 @@ to interrupt a running program and return to direct mode.  </p>
                 original PC and the PCjr. There are not many IBM PC cassettes in the wild.
                 However, should you come across one, all you have to do to read it with PC-BASIC
                 is record it into a <code>.WAV</code> (RIFF WAVE) file and attach it to the <code>CAS1:</code>
-                device with the <code><a href="#--cas1">--cas1</a>=WAV:<var>filename</var></code> option.
+                device with the <code><b><a href="#--cas1">cas1</a>=WAV:</b><var>filename</var></code> option.
                 You can also generate your own tape images and store your programs on it. <code>WAV</code>
                 files generated by PC-BASIC are large but very easily compressed in a <code>ZIP</code>
                 archive; this works better and leads to smaller files than transcoding to a lossy
@@ -1124,7 +1125,7 @@ to interrupt a running program and return to direct mode.  </p>
                 Reading it into a PC required special hardware, usually hooking up a tape
                 recorder to a serial or parallel port.
                 In PC-BASIC, BASICODE tapes are read through the <code>CAS1</code> device instead,
-                by attaching a <code>.WAV</code> file with the <code><a href="#--cas1">--cas1</a>=BC:<var>filename</var></code>
+                by attaching a <code>.WAV</code> file with the <code><b><a href="#--cas1">cas1</a>=BC:</b><var>filename</var></code>
                 option. PC-BASIC will load the BASICODE, inserting the necessary spaces
                 between keywords where the BASICODE standard leaves these out.
                 Note that you will need a Bascoder program to run the BASICODE, and this is not
@@ -1148,7 +1149,7 @@ to interrupt a running program and return to direct mode.  </p>
                 full access to your computer. You should treat them with the same caution as
                 you would shell scripts or binaries. Therefore, do not run a program from the
                 internet that you have not inspected first using <code><a href="#LIST">LIST</a></code> or
-                <code><a href="#--convert">--convert</a>=A</code> on the command line. You wouldn't just download
+                <code class="block"><b>pcbasic <a href="#--convert">--convert</a>=A</b> <var>filename</var></code> on the <a href="#settings">command line</a>. You wouldn't just download
                 an executable from the internet and run it either, right?</p>
         </section>
         <hr>
@@ -1301,7 +1302,7 @@ to interrupt a running program and return to direct mode.  </p>
             <p>
                 PC-BASIC aims for a very high level of compatibility with GW-BASIC. However,
                 some compatibility features are disabled by default for convenience or security reasons.
-                These features can be switched on using individual command-line options. The highest level of
+                These features can be switched on using individual <a href="#options">command-line options</a>. The highest level of
                 compatibility with GW-BASIC can be attained by setting
                 <code><a href="#--preset">preset</a>=strict</code>,
                 which switches off all convenience and security features that cause differences with
@@ -1999,92 +2000,92 @@ me@mybox$
 
 <section>
     <h3 id="synopsis">Synopsis</h3>
-    <code class="block">
+    <code class="flow">
         <b>pcbasic</b>
         [<var><a href="#p-program">program</a></var>|<var><a href="#p-package">package</a></var>
         [<var><a href="#p-output">output</a></var>]]
-        <span><a href="#--allow-code-poke">[<b>--allow-code-poke</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--altgr">[<b>--altgr</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--append">[<b>--append</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--aspect">[<b>--aspect=</b><var>x</var>,<var>y</var>]</a>
-<a href="#-b">[<b>-b</b>]</a>
-<a href="#--border">[<b>--border=</b><var>width</var>]</a>
-<a href="#--caption">[<b>--caption=</b><var>title</var>]</a>
-<a href="#--capture-caps">[<b>--capture-caps</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--cas1">[<b>--cas1=</b><var>type</var><b>:</b><var>value</var>[<b>:</b><var>loc</var>]]</a>
-<a href="#--cga-low">[<b>--cga-low</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--codepage">[<b>--codepage=</b><var>codepage_id</var>]</a>
-<a href="#--config">[<b>--config=</b><var>config_file</var>]</a>
-<a href="#--com1">[<b>--com1=</b><var>type</var><b>:</b><var>value</var>]</a>
-<a href="#--com2">[<b>--com2=</b><var>type</var><b>:</b><var>value</var>]</a>
-<a href="#--convert">[<b>--convert=</b>{<b>A</b>|<b>B</b>|<b>P</b>}]</a>
-<a href="#--copy-paste">[<b>--copy-paste=</b><var>copy_button</var><b>,</b><var>paste_button</var>]</a>
-<a href="#--ctrl-c-break">[<b>--ctrl-c-break</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--current-device">[<b>--current-device=</b>{<b>CAS1</b>|<b>@</b>|<b>A</b>|<b>B</b> ... |<b>Z</b>}]</a>
-<a href="#--dimensions">[<b>--dimensions=</b><var>x</var>,<var>y</var>]</a>
-<a href="#--double">[<b>-d</b>]</a>
-<a href="#--double">[<b>--double</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--exec">[<b>-e=</b><var>command_line</var>]</a>
-<a href="#--exec">[<b>--exec=</b><var>command_line</var>]</a>
-<a href="#--font">[<b>--font=</b><var>font_name</var>[<b>,</b><var>font_name</var> ... ]]</a>
-<a href="#--fullscreen">[<b>--fullscreen</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--help">[<b>-h</b>]</a>
-<a href="#--help">[<b>--help</b>]</a>
-<a href="#-i">[<b>-i</b>]</a>
-<a href="#--input">[<b>--input=</b><var>input_file</var>]</a>
-<a href="#--interface">[<b>--interface=</b>{<b>none</b>|<b>cli</b>|<b>text</b>|<b>graphical</b>}]</a>
-<a href="#--keys">[<b>-k=</b><var>keystring</var>]</a>
-<a href="#--keys">[<b>--keys=</b><var>keystring</var>]</a>
-<a href="#--load">[<b>-l=</b><var>program</var>]</a>
-<a href="#--load">[<b>--load=</b><var>program</var>]</a>
-<a href="#--logfile">[<b>--logfile=</b><var>log_file</var>]</a>
-<a href="#--lpt1">[<b>--lpt1=</b><var>type</var><b>:</b><var>value</var>]</a>
-<a href="#--lpt2">[<b>--lpt2=</b><var>type</var>:<var>value</var>]</a>
-<a href="#--lpt3">[<b>--lpt3=</b><var>type</var>:<var>value</var>]</a>
-<a href="#--map-drives">[<b>--map-drives</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--max-files">[<b>-f=</b><var>number_of_files</var>]</a>
-<a href="#--max-files">[<b>--max-files=</b><var>number_of_files</var>]</a>
-<a href="#--max-memory">[<b>-m=</b><var>max_memory</var>[<b>,</b><var>basic_memory_blocks</var>]]</a>
-<a href="#--max-memory">[<b>--max-memory=</b><var>max_memory</var>[<b>,</b><var>basic_memory_blocks</var>]]</a>
-<a href="#--max-reclen">[<b>-s=</b><var>record_length</var>]</a>
-<a href="#--max-reclen">[<b>--max-reclen=</b><var>record_length</var>]</a>
-<a href="#--monitor">[<b>--monitor=</b>{<b>rgb</b>|<b>composite</b>|<b>mono</b>}]</a>
-<a href="#--mono-tint">[<b>--mono-tint=</b><var>r</var><b>,</b><var>g</var><b>,</b><var>b</var>]</a>
-<a href="#--mount">[<b>--mount=</b><var>drive</var><b>:</b><var>path</var><b>,</b>[<var>drive</var><b>:</b><var>path</var> ... ]]</a>
-<a href="#-n">[<b>-n</b>]</a>
-<a href="#--nobox">[<b>--nobox</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--nokill">[<b>--nokill</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--nosound">[<b>--nosound</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--output">[<b>--output=</b><var>output_file</var>]</a>
-<a href="#--pcjr-term">[<b>--pcjr-term=</b><var>terminal_program</var>]</a>
-<a href="#--peek">[<b>--peek=</b>[<var>seg</var><b>:</b><var>addr</var><b>:</b><var>val</var>[<b>,</b><var>seg</var><b>:</b><var>addr</var><b>:</b><var>val</var> ... ]]]</a>
-<a href="#--pen">[<b>--pen=</b>{<b>left</b>|<b>middle</b>|<b>right</b>|<b>none</b>}]</a>
-<a href="#--preset">[<b>--preset=</b><var>option_block</var>]</a>
-<a href="#--print-trigger">[<b>--print-trigger=</b>{<b>line</b>|<b>page</b>|<b>close</b>}]</a>
-<a href="#--quit">[<b>-q</b>]</a>
-<a href="#--quit">[<b>--quit</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--reserved-memory">[<b>--reserved-memory=</b><var>number_of_bytes</var>]</a>
-<a href="#--resume">[<b>--resume</b>[<b>=True</b>|<b>=False</b>]</a>
-<a href="#--run">[<b>-r=</b><var>program</var>]</a>
-<a href="#--run">[<b>--run=</b><var>program</var>]</a>
-<a href="#--scaling">[<b>--scaling=</b>{<b>smooth</b>|<b>crisp</b>|<b>native</b>}]</a>
-<a href="#--serial-buffer-size">[<b>-c=</b><var>size</var>]</a>
-<a href="#--serial-buffer-size">[<b>--serial-buffer-size=</b><var>size</var>]</a>
-<a href="#--shell">[<b>--shell=</b>{<b>none</b>|<b>native</b>|<var>command</var>]]</a>
-<a href="#--state">[<b>--state=</b><var>state_file</var>]</a>
-<a href="#--strict-hidden-lines">[<b>--strict-hidden-lines</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--strict-newline">[<b>--strict-newline</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--strict-protect">[<b>--strict-protect</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--syntax">[<b>--syntax=</b>{<b>advanced</b>|<b>pcjr</b>|<b>tandy</b>}]</a>
-<a href="#-t">[<b>-t</b>]</a>
-<a href="#--text-width">[<b>--text-width=</b>{<b>40</b>|<b>80</b>}]</a>
-<a href="#--utf-8">[<b>--utf8</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--version">[<b>-v</b>]</a>
-<a href="#--version">[<b>--version</b>]</a>
-<a href="#--video">[<b>--video=</b><var>card</var>]</a>
-<a href="#--video-memory">[<b>--video-memory=</b><var>size</var>]</a>
-<a href="#--wait">[<b>-w</b>]</a>
-<a href="#--wait">[<b>--wait</b>[<b>=True</b>|<b>=False</b>]]</a>
+        <span><a href="#--allow-code-poke" class="option-link">[<b>--allow-code-poke</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--altgr" class="option-link">[<b>--altgr</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--append" class="option-link">[<b>--append</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--aspect" class="option-link">[<b>--aspect=</b><var>x</var>,<var>y</var>]</a>
+<a href="#-b" class="option-link">[<b>-b</b>]</a>
+<a href="#--border" class="option-link">[<b>--border=</b><var>width</var>]</a>
+<a href="#--caption" class="option-link">[<b>--caption=</b><var>title</var>]</a>
+<a href="#--capture-caps" class="option-link">[<b>--capture-caps</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--cas1" class="option-link">[<b>--cas1=</b><var>type</var><b>:</b><var>value</var>[<b>:</b><var>loc</var>]]</a>
+<a href="#--cga-low" class="option-link">[<b>--cga-low</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--codepage" class="option-link">[<b>--codepage=</b><var>codepage_id</var>]</a>
+<a href="#--config" class="option-link">[<b>--config=</b><var>config_file</var>]</a>
+<a href="#--com1" class="option-link">[<b>--com1=</b><var>type</var><b>:</b><var>value</var>]</a>
+<a href="#--com2" class="option-link">[<b>--com2=</b><var>type</var><b>:</b><var>value</var>]</a>
+<a href="#--convert" class="option-link">[<b>--convert=</b>{<b>A</b>|<b>B</b>|<b>P</b>}]</a>
+<a href="#--copy-paste" class="option-link">[<b>--copy-paste=</b><var>copy_button</var><b>,</b><var>paste_button</var>]</a>
+<a href="#--ctrl-c-break" class="option-link">[<b>--ctrl-c-break</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--current-device" class="option-link">[<b>--current-device=</b>{<b>CAS1</b>|<b>@</b>|<b>A</b>|<b>B</b> ... |<b>Z</b>}]</a>
+<a href="#--dimensions" class="option-link">[<b>--dimensions=</b><var>x</var>,<var>y</var>]</a>
+<a href="#--double" class="option-link">[<b>-d</b>]</a>
+<a href="#--double" class="option-link">[<b>--double</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--exec" class="option-link">[<b>-e=</b><var>command_line</var>]</a>
+<a href="#--exec" class="option-link">[<b>--exec=</b><var>command_line</var>]</a>
+<a href="#--font" class="option-link">[<b>--font=</b><var>font_name</var>[<b>,</b><var>font_name</var> ... ]]</a>
+<a href="#--fullscreen" class="option-link">[<b>--fullscreen</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--help" class="option-link">[<b>-h</b>]</a>
+<a href="#--help" class="option-link">[<b>--help</b>]</a>
+<a href="#-i" class="option-link">[<b>-i</b>]</a>
+<a href="#--input" class="option-link">[<b>--input=</b><var>input_file</var>]</a>
+<a href="#--interface" class="option-link">[<b>--interface=</b>{<b>none</b>|<b>cli</b>|<b>text</b>|<b>graphical</b>}]</a>
+<a href="#--keys" class="option-link">[<b>-k=</b><var>keystring</var>]</a>
+<a href="#--keys" class="option-link">[<b>--keys=</b><var>keystring</var>]</a>
+<a href="#--load" class="option-link">[<b>-l=</b><var>program</var>]</a>
+<a href="#--load" class="option-link">[<b>--load=</b><var>program</var>]</a>
+<a href="#--logfile" class="option-link">[<b>--logfile=</b><var>log_file</var>]</a>
+<a href="#--lpt1" class="option-link">[<b>--lpt1=</b><var>type</var><b>:</b><var>value</var>]</a>
+<a href="#--lpt2" class="option-link">[<b>--lpt2=</b><var>type</var>:<var>value</var>]</a>
+<a href="#--lpt3" class="option-link">[<b>--lpt3=</b><var>type</var>:<var>value</var>]</a>
+<a href="#--map-drives" class="option-link">[<b>--map-drives</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--max-files" class="option-link">[<b>-f=</b><var>number_of_files</var>]</a>
+<a href="#--max-files" class="option-link">[<b>--max-files=</b><var>number_of_files</var>]</a>
+<a href="#--max-memory" class="option-link">[<b>-m=</b><var>max_memory</var>[<b>,</b><var>basic_memory_blocks</var>]]</a>
+<a href="#--max-memory" class="option-link">[<b>--max-memory=</b><var>max_memory</var>[<b>,</b><var>basic_memory_blocks</var>]]</a>
+<a href="#--max-reclen" class="option-link">[<b>-s=</b><var>record_length</var>]</a>
+<a href="#--max-reclen" class="option-link">[<b>--max-reclen=</b><var>record_length</var>]</a>
+<a href="#--monitor" class="option-link">[<b>--monitor=</b>{<b>rgb</b>|<b>composite</b>|<b>mono</b>}]</a>
+<a href="#--mono-tint" class="option-link">[<b>--mono-tint=</b><var>r</var><b>,</b><var>g</var><b>,</b><var>b</var>]</a>
+<a href="#--mount" class="option-link">[<b>--mount=</b><var>drive</var><b>:</b><var>path</var><b>,</b>[<var>drive</var><b>:</b><var>path</var> ... ]]</a>
+<a href="#-n" class="option-link">[<b>-n</b>]</a>
+<a href="#--nobox" class="option-link">[<b>--nobox</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--nokill" class="option-link">[<b>--nokill</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--nosound" class="option-link">[<b>--nosound</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--output" class="option-link">[<b>--output=</b><var>output_file</var>]</a>
+<a href="#--pcjr-term" class="option-link">[<b>--pcjr-term=</b><var>terminal_program</var>]</a>
+<a href="#--peek" class="option-link">[<b>--peek=</b>[<var>seg</var><b>:</b><var>addr</var><b>:</b><var>val</var>[<b>,</b><var>seg</var><b>:</b><var>addr</var><b>:</b><var>val</var> ... ]]]</a>
+<a href="#--pen" class="option-link">[<b>--pen=</b>{<b>left</b>|<b>middle</b>|<b>right</b>|<b>none</b>}]</a>
+<a href="#--preset" class="option-link">[<b>--preset=</b><var>option_block</var>]</a>
+<a href="#--print-trigger" class="option-link">[<b>--print-trigger=</b>{<b>line</b>|<b>page</b>|<b>close</b>}]</a>
+<a href="#--quit" class="option-link">[<b>-q</b>]</a>
+<a href="#--quit" class="option-link">[<b>--quit</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--reserved-memory" class="option-link">[<b>--reserved-memory=</b><var>number_of_bytes</var>]</a>
+<a href="#--resume" class="option-link">[<b>--resume</b>[<b>=True</b>|<b>=False</b>]</a>
+<a href="#--run" class="option-link">[<b>-r=</b><var>program</var>]</a>
+<a href="#--run" class="option-link">[<b>--run=</b><var>program</var>]</a>
+<a href="#--scaling" class="option-link">[<b>--scaling=</b>{<b>smooth</b>|<b>crisp</b>|<b>native</b>}]</a>
+<a href="#--serial-buffer-size" class="option-link">[<b>-c=</b><var>size</var>]</a>
+<a href="#--serial-buffer-size" class="option-link">[<b>--serial-buffer-size=</b><var>size</var>]</a>
+<a href="#--shell" class="option-link">[<b>--shell=</b>{<b>none</b>|<b>native</b>|<var>command</var>]]</a>
+<a href="#--state" class="option-link">[<b>--state=</b><var>state_file</var>]</a>
+<a href="#--strict-hidden-lines" class="option-link">[<b>--strict-hidden-lines</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--strict-newline" class="option-link">[<b>--strict-newline</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--strict-protect" class="option-link">[<b>--strict-protect</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--syntax" class="option-link">[<b>--syntax=</b>{<b>advanced</b>|<b>pcjr</b>|<b>tandy</b>}]</a>
+<a href="#-t" class="option-link">[<b>-t</b>]</a>
+<a href="#--text-width" class="option-link">[<b>--text-width=</b>{<b>40</b>|<b>80</b>}]</a>
+<a href="#--utf-8" class="option-link">[<b>--utf8</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--version" class="option-link">[<b>-v</b>]</a>
+<a href="#--version" class="option-link">[<b>--version</b>]</a>
+<a href="#--video" class="option-link">[<b>--video=</b><var>card</var>]</a>
+<a href="#--video-memory" class="option-link">[<b>--video-memory=</b><var>size</var>]</a>
+<a href="#--wait" class="option-link">[<b>-w</b>]</a>
+<a href="#--wait" class="option-link">[<b>--wait</b>[<b>=True</b>|<b>=False</b>]]</a>
 </span></code>
 </section>
 <hr>
@@ -2240,8 +2241,70 @@ me@mybox$
             Load the specified codepage. The codepage determines which
             characters are associated to a given character byte or, in the case
             of double-byte codepages, two character bytes. The available codepages are
-            stored in the <code>codepage/</code> directory.
-            See the <a href="#codepages">list of default available codepages</a> in the User's Guide.
+            stored in the <code>codepage/</code> directory; by default, these are:
+            <ul class="compact">
+                <li><code><b>437</b></code></li>
+                <li><code><b>720</b></code></li>
+                <li><code><b>737</b></code></li>
+                <li><code><b>775</b></code></li>
+                <li><code><b>806</b></code></li>
+                <li><code><b>850</b></code></li>
+                <li><code><b>851</b></code></li>
+                <li><code><b>852</b></code></li>
+                <li><code><b>853</b></code></li>
+                <li><code><b>855</b></code></li>
+                <li><code><b>856</b></code></li>
+                <li><code><b>857</b></code></li>
+                <li><code><b>858</b></code></li>
+                <li><code><b>860</b></code></li>
+                <li><code><b>861</b></code></li>
+                <li><code><b>862</b></code></li>
+                <li><code><b>863</b></code></li>
+                <li><code><b>864</b></code></li>
+                <li><code><b>865</b></code></li>
+                <li><code><b>866</b></code></li>
+                <li><code><b>868</b></code></li>
+                <li><code><b>869</b></code></li>
+                <li><code><b>874</b></code></li>
+                <li><code><b>932</b></code></li>
+                <li><code><b>934</b></code></li>
+                <li><code><b>936</b></code></li>
+                <li><code><b>938</b></code></li>
+                <li><code><b>949</b></code></li>
+                <li><code><b>950</b></code></li>
+                <li><code><b>1258</b></code></li>
+                <li><code><b>alternativnyj</b></code></li>
+                <li><code><b>armscii8a</b></code></li>
+                <li><code><b>big5-2003</b></code></li>
+                <li><code><b>big5-hkscs</b></code></li>
+                <li><code><b>georgian-academy</b></code></li>
+                <li><code><b>georgian-ps</b></code></li>
+                <li><code><b>iransystem</b></code></li>
+                <li><code><b>iscii-as</b></code></li>
+                <li><code><b>iscii-be</b></code></li>
+                <li><code><b>iscii-de</b></code></li>
+                <li><code><b>iscii-gu</b></code></li>
+                <li><code><b>iscii-ka</b></code></li>
+                <li><code><b>iscii-ma</b></code></li>
+                <li><code><b>iscii-or</b></code></li>
+                <li><code><b>iscii-pa</b></code></li>
+                <li><code><b>iscii-ta</b></code></li>
+                <li><code><b>iscii-te</b></code></li>
+                <li><code><b>kamenicky</b></code></li>
+                <li><code><b>koi8-r</b></code></li>
+                <li><code><b>koi8-ru</b></code></li>
+                <li><code><b>koi8-u</b></code></li>
+                <li><code><b>mazovia</b></code></li>
+                <li><code><b>mik</b></code></li>
+                <li><code><b>osnovnoj</b></code></li>
+                <li><code><b>pascii</b></code></li>
+                <li><code><b>ruscii</b></code></li>
+                <li><code><b>russup3</b></code></li>
+                <li><code><b>russup4ac</b></code></li>
+                <li><code><b>russup4na</b></code></li>
+                <li><code><b>viscii</b></code></li>
+            </ul>.
+            See the <a href="#codepages">list of codepages</a> in the User's Guide for details.
         </dd>
 
         <dt id="--config">
@@ -2392,12 +2455,23 @@ me@mybox$
         <dt id="--font">
             <code><b>--font=</b><var>font_name</var>[<b>,</b><var>font_name</var> ... ]</code></dt>
         <dd>
-            Load <a href="#--codepage">current codepage</a>
-            from specified <code>font_name.hex</code>
-            fonts. The last fonts specified take precedence, previous ones are
+            Use the specified fonts for the interface. The last fonts specified take precedence, previous ones are
             fallback. Default is <code><b>unifont,univga,freedos</b></code> (i.e. the
-            <code>freedos.hex</code> font has preference). The available fonts
-            depend on what is stored in <code>font/</code>.
+            <code>freedos</code> font has preference). The available fonts
+            are stored in <code>font/</code>. By default, the following fonts are
+            available:
+            <ul class="compact">
+                <li><code><b>unifont</b></code></li>
+                <li><code><b>univga</b></code></li>
+                <li><code><b>freedos</b></code></li>
+                <li><code><b>cga</b></code></li>
+                <li><code><b>mda</b></code></li>
+                <li><code><b>vga</b></code></li>
+                <li><code><b>olivetti</b></code></li>
+                <li><code><b>tandy1</b></code></li>
+                <li><code><b>tandy2</b></code></li>
+            </ul>.
+            See the <a href="#fonts">list of fonts</a> in the User's Guide for details.
         </dd>
 
         <dt id="--fullscreen">
@@ -4640,21 +4714,21 @@ me@mybox$
     </p>
     <p>
         A <dfn>compound statement</dfn> consists of <a href="#statements">statements</a> separated by colons:
-        <code class="block"><var>statement</var> [<b>:</b> <var>statement</var>] ...</code>
+        <code class="flow"><var>statement</var> [<b>:</b> <var>statement</var>] ...</code>
     </p>
     <p>
         An <dfn>expression</dfn> takes one of the following forms:
-        <code class="block"><var>unary_operator</var> {<var>literal</var> | <var>variable</var> |
+        <code class="flow"><var>unary_operator</var> {<var>literal</var> | <var>variable</var> |
              <var>array_element</var> | <var>function</var>}</code>
-        <code class="block"><var>expression</var> <var>binary_operator</var> <var>expression</var></code>
-        <code class="block"><b>(</b><var>expression</var><b>)</b></code>
+        <code class="flow"><var>expression</var> <var>binary_operator</var> <var>expression</var></code>
+        <code class="flow"><b>(</b><var>expression</var><b>)</b></code>
         whose elements are described the sections <a href="#literals">Literals</a>,
         <a href="#variables">Variables</a>, <a href="#operators">Operators</a> and
         <a href="#functions">Functions</a>.
     </p>
     <p>
         An <dfn>array element</dfn> takes the form
-        <code class="block"><var>array</var> {<b>[</b>|<b>(</b>} <var>numeric_expression</var> [<b>,</b> <var>numeric_expression</var> ] ... {<b>)</b>|<b>]</b>}</code>
+        <code class="flow"><var>array</var> {<b>[</b>|<b>(</b>} <var>numeric_expression</var> [<b>,</b> <var>numeric_expression</var> ] ... {<b>)</b>|<b>]</b>}</code>
     </p>
 </section>
 <hr>
@@ -4665,7 +4739,7 @@ me@mybox$
     <h5>String literals</h5>
     <p>
         String literals are of the following form:
-        <code class="block"><b>"</b>[<var>characters</var>]{<b><i>NUL</i></b>|<b><i>CR</i></b>|<b><i>EOF</i></b>|<b>"</b>}</code>
+        <code class="flow"><b>"</b>[<var>characters</var>]{<b><i>NUL</i></b>|<b><i>CR</i></b>|<b><i>EOF</i></b>|<b>"</b>}</code>
         where <code><var>characters</var></code> is a string of characters. Any
         character from the current code page can be used, with the following
         exceptions, all of which terminate the string literal (aside from other effects they may have):
@@ -4691,12 +4765,12 @@ me@mybox$
     <h5>Numeric literals</h5>
     <p>
         Numeric literals have one of the following forms:
-        <code class="block">[<b>+</b>|<b>-</b>] [<b>0</b>|<b>1</b>|<b>2</b>|<b>3</b>|<b>4</b>|<b>5</b>|<b>6</b>|<b>7</b>|<b>8</b>|<b>9</b>]...
+        <code class="flow">[<b>+</b>|<b>-</b>] [<b>0</b>|<b>1</b>|<b>2</b>|<b>3</b>|<b>4</b>|<b>5</b>|<b>6</b>|<b>7</b>|<b>8</b>|<b>9</b>]...
             [<b>.</b>][<b>0</b>|<b>1</b>|<b>2</b>|<b>3</b>|<b>4</b>|<b>5</b>|<b>6</b>|<b>7</b>|<b>8</b>|<b>9</b>]...
             [{<b>E</b>|<b>e</b>|<b>D</b>|<b>d</b>}[<b>+</b>|<b>-</b>][<b>0</b>|<b>1</b>|<b>2</b>|<b>3</b>|<b>4</b>|<b>5</b>|<b>6</b>|<b>7</b>|<b>8</b>|<b>9</b>]...]
             |<b>#</b>|<b>!</b>|<b>%</b>]</code>
-        <code class="block"><b>&amp;</b>{<b>H</b>|<b>h</b>}[<b>0</b>|<b>1</b>|<b>2</b>|<b>3</b>|<b>4</b>|<b>5</b>|<b>6</b>|<b>7</b>|<b>8</b>|<b>9</b>|<b>A</b>|<b>B</b>|<b>C</b>|<b>D</b>|<b>E</b>|<b>F</b>|<b>a</b>|<b>b</b>|<b>c</b>|<b>d</b>|<b>e</b>|<b>f</b>]...</code>
-        <code class="block"><b>&amp;</b>[<b>O</b>|<b>o</b>] [<b>0</b>|<b>1</b>|<b>2</b>|<b>3</b>|<b>4</b>|<b>5</b>|<b>6</b>|<b>7</b>]...</code>
+        <code class="flow"><b>&amp;</b>{<b>H</b>|<b>h</b>}[<b>0</b>|<b>1</b>|<b>2</b>|<b>3</b>|<b>4</b>|<b>5</b>|<b>6</b>|<b>7</b>|<b>8</b>|<b>9</b>|<b>A</b>|<b>B</b>|<b>C</b>|<b>D</b>|<b>E</b>|<b>F</b>|<b>a</b>|<b>b</b>|<b>c</b>|<b>d</b>|<b>e</b>|<b>f</b>]...</code>
+        <code class="flow"><b>&amp;</b>[<b>O</b>|<b>o</b>] [<b>0</b>|<b>1</b>|<b>2</b>|<b>3</b>|<b>4</b>|<b>5</b>|<b>6</b>|<b>7</b>]...</code>
     </p>
     <p>
         Hexadecimal literals must not contain spaces, but decimal and octal literals may. The <code>o</code> character in octal literals is optional: they can be
@@ -5219,7 +5293,7 @@ me@mybox$
 
     <section>
         <h4 id="ABS"><code>ABS</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>y</var><b> = ABS(</b><var>x</var><b>)</b>
         </code>
         <p>
@@ -5242,7 +5316,7 @@ me@mybox$
 
     <section>
         <h4 id="ASC"><code>ASC</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>val</var><b> = ASC(</b><var>char</var><b>)</b>
         </code>
         <p>
@@ -5268,7 +5342,7 @@ me@mybox$
 
     <section>
         <h4 id="ATN"><code>ATN</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>y</var><b> = ATN(</b><var>x</var><b>)</b>
         </code>
         <p>
@@ -5302,7 +5376,7 @@ me@mybox$
 
     <section>
         <h4 id="CDBL"><code>CDBL</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>y</var><b> = CDBL(</b><var>x</var><b>)</b>
         </code>
         <p>
@@ -5319,7 +5393,7 @@ me@mybox$
 
     <section>
         <h4 id="CHR$"><code>CHR$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>char</var> <b>= CHR$(</b><var>x</var><b>)</b>
         </code>
         <p>
@@ -5348,7 +5422,7 @@ me@mybox$
 
     <section>
         <h4 id="CINT"><code>CINT</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>y</var> <b>= CINT(</b><var>x</var><b>)</b>
         </code>
         <p>
@@ -5368,12 +5442,12 @@ me@mybox$
 
     <section>
         <h4 id="COS"><code>COS</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>cosine</var> <b>= COS(</b><var>angle</var><b>)</b>
         </code>
         <p>
             Returns the cosine of <code><var>angle</var></code>.
-            Unless PC-BASIC is run with the <code><a href="#--double">--double</a></code> option,
+            Unless PC-BASIC is run with the <code><a href="#--double">double</a></code> option,
             this function returns a single-precision
             value.
         </p>
@@ -5401,7 +5475,7 @@ me@mybox$
 
     <section>
         <h4 id="CSNG"><code>CSNG</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>y</var> <b>= CSNG(</b><var>x</var><b>)</b>
         </code>
         <p>
@@ -5418,7 +5492,7 @@ me@mybox$
 
     <section>
         <h4 id="CSRLIN"><code>CSRLIN</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>y</var> <b>= CSRLIN</b>
         </code>
         <p>
@@ -5436,7 +5510,7 @@ me@mybox$
 
     <section>
         <h4 id="CVI"><code>CVI</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>y</var> <b>= CVI(</b><var>s</var><b>)</b>
         </code>
         <p>
@@ -5460,7 +5534,7 @@ me@mybox$
 
     <section>
         <h4 id="CVS"><code>CVS</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>y</var> <b>= CVS(</b><var>s</var><b>)</b>
         </code>
         <p>
@@ -5484,7 +5558,7 @@ me@mybox$
 
     <section>
         <h4 id="CVD"><code>CVD</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>y</var> <b>= CVD(</b><var>s</var><b>)</b>
         </code>
         <p>
@@ -5508,7 +5582,7 @@ me@mybox$
 
     <section>
         <h4 id="DATE$-function"><code>DATE$</code> (function)</h4>
-        <code class="block">
+        <code class="flow">
             <var>s</var> <b>= DATE$</b>
         </code>
         <p>
@@ -5525,7 +5599,7 @@ me@mybox$
 
     <section>
         <h4 id="ENVIRON$"><code>ENVIRON$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>value</var> <b>= ENVIRON</b>[ ]<b>$</b>(<var>x</var>)
         </code>
         <p>
@@ -5562,7 +5636,7 @@ me@mybox$
 
     <section>
         <h4 id="EOF"><code>EOF</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>is_at_end</var> <b>= EOF(</b><var>file_num</var><b>)</b>
         </code>
         <p>
@@ -5602,7 +5676,7 @@ me@mybox$
 
     <section>
         <h4 id="ERDEV"><code>ERDEV</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>zero</var> <b>= ERDEV</b>
         </code>
         <p>
@@ -5625,7 +5699,7 @@ me@mybox$
 
     <section>
         <h4 id="ERDEV$"><code>ERDEV$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>empty</var> <b>= ERDEV</b>[ ]<b>$</b>
         </code>
         <p>
@@ -5648,7 +5722,7 @@ me@mybox$
 
     <section>
         <h4 id="ERL"><code>ERL</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>error_line</var> <b>= ERL</b>
         </code>
         <p>
@@ -5673,7 +5747,7 @@ me@mybox$
 
     <section>
         <h4 id="ERR"><code>ERR</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>error_code</var> <b>= ERR</b>
         </code>
         <p>
@@ -5696,7 +5770,7 @@ me@mybox$
 
     <section>
         <h4 id="EXP"><code>EXP</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>y</var> <b>= EXP(</b><var>x</var><b>)</b>
         </code>
         <p>
@@ -5712,7 +5786,7 @@ me@mybox$
         <h5>Notes</h5>
         <ul>
             <li>
-                Unless PC-BASIC is run with the <code><a href="#--double">--double</a></code> option, this function returns a single-precision
+                Unless PC-BASIC is run with the <code><a href="#--double">double</a></code> option, this function returns a single-precision
                 value.
             </li>
             <li>
@@ -5735,7 +5809,7 @@ me@mybox$
 
     <section>
         <h4 id="EXTERR"><code>EXTERR</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>zero</var> <b>= EXTERR(</b><var>x</var><b>)</b>
         </code>
         <p>
@@ -5773,7 +5847,7 @@ me@mybox$
 
     <section>
         <h4 id="FIX"><code>FIX</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>whole</var> <b>= FIX(</b><var>number</var><b>)</b>
         </code>
         <p>
@@ -5803,7 +5877,7 @@ me@mybox$
 
     <section>
         <h4 id="FN"><code>FN</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>result</var> <b>= FN</b>[ ]<var>name</var> [<b>(</b><var>arg_0</var> [<b>,</b> <var>arg_1</var>] ...<b>)</b>]
         </code>
         <p>
@@ -5842,7 +5916,7 @@ me@mybox$
 
     <section>
         <h4 id="FRE"><code>FRE</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>free_mem</var> <b>= FRE(</b><var>x</var><b>)</b>
         </code>
         <p>
@@ -5866,7 +5940,7 @@ me@mybox$
 
     <section>
         <h4 id="HEX$"><code>HEX$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>hex_repr</var> <b>= HEX$(</b><var>x</var><b>)</b>
         </code>
         <p>
@@ -5894,7 +5968,7 @@ me@mybox$
 
     <section>
         <h4 id="INKEY$"><code>INKEY$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>key</var> <b>= INKEY$</b>
         </code>
         <p>
@@ -5920,7 +5994,7 @@ me@mybox$
 
     <section>
         <h4 id="INP"><code>INP</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>code</var> <b>= INP(</b><var>port</var><b>)</b>
         </code>
         <p>
@@ -6021,7 +6095,7 @@ me@mybox$
 
     <section>
         <h4 id="INPUT$"><code>INPUT$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>chars</var> <b>= INPUT</b>[ ]<b>$</b> <b>(</b><var>num_chars</var> [<b>,</b> [<b>#</b>] <var>file_num</var>]<b>)</b>
         </code>
         <p>
@@ -6091,7 +6165,7 @@ me@mybox$
 
     <section>
         <h4 id="INSTR"><code>INSTR</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>position</var> <b>= INSTR(</b>[<var>start</var><b>,</b>] <var>parent</var><b>,</b> <var>child</var><b>)</b>
         </code>
         <p>
@@ -6133,7 +6207,7 @@ me@mybox$
 
     <section>
         <h4 id="INT"><code>INT</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>whole</var> <b>= INT(</b><var>number</var><b>)</b>
         </code>
         <p>
@@ -6164,7 +6238,7 @@ me@mybox$
 
     <section>
         <h4 id="IOCTL$"><code>IOCTL$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>result</var> <b>= IOCTL</b>[ ]<b>$ (</b>[<b>#</b>] <var>file_num</var><b>)</b>
         </code>
         <p>
@@ -6200,7 +6274,7 @@ me@mybox$
 
     <section>
         <h4 id="LEFT$"><code>LEFT$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>child</var> <b>= LEFT$(</b><var>parent</var><b>,</b> <var>num_chars</var><b>)</b>
         </code>
         <p>
@@ -6243,7 +6317,7 @@ me@mybox$
 
     <section>
         <h4 id="LEN"><code>LEN</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>length</var> <b>= LEN(</b><var>string</var><b>)</b>
         </code>
         <p>
@@ -6267,7 +6341,7 @@ me@mybox$
 
     <section>
         <h4 id="LOC"><code>LOC</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>location</var> <b>= LOC(</b><var>file_num</var><b>)</b>
         </code>
         <p>
@@ -6333,7 +6407,7 @@ me@mybox$
 
     <section>
         <h4 id="LOF"><code>LOF</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>length</var> <b>= LOF(</b><var>file_num</var><b>)</b>
         </code>
         <p>
@@ -6375,7 +6449,7 @@ me@mybox$
 
     <section>
         <h4 id="LOG"><code>LOG</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>y</var> <b>= LOG(</b><var>x</var><b>)</b>
         </code>
         <p>
@@ -6390,7 +6464,7 @@ me@mybox$
         <h5>Notes</h5>
         <ul>
             <li>
-                Unless PC-BASIC is run with the <code><a href="#--double">--double</a></code>
+                Unless PC-BASIC is run with the <code><a href="#--double">double</a></code>
                 option, this function returns a single-precision value.
             </li>
             <li>
@@ -6411,7 +6485,7 @@ me@mybox$
 
     <section>
         <h4 id="LPOS"><code>LPOS</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>position</var> <b>= LPOS(</b><var>printer_number</var><b>)</b>
         </code>
         <p>
@@ -6450,7 +6524,7 @@ me@mybox$
 
     <section>
         <h4 id="MID$"><code>MID$</code> (function)</h4>
-        <code class="block">
+        <code class="flow">
             <var>substring</var> <b>= MID$(</b><var>string</var><b>,</b> <var>position</var> [<b>,</b> <var>length</var>]<b>)</b>
         </code>
         <p>
@@ -6489,7 +6563,7 @@ me@mybox$
 
     <section>
         <h4 id="MKD$"><code>MKD$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>bytes</var> <b>= MKD$(</b><var>double</var><b>)</b>
         </code>
         <p>
@@ -6507,7 +6581,7 @@ me@mybox$
 
     <section>
         <h4 id="MKI$"><code>MKI$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>bytes</var> <b>= MKI$(</b><var>int</var><b>)</b>
         </code>
         <p>
@@ -6527,7 +6601,7 @@ me@mybox$
 
     <section>
         <h4 id="MKS$"><code>MKS$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>bytes</var> <b>= MKS$(</b><var>single</var><b>)</b>
         </code>
         <p>
@@ -6545,7 +6619,7 @@ me@mybox$
 
     <section>
         <h4 id="OCT$"><code>OCT$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>octal</var> <b>= OCT$(</b><var>x</var><b>)</b>
         </code>
         <p>
@@ -6573,7 +6647,7 @@ me@mybox$
 
     <section>
         <h4 id="PEEK"><code>PEEK</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>value</var> <b>= PEEK(</b><var>address</var><b>)</b>
         </code>
         <p>
@@ -6595,7 +6669,7 @@ me@mybox$
             </li>
             <li>
                Values for particular memory address can be preset on the command line
-                using the <code><a href="#--peek">--peek</a></code> option. This can be used for compatibility with old
+                using the <code><a href="#--peek">peek</a></code> option. This can be used for compatibility with old
                 programs. These values will override video or data segment values, if they
                 are in those locations.
             </li>
@@ -6614,7 +6688,7 @@ me@mybox$
 
     <section>
         <h4 id="PEN"><code>PEN</code> (function)</h4>
-        <code class="block"><var>x</var> <b>= PEN(</b><var>mode</var><b>)</b></code>
+        <code class="flow"><var>x</var> <b>= PEN(</b><var>mode</var><b>)</b></code>
         <p>
             Reads the light pen. What this function returns depends on <code><var>mode</var></code>:
         </p>
@@ -6696,7 +6770,7 @@ me@mybox$
 
     <section>
         <h4 id="PLAY-function"><code>PLAY</code> (function)</h4>
-        <code class="block">
+        <code class="flow">
             <var>length</var> <b>= PLAY(</b><var>voice</var><b>)</b>
         </code>
         <p>
@@ -6706,10 +6780,10 @@ me@mybox$
         <ul>
             <li>
                 <code><var>voice</var></code> is a numeric expression in <code>[0&#8212;255]</code>.
-                If <code><a href="#--syntax">--syntax</a>={pcjr|tandy}</code>, indicates for which tone voice channel
+                If <code><a href="#--syntax">syntax</a>={pcjr|tandy}</code>, indicates for which tone voice channel
                 the number of notes is to be returned. If <code><var>voice</var></code> is not in <code>[0&#8212;2]</code>, the
                 queue for voice 0 is returned.
-                For other choices of <code>--syntax</code>, the <code><var>voice</var></code> value has no effect.
+                For other choices of <code>syntax</code>, the <code><var>voice</var></code> value has no effect.
             </li>
         </ul>
         <h5>Notes</h5>
@@ -6737,7 +6811,7 @@ me@mybox$
 
     <section>
         <h4 id="PMAP"><code>PMAP</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>transformed_coord</var> <b>= PMAP(</b><var>original_coord</var><b>,</b> <var>fn</var><b>)</b>
         </code>
         <p>
@@ -6810,7 +6884,7 @@ me@mybox$
 
     <section>
         <h4 id="POINT-coord"><code>POINT</code> (current coordinate)</h4>
-        <code class="block">
+        <code class="flow">
             <var>coord</var> <b>= POINT(</b><var>fn</var><b>)</b>
         </code>
         <p>
@@ -6876,7 +6950,7 @@ me@mybox$
 
     <section>
         <h4 id="POINT-attr"><code>POINT</code> (pixel attribute)</h4>
-        <code class="block">
+        <code class="flow">
             <var>attrib</var> <b>= POINT(</b><var>x</var><b>,</b> <var>y</var><b>)</b>
         </code>
         <p>
@@ -6912,7 +6986,7 @@ me@mybox$
 
     <section>
         <h4 id="POS"><code>POS</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>pos</var> <b>= POS(</b><var>dummy</var><b>)</b>
         </code>
         <p>
@@ -6929,7 +7003,7 @@ me@mybox$
 
     <section>
         <h4 id="RIGHT$"><code>RIGHT$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>child</var> <b>= RIGHT$(</b><var>parent</var><b>,</b> <var>num_chars</var><b>)</b>
         </code>
         <p>
@@ -6964,7 +7038,7 @@ me@mybox$
 
     <section>
         <h4 id="RND"><code>RND</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>random</var> <b>= RND</b>[<b>(</b><var>x</var><b>)</b>]
         </code>
         <p>
@@ -6999,7 +7073,7 @@ me@mybox$
 
     <section>
         <h4 id="SCREEN-function"><code>SCREEN</code> (function)</h4>
-        <code class="block">
+        <code class="flow">
             <var>value</var> <b>= SCREEN(</b><var>row</var><b>,</b> <var>column</var> [<b>,</b> <var>fn</var>]<b>)</b>
         </code>
         <p>
@@ -7047,7 +7121,7 @@ me@mybox$
 
     <section>
         <h4 id="SGN"><code>SGN</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>sign</var> <b>= SGN(</b><var>number</var><b>)</b>
         </code>
         <p>
@@ -7070,7 +7144,7 @@ me@mybox$
 
     <section>
         <h4 id="SIN"><code>SIN</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>sine</var> <b>= SIN(</b><var>angle</var><b>)</b>
         </code>
         <p>
@@ -7086,7 +7160,7 @@ me@mybox$
         <h5>Notes</h5>
         <ul>
             <li>
-                Unless PC-BASIC is run with the <code><a href="#--double">--double</a></code>
+                Unless PC-BASIC is run with the <code><a href="#--double">double</a></code>
                 option, this function returns a single-precision value.
             </li>
             <li>
@@ -7105,7 +7179,7 @@ me@mybox$
 
     <section>
         <h4 id="SPACE$"><code>SPACE$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>spaces</var> <b>= SPACE$(</b><var>number</var><b>)</b>
         </code>
         <p>
@@ -7134,7 +7208,7 @@ me@mybox$
 
     <section>
         <h4 id="SQR"><code>SQR</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>root</var> <b>= SQR(</b><var>number</var><b>)</b>
         </code>
         <p>
@@ -7149,7 +7223,7 @@ me@mybox$
         <h5>Notes</h5>
         <ul>
             <li>
-                Unless PC-BASIC is run with the <code><a href="#--double">--double</a></code>
+                Unless PC-BASIC is run with the <code><a href="#--double">double</a></code>
                 option, this function returns a single-precision value.
             </li>
         </ul>
@@ -7164,7 +7238,7 @@ me@mybox$
 
     <section>
         <h4 id="STICK"><code>STICK</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>pos</var> <b>= STICK(</b><var>axis</var><b>)</b>
         </code>
         <p>
@@ -7218,7 +7292,7 @@ me@mybox$
 
     <section>
         <h4 id="STR$"><code>STR$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>repr</var> <b>= STR$(</b><var>number</var><b>)</b>
         </code>
         <p>
@@ -7241,7 +7315,7 @@ me@mybox$
 
     <section>
         <h4 id="STRIG-function"><code>STRIG</code> (function)</h4>
-        <code class="block">
+        <code class="flow">
             <var>result</var> <b>= STRIG(</b><var>mode</var><b>)</b>
         </code>
         <p>
@@ -7321,7 +7395,7 @@ me@mybox$
 
     <section>
         <h4 id="STRING$"><code>STRING$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>string</var> <b>= STRING$(</b><var>length</var><b>,</b> <var>char</var><b>)</b>
         </code>
         <p>
@@ -7357,7 +7431,7 @@ me@mybox$
 
     <section>
         <h4 id="TAN"><code>TAN</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>tangent</var> <b>= TAN(</b><var>angle</var><b>)</b>
         </code>
         <p>
@@ -7373,7 +7447,7 @@ me@mybox$
         <h5>Notes</h5>
         <ul>
             <li>
-                Unless PC-BASIC is run with the <code><a href="#--double">--double</a></code>
+                Unless PC-BASIC is run with the <code><a href="#--double">double</a></code>
                 option, this function returns a single-precision value.
             </li>
             <li>
@@ -7395,7 +7469,7 @@ me@mybox$
 
     <section>
         <h4 id="TIME$-function"><code>TIME$</code> (function)</h4>
-        <code class="block">
+        <code class="flow">
             <var>time</var> <b>= TIME$</b>
         </code>
         <p>
@@ -7412,7 +7486,7 @@ me@mybox$
 
     <section>
         <h4 id="TIMER"><code>TIMER</code> (function)</h4>
-        <code class="block">
+        <code class="flow">
             <var>seconds</var> <b>= TIMER</b>
         </code>
         <p>
@@ -7440,7 +7514,7 @@ me@mybox$
 
     <section>
         <h4 id="USR"><code>USR</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>value</var> <b>= USR</b>[<var>n</var>]<b>(</b><var>expr</var><b>)</b>
         </code>
         <p>
@@ -7475,7 +7549,7 @@ me@mybox$
 
     <section>
         <h4 id="VAL"><code>VAL</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>value</var> <b>= VAL(</b><var>string</var><b>)</b>
         </code>
         <p>
@@ -7512,7 +7586,7 @@ me@mybox$
 
     <section>
         <h4 id="VARPTR"><code>VARPTR</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>pointer</var> <b>= VARPTR(</b>{<var>name</var>|<b>#</b><var>file_num</var>}<b>)</b>
         </code>
         <p>
@@ -7557,7 +7631,7 @@ me@mybox$
 
     <section>
         <h4 id="VARPTR$"><code>VARPTR$</code></h4>
-        <code class="block">
+        <code class="flow">
             <var>pointer</var> <b>= VARPTR$(</b><var>name</var><b>)</b>
         </code>
         <p>
@@ -7610,7 +7684,7 @@ me@mybox$
 
     <section>
         <h4 id="AUTO"><code>AUTO</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>AUTO</b> [<var>line_number</var>|<b>.</b>] [<b>,</b> [<var>increment</var>]]
         </code>
         <p>
@@ -7654,7 +7728,7 @@ me@mybox$
 
     <section>
         <h4 id="BEEP"><code>BEEP</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>BEEP</b>
         </code>
         <p>
@@ -7671,7 +7745,7 @@ me@mybox$
 
     <section>
         <h4 id="BEEP-switch"><code>BEEP</code> (switch)</h4>
-        <code class="block">
+        <code class="flow">
             <b>BEEP</b> {<b>ON</b>|<b>OFF</b>}
         </code>
         <p>
@@ -7693,7 +7767,7 @@ me@mybox$
 
     <section>
         <h4 id="BLOAD"><code>BLOAD</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>BLOAD</b> <var>file_spec</var> [<b>,</b> <var>offset</var>]
         </code>
         <p>
@@ -7735,7 +7809,7 @@ me@mybox$
 
     <section>
         <h4 id="BSAVE"><code>BSAVE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>BSAVE</b> <var>file_spec</var><b>,</b> <var>offset</var><b>,</b> <var>length</var>
         </code>
         <p>
@@ -7783,7 +7857,7 @@ me@mybox$
 
     <section>
     <h4 id="CALL"><code>CALL</code></h4>
-    <code class="block">
+    <code class="flow">
         <b>CALL</b> <var>address_var</var> [<b>(</b> <var>p0</var> [<b>,</b> <var>p1</var>] ... <b>)</b>]
     </code>
     <p>
@@ -7821,7 +7895,7 @@ me@mybox$
 
     <section>
         <h4 id="CALLS"><code>CALLS</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>CALLS</b> <var>address_var</var> [<b>(</b> <var>p0</var> [<b>,</b> <var>p1</var>] ... <b>)</b>]
         </code>
         <p>Does nothing.</p>
@@ -7857,7 +7931,7 @@ me@mybox$
 
     <section>
     <h4 id="CHAIN"><code>CHAIN</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>CHAIN</b> [<b>MERGE</b>] <var>file_spec</var> [<b>,</b> [<var>line_number_expr</var>] [<b>, ALL</b>] [<b>, DELETE</b> <var>range</var> [<b>,</b> <var>ign</var>]]]
         </code>
         <p>
@@ -7957,7 +8031,7 @@ me@mybox$
 
     <section>
         <h4 id="CHDIR"><code>CHDIR</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>CHDIR</b> <var>dir_spec</var>
         </code>
         <p>
@@ -7989,7 +8063,7 @@ me@mybox$
 
     <section>
         <h4 id="CIRCLE"><code>CIRCLE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>CIRCLE</b> [<b>STEP</b>] <b>(</b><var>x</var><b>,</b> <var>y</var>)<b>,</b> <var>radius</var>
             [<b>,</b> [<var>colour</var>] [<b>,</b> [<var>start</var>] [<b>,</b> [<var>end</var>] [<b>,</b> <var>aspect</var>]]]
         </code>
@@ -8044,7 +8118,7 @@ me@mybox$
 
     <section>
         <h4 id="CLEAR"><code>CLEAR</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>CLEAR</b> [<var>expr</var>] [<b>,</b> [<var>mem_limit</var>] [<b>,</b> [<var>stack_size</var>] [<b>,</b> <var>video_memory</var>]]]
         </code>
         <p>
@@ -8068,8 +8142,8 @@ me@mybox$
             <li>
                 <code><var>video_memory</var></code> specifies the amount of memory available
                 to the video adapter. This parameter is only legal with one of the options
-                <code><a href="#--syntax">--syntax</a>={pcjr, tandy}</code>. Instead of using
-                <code>CLEAR</code>, the option <code><a href="#--video-memory">--video-memory</a></code>
+                <code><a href="#--syntax">syntax</a>={pcjr, tandy}</code>. Instead of using
+                <code>CLEAR</code>, the option <code><a href="#--video-memory">video-memory</a></code>
                 can also be used to set video memory size.
             </li>
         </ul>
@@ -8112,7 +8186,7 @@ me@mybox$
 
     <section>
         <h4 id="CLOSE"><code>CLOSE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>CLOSE</b> [[<b>#</b>] <var>file_0</var> [<b>,</b> [<b>#</b>] <var>file_1</var>] ...]
         </code>
         <p>
@@ -8155,7 +8229,7 @@ me@mybox$
 
     <section>
         <h4 id="CLS"><code>CLS</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>CLS</b> [<var>x</var>][<b>,</b>]
         </code>
         <p>
@@ -8205,7 +8279,7 @@ me@mybox$
 
     <section>
         <h4 id="COLOR"><code>COLOR</code> (text mode)</h4>
-        <code class="block">
+        <code class="flow">
             <b>COLOR</b> [<var>foreground</var>] [<b>,</b> [<var>background</var>] [<b>,</b> <var>border</var>]]
         </code>
         <p>
@@ -8262,7 +8336,7 @@ me@mybox$
 
     <section>
         <h4 id="COLOR-1"><code>COLOR</code> (<code>SCREEN 1</code>)</h4>
-        <code class="block">
+        <code class="flow">
             <b>COLOR</b> [<var>palette_0</var>] [<b>,</b> <var>palette</var> [<b>,</b> <var>override</var>]]
         </code>
         <p>
@@ -8323,7 +8397,7 @@ me@mybox$
 
     <section>
         <h4 id="COLOR-3-9"><code>COLOR</code> (<code>SCREEN 3&#8212;9</code>)</h4>
-        <code class="block">
+        <code class="flow">
             <b>COLOR</b> [<var>foreground</var>] [<b>,</b> <var>palette_0</var> [<b>,</b> <var>dummy</var>]]
         </code>
         <p>
@@ -8380,7 +8454,7 @@ me@mybox$
 
     <section>
         <h4 id="COM"><code>COM</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>COM(</b><var>port</var><b>)</b> {<b>ON</b>|<b>OFF</b>|<b>STOP</b>}
         </code>
         <ul>
@@ -8407,7 +8481,7 @@ me@mybox$
 
     <section>
         <h4 id="COMMON"><code>COMMON</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>COMMON</b> [<var>var_0</var> [<b>,</b> [<var>var_1</var>]] ...]
         </code>
         <p>
@@ -8427,7 +8501,7 @@ me@mybox$
 
     <section>
         <h4 id="CONT"><code>CONT</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>CONT</b> [<var>anything</var>]
         </code>
         <p>
@@ -8474,7 +8548,7 @@ me@mybox$
 
     <section>
         <h4 id="DATA"><code>DATA</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>DATA</b> [<var>const_0</var>] [<b>,</b> [<var>const_1</var>]] ...
         </code>
         <p>
@@ -8502,7 +8576,7 @@ me@mybox$
 
     <section>
         <h4 id="DATE$-statement"><code>DATE$</code> (statement)</h4>
-        <code class="block">
+        <code class="flow">
             <b>DATE$ = </b><var>date</var>
         </code>
         <p>
@@ -8561,7 +8635,7 @@ me@mybox$
 
     <section>
         <h4 id="DEF-FN"><code>DEF FN</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>DEF FN</b>[ ]<var>name</var> [<b>(</b><var>arg_0</var> [<b>,</b> <var>arg_1</var>] ...<b>)</b>] <b>=</b> <var>expression</var>
         </code>
         <p>
@@ -8607,7 +8681,7 @@ me@mybox$
 
     <section>
         <h4 id="DEFINT"><code>DEFINT</code>, <code>DEFDBL</code>, <code>DEFSNG</code>, <code>DEFSTR</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>{DEFINT|DEFDBL|DEFSNG|DEFSTR}</b> <var>first_0</var>[<b>-</b> <var>last_0</var>] [<b>,</b> <var>first_1</var>[<b>-</b> <var>last_1</var>]] ...
         </code>
         <p>
@@ -8645,7 +8719,7 @@ me@mybox$
 
     <section>
         <h4 id="DEF-SEG"><code>DEF SEG</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>DEF SEG</b> [<b>=</b> <var>address</var>]
         </code>
         <p>
@@ -8682,7 +8756,7 @@ me@mybox$
 
     <section>
         <h4 id="DEF-USR"><code>DEF USR</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>DEF USR</b>[<var>n</var>] <b>=</b> <var>address</var>
         </code>
         <p>
@@ -8726,7 +8800,7 @@ me@mybox$
 
     <section>
         <h4 id="DELETE"><code>DELETE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>DELETE</b> [<var>line_number_0</var>|<b>.</b>] [<b>-</b>[<var>line_number_1</var>|<b>.</b>] ]
         </code>
         <p>
@@ -8767,7 +8841,7 @@ me@mybox$
 
     <section>
         <h4 id="DIM"><code>DIM</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>DIM</b> <var>name</var> {<b>(</b>|<b>[</b>} <var>limit_0</var> [<b>,</b> <var>limit_1</var>] ... {<b>)</b>|<b>]</b>}
         </code>
         <p>
@@ -8834,7 +8908,7 @@ me@mybox$
 
     <section>
         <h4 id="DRAW"><code>DRAW</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>DRAW</b> <var>gml_string</var>
         </code>
         <p>
@@ -8845,7 +8919,7 @@ me@mybox$
         <dl>
             <dt>Movement commands</dt>
             <dd>
-                <code class="block">
+                <code class="flow">
                     [<b>B</b>][<b>N</b>] <var>movement</var>
                 </code>
                 where the default is to move and draw; the optional prefixes mean:
@@ -9014,7 +9088,7 @@ me@mybox$
 
     <section>
         <h4 id="EDIT"><code>EDIT</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>EDIT</b> {<var>line_number</var>|<b>.</b>}
         </code>
         <p>
@@ -9042,7 +9116,7 @@ me@mybox$
 
     <section>
         <h4 id="ELSE"><code>ELSE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>ELSE</b> [<var>anything</var>]
         </code>
         <p>
@@ -9055,7 +9129,7 @@ me@mybox$
 
     <section>
         <h4 id="END"><code>END</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>END</b>
         </code>
         <p>
@@ -9068,7 +9142,7 @@ me@mybox$
 
     <section>
         <h4 id="ENVIRON"><code>ENVIRON</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>ENVIRON</b> <var>command_string</var>
         </code>
         <p>
@@ -9080,7 +9154,7 @@ me@mybox$
         </p>
         <dl>
             <dt>
-                <code class="block">
+                <code class="flow">
                     <b>"</b><var>VARIABLE</var><b>=</b><var>VALUE</var><b>"</b>
                 </code>
             </dt>
@@ -9088,7 +9162,7 @@ me@mybox$
                 to set <code><var>VARIABLE</var></code> to <code><var>VALUE</var></code>;
             </dd>
             <dt>
-                <code class="block">
+                <code class="flow">
                     <b>"</b><var>VARIABLE</var><b>="</b>
                 </code>
             </dt>
@@ -9110,7 +9184,7 @@ me@mybox$
 
     <section>
         <h4 id="ERASE"><code>ERASE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>ERASE</b> <var>array_0</var> [<b>,</b> <var>array_1</var>] ...
         </code>
         <p>
@@ -9141,7 +9215,7 @@ me@mybox$
 
     <section>
         <h4 id="ERROR"><code>ERROR</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>ERROR</b> <var>error_number</var>
         </code>
         <p>
@@ -9171,7 +9245,7 @@ me@mybox$
 
     <section>
         <h4 id="FIELD"><code>FIELD</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>FIELD</b> [<b>#</b>] <var>file_number</var> [<b>,</b> <var>width_0</var> <b>AS</b> <var>name_0</var> [<b>,</b> <var>width_1</var> <b>AS</b> <var>name_1</var>] ...]
         </code>
         <p>
@@ -9252,7 +9326,7 @@ me@mybox$
 
     <section>
         <h4 id="FILES"><code>FILES</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>FILES</b> [<var>filter_spec</var>]
         </code>
         <p>
@@ -9316,7 +9390,7 @@ me@mybox$
 
     <section>
         <h4 id="FOR"><code>FOR</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>FOR</b> <var>loop_var</var> <b>=</b> <var>start</var> <b>TO</b> <var>stop</var> [<b>STEP</b> <var>step</var>]
         </code>
         <p>
@@ -9359,7 +9433,7 @@ me@mybox$
 
     <section>
         <h4 id="GET-files"><code>GET</code> (files)</h4>
-        <code class="block">
+        <code class="flow">
             <b>GET</b> [<b>#</b>] <var>file_number</var> [<b>,</b> <var>record_number</var>]
         </code>
         <p>
@@ -9412,7 +9486,7 @@ me@mybox$
 
     <section>
         <h4 id="GET-serial"><code>GET</code> (communications)</h4>
-        <code class="block">
+        <code class="flow">
             <b>GET</b> [<b>#</b>] <var>com_file_number</var> [<b>,</b> <var>number_bytes</var>]
         </code>
         <p>
@@ -9477,7 +9551,7 @@ me@mybox$
 
     <section>
         <h4 id="GET-graphics"><code>GET</code> (graphics)</h4>
-        <code class="block">
+        <code class="flow">
             <b>GET (</b><var>x0</var><b>,</b> <var>y0</var><b>) -</b> [<b>STEP</b>] <b>(</b><var>x1</var><b>,</b> <var>y1</var><b>),</b> <var>array_name</var>
         </code>
         <p>
@@ -9568,7 +9642,7 @@ me@mybox$
 
     <section>
         <h4 id="GOSUB"><code>GOSUB</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>GO</b>[ ]<b>SUB</b> <var>line_number</var> [<var>anything</var>]
         </code>
         <p>
@@ -9613,7 +9687,7 @@ me@mybox$
 
     <section>
         <h4 id="GOTO"><code>GOTO</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>GO</b>[ ]<b>TO</b> <var>line_number</var> [<var>anything</var>]
         </code>
         <p>
@@ -9652,7 +9726,7 @@ me@mybox$
 
     <section>
         <h4 id="IF"><code>IF</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>IF</b> <var>truth_value</var> [<b>,</b>] {<b>THEN</b>|<b>GOTO</b>} [<var>compound_statement_true</var>|<var>line_number_true</var> [<var>anything</var>]]
             [<b>ELSE</b> [<var>compound_statement_false</var>|<var>line_number_false</var> [<var>anything</var>]]]
        </code>
@@ -9714,7 +9788,7 @@ me@mybox$
 
     <section>
         <h4 id="INPUT"><code>INPUT</code> (console)</h4>
-        <code class="block">
+        <code class="flow">
             <b>INPUT</b> [<b>;</b>] [<var>prompt</var> {<b>;</b>|<b>,</b>}] <var>var_0</var> [<b>,</b> <var>var_1</var>] ...
         </code>
         <p>
@@ -9786,7 +9860,7 @@ me@mybox$
 
     <section>
         <h4 id="INPUT-file"><code>INPUT</code> (files)</h4>
-        <code class="block">
+        <code class="flow">
             <b>INPUT #</b> <var>file_num</var><b>,</b> <var>var_0</var> [<b>,</b> <var>var_1</var>] ...
         </code>
         <p>
@@ -9872,7 +9946,7 @@ me@mybox$
 
     <section>
         <h4 id="IOCTL"><code>IOCTL</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>IOCTL</b> [<b>#</b>] <var>file_num</var><b>,</b> <var>control_string</var>
         </code>
         <p>
@@ -9907,13 +9981,13 @@ me@mybox$
 
     <section>
         <h4 id="KEY-list"><code>KEY</code> (macro list)</h4>
-        <code class="block">
+        <code class="flow">
             <b>KEY</b> {<b>ON</b>|<b>OFF</b>|<b>LIST</b>}
         </code>
         <p>
             Turns the list of function-key macros on the bottom of the screen <code>ON</code> or <code>OFF</code>.
             If <code>LIST</code> is specified, prints a list of
-            the 10 (or 12 with <code><a href="#--syntax">--syntax</a>=tandy</code>) function keys
+            the 10 (or 12 with <code><a href="#--syntax">syntax</a>=tandy</code>) function keys
             with the function-key macros defined for those keys to the console.
         </p>
         <p>
@@ -10062,7 +10136,7 @@ me@mybox$
 
     <section>
         <h4 id="KEY-def"><code>KEY</code> (macro definition)</h4>
-        <code class="block">
+        <code class="flow">
             <b>KEY</b> <var>key_id</var><b>,</b> <var>string_value</var>
         </code>
         <p>
@@ -10074,7 +10148,7 @@ me@mybox$
             <li>
                 <code><var>key_id</var></code> is a numeric expression in the range
                 <code>[1&#8212;10]</code> (or <code>[1&#8212;12]</code>
-                when <code><a href="#--syntax">--syntax</a>=tandy</code>).
+                when <code><a href="#--syntax">syntax</a>=tandy</code>).
             </li>
             <li>
                 <code><var>string_value</var></code> is a string expression.
@@ -10112,7 +10186,7 @@ me@mybox$
 
     <section>
         <h4 id="KEY-event"><code>KEY</code> (event switch)</h4>
-        <code class="block">
+        <code class="flow">
             <b>KEY</b> <b>(</b><var>key_id</var><b>)</b> {<b>ON</b>|<b>OFF</b>|<b>STOP</b>}
         </code>
         <p>
@@ -10195,7 +10269,7 @@ me@mybox$
         <h5>Notes</h5>
         <ul>
             <li>
-                With <code><a href="#--syntax">--syntax</a>=tandy</code>, key 11
+                With <code><a href="#--syntax">syntax</a>=tandy</code>, key 11
                 is <kbd>F11</kbd> and key 12 is <kbd>F12</kbd>.
                 Pre-defined keys 11&#8212;14 shift to 13&#8212;16.
             </li>
@@ -10217,7 +10291,7 @@ me@mybox$
 
     <section>
         <h4 id="KEY-event-def"><code>KEY</code> (event definition)</h4>
-        <code class="block">
+        <code class="flow">
             <b>KEY</b> <var>key_id</var><b>,</b> <var>two_char_string</var>
         </code>
         <p>
@@ -10228,7 +10302,7 @@ me@mybox$
             <li>
                 <code><var>key_id</var></code> is a numeric
                 expression in <code>[15&#8212;20]</code>
-                (or <code>[17&#8212;20]</code> when <code><a href="#--syntax">--syntax</a>=tandy</code>).
+                (or <code>[17&#8212;20]</code> when <code><a href="#--syntax">syntax</a>=tandy</code>).
             </li>
             <li>
                 <code><var>two_char_string</var></code> is a string expression of length 2. The first character is interpreted as a modifier
@@ -10279,7 +10353,7 @@ me@mybox$
             </li>
             <li>
                 If <code><var>key_id</var></code> is in <code>[1&#8212;10]</code>
-                (or <code>[1&#8212;12]</code> when <code><a href="#--syntax">--syntax</a>=tandy</code>),
+                (or <code>[1&#8212;12]</code> when <code><a href="#--syntax">syntax</a>=tandy</code>),
                 the statement is interpreted as a
                 <a href="#KEY-def">function-key macro definition</a>.
             </li>
@@ -10307,7 +10381,7 @@ me@mybox$
 
     <section>
         <h4 id="KILL"><code>KILL</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>KILL</b> <var>file_spec</var>
         </code>
         <p>
@@ -10344,7 +10418,7 @@ me@mybox$
 
     <section>
         <h4 id="LCOPY"><code>LCOPY</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>LCOPY</b> [<var>num</var>]
         </code>
         <p>
@@ -10381,7 +10455,7 @@ me@mybox$
 
     <section>
         <h4 id="LET"><code>LET</code></h4>
-        <code class="block">
+        <code class="flow">
             [<b>LET</b>] <var>name</var> <b>=</b> <var>expression</var>
         </code>
         <p>
@@ -10409,7 +10483,7 @@ me@mybox$
 
     <section>
         <h4 id="LINE"><code>LINE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>LINE</b> [[<b>STEP</b>] <b>(</b><var>x0</var><b>,</b> <var>y0</var><b>)</b>] <b>-</b> [<b>STEP</b>]
             <b>(</b><var>x1</var><b>,</b> <var>y1</var><b>)</b> [<b>,</b> [<var>attr</var>] [<b>,</b> [<b>B</b> [<b>F</b>]] [<b>,</b> <var>pattern</var>]]]
         </code>
@@ -10472,7 +10546,7 @@ me@mybox$
 
     <section>
         <h4 id="LINE-INPUT"><code>LINE INPUT</code> (console)</h4>
-        <code class="block">
+        <code class="flow">
             <b>LINE INPUT</b> [<b>;</b>] [<var>prompt_literal</var> {<b>;</b>|<b>,</b>}] <var>string_name</var>
         </code>
         <p>
@@ -10508,7 +10582,7 @@ me@mybox$
 
     <section>
         <h4 id="LINE-INPUT-file"><code>LINE INPUT</code> (files)</h4>
-        <code class="block">
+        <code class="flow">
             <b>LINE INPUT</b> <b>#</b> <var>file_num</var><b>,</b> <var>string_name</var>
         </code>
         <p>
@@ -10573,7 +10647,7 @@ me@mybox$
 
     <section>
         <h4 id="LIST"><code>LIST</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>LIST</b> [<var>line_number_0</var>|<b>.</b>] [<b>-</b>[<var>line_number_1</var>|<b>.</b>]] [<b>,</b> <var>file_spec</var> [<var>anything</var>]]
         </code>
         <p>
@@ -10636,7 +10710,7 @@ me@mybox$
 
     <section>
         <h4 id="LLIST"><code>LLIST</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>LLIST</b> [<var>line_number_0</var>|<b>.</b>] [<b>-</b>[<var>line_number_1</var>|<b>.</b>]]
         </code>
         <p>
@@ -10674,7 +10748,7 @@ me@mybox$
 
     <section>
         <h4 id="LOAD"><code>LOAD</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>LOAD</b> <var>file_spec</var> [<b>, R</b>]
         </code>
         <p>
@@ -10721,7 +10795,7 @@ me@mybox$
 
     <section>
         <h4 id="LOCATE"><code>LOCATE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>LOCATE</b> [<var>row</var>] [<b>,</b> [<var>col</var>] [<b>,</b> [<var>cursor_visible</var>] [<b>,</b> [<var>start_line</var>] [<b>,</b> [<var>stop_line</var>] [<b>,</b>]]]]]
         </code>
         <p>
@@ -10773,10 +10847,10 @@ me@mybox$
 
     <section>
         <h4 id="LOCK"><code>LOCK</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>LOCK</b> [<b>#</b>] <var>file_number</var> [<b>,</b> <var>record_0</var>]
         </code>
-        <code class="block">
+        <code class="flow">
             <b>LOCK</b> [<b>#</b>] <var>file_number</var><b>,</b> [<var>record_0</var>] <b>TO</b> <var>record_1</var>
         </code>
         <p>
@@ -10845,7 +10919,7 @@ me@mybox$
 
     <section>
         <h4 id="LSET"><code>LSET</code> and <code>RSET</code></h4>
-        <code class="block">
+        <code class="flow">
             {<b>LSET</b>|<b>RSET</b>} <var>string_name</var> <b>=</b> <var>expression</var>
         </code>
         <p>
@@ -10891,7 +10965,7 @@ me@mybox$
 
     <section>
         <h4 id="MERGE"><code>MERGE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>MERGE</b> <var>file_spec</var>
         </code>
         <p>
@@ -10928,7 +11002,7 @@ me@mybox$
 
     <section>
         <h4 id="MID$-statement"><code>MID$</code> (statement)</h4>
-        <code class="block">
+        <code class="flow">
             <b>MID$(</b><var>string_name</var><b>,</b> <var>position</var> [<b>,</b> <var>length</var>]<b>) =</b> <var>substring</var>
         </code>
         <p>
@@ -10981,7 +11055,7 @@ me@mybox$
 
     <section>
         <h4 id="MKDIR"><code>MKDIR</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>MKDIR</b> <var>dir_spec</var>
         </code>
         <p>
@@ -11015,7 +11089,7 @@ me@mybox$
 
     <section>
         <h4 id="MOTOR"><code>MOTOR</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>MOTOR</b> [<var>num</var>]
         </code>
         <p>
@@ -11052,7 +11126,7 @@ me@mybox$
 
     <section>
         <h4 id="NAME"><code>NAME</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>NAME</b> <var>old_name</var> <b>AS</b> <var>new_name</var>
         </code>
         <p>
@@ -11092,7 +11166,7 @@ me@mybox$
 
     <section>
         <h4 id="NEW"><code>NEW</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>NEW</b>
         </code>
         <p>
@@ -11105,7 +11179,7 @@ me@mybox$
 
     <section>
         <h4 id="NEXT"><code>NEXT</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>NEXT</b> [<var>var_0</var> [<b>,</b> <var>var_1</var>] ...]
         </code>
         <p>
@@ -11137,7 +11211,7 @@ me@mybox$
 
     <section>
         <h4 id="NOISE"><code>NOISE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>NOISE</b> <var>source</var><b>,</b> <var>volume</var><b>,</b> <var>duration</var>
         </code>
         <p>
@@ -11211,7 +11285,7 @@ me@mybox$
         <ul>
             <li>
                 This statement is only available if
-                <code><a href="#--syntax">--syntax</a>={pcjr|tandy}</code> is set.
+                <code><a href="#--syntax">syntax</a>={pcjr|tandy}</code> is set.
             </li>
         </ul>
         <h5>Errors</h5>
@@ -11234,7 +11308,7 @@ me@mybox$
 
     <section>
         <h4 id="ON-jump"><code>ON</code> (calculated jump)</h4>
-        <code class="block">
+        <code class="flow">
             <b>ON</b> <var>n</var> {<b>GOTO</b>|<b>GOSUB</b>} <var>line_number_0</var> [<b>,</b> <var>line_number_1</var>] ...
         </code>
         <p>
@@ -11271,7 +11345,7 @@ me@mybox$
 
     <section>
         <h4 id="ON-event"><code>ON</code> (event trapping)</h4>
-        <code class="block">
+        <code class="flow">
             <b>ON</b> {<b>COM(</b><var>n</var><b>)</b>|<b>KEY(</b><var>n</var><b>)</b>|<b>STRIG(</b><var>n</var><b>)</b>|<b>PEN</b>|<b>PLAY(</b><var>n</var><b>)</b>|<b>TIMER(</b><var>x</var><b>)</b>}
             <b>GOSUB</b> <var>line_number</var>
         </code>
@@ -11362,7 +11436,7 @@ me@mybox$
 
     <section>
         <h4 id="ON-ERROR"><code>ON ERROR</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>ON ERROR GOTO</b> {<var>line_number</var>|<b>0</b>}
         </code>
         <p>
@@ -11398,10 +11472,10 @@ me@mybox$
 
     <section>
         <h4 id="OPEN"><code>OPEN</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>OPEN</b> <var>mode_char</var><b>,</b> [<b>#</b>] <var>file_num</var><b>,</b> <var>file_spec</var> [<b>,</b> <var>rec_len</var>]
         </code>
-        <code class="block">
+        <code class="flow">
             <b>OPEN</b> <var>file_spec</var> [<b>FOR</b> {<b>INPUT</b>|<b>OUTPUT</b>|<b>APPEND</b>|<b>RANDOM</b>}]
                        [<b>ACCESS</b> {<b>READ</b>|<b>WRITE</b>|<b>READ WRITE</b>}]
                        [<b>SHARED</b>|<b>LOCK</b> {<b>READ</b>|<b>WRITE</b>|<b>READ WRITE</b>}]
@@ -11743,7 +11817,7 @@ me@mybox$
             <dd>
                 <p>
                     When opening a <code>COM</code> port, the <code><var>file_spec</var></code> has the form
-                    <code class="block"><b>"COM</b><var>n</var><b>:</b>[<var>speed</var>[<b>,</b><var>parity</var>[<b>,</b><var>data</var>[<b>,</b><var>stop</var>[<b>,RS</b>][<b>,CS</b>[<var>n</var>]][<b>,DS</b>[<var>n</var>]][<b>,CD</b>[<var>n</var>]][<b>,LF</b>][<b>,PE</b>]]]]]<b>"</b></code>
+                    <code class="flow"><b>"COM</b><var>n</var><b>:</b>[<var>speed</var>[<b>,</b><var>parity</var>[<b>,</b><var>data</var>[<b>,</b><var>stop</var>[<b>,RS</b>][<b>,CS</b>[<var>n</var>]][<b>,DS</b>[<var>n</var>]][<b>,CD</b>[<var>n</var>]][<b>,LF</b>][<b>,PE</b>]]]]]<b>"</b></code>
                     The first four parameters after the device colon must be given
                     in the order specified but the named parameters
                     can be given in any order.
@@ -11950,7 +12024,7 @@ me@mybox$
 
     <section>
         <h4 id="OPTION-BASE"><code>OPTION BASE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>OPTION BASE</b> <var>n</var>
         </code>
         <p>
@@ -11987,7 +12061,7 @@ me@mybox$
 
     <section>
         <h4 id="OUT"><code>OUT</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>OUT</b> <var>port</var><b>,</b> <var>value</var>
         </code>
         <p>
@@ -12020,7 +12094,7 @@ me@mybox$
                     <td>
                         if <code><var>value</var> = &amp;h1A</code>, enable composite colorburst.<br>
                         if <code><var>value</var> = &amp;h1E</code>, disable composite colorburst.<br>
-                        Requires <code><a href="#--video">--video</a>={cga, tandy, pcjr}</code>.
+                        Requires <code><a href="#--video">video</a>={cga, tandy, pcjr}</code>.
                     </td>
                 </tr>
             </table>
@@ -12073,7 +12147,7 @@ me@mybox$
 
     <section>
         <h4 id="PAINT"><code>PAINT</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>PAINT</b> [<b>STEP</b>] <b>(</b><var>x</var><b>,</b> <var>y</var><b>)</b> [<b>,</b> <var>attrib</var> [<b>,</b> <var>border</var> [<b>,</b> <var>background</var>]]]
         </code>
         <p>
@@ -12221,7 +12295,7 @@ me@mybox$
 
     <section>
         <h4 id="PALETTE"><code>PALETTE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>PALETTE</b> [<var>attrib</var><b>,</b> <var>colour</var>]
         </code>
         <p>
@@ -12258,7 +12332,7 @@ me@mybox$
 
     <section>
         <h4 id="PALETTE-USING"><code>PALETTE USING</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>PALETTE USING</b> <var>int_array_name</var> {<b>(</b>|<b>[</b>} <var>start_index</var> {<b>)</b>|<b>]</b>}
         </code>
         <p>
@@ -12305,7 +12379,7 @@ me@mybox$
 
     <section>
         <h4 id="PCOPY"><code>PCOPY</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>PCOPY</b> <var>src</var><b>,</b> <var>dst</var>
         </code>
         <p>
@@ -12336,7 +12410,7 @@ me@mybox$
 
     <section>
         <h4 id="PEN-statement"><code>PEN</code> (statement)</h4>
-        <code class="block"><b>PEN</b> {<b>ON</b>|<b>OFF</b>|<b>STOP</b>}</code>
+        <code class="flow"><b>PEN</b> {<b>ON</b>|<b>OFF</b>|<b>STOP</b>}</code>
         <p>
             Controls event trapping and read access of the light pen (emulated through the mouse in PC-BASIC).
             <code>PEN ON</code> switches pen reading and trapping on.  <code>PEN OFF</code> switches it off.
@@ -12350,7 +12424,7 @@ me@mybox$
 
     <section>
         <h4 id="PLAY-event"><code>PLAY</code> (event switch)</h4>
-        <code class="block">
+        <code class="flow">
             <b>PLAY</b> {<b>ON</b>|<b>OFF</b>|<b>STOP</b>}
         </code>
         <ul>
@@ -12372,14 +12446,14 @@ me@mybox$
 
     <section>
         <h4 id="PLAY"><code>PLAY</code> (music statement)</h4>
-        <code class="block">
+        <code class="flow">
             <b>PLAY</b> [<var>mml_string_0</var>] [<b>,</b> [<var>mml_string_1</var>] [<b>,</b> <var>mml_string_2</var>]]
         </code>
         <p>
             Plays the tune defined by the Music Macro Language strings <code><var>mml_string_0</var>, ...</code>.
         </p>
         <p>
-            Unless <code><a href="#--syntax">--syntax</a>={tandy | pcjr}</code> is set, only the single-voice syntax is available.
+            Unless <code><a href="#--syntax">syntax</a>={tandy | pcjr}</code> is set, only the single-voice syntax is available.
             The three separate MML strings correspond to the three voices of the PCjr/Tandy sound adapter.
             The notes in these strings are played synchronously.
         </p>
@@ -12520,7 +12594,7 @@ me@mybox$
         </div>
         <h6>Volume control</h6>
         <p>
-            Volume control is available on <code><a href="#--syntax">--syntax</a>={tandy | pcjr}</code> only:
+            Volume control is available on <code><a href="#--syntax">syntax</a>={tandy | pcjr}</code> only:
         </p>
         <div class="scrollable">
         <table>
@@ -12534,8 +12608,8 @@ me@mybox$
                 </td>
                 <td>
                     Set the volume to <code><var>n</var></code>, in the range <code>[0&#8212;15]</code>.
-                    On <code><a href="#--syntax">--syntax</a>=pcjr</code>, if <code><a href="#SOUND-switch">SOUND ON</a></code>
-                    has not been executed, this has no effect. On <code><a href="#--syntax">--syntax</a>=tandy</code> it does have.
+                    On <code><a href="#--syntax">syntax</a>=pcjr</code>, if <code><a href="#SOUND-switch">SOUND ON</a></code>
+                    has not been executed, this has no effect. On <code><a href="#--syntax">syntax</a>=tandy</code> it does have.
                 </td>
             </tr>
         </table>
@@ -12579,7 +12653,7 @@ me@mybox$
 
     <section>
         <h4 id="POKE"><code>POKE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>POKE</b> <var>address</var><b>,</b> <var>value</var>
         </code>
         <p>
@@ -12625,7 +12699,7 @@ me@mybox$
 
     <section>
         <h4 id="PSET"><code>PSET</code> and <code>PRESET</code></h4>
-        <code class="block">
+        <code class="flow">
             { <b>PSET</b> | <b>PRESET</b> } [<b>STEP</b>] <b>(</b><var>x</var><b>,</b> <var>y</var><b>)</b> [<b>,</b> <var>attrib</var>]
         </code>
         <p>
@@ -12666,7 +12740,7 @@ me@mybox$
 
     <section>
         <h4 id="PRINT"><code>PRINT</code> and <code>LPRINT</code></h4>
-        <code class="block">
+        <code class="flow">
             {<b>LPRINT</b>|{<b>PRINT</b>|<b>?</b>} [<b>#</b> <var>file_num</var><b>,</b>]} [<var>expr_0</var>|<b>;</b>|<b>,</b>|<b>SPC(</b><var>n</var><b>)</b>|<b>TAB(</b><var>n</var><b>)</b>] ...
             [<b>USING</b> <var>format</var><b>;</b> <var>uexpr_0</var> [{<b>;</b>|<b>,</b>} <var>uexpr_1</var>] ... [<b>;</b>|<b>,</b>]]
         </code>
@@ -13063,7 +13137,7 @@ me@mybox$
 
     <section>
         <h4 id="PUT-files"><code>PUT</code> (files)</h4>
-        <code class="block">
+        <code class="flow">
             <b>PUT</b> [<b>#</b>] <var>file_number</var> [<b>,</b> <var>record_number</var>]
         </code>
         <p>
@@ -13105,7 +13179,7 @@ me@mybox$
 
     <section>
         <h4 id="PUT-serial"><code>PUT</code> (communications)</h4>
-        <code class="block">
+        <code class="flow">
             <b>PUT</b> [<b>#</b>] <var>com_file_number</var> [<b>,</b> <var>number_bytes</var>]
         </code>
         <p>
@@ -13150,7 +13224,7 @@ me@mybox$
 
     <section>
         <h4 id="PUT-graphics"><code>PUT</code> (graphics)</h4>
-        <code class="block">
+        <code class="flow">
             <b>PUT (</b><var>x0</var><b>,</b> <var>y0</var><b>),</b> <var>array_name</var> [<b>,</b> {<b>PSET</b>|<b>PRESET</b>|<b>AND</b>|<b>OR</b>|<b>XOR</b>}]
         </code>
         <p>
@@ -13218,7 +13292,7 @@ me@mybox$
 
     <section>
         <h4 id="RANDOMIZE"><code>RANDOMIZE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>RANDOMIZE</b> [<var>expr</var>]
         </code>
         <p>
@@ -13263,7 +13337,7 @@ me@mybox$
 
     <section>
         <h4 id="READ"><code>READ</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>READ</b> <var>var_0</var> [<b>,</b> <var>var_1</var>] ...
         </code>
         <p>
@@ -13294,7 +13368,7 @@ me@mybox$
 
     <section>
         <h4 id="REM"><code>REM</code></h4>
-        <code class="block">
+        <code class="flow">
             {<b>REM</b>|<b>'</b>} [<var>anything</var>]
         </code>
         <p>
@@ -13312,7 +13386,7 @@ me@mybox$
 
     <section>
         <h4 id="RENUM"><code>RENUM</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>RENUM</b> [<var>new</var>|<b>.</b>] [<b>,</b> [<var>old</var>|<b>.</b>] [<b>,</b> <var>increment</var>]]
         </code>
         <p>
@@ -13373,7 +13447,7 @@ me@mybox$
 
     <section>
         <h4 id="RESET"><code>RESET</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>RESET</b>
         </code>
         <p>
@@ -13395,7 +13469,7 @@ me@mybox$
 
     <section>
         <h4 id="RESTORE"><code>RESTORE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>RESTORE</b> [<var>line</var>]
         </code>
         <p>
@@ -13416,7 +13490,7 @@ me@mybox$
 
     <section>
         <h4 id="RESUME"><code>RESUME</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>RESUME</b> [<b>0</b>|<b>NEXT</b>|<var>line</var>]
         </code>
         <p>
@@ -13444,7 +13518,7 @@ me@mybox$
 
     <section>
         <h4 id="RETURN"><code>RETURN</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>RETURN</b> [<var>line</var>]
         </code>
         <p>
@@ -13467,7 +13541,7 @@ me@mybox$
 
     <section>
         <h4 id="RMDIR"><code>RMDIR</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>RMDIR</b> <var>dir_spec</var>
         </code>
         <p>
@@ -13505,7 +13579,7 @@ me@mybox$
 
     <section>
         <h4 id="RUN"><code>RUN</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>RUN</b> [<var>line</var>|<var>file_spec</var>] [<b>,R</b>]
         </code>
         <p>
@@ -13547,7 +13621,7 @@ me@mybox$
 
     <section>
         <h4 id="SAVE"><code>SAVE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>SAVE</b> <var>file_spec</var> [<b>,</b> {<b>A</b>|<b>P</b>}]
         </code>
         <p>
@@ -13587,7 +13661,7 @@ me@mybox$
                 <samp>Bad file name</samp> (on disk devices).
             </li>
             <li>
-                <code><a href="#--strict-protect">--strict-protect</a></code> is enabled, the current program is protected and <code>,P</code> is not specified:
+                <code><a href="#--strict-protect">strict-protect</a></code> is enabled, the current program is protected and <code>,P</code> is not specified:
                 <samp>Illegal function call</samp>.
             </li>
         </ul>
@@ -13596,7 +13670,7 @@ me@mybox$
 
     <section>
         <h4 id="SCREEN-statement"><code>SCREEN</code> (statement)</h4>
-        <code class="block">
+        <code class="flow">
             <b>SCREEN</b> [<var>mode</var>] [<b>,</b> [<var>colorburst</var>] [<b>,</b> [<var>apage</var>] [<b>,</b> [<var>vpage</var>] [<b>,</b> <var>erase</var>]]]]
         </code>
         <p>
@@ -13618,7 +13692,7 @@ me@mybox$
             </li>
             <li>
                 <code><var>erase</var></code> is a numeric expression in the range <code>[0, 1, 2]</code>.
-                It is only legal with <code><a href="#--syntax">--syntax</a>={pcjr, tandy}</code>. See notes below.
+                It is only legal with <code><a href="#--syntax">syntax</a>={pcjr, tandy}</code>. See notes below.
             </li>
         </ul>
         <h5>NTSC Composite Colorburst</h5>
@@ -13673,7 +13747,7 @@ me@mybox$
         <p>
             By default, if the <code><var>mode</var></code> changes or the <code><var>colorburst</var></code>
             changes between zero and non-zero, the old page and the new page of the screen
-            are cleared. On <code><a href="#--syntax">--syntax</a>={pcjr, tandy}</code>,
+            are cleared. On <code><a href="#--syntax">syntax</a>={pcjr, tandy}</code>,
             the <code><var>erase</var></code> parameter can be used to change this behaviour.
             Its values are as follows:
         </p>
@@ -13738,7 +13812,7 @@ me@mybox$
 
     <section>
         <h4 id="SHELL"><code>SHELL</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>SHELL</b> [<var>command</var>]
         </code>
         <p>
@@ -13757,7 +13831,7 @@ me@mybox$
         <h5>Notes</h5>
         <ul>
             <li>
-                If the <code><a href="#--shell">--shell</a>=native</code> option is not specified, this statement does nothing.
+                If the <code><a href="#--shell">shell</a>=native</code> option is not specified, this statement does nothing.
             </li>
             <li>
             Be careful when enabling this command, as it allows the running BASIC program full access to your files and operating system.
@@ -13778,7 +13852,7 @@ me@mybox$
 
     <section>
         <h4 id="SOUND"><code>SOUND</code> (tone)</h4>
-        <code class="block">
+        <code class="flow">
             <b>SOUND</b> <var>frequency</var><b>,</b> <var>duration</var> [<b>,</b> <var>volume</var> [<b>,</b> <var>voice</var>]]
         </code>
         <p>
@@ -13796,19 +13870,19 @@ me@mybox$
         <h5>Parameters</h5>
         <ul>
             <li>
-                <code><var>frequency</var></code> is a numeric expression in <code>[37&#8212;32767]</code> or <code>0</code> (for <code>--syntax={advanced | pcjr}</code>)
-                or in <code>[-32768&#8212;32767]</code> (for <code>--syntax=tandy</code>).
+                <code><var>frequency</var></code> is a numeric expression in <code>[37&#8212;32767]</code> or <code>0</code> (for <code>syntax={advanced | pcjr}</code>)
+                or in <code>[-32768&#8212;32767]</code> (for <code>syntax=tandy</code>).
             </li>
             <li>
                 <code><var>duration</var></code> is a numeric expression in <code>[0&#8212;65535]</code>.
             </li>
             <li>
                 <code><var>volume</var></code> is a numeric expression in [0, 15]. 0 is silent, 15 is full
-                volume; every step less reduces the volume by 2 dB. (For <code>--syntax={pcjr | tandy}</code>)
+                volume; every step less reduces the volume by 2 dB. (For <code>syntax={pcjr | tandy}</code>)
             </li>
             <li>
                 <code><var>voice</var></code> is a numeric expression in [0, 2], indicating which of the
-                three tone voice channels is used for this sound. (For <code><a href="#--syntax">--syntax</a>={pcjr | tandy}</code>)
+                three tone voice channels is used for this sound. (For <code><a href="#--syntax">syntax</a>={pcjr | tandy}</code>)
             </li>
         </ul>
         <h5>Notes</h5>
@@ -13846,7 +13920,7 @@ me@mybox$
                 <samp>Syntax error</samp>.
             </li>
             <li>
-                <code><a href="#--syntax">--syntax</a>={ pcjr | tandy }</code> is not set and more than two arguments are specified:
+                <code><a href="#--syntax">syntax</a>={ pcjr | tandy }</code> is not set and more than two arguments are specified:
                 <samp>Syntax error</samp>.
             </li>
             <li>
@@ -13871,7 +13945,7 @@ me@mybox$
 
     <section>
         <h4 id="SOUND-switch"><code>SOUND</code> (switch)</h4>
-        <code class="block">
+        <code class="flow">
             <b>SOUND</b> {<b>ON</b>|<b>OFF</b>}
         </code>
         <p>
@@ -13881,7 +13955,7 @@ me@mybox$
         <h5>Notes</h5>
         <ul>
             <li>
-                Only available with <code>--syntax={pcjr | tandy}</code>.
+                Only available with <code>syntax={pcjr | tandy}</code>.
             </li>
             <li>
                On PCjr and Tandy computers, <code>SOUND ON</code> would turn on the external speaker as
@@ -13893,7 +13967,7 @@ me@mybox$
         <h5>Errors</h5>
         <ul>
             <li>
-                This statement is used and <code><a href="#--syntax">--syntax</a>={ pcjr | tandy }</code> is not set:
+                This statement is used and <code><a href="#--syntax">syntax</a>={ pcjr | tandy }</code> is not set:
                 <samp>Syntax error</samp>.
             </li>
         </ul>
@@ -13902,7 +13976,7 @@ me@mybox$
 
     <section>
         <h4 id="STOP"><code>STOP</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>STOP</b>
         </code>
         <p>
@@ -13915,8 +13989,8 @@ me@mybox$
     <hr>
 
     <section>
-        <h4 id="STRIG-switch"><code>STRIG</code> (statement)</h4>
-        <code class="block">
+        <h4 id="STRIG-switch"><code>STRIG</code> (switch)</h4>
+        <code class="flow">
             <b>STRIG</b> {<b>ON</b>|<b>OFF</b>}
         </code>
         <p>
@@ -13927,8 +14001,8 @@ me@mybox$
 
     <section>
         <h4 id="STRIG-events"><code>STRIG</code> (event switch)</h4>
-        <code class="block">
-            <b>STRIG(</b><var>button</var><b>)</b> {<b>ON</b>|<b>OFF</b>|<b>STOP</b>}
+        <code class="flow">
+            <b>STRIG</b>[ ]<b>(</b><var>button</var><b>)</b> {<b>ON</b>|<b>OFF</b>|<b>STOP</b>}
         </code>
         <p>
             Switches event trapping of the joystick trigger <code><var>button</var></code>
@@ -13986,7 +14060,7 @@ me@mybox$
 
     <section>
         <h4 id="SWAP"><code>SWAP</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>SWAP</b> <var>var_0</var><b>,</b> <var>var_1</var>
         </code>
         <p>
@@ -14022,7 +14096,7 @@ me@mybox$
 
     <section>
         <h4 id="SYSTEM"><code>SYSTEM</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>SYSTEM</b>
         </code>
         <p>
@@ -14040,24 +14114,24 @@ me@mybox$
 
     <section>
         <h4 id="TERM"><code>TERM</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>TERM</b>
         </code>
         <p>
-            Load and run the program defined by <code><a href="#--pcjr-term">--pcjr-term</a></code>.
+            Load and run the program defined by the <code><a href="#--pcjr-term">pcjr-term</a></code> option.
             By default, as on the IBM PCjr, this is a
             built-in serial terminal emulator application.
             This statement is only available with
-            <code><a href="#--syntax">--syntax</a>={pcjr|tandy}</code>.
+            <code><a href="#--syntax">syntax</a>={pcjr|tandy}</code>.
         </p>
         <h5>Errors</h5>
         <ul>
             <li>
-                If <code><a href="#--pcjr-term">--pcjr-term</a></code> is not set,
+                If <code><a href="#--pcjr-term">pcjr-term</a></code> is not set,
                 this statement raises <code>Internal error</code>.
             </li>
             <li>
-                If <code><a href="#--syntax">--syntax</a></code> is not set to
+                If <code><a href="#--syntax">syntax</a></code> is not set to
                 <code>pcjr</code> or <code>tandy</code>, this keyword is not present.
                 Calling <code>TERM</code> will raise <samp>Syntax error</samp>.
             </li>
@@ -14067,7 +14141,7 @@ me@mybox$
 
     <section>
         <h4 id="TIME$-statement"><code>TIME$</code> (statement)</h4>
-        <code class="block">
+        <code class="flow">
             <b>TIME$ = </b><var>time</var>
         </code>
         <p>
@@ -14104,7 +14178,7 @@ me@mybox$
 
     <section>
         <h4 id="TIMER-event"><code>TIMER</code> (statement)</h4>
-        <code class="block">
+        <code class="flow">
             <b>TIMER</b> {<b>ON</b>|<b>OFF</b>|<b>STOP</b>}
         </code>
         <ul>
@@ -14126,7 +14200,7 @@ me@mybox$
 
     <section>
         <h4 id="TRON"><code>TRON</code> and <code>TROFF</code></h4>
-        <code class="block">
+        <code class="flow">
             {<b>TRON</b>|<b>TROFF</b>}
         </code>
         <p>
@@ -14145,10 +14219,10 @@ me@mybox$
 
     <section>
         <h4 id="UNLOCK"><code>UNLOCK</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>UNLOCK</b> [<b>#</b>] <var>file_number</var> [<b>,</b> <var>record_0</var>]
         </code>
-        <code class="block">
+        <code class="flow">
             <b>UNLOCK</b> [<b>#</b>] <var>file_number</var><b>,</b> [<var>record_0</var>] <b>TO</b> <var>record_1</var>
         </code>
         <p>
@@ -14193,7 +14267,7 @@ me@mybox$
 
     <section>
         <h4 id="VIEW"><code>VIEW</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>VIEW</b> [[<b>SCREEN</b>] <b>(</b><var>x0</var><b>,</b> <var>y0</var><b>)-(</b><var>x1</var><b>,</b> <var>y1</var><b>)</b> [<b>,</b> [<var>fill</var>] [<b>,</b> <var>border</var>]]]
         </code>
         <p>
@@ -14235,7 +14309,7 @@ me@mybox$
 
     <section>
         <h4 id="VIEW-PRINT"><code>VIEW PRINT</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>VIEW PRINT</b> <var>top_row</var> <b>TO</b> <var>bottom_row</var>
         </code>
         <p>
@@ -14252,7 +14326,7 @@ me@mybox$
         <h5>Notes</h5>
         <ul>
             <li>
-                If <code><a href="#--syntax">--syntax</a>={pcjr | tandy}</code> and
+                If <code><a href="#--syntax">syntax</a>={pcjr | tandy}</code> and
                 <code><a href="#KEY-list">KEY OFF</a></code> is set, <code><var>bottom_row</var></code> may be 25.
                 Otherwise, screen row 25 cannot be part of the
                 scrolling area.
@@ -14269,7 +14343,7 @@ me@mybox$
 
     <section>
         <h4 id="WAIT"><code>WAIT</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>WAIT</b> <var>port</var><b>,</b> <var>and_mask</var> [<b>,</b> <var>xor_mask</var>]
         </code>
         <p>
@@ -14303,7 +14377,7 @@ me@mybox$
 
     <section>
         <h4 id="WEND"><code>WEND</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>WEND</b>
         </code>
         <p>
@@ -14331,7 +14405,7 @@ me@mybox$
 
     <section>
         <h4 id="WHILE"><code>WHILE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>WHILE</b> <var>expr</var>
         </code>
         <p>
@@ -14360,7 +14434,7 @@ me@mybox$
 
     <section>
         <h4 id="WIDTH"><code>WIDTH</code> (console)</h4>
-        <code class="block">
+        <code class="flow">
             <b>WIDTH</b> <var>num_columns</var> [<b>,</b> [<var>num_rows</var>] [<b>,</b>]]
         </code>
         <p>
@@ -14393,7 +14467,7 @@ me@mybox$
             </li>
             <li>
                 <code><var>num_rows</var></code> is optional and must equal 25. If
-                <code><a href="#--syntax">--syntax</a>={pcjr | tandy}</code> is set,
+                <code><a href="#--syntax">syntax</a>={pcjr | tandy}</code> is set,
                 <code><var>num_rows</var></code>
                 may be in <code>[0&#8212;25]</code> but its value is ignored.
             </li>
@@ -14421,7 +14495,7 @@ me@mybox$
 
     <section>
         <h4 id="WIDTH-files"><code>WIDTH</code> (devices and files)</h4>
-        <code class="block">
+        <code class="flow">
             <b>WIDTH</b> {<b>#</b><var>file_num</var><b>,</b>|<var>device_name</var><b>,</b>|<b>LPRINT</b>} <var>num_columns</var>
         </code>
         <p>
@@ -14485,7 +14559,7 @@ me@mybox$
 
     <section>
         <h4 id="WINDOW"><code>WINDOW</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>WINDOW</b> [[<b>SCREEN</b>] <b>(</b><var>x0</var><b>,</b> <var>y0</var><b>)-(</b><var>x1</var><b>,</b> <var>y1</var><b>)</b>]
         </code>
         <p>
@@ -14521,7 +14595,7 @@ me@mybox$
 
     <section>
         <h4 id="WRITE"><code>WRITE</code></h4>
-        <code class="block">
+        <code class="flow">
             <b>WRITE</b> [<b>#</b> <var>file_num</var><b>,</b>] <var>expr_0</var> [{<b>,</b>|<b>;</b>} <var>expr_1</var>] ...
         </code>
         <p>
@@ -14970,15 +15044,15 @@ me@mybox$
             <li><code>FFA5</code> <code>LOF</code></li>
         </ul>
         <p>
-            The following additional keywords are activated by
-            <code><a href="#--syntax">--syntax</a>={pcjr|tandy}</code>.
+            The following additional keywords are activated by the option
+            <code><a href="#--syntax">syntax</a>={pcjr|tandy}</code>.
         </p>
         <ul class="compact10">
             <li><code>FEA4</code> <code>NOISE</code></li>
             <li><code>FEA6</code> <code>TERM</code></li>
         </ul>
         <p>
-            The following additional keyword is activated by <code><a href="#--debug">--debug</a></code>.
+            The following additional keyword is activated by the <code><a href="#--debug">debug</a></code> option.
             It is specific to PC-BASIC and not present in GW-BASIC.
         </p>
         <ul class="compact10">
@@ -15679,7 +15753,7 @@ me@mybox$
         <p>
             This is a list of the American Standard Code for Information Interchange (ASCII).
             ASCII only covers 128 characters and defines the code point ranges
-            <code>&amp;h00</code>&#160;<code>&amp;h1F</code> and <code>&amp;h7F</code>
+            <code>&amp;h00</code>&#8211;<code>&amp;h1F</code> and <code>&amp;h7F</code>
             as <dfn>control characters</dfn> which do not have a printable glyph assigned
             to them. This includes such values as the <i>Carriage Return</i> (<code><i>CR</i></code>)
             character that ends a program line.
@@ -15869,7 +15943,7 @@ me@mybox$
             This table shows the characters that
             are produced by the 256 single-byte code points when
             the DOS Latin USA codepage 437 is loaded, which is the default.
-            Code points <code>00</code> and <code>20</code>&#8211;<code>7E</code>
+            Code points <code>&amp;h00</code> and <code>&amp;h20</code>&#8211;<code>&amp;h7E</code>
             are fixed while the other characters, as well as any double-byte characters,
             can be redefined by loading another codepage.
         </p>
@@ -17507,6 +17581,14 @@ apologies to those whose contribution I have failed to acknowledge here.</p>
 <li><strong>Konstantinos Kostis</strong>' <a href="http://www.kostis.net/charsets/">Charsets Index</a></li>
 <li><a href="http://www-01.ibm.com/software/globalization/cdra/">IBM CDRA</a></li>
 <li><strong>Masaki Tojo</strong>'s <a href="https://github.com/mtojo/camellia">Camellia</a></li>
+</ul>
+<h3 id="acks_bibliography">Bibliography</h3>
+<ul>
+<li><em>GW-BASIC 3.23 User's Guide</em>, Microsoft Corporation, 1987</li>
+<li><em>IBM Personal Computer Hardware Reference Library: BASIC</em>, IBM, 1982</li>
+<li><em>Tandy 1000 BASIC, A Reference Guide</em>, Tandy Corporation</li>
+<li><strong>William Barden, Jr.</strong>, <em>Graphics and Sound for the Tandy 1000s and PC Compatibles</em>, Microtrend, 1987</li>
+<li><strong>Don Inman</strong> and <strong>Bob Albrecht</strong>, <em>The GW-BASIC Reference</em>, Osborne McGraw-Hill, 1990</li>
 </ul>
 <h3 id="acks_development-tools">Development tools</h3>
 <p>PC-BASIC is developed using <a href="https://git-scm.com/">Git</a> source control,
