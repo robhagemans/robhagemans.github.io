@@ -29,7 +29,7 @@
 </nav>
 <header>
 <h1>PC-BASIC 15.08.4 documentation</h1>
-<small>Documentation compiled on 2016-02-28 08:58:44.</small>
+<small>Documentation compiled on 2016-02-28 14:17:12.</small>
 </header>
 <nav class="toc">
     <h2 id="toc">Table of Contents</h2>
@@ -4981,23 +4981,23 @@ me@mybox$
     <h4 id="order-of-preference">Order of precedence</h4>
     <p>
         The order of precedence of operators is as follows, from tightly bound
-        (high priority) to loosely bound (low priority):
+        (high precedence) to loosely bound (low precedence):
     </p>
     <ol>
-        <li><code>^</code></li>
-        <li><ul class="horizontal">
+        <li value="12"><code>^</code></li>
+        <li value="11"><ul class="horizontal">
             <li><code>*</code></li>
             <li><code>/</code></li>
         </ul></li>
-        <li><code>\</code></li>
-        <li><code>MOD</code></li>
-        <li>
+        <li value="10"><code>\</code></li>
+        <li value="9"><code>MOD</code></li>
+        <li value="8">
             <ul class="horizontal">
                 <li><code>+</code></li>
                 <li><code>-</code> (unary and binary)</li>
             </ul>
         </li>
-        <li>
+        <li value="7">
             <ul class="horizontal">
                 <li><code>=</code></li>
                 <li><code>&lt;&gt;</code></li>
@@ -5010,21 +5010,39 @@ me@mybox$
                 <li><code>=&gt;</code></li>
             </ul>
         </li>
-        <li><code>NOT</code></li>
-        <li><code>AND</code></li>
-        <li><code>OR</code></li>
-        <li><code>XOR</code></li>
-        <li><code>EQV</code></li>
-        <li><code>IMP</code></li>
+        <li value="6"><code>NOT</code> (unary)</li>
+        <li value="5"><code>AND</code></li>
+        <li value="4"><code>OR</code></li>
+        <li value="3"><code>XOR</code></li>
+        <li value="2"><code>EQV</code></li>
+        <li value="1"><code>IMP</code></li>
     </ol>
     <p>
         Expressions within parentheses <code>()</code> are evaluated first.
         All binary operators are left-associative: operators of equal precedence are evaluated left to right.
     </p>
-    <p>
-        For example, exponentiation is more tightly bound than negation:
-        <code>-1^2 = -1</code> but <code>(-1)^2 = 1</code>.
-    </p>
+    <h5>Examples</h5>
+    <ul>
+        <li>
+            Exponentiation is more tightly bound than negation:
+            <code>-1^2 = -(1^2) = -1</code> but <code>(-1)^2 = 1</code>.
+        </li>
+        <li>
+            Exponentiation is left-associative:
+            <code>2^3^4 = (2^3)^4 = 4096</code>.
+        </li>
+    </ul>
+    <h5>Errors</h5>
+    <ul>
+        <li>
+            If any operator other than <code>+</code>, <code>-</code> or <code>NOT</code> is used without a
+            left operand, <samp>Syntax error</samp> is raised.
+        </li>
+        <li>
+            At the end of a statement, if any operator is used without a right operand, <samp>Missing operand</samp> is
+            raised. If this occurs elsewhere inside a statement, such as within brackets, <samp>Syntax error</samp> is raised.
+        </li>
+    </ul>
 
     <h4 id="math-operators">Mathematical operators</h4>
     <p>
@@ -5127,6 +5145,10 @@ me@mybox$
         <li>
             If <code><var>y=0</var></code>, <code><var>x</var> / <var>y</var></code>, <code><var>x</var> MOD <var>y</var></code> and
              <code><var>x</var> \ <var>y</var></code> will raise <samp>Division by zero</samp>.
+        </li>
+        <li>
+            If <code><var>x=0</var></code> and <code><var>y</var>&lt;0</code>, <code><var>x</var>^<var>y</var></code>
+            will raise <samp>Division by zero</samp>.
         </li>
         <li>
             If the result of any operation is too large to fit in a floating-point data type, <samp>Overflow</samp> is raised.
