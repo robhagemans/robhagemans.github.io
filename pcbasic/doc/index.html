@@ -28,8 +28,8 @@
     </ul>
 </nav>
 <header>
-<h1>PC-BASIC 15.08.4 documentation</h1>
-<small>Documentation compiled on 2016-02-28 14:17:12.</small>
+<h1>PC-BASIC 15.08.5 documentation</h1>
+<small>Documentation compiled on 2016-03-12 17:40:46.</small>
 </header>
 <nav class="toc">
     <h2 id="toc">Table of Contents</h2>
@@ -285,7 +285,7 @@
                                 <li><a href="#LOCATE"><code>LOCATE</code></a></li>
                                 <li><a href="#LOCK"><code>LOCK</code></a></li>
                                 <li><a href="#LPRINT"><code>LPRINT</code></a></li>
-                                <li><a href="#LSET"><code>LSET</code> and <code>RSET</code></a></li>
+                                <li><a href="#LSET"><code>LSET</code></a></li>
                                 <li><a href="#MERGE"><code>MERGE</code></a></li>
                                 <li><a href="#MID%24-statement"><code>MID$</code> (statement)</a></li>
                                 <li><a href="#MKDIR"><code>MKDIR</code></a></li>
@@ -353,7 +353,7 @@
                         <li><a href="#errors-messages">Errors and Messages</a>
                             <ul>
                                 <li><a href="#errors">Errors</a></li>
-                                <li><a>Other messages</a></li>
+                                <li><a href="#other-messages">Other messages</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -2015,7 +2015,7 @@ me@mybox$
 <a href="#--border" class="option-link">[<b>--border=</b><var>width</var>]</a>
 <a href="#--caption" class="option-link">[<b>--caption=</b><var>title</var>]</a>
 <a href="#--capture-caps" class="option-link">[<b>--capture-caps</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--cas1" class="option-link">[<b>--cas1=</b><var>type</var><b>:</b><var>value</var>[<b>:</b><var>loc</var>]]</a>
+<a href="#--cas1" class="option-link">[<b>--cas1=</b><var>type</var><b>:</b><var>value</var>]</a>
 <a href="#--cga-low" class="option-link">[<b>--cga-low</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--codepage" class="option-link">[<b>--codepage=</b><var>codepage_id</var>]</a>
 <a href="#--config" class="option-link">[<b>--config=</b><var>config_file</var>]</a>
@@ -2202,11 +2202,10 @@ me@mybox$
         </dd>
 
         <dt id="--cas1">
-            <code><b>--cas1=</b><var>type</var><b>:</b><var>value</var>[<b>:</b><var>loc</var>]</code>
+            <code><b>--cas1=</b><var>type</var><b>:</b><var>value</var></code>
         </dt>
         <dd>
-            Attach a resource to the <code>CAS1:</code> cassette device
-            and wind the virtual tape to <code><var>loc</var></code> seconds.
+            Attach a resource to the <code>CAS1:</code> cassette device.
             <code><var>type</var><b>:</b><var>value</var></code> can be
             <dl>
                 <dt><code><b>WAV:</b><var>wav_file</var></code></dt>
@@ -3580,8 +3579,16 @@ me@mybox$
                 <th>Description</th>
             </tr>
             <tr>
+                <td><a href="#LSET"><code>LSET</code></a></td>
+                <td>Copy a left-justified value into a string buffer</td>
+            </tr>
+            <tr>
                 <td><a href="#MID%24-statement"><code>MID$</code></a></td>
-                <td>Assign a value to part of a string</td>
+                <td>Copy a value into part of a string buffer</td>
+            </tr>
+            <tr>
+                <td><a href="#RSET"><code>RSET</code></a></td>
+                <td>Copy a right-justified value into a string buffer</td>
             </tr>
             <tr>
                 <th>Function</th>
@@ -3883,14 +3890,6 @@ me@mybox$
             <tr>
                 <td><a href="#LOCK"><code>LOCK</code></a></td>
                 <td>Locks a file or a range of records against other use</td>
-            </tr>
-            <tr>
-                <td><a href="#LSET"><code>LSET</code></a></td>
-                <td>Change the value of a random-access record buffer string</td>
-            </tr>
-            <tr>
-                <td><a href="#LSET"><code>RSET</code></a></td>
-                <td>Change the value of a random-access record buffer string</td>
             </tr>
             <tr>
                 <td><a href="#OPEN"><code>OPEN</code></a></td>
@@ -9405,7 +9404,8 @@ me@mybox$
                 an integer literal, e.g. <code>DRAW "U100"</code>
             </li>
             <li>
-                a numeric variable name <code><var>var</var></code> preceded by <code>=</code> and followed by <code>;</code> e.g. <code>DRAW "U=VAR;"</code>
+                a numeric variable name or array element <code><var>var</var></code> preceded by <code>=</code> and followed by <code>;</code>.
+                For example, <code>DRAW "U=VAR;"</code> or <code>DRAW "U=A(1);"</code>
             </li>
             <li>
                 the result of <code>VARPTR$(<var>var</var>)</code> preceded by <code>=</code>.  For example, <code>DRAW "U=" + VARPTR$(VAR)</code>
@@ -9621,8 +9621,8 @@ me@mybox$
                 associate the string variable from the field buffer.
             </li>
             <li>
-                Use <code><a href="#LSET">LSET</a></code> or <code><a href="#RSET">RSET</a></code> to change
-                values in the field buffer.
+                Use <code><a href="#LSET">LSET</a></code>, <code><a href="#RSET">RSET</a></code> or
+                <code><a href="#MID%24-statement">MID$</a></code> to copy values into a <code><a href="#FIELD">FIELD</a></code> buffer.
             </li>
             <li>
                 Use <code><a href="#GET-files">GET</a></code> to read values from the file into the field
@@ -9777,6 +9777,10 @@ me@mybox$
             </li>
             <li>
                 <code><var>loop_var</var></code> is an array element: <samp>Syntax error</samp> .
+            </li>
+            <li>
+                <code><var>loop_var</var></code> is an integer variable and a <code><var>start</var></code>, <code><var>stop</var></code> or <code><var>step</var></code>
+                is outside the range <code>[-32768, 32767]</code>: <samp>Overflow</samp> .
             </li>
         </ul>
     </section>
@@ -11108,10 +11112,11 @@ me@mybox$
         </code>
         <p>
             Loads the program stored in a file into memory.
-            If <code>,R</code> is specified, runs the file after loading.
-            <code>LOAD ,R</code> keeps all data files open. Existing variables will be
-            cleared and any program in memory will be erased. <code>LOAD</code> implies a
+            Existing variables will be cleared and any program in memory will be erased. <code>LOAD</code> implies a
             <code><a href="#CLEAR">CLEAR</a></code>.
+        </p>
+        <p>
+            If <code>,R</code> is specified, keeps all data files open and runs the specified file.
         </p>
         <h5>Parameters</h5>
         <ul>
@@ -11273,21 +11278,19 @@ me@mybox$
 <hr>
 
     <section>
-        <h4 id="LSET"><code>LSET</code> and <code>RSET</code></h4>
+        <h4 id="LSET"><code>LSET</code></h4>
         <code class="flow">
-            {<b>LSET</b>|<b>RSET</b>} <var>string_name</var> <b>=</b> <var>expression</var>
+            <b>LSET</b> <var>string_name</var> <b>=</b> <var>expression</var>
         </code>
         <p>
-            Assigns a value to a <code><a href="#FIELD">FIELD</a></code> variable such that
-            it overwrites the <code>FIELD</code> record.
-            With <code>LSET</code>, the value will be left-justified if it is shorter than the length of
-            the <code>FIELD</code> variable and the remaining characters are replaced by
-            spaces. <code>RSET</code> does the same but the value will be right-justified.
+            Copies a string value into an existing string variable or array element.
+            The value will be left-justified and any remaining characters are replaced by
+            spaces.
         </p>
         <h5>Parameters</h5>
         <ul>
             <li>
-                <code><var>string_name</var></code> is a string variable.
+                <code><var>string_name</var></code> is a string variable or array element.
             </li>
                 <li><code><var>expression</var></code> is a string expression.
             </li>
@@ -11295,23 +11298,28 @@ me@mybox$
         <h5>Notes</h5>
         <ul>
             <li>
-                If <code><var>string_name</var></code> is not a <code>FIELD</code> variable, the value is justified into the
-                existing string, which retains its length.
+                If <code><var>expression</var></code> has a value that is longer than the length of the target variable,
+                it is truncated at the tail to the length of the target variable.
             </li>
             <li>
-                If <code><var>expression</var></code> has a value that is longer than the length of the variable,
-                it is truncated at the back at the length of the variable.
+                If <code><var>string_name</var></code> has not been allocated before, this statement has no effect.
+            </li>
+            <li>
+                Use <code><a href="#LSET">LSET</a></code>, <code><a href="#RSET">RSET</a></code> or
+                <code><a href="#MID%24-statement">MID$</a></code> to copy values into a <code><a href="#FIELD">FIELD</a></code> buffer.
             </li>
             <li>
                 If <code><a href="#LET">LET</a></code> is used on a <code>FIELD</code> variable
                 instead of <code>L|RSET</code>, the variable is
-                detached from the field and becomes a normal string variable.
+                detached from the field and a new, normal string variable is allocated.
             </li>
         </ul>
         <h5>Errors</h5>
         <ul>
             <li>
                 <code><var>string_name</var></code> is not a string variable: <samp>Type mismatch</samp>.
+            </li>
+            <li>
                 <code><var>expression</var></code> does not have a string value: <samp>Type mismatch</samp>.
             </li>
         </ul>
@@ -11560,6 +11568,11 @@ me@mybox$
             <li>
                 <code><var>var_0</var>, <var>var_1</var>, ...</code> are string variables: <samp>NEXT without FOR</samp>.
             </li>
+            <li>
+                The (implicit or explicit) loop variable is an integer variable and is
+                taken outside the range <code>[-32768, 32767]</code> when incremented after the final iteration: <samp>Overflow</samp> .
+            </li>
+
         </ul>
     </section>
 <hr>
@@ -13196,13 +13209,13 @@ me@mybox$
                     <th>Effect</th>
                 </tr>
                 <tr>
-                    <td><code>{<b>A</b>|<b>B</b>|<b>C</b>|<b>D</b>|<b>E</b>|<b>F</b>|<b>G</b>}[<b>#</b>|<b>+</b>|<b>-</b>][<var>n</var>]</code></td>
+                    <td><code>{<b>A</b>|<b>B</b>|<b>C</b>|<b>D</b>|<b>E</b>|<b>F</b>|<b>G</b>}[<b>#</b>|<b>+</b>|<b>-</b>][<var>m</var>]</code></td>
                     <td>
                         Play a note. <br>
                         <code>+</code> or <code>#</code> indicates sharp. <br>
                         <code>-</code> indicates flat. <br>
-                        <code><var>n</var></code>
-                        indicates duration of an <code><var>n</var></code>th note.
+                        <code><var>m</var></code> is a numeric literal and
+                        indicates duration of an <code><var>m</var></code>th note.
                     </td>
                 </tr>
                 <tr>
@@ -13341,15 +13354,21 @@ me@mybox$
         </p>
         <ul>
             <li>
-                an integer literal, e.g. <code>PLAY "G4"</code>
+                an integer literal, e.g. <code>PLAY "L4G"</code>
             </li>
             <li>
-                a numeric variable name <code><var>var</var></code> preceded by <code>=</code> and followed by <code>;</code> e.g. <code>PLAY "G=VAR;"</code>
+                a numeric variable name or array element <code><var>var</var></code> preceded by <code>=</code> and followed by <code>;</code>.
+                For example, <code>PLAY "L=VAR;G"</code> or <code>PLAY "L=A(1);G"</code>
             </li>
             <li>
-                the result of <code>VARPTR$(<var>var</var>)</code> preceded by <code>=</code>.  For example, <code>PLAY "G=" + VARPTR$(VAR)</code>
+                the result of <code>VARPTR$(<var>var</var>)</code> preceded by <code>=</code>.  For example, <code>PLAY "L=" + VARPTR$(VAR) + "G"</code>
             </li>
         </ul>
+        <p>
+            Note that only number <em>literals</em> may follow named notes and dereferencing variables or arrays is not allowed there.
+            It is an error to write <code>PLAY "G=VAR;"</code> or <code>PLAY "G=" + VARPTR$(VAR)</code>.
+            Use <code>PLAY "G4"</code> or <code>PLAY "L=VAR;G"</code> or <code>PLAY "L=" + VARPTR$(VAR) + "G"</code> instead.
+        </p>
         <h5>Errors</h5>
         <ul>
             <li>
@@ -14297,30 +14316,73 @@ me@mybox$
     </section>
 <hr>
 
+
     <section>
         <h4 id="RSET"><code>RSET</code></h4>
+        <code class="flow">
+            <b>RSET</b> <var>string_name</var> <b>=</b> <var>expression</var>
+        </code>
         <p>
-            See <code><a href="#LSET">LSET</a></code>.
+            Copies a string value into an existing string variable or array element.
+            The value will be right-justified and any remaining characters are replaced by
+            spaces.
         </p>
+        <h5>Parameters</h5>
+        <ul>
+            <li>
+                <code><var>string_name</var></code> is a string variable or array element.
+            </li>
+                <li><code><var>expression</var></code> is a string expression.
+            </li>
+        </ul>
+        <h5>Notes</h5>
+        <ul>
+            <li>
+                If <code><var>expression</var></code> has a value that is longer than the length of the target variable,
+                it is truncated at the tail to the length of the target variable.
+            </li>
+            <li>
+                If <code><var>string_name</var></code> has not been allocated before, this statement has no effect.
+            </li>
+            <li>
+                Use <code><a href="#LSET">LSET</a></code>, <code><a href="#RSET">RSET</a></code> or
+                <code><a href="#MID%24-statement">MID$</a></code> to copy values into a <code><a href="#FIELD">FIELD</a></code> buffer.
+            </li>
+            <li>
+                If <code><a href="#LET">LET</a></code> is used on a <code>FIELD</code> variable
+                instead of <code>L|RSET</code>, the variable is
+                detached from the field and a new, normal string variable is allocated.
+            </li>
+        </ul>
+        <h5>Errors</h5>
+        <ul>
+            <li>
+                <code><var>string_name</var></code> is not a string variable: <samp>Type mismatch</samp>.
+            </li>
+            <li>
+                <code><var>expression</var></code> does not have a string value: <samp>Type mismatch</samp>.
+            </li>
+        </ul>
     </section>
+<hr>
 <hr>
 
     <section>
         <h4 id="RUN"><code>RUN</code></h4>
         <code class="flow">
-            <b>RUN</b> [<var>line</var>|<var>file_spec</var>] [<b>,R</b>]
+            <b>RUN</b> [<var>line_number</var> [<var>anything</var>]|<var>file_spec</var> [<b>, R</b>]]
         </code>
         <p>
             Executes a program.
             Existing variables will be
             cleared and any program in memory will be erased. <code>RUN</code> implies a <code><a href="#CLEAR">CLEAR</a></code>
-            If <code>,R</code> is specified, files are kept open; if not, all files are closed.
+            If <code>,R</code> is specified after <code><var>file_spec</var></code>, files are kept open; if not, all files are closed.
         </p>
         <h5>Parameters</h5>
         <ul>
             <li>
-                <code><var>line</var></code> is a valid line number in the current program.
-                If specified, execution starts from this line number.
+                <code><var>line_number</var></code> is a valid line number in the current program.
+                If specified, execution starts from this line number. The rest of the <code>RUN</code> statement is ignored in this case.
             </li>
             <li>
                 The string expression <code><var>file_spec</var></code>, if specified,
@@ -14331,13 +14393,13 @@ me@mybox$
         <h5>Errors</h5>
         <ul>
             <li>
-                <code><var>line</var></code> does not exist: <samp>Undefined line number</samp>.
+                <code><var>line_number</var></code> is not a line number in the current program: <samp>Undefined line number</samp>.
             </li>
             <li>
-                <code><var>filename</var></code> cannot be found: <samp>File not found</samp>.
+                <code><var>file_spec</var></code> cannot be found: <samp>File not found</samp>.
             </li>
             <li>
-                <code><var>filename</var></code> is an empty string: <samp>Bad file number</samp>.
+                <code><var>file_spec</var></code> is an empty string: <samp>Bad file number</samp>.
             </li>
             <li>
                 A loaded text file contains lines without line numbers:
@@ -16007,8 +16069,15 @@ me@mybox$
         in which the error occurred, wth the cursor positioned at the location
         where the error was raised.
     </p>
-    
-    <h4>Other messages</h4>
+    <p>
+        A <samp>Division by zero</samp> error or, in a floating point calculation, an <samp>Overflow</samp>,
+        will not interrupt execution unless it occurs
+        within an error handling routine. The error message will be printed on the console
+        and the result of the offending calculation will be taken to be the maximum
+        value that fits in the appropriate floating-point variable. <samp>Overflow</samp>
+        in an integer calculation will always interrupt execution like other errors.
+    </p>
+    <h4 id="other-messages">Other messages</h4>
     <dl>
         <dt>
             <samp>Break</samp>
@@ -16019,6 +16088,14 @@ me@mybox$
             keyboard interrupt (such as <kbd>Ctrl</kbd>+<kbd>Break</kbd>). If the
             interrupt happens in a program, the <samp>Break</samp> message will be
             supplemented with the line number in which the interrupt occurred.
+        </dd>
+        <dt>
+            <samp>?Redo from start</samp>
+        </dt>
+        <dd>
+            The input provided on the console for an <a href="#INPUT"><code>INPUT</code></a>
+            statement does not match the expected format. The number or type of
+            inputs is not correct. Re-enter all inputs.
         </dd>
         <dt>
             <samp><var>filename</var> Found.</samp>
@@ -16477,97 +16554,58 @@ me@mybox$
         </p>
         <h4 id="mbf">Microsoft Binary Format
         </h4><p>
-            GW-BASIC's floating point numbers are implemented in Microsoft Binary Format
-            (MBF), which differs from the now ubiquitous IEEE 754 format. PC-BASIC follows
-            GW-BASIC's implementation. Consequently, binary files generated by either BASIC are
+            Floating point numbers in GW-BASIC and PC-BASIC are represented in <dfn>Microsoft Binary Format
+            (MBF)</dfn>, which differs from the IEEE 754 standard used by practically all modern software and hardware.
+            Consequently, binary files generated by either BASIC are
             fully compatible with each other and with some applications contemporary to
-            GW-BASIC, but not easily interchanged with other software. QBASIC, for example, uses IEEE 754
+            GW-BASIC, but not easily interchanged with other software. QBASIC, for example, uses IEEE
             floats.
         </p>
         <p>
-            MBF differs from IEEE 754 in positioning the sign bit in a mantissa byte
-            rather than the exponent, and in using only an 8-bit exponent even for double
-            precision, making the range of allowable numbers in double precision smaller,
-            but their precision higher, than for an IEEE double.
-            Schematically, MBF floating point numbers are represented as follows.
+            MBF differs from IEEE in the position of the sign bit and in using
+            only 8 bits for the exponent, both in single- and in double-precision.
+            This makes the range of allowable numbers in an MBF double-precision number smaller,
+            but their precision higher, than for an IEEE double:
+            an MBF single has 23 bits of precision,
+            while an MBF double has 55 bits of precision. Both have the same range.
         </p>
-        <h5>Single precision</h5>
-        <table>
-            <tr>
-                <th>Offset</th>
-                <td><code>00  01  02  03</code></td>
-            </tr>
-            <tr>
-                <th>Use</th>
-                <td><code><var>m3</var>  <var>m2</var>  <var>m1</var>  <var>ex</var></code></td>
-            </tr>
-        </table>
-        <h5>Double precision</h5>
-        <table>
-            <tr>
-                <th>Offset</th>
-                <td><code>00  01  02  03  04  05  06  07</code></td>
-            </tr>
-            <tr>
-                <th>Use</th>
-                <td><code><var>m7</var>  <var>m6</var>  <var>m5</var>  <var>m4</var>  <var>m3</var>  <var>m2</var>  <var>m1</var>  <var>ex</var></code></td>
-            </tr>
-        </table>
-        <p>where:</p>
-        <div class="scrollable">
-            <table>
-                <tr>
-                    <td><code><var>ex</var></code></td>
-                    <td>the exponent byte</td>
-                </tr>
-                <tr>
-                    <td><code><var>m1</var></code></td>
-                    <td>
-                        most significant mantissa byte:
-                        <code><var>m1</var> = <var>s f1 f2 f3 f4 f5 f6 f7</var></code>
-                    </td>
-                </tr>
-                <tr>
-                    <td><code><var>m2</var>&#8212;<var>m7</var></code></td>
-                    <td>
-                        bytes of decreasing significance:
-                        <code><var>m2</var> = <var>f8 f9 fA fB fC fD fE fF</var></code>, etc.
-                    </td>
-                </tr>
-                <tr>
-                    <td><code><var>s</var></code></td>
-                    <td>sign bit</td>
-                </tr>
-                <tr>
-                    <td><code><var>f</var></code></td>
-                    <td>fraction bit</td>
-                </tr>
-            </table>
-        </div>
-        <dl>
-            <dt>sign</dt>
-            <dd>If the sign bit is set, the number is negative.</dd>
+        <p>
+            Unlike IEEE, the Microsoft Binary Format does not support signed zeroes, subnormal numbers, infinities or not-a-number values.
+        </p>
 
-            <dt>mantissa</dt>
+        <p>
+            MBF floating point numbers are represented in bytes as follows:
+        </p>
+        <dl class="compact">
+            <dt>
+                Single
+            </dt>
             <dd>
-                There is an assumed <code>1</code> bit after the radix point, so the mantissa binary
-                fraction is <code>0 . 1 <var>f0 f1 f2</var> ...</code> where <code><var>f</var></code>s are the fraction bits.
+                <var>M<sub>3</sub></var>  <var>M<sub>2</sub></var>  <var>M<sub>1</sub></var>  <var>E<sub>0</sub></var>
             </dd>
-
-            <dt>exponent</dt>
+            <dt>
+                Double
+            </dt>
             <dd>
-                The exponent is biased by 128: the mantissa fraction is multiplied by
-                <code>2 ^ (<var>exp</var> - 128)</code>.
-            </dd>
-
-            <dt>zero</dt>
-            <dd>
-                Any float with the exponent byte set to <code>0</code> is interpreted as a zero.
+                <var>M<sub>7</sub></var>  <var>M<sub>6</sub></var>  <var>M<sub>5</sub></var>  <var>M<sub>4</sub></var>  <var>M<sub>3</sub></var>  <var>M<sub>2</sub></var>  <var>M<sub>1</sub></var>  <var>E<sub>0</sub></var>
             </dd>
         </dl>
         <p>
-            A single-precision MBF float therefore has 23 bits of precision,
-            while a double-precision MBF float has 55 bits of precision.
+            Here, <var>E<sub>0</sub></var> is the <dfn>exponent byte</dfn> and the
+            other bytes form the <dfn>mantissa</dfn>, in little-endian order so that
+            <var>M<sub>1</sub></var> is the most significant byte.
+            The most significant bit of <var>M<sub>1</sub></var> is the <dfn>sign bit</dfn>, followed
+            by the most significant bits of the mantissa:
+            <var>M<sub>1</sub></var> = <var>s<sub>0</sub>  f<sub>1</sub> f<sub>2</sub> f<sub>3</sub> f<sub>4</sub> f<sub>5</sub> f<sub>6</sub> f<sub>7</sub></var>.
+            The other bytes contain the less-significant mantissa bits:
+            <var>M<sub>2</sub></var> = <var>f<sub>8</sub> f<sub>9</sub> f<sub>A</sub> f<sub>B</sub> f<sub>C</sub> f<sub>D</sub> f<sub>E</sub> f<sub>F</sub></var>, and so on.
+        </p>
+        <p>
+            The value of the floating-point number is <var>v</var> = 0 if <var>E<sub>0</sub></var> = 0 and
+            <var>v</var> = (-1) <sup><var>s<sub>0</sub></var></sup> &#215; <var>mantissa</var> &#215; 2 <sup><var>E<sub>0</sub></var> - 128</sup> otherwise,
+            where
+            the mantissa is formed as a binary fraction
+            <var>mantissa</var> = 0 . 1 <var>f<sub>1</sub></var> <var>f<sub>2</sub></var> <var>f<sub>3</sub></var> ...
         </p>
     </section>
     <hr>
