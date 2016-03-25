@@ -28,8 +28,8 @@
     </ul>
 </nav>
 <header>
-<h1>PC-BASIC 15.08.5 documentation</h1>
-<small>Documentation compiled on 2016-03-12 17:40:46.</small>
+<h1>PC-BASIC 15.08.6 documentation</h1>
+<small>Documentation compiled on 2016-03-25 16:17:07.</small>
 </header>
 <nav class="toc">
     <h2 id="toc">Table of Contents</h2>
@@ -511,6 +511,7 @@ to interrupt a running program and return to direct mode.  </p>
 <li><a href="http://www.garypeek.com/basic/gwprograms.htm">Gary Peek</a> provides miscellaneous GW-BASIC sources which he released into the public domain.  </li>
 <li><a href="http://www.moorecad.com/classicbasic/index.html">S.A. Moore's Classic BASIC Games page</a> provides the BASIC games from David Ahl's classic book.  </li>
 <li><a href="http://www.geocities.ws/joseph_sixpack/btoc.html">Joseph Sixpack's Last Book of GW-BASIC</a> has lots of office and utility programs, including the PC-CALC spreadsheet.  </li>
+<li><a href="https://web.archive.org/web/20060410121551/http://scottserver.net/basically/geewhiz.html">Thomas C. McIntyre</a>'s GeeWhiz Collection has business applications, games and reference material.</li>
 <li><a href="http://cd.textfiles.com">cd.textfiles.com</a> has tons of old shareware, among which some good GW-BASIC games.  </li>
 </ul></article>
 <!--
@@ -5395,7 +5396,10 @@ me@mybox$
     </ul>
 
     <h4 id="string-operators">String operators</h4>
-    <p>The string concatenation operator is <code>+</code>. It has a binary as well as a unary form.</p>
+    <p>
+        The string concatenation operator is <code>+</code>. It has a binary as well as a unary form.
+        The unary minus may also be used on strings, but has no effect.
+    </p>
     <div class="scrollable">
         <table>
             <tr>
@@ -5411,6 +5415,13 @@ me@mybox$
             <tr>
                 <td id="unary-concat"><code>+ <var>y</var></code></td>
                 <td>Unary Plus</td>
+                <td>
+                    Value of <code><var>y</var></code>
+                </td>
+            </tr>
+            <tr>
+                <td id="string-unary-minus"><code>- <var>y</var></code></td>
+                <td>Unary Minus</td>
                 <td>
                     Value of <code><var>y</var></code>
                 </td>
@@ -5455,18 +5466,13 @@ me@mybox$
             <var>y</var><b> = ABS(</b><var>x</var><b>)</b>
         </code>
         <p>
-            Returns the absolute value of <code><var>x</var></code>.
+            Returns the absolute value of <code><var>x</var></code> if <code><var>x</var></code> is a number and the
+            value of <code><var>x</var></code> if <code><var>x</var></code> is a string.
         </p>
         <h5>Parameters</h5>
         <ul>
             <li>
-                <code><var>x</var></code> is an expression with a numeric value.
-            </li>
-        </ul>
-        <h5>Errors</h5>
-        <ul>
-            <li>
-                <code><var>x</var></code> has a string value: <samp>Type mismatch</samp>.
+                <code><var>x</var></code> is an expression.
             </li>
         </ul>
     </section>
@@ -6063,6 +6069,10 @@ me@mybox$
             </li>
             <li>
                 The type of one or more parameters differs from the function definition:
+                <samp>Type mismatch</samp>.
+            </li>
+            <li>
+                The return type is incompatible with the function name's sigil:
                 <samp>Type mismatch</samp>.
             </li>
             <li>
@@ -8995,7 +9005,8 @@ me@mybox$
             evaluated with the supplied parameters substituted. Any variable names used in the function that are not
             in the argument list refer to the corresponding global variables.
             The result of the
-            evaluation is the return value of <code>FN<var>name</var></code>.
+            evaluation is the return value of <code>FN<var>name</var></code>. The type of the return value
+            must be compatible with the type indicated by <code><var>name</var></code>.
         </p>
         <h5>Notes</h5>
         <ul>
@@ -9024,6 +9035,11 @@ me@mybox$
         <ul>
             <li>
                 The statement is executed directly instead of in a program line: <samp>Illegal direct</samp>.
+            </li>
+            <li>
+                If the type of the return value is incompatible with the type of <code><var>name</var></code>,
+                no error is raised at the <code>DEF FN</code> statement; however, a <samp>Type mismatch</samp>
+                will be raised at the first call of <code>FN<var>name</var></code>.
             </li>
         </ul>
     </section>
@@ -14165,7 +14181,10 @@ me@mybox$
                 including any line number offsets or increments. However silly, this agrees with GW-BASIC's behaviour.
             </li>
             <li>
-               If a referenced line number does not exist in the program, the statement prints a
+                A zero line number following the keywords <code>ERROR GOTO</code> will not be renumbered.
+            </li>
+            <li>
+                If a referenced line number does not exist in the program, the statement prints a
                 message (not an error) <code>Undefined line <var>ref</var> in <var>old_line</var></code> where <code><var>old_line</var></code>
                 is the line number prior to renumbering. The referenced line number will be
                 left unchanged, but the line's old line number will be renumbered.
@@ -15751,7 +15770,8 @@ me@mybox$
                     <p>
                         An <a href="#INPUT"><code>INPUT</code></a> or
                         <a href="#LINE-INPUT"><code>LINE INPUT</code></a> statement encountered
-                        an input string longer than 255 characters.
+                        an input string longer than 255 characters or the plain-text program file
+                        being loaded contains a line with more than 255 characters.
                     </p>
                 </td>
             </tr>
@@ -16096,6 +16116,16 @@ me@mybox$
             The input provided on the console for an <a href="#INPUT"><code>INPUT</code></a>
             statement does not match the expected format. The number or type of
             inputs is not correct. Re-enter all inputs.
+        </dd>
+        <dt>
+            <samp>Undefined line <var>ref_num</var> in <var>line_num</var></samp>
+        </dt>
+        <dd>
+            The <a href="#RENUM"><code>RENUM</code></a> statement encountered
+            a reference to the line number <code><var>ref_num</var></code>
+            which is not defined in the program. The reference occurs on line number
+            <code><var>line_num</var></code>.
+            The undefined line number reference will not be renumbered.
         </dd>
         <dt>
             <samp><var>filename</var> Found.</samp>
@@ -18666,11 +18696,12 @@ apologies to those whose contribution I have failed to acknowledge here.</p>
 </ul>
 <h3 id="acks_bibliography">Bibliography</h3>
 <ul>
-<li><em>GW-BASIC 3.23 User's Guide</em>, Microsoft Corporation, 1987</li>
-<li><em>IBM Personal Computer Hardware Reference Library: BASIC</em>, IBM, 1982</li>
-<li><em>Tandy 1000 BASIC, A Reference Guide</em>, Tandy Corporation</li>
-<li><strong>William Barden, Jr.</strong>, <em>Graphics and Sound for the Tandy 1000s and PC Compatibles</em>, Microtrend, 1987</li>
-<li><strong>Don Inman</strong> and <strong>Bob Albrecht</strong>, <em>The GW-BASIC Reference</em>, Osborne McGraw-Hill, 1990</li>
+<li><em>GW-BASIC 3.23 User's Guide</em>, Microsoft Corporation, 1987.</li>
+<li><em>IBM Personal Computer Hardware Reference Library: BASIC</em>, IBM, 1982.</li>
+<li><em>Tandy 1000 BASIC, A Reference Guide</em>, Tandy Corporation.</li>
+<li><strong>William Barden, Jr.</strong>, <em>Graphics and Sound for the Tandy 1000s and PC Compatibles</em>, Microtrend, 1987.</li>
+<li><strong>Don Inman</strong> and <strong>Bob Albrecht</strong>, <em>The GW-BASIC Reference</em>, Osborne McGraw-Hill, 1990.</li>
+<li><strong>Thomas C. McIntyre</strong>, <em>BLUE: BASIC Language User Essay</em>, 1991, <a href="https://web.archive.org/web/20060410121551/http://scottserver.net/basically/geewhiz.html">available online</a>.</li>
 </ul>
 <h3 id="acks_development-tools">Development tools</h3>
 <p>PC-BASIC is developed using <a href="https://git-scm.com/">Git</a> source control,
@@ -18700,9 +18731,10 @@ behaviour of various Microsoft BASIC dialects.</p>
 <h3 id="pc-basic-interpreter">PC-BASIC interpreter</h3>
 <p><strong>Copyright &#169; 2013&#8212;2016 Rob Hagemans.</strong></p>
 <p><em>Source code available at <a href="https://github.com/robhagemans/pcbasic">https://github.com/robhagemans/pcbasic</a>.</em></p>
-<p>This program is free software; you can redistribute it and/or modify
-it under the terms of the <a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License, Version 3</a>,
-as published by the Free Software Foundation.</p>
+<p>This program is free software: you can redistribute it and/or modify
+it under the terms of the <a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License</a> as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.</p>
 <p>This program is distributed in the hope that it will be useful,
 but WITHOUT ANY WARRANTY; without even the implied warranty of
 MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
