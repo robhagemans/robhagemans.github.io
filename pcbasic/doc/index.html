@@ -28,8 +28,8 @@
     </ul>
 </nav>
 <header>
-<h1>PC-BASIC 15.08.6 documentation</h1>
-<small>Documentation compiled on 2016-03-25 16:17:07.</small>
+<h1>PC-BASIC 15.08.9 documentation</h1>
+<small>Documentation compiled on 2016-06-18 18:15:23.</small>
 </header>
 <nav class="toc">
     <h2 id="toc">Table of Contents</h2>
@@ -138,7 +138,8 @@
                         <li><a href="#variables">Variables</a>
                             <ul>
                                 <li><a href="#typechars">Types and sigils</a></li>
-                                <li><a href="#arrays">Array elements</a></li>
+                                <li><a href="#arrays">Arrays</a></li>
+                                <li><a href="#conversions">Conversions</a></li>
                             </ul>
                         </li>
                         <li><a href="#operators">Operators</a>
@@ -4601,7 +4602,8 @@ me@mybox$
         syntax is supported, so no <samp>Syntax error</samp> should be raised if
         the statements or functions are used correctly. However, the statements
         do nothing and the functions return zero or the empty string.
-    </p><p>
+    </p>
+    <p>
         These language elements may be implemented in future
         versions of PC-BASIC.
     </p>
@@ -4886,10 +4888,10 @@ me@mybox$
         Variable names must start with a letter; all characters of the variable name
         (except the <a href="#typechars">sigil</a>) must be letters <code>A&#8212;Z</code>, figures <code>0&#8212;9</code>, or a dot <code>.</code>
         Only the first 40 characters in the name are significant. A variable name must
-        not be identical to a <a href="#keywords">keyword</a> or a keyword plus sigil.
+        not be identical to a <a href="#reserved-words">reserved word</a> or a reserved word plus sigil.
         Therefore, for example, you cannot name a variable <code>TO!</code> but you can
-        name it <code>AS!</code>. Variable
-        names may <em>contain</em> any keyword. Variable names may also start with a keyword, with the exception of <code><a href="#USR">USR</a></code> and
+        name it <code>AS!</code>. Variable names may <em>contain</em> any reserved word.
+        Variable names may also start with a reserved word, with the exception of <code><a href="#USR">USR</a></code> and
         <code><a href="#FN">FN</a></code>. Thus, <code>FNORD%</code> and <code>USRNME$</code>
         are not legal variable names while <code>FRECKLE%</code> and <code>LUSR$</code> are.
     </p>
@@ -4899,7 +4901,10 @@ me@mybox$
         <code>A%</code>, <code>A!</code> and <code>A#</code> as different variables.
         Which one of those is also known as <code>A</code> depends on the settings in
         <code><a href="#DEFINT">DEFINT</a></code>/<code>DEFDBL</code>/<code>DEFSNG</code>/<code>DEFSTR</code>.
-        By default, <code>A</code> equals the single-precision <code>A!</code>. The
+        By default, <code>A</code> equals the single-precision <code>A!</code>.
+    </p>
+    <p>
+        Furthermore, the
         <a href="#arrays">arrays</a> <code>A$()</code>, <code>A%()</code>,
         <code>A!()</code>, <code>A#()</code> are separate from the scalar
         variables of the same name.
@@ -4952,7 +4957,7 @@ me@mybox$
         integers as their two's complement.
     </p>
 
-    <h4 id="arrays">Array elements</h4>
+    <h4 id="arrays">Arrays</h4>
     <p>
         Arrays are indexed with round or square
         brackets; even mixing brackets is allowed. The following are all legal array elements: <code>A[0]</code>, <code>A(0)</code>,
@@ -4972,6 +4977,39 @@ me@mybox$
         with <code><a href="#CLEAR">CLEAR</a></code> or
         <code><a href="#ERASE">ERASE</a></code>.
     </p>
+
+    <h4 id="conversions">Conversions</h4>
+    <p>
+        PC-BASIC will implicitly convert between the three numerical data types. When a value of
+        one type is assigned to a variable, array element or parameter of another
+        type, it is converted according to the following rules:
+    </p>
+    <ul>
+        <li>
+            Single- and double-precision floats are converted to integer by rounding
+            to the nearest whole number. Halves are rounded away from zero. If the resulting whole
+            number is outside the allowed range for integers, <samp>Overflow</samp> is raised.
+        </li>
+        <li>
+            Double-precision floats are converted to single-precision floats by
+            Gaussian rounding of the mantissa, where the new least significant bit of the
+            mantissa is rounded up if the clipped-off binary fraction is greater than one-half; halves
+            are rounded to even.
+        </li>
+        <li>
+            Integers are converted to their exact representation as single-
+            or double-precision floats.
+        </li>
+        <li>
+            Single-precision floats are converted to their exact representation as
+            double-precision floats.
+        </li>
+        <li>
+            There is no implicit conversion between strings and any of the numeric types.
+            Attempting to assign a string value to a numeric variable, array element or parameter
+            (or vice versa) will raise <samp>Type mismatch</samp>.
+    </li></ul>
+
 </section>
 <hr>
 
@@ -6294,7 +6332,7 @@ me@mybox$
             <li>
                 When reading from the keyboard directly or through <code>KYBD:</code>, arrow keys, <kbd>Del</kbd>,
                 <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>Pg Up</kbd>, <kbd>Pg Dn</kbd> are passed as <code>NUL</code> characters. Function keys
-                are ignored if they are event-trapped, otherwise keyword replacement is
+                are ignored if they are event-trapped, otherwise function-key macro replacement is
                 active as normal.
             </li>
         </ul>
@@ -8321,8 +8359,9 @@ me@mybox$
                 The purpose of <code><var>expr</var></code> is unknown.
             </li>
             <li>
-                If called inside a <code><a href="#FOR">FOR</a></code>&#8212;<code><a href="#NEXT">NEXT</a></code> or <code><a href="#WHILE">WHILE</a></code>&#8212;<code><a href="#WEND">WEND</a></code> loop, an error will be raised at
-                the iteration keyword as the loop stacks are cleared.
+                If called inside a <code><a href="#FOR">FOR</a></code>&#8212;<code><a href="#NEXT">NEXT</a></code> or
+                <code><a href="#WHILE">WHILE</a></code>&#8212;<code><a href="#WEND">WEND</a></code> loop, an error will be raised at
+                the <code>NEXT</code> or <code>WEND</code> statement, since the loop stacks have been cleared.
             </li>
         </ul>
         <h5>Errors</h5>
@@ -9337,7 +9376,8 @@ me@mybox$
                     </table>
                 </div>
                 <p>
-                    where <code><var>n</var></code>, <code><var>x</var></code>, <code><var>y</var></code> are integers in <code>[0&#8212;9999]</code>.
+                    where <code><var>n</var></code> is an integer in <code>[-32768&#8212;32767]</code> and
+                    <code><var>x</var></code>, <code><var>y</var></code> are integers in <code>[0&#8212;9999]</code>.
                     Where optional, <code><var>n</var></code> defaults to <code>1</code>.
                 </p>
             </dd>
@@ -9379,7 +9419,8 @@ me@mybox$
                         <tr>
                             <td><code><b>C</b><var>n</var></code></td>
                             <td>
-                                set the foreground attribute to <code><var>n</var></code>.
+                                set the foreground attribute to <code><var>n</var></code>,
+                                where <code><var>n</var></code> is an integer in <code>[-32768&#8212;32767]</code>
                                 See <code><a href="#COLOR">COLOR</a></code>.
                             </td>
                         </tr>
@@ -9387,7 +9428,8 @@ me@mybox$
                             <td><code><b>P</b><var>n</var>,<var>b</var></code></td>
                             <td>
                                 flood fill with attribute <code><var>n</var></code> and boundary
-                                attribute <code><var>b</var></code>.
+                                attribute <code><var>b</var></code>,
+                                where <code><var>n</var>, <var>b</var></code> are integers in <code>[0&#8212;9999]</code>
                                 See <code><a href="#PAINT">PAINT</a></code>.
                             </td>
                         </tr>
@@ -9436,6 +9478,12 @@ me@mybox$
             <li>
                 The value <code><var>n</var></code> in the <code>TA</code>, <code>A</code> and <code>C</code> command can be left out but <em>only</em> if the
                 command is terminated by a semicolon. <code><var>n</var></code> defaults to <code>0</code>.
+            </li>
+            <li>
+                In GW-BASIC, the numeric arguments of <code><b>U</b></code>, <code><b>L</b></code>, <code><b>D</b></code>,
+                <code><b>R</b></code>, <code><b>E</b></code>, <code><b>F</b></code>, <code><b>G</b></code>, <code><b>H</b></code>, and <code><b>C</b></code>
+                can be in the range <code>[-99999&#8212;99999]</code>;
+                however, results for large numbers are unpredictable. This is not implemented in PC-BASIC.
             </li>
         </ul>
         <h5>Errors</h5>
@@ -11703,7 +11751,9 @@ me@mybox$
         <h5>Parameters</h5>
         <ul>
             <li>
-                <code><var>n</var></code> is a numeric expression in <code>[0&#8212;255]</code>. The expression must not start with the <code>STRIG</code>, <code>PEN</code>, <code>PLAY</code> or <code>TIMER</code> function keywords; if you need these functions, the expression must be bracketed.
+                <code><var>n</var></code> is a numeric expression in <code>[0&#8212;255]</code>.
+                The expression must not start with the <code>STRIG</code>, <code>PEN</code>, <code>PLAY</code> or <code>TIMER</code>
+                function keywords; if you need these functions, the expression must be bracketed.
             </li>
             <li>
                 <code><var>line_number_0</var>, <var>line_number_1</var>, ...</code> are existing line numbers in the program.
@@ -13232,6 +13282,8 @@ me@mybox$
                         <code>-</code> indicates flat. <br>
                         <code><var>m</var></code> is a numeric literal and
                         indicates duration of an <code><var>m</var></code>th note.
+                        <code><var>m</var></code> is in the range <code>[0&#8212;64]</code>.
+                        If <code><var>m</var>=0</code> or omitted, use the default length.
                     </td>
                 </tr>
                 <tr>
@@ -13253,7 +13305,11 @@ me@mybox$
                 </tr>
                 <tr>
                     <td><code><b>P</b><var>n</var></code></td>
-                    <td>Pause for the duration of an <code><var>n</var></code>th note.</td>
+                    <td>
+                        Pause for the duration of an <code><var>n</var></code>th note.
+                        <code><var>n</var></code> is in the range <code>[0&#8212;64]</code>.
+                        If <code><var>n</var>=0</code>, this has no effect.
+                    </td>
                 </tr>
             </table>
         </div>
@@ -13272,9 +13328,11 @@ me@mybox$
                 </tr>
                 <tr>
                     <td><code><b>L</b><var>n</var></code></td>
-                    <td>Set the duration of following note to an <code><var>n</var></code>th note.
-                    (<code><var>n</var>=4</code> is a quarter note, etc.)
-                            <code><var>n</var></code> is in the range <code>[1&#8212;64]</code>.</td>
+                    <td>
+                        Set the duration of following note to an <code><var>n</var></code>th note.
+                        (<code><var>n</var>=4</code> is a quarter note, etc.)
+                        <code><var>n</var></code> is in the range <code>[1&#8212;64]</code>.
+                    </td>
                 </tr>
                 <tr>
                     <td><code><b>MN</b></code></td>
@@ -13290,7 +13348,10 @@ me@mybox$
                 </tr>
                 <tr>
                     <td><code><b>T</b><var>n</var></code></td>
-                    <td>Sets the tempo to <code><var>n</var></code> <code>L4</code>s per minute. Default is 120.</td>
+                    <td>
+                        Sets the tempo to <code><var>n</var></code> <code>L4</code>s per minute.
+                        <code><var>n</var></code> is in the range <code>[32&#8212;255]</code>.  Default is 120.
+                    </td>
                 </tr>
             </table>
         </div>
@@ -16247,8 +16308,8 @@ me@mybox$
         <p>
             The printable ASCII characters in the range <code>20</code>&#8212;<code>7E</code>
             are used for string literals, comments, variable names,
-            and elements of statement syntax that are not keywords.
-            Keywords are represented by their <a href="#keywords">keyword tokens</a> and
+            and elements of statement syntax that are not reserved words.
+            Reserved words are represented by their <a href="#reserved-words">reserved word tokens</a> and
             numeric literals are represented by numeric token sequences.
         </p>
         <h5>Numeric token sequences</h5>
@@ -16363,19 +16424,26 @@ me@mybox$
                 </tr>
             </table>
         </div>
-        <h5 id="keywords">Keyword tokens</h5>
+        <h5 id="reserved-words">Keyword tokens</h5>
         <p>
-            <dfn>Keywords</dfn> in PC-BASIC are reserved words, meaning that a variable or
-            array name cannot be identical to a keyword. Keywords are represented
+            Most keywords in PC-BASIC are <dfn>reserved words</dfn>. Reserved words are represented
             in a tokenised program by a single- or double-byte token. The complete list is below.
         </p>
         <p>
-            All function names and operators are keywords and all statements start with a keyword
+            All function names and operators are reserved words and all statements start with a reserved word
             (which in the case of <code>LET</code> is optional). However, the converse is not true:
-            not all keywords are statements or functions. For example, <code>TO</code> and <code>SPC(</code>
-            only occur as part of a statement syntax.
-            Furthermore, some words that form part of statement syntax are not keywords:
+            not all reserved words are statements, functions, or operators.
+            For example, <code>TO</code> and <code>SPC(</code> only occur as part of a statement syntax.
+            Furthermore, some keywords that form part of statement syntax are not reserved words:
             examples are <code>AS</code>, <code>BASE</code>, and <code>ACCESS</code>.
+        </p>
+        <p>
+            Keywords that are not reserved words are spelt out in full text in the tokenised source.
+        </p>
+        <p>
+            A variable or user-defined function name must not be identical to a reserved word. The list below
+            is an exhaustive list of reserved words that can be used to determine whether a
+            name is legal.
         </p>
         <ul class="compact10">
             <li><code>81</code> <code>END</code></li>
@@ -16562,7 +16630,7 @@ me@mybox$
             <li><code>FFA5</code> <code>LOF</code></li>
         </ul>
         <p>
-            The following additional keywords are activated by the option
+            The following additional reserved words are activated by the option
             <code><a href="#--syntax">syntax</a>={pcjr|tandy}</code>.
         </p>
         <ul class="compact10">
@@ -16570,7 +16638,7 @@ me@mybox$
             <li><code>FEA6</code> <code>TERM</code></li>
         </ul>
         <p>
-            The following additional keyword is activated by the <code><a href="#--debug">debug</a></code> option.
+            The following additional reserved word is activated by the <code><a href="#--debug">debug</a></code> option.
             It is specific to PC-BASIC and not present in GW-BASIC.
         </p>
         <ul class="compact10">
@@ -18617,6 +18685,7 @@ sending in patches, and documenting GW-BASIC's behaviour. Thank you all!</p>
 <li><strong>Rob Hagemans</strong>,   lead author</li>
 <li><strong>Wengier Wu</strong>,     bug fixes, advice for CJK support</li>
 <li><strong>WJB</strong>,            bug fixes</li>
+<li><strong>Jan Bredenbeek</strong>, bug fixes, advice for BASICODE support</li>
 <li><strong>Ronald Herrera</strong>, testing, bug hunting</li>
 <li><strong>Miguel Dorta</strong>,   testing, serial ports</li>
 <li><strong>Patrik</strong>,         testing, serial ports</li>
@@ -18663,18 +18732,24 @@ apologies to those whose contribution I have failed to acknowledge here.</p>
 </ul>
 <h5 id="acks_data-cassette-format">Data cassette format</h5>
 <ul>
-<li><strong>Mike Brutman</strong>'s <a href="http://www.brutman.com/Cassette_Waveforms/Cassette_Waveforms.html">Analysis of the IBM PC Data cassette format</a></li>
-<li><strong>Dan Tobias</strong>' <a href="http://fileformats.archiveteam.org/wiki/IBM_PC_data_cassette">IBM PC Data cassette format documentation</a></li>
+<li><strong>Mike Brutman</strong>'s <a href="http://www.brutman.com/Cassette_Waveforms/Cassette_Waveforms.html">Analysis of the IBM PC data cassette format</a></li>
+<li><strong>Dan Tobias</strong>' <a href="http://fileformats.archiveteam.org/wiki/IBM_PC_data_cassette">IBM PC data cassette format documentation</a></li>
 </ul>
 <h5 id="acks_basicode">BASICODE</h5>
 <ul>
 <li><strong>Janny Looyenga</strong>'s documentation of the <a href="http://www.nostalgia8.nl/basicode.htm">BASICODE format</a></li>
 <li><strong>Prof. Dr. Horst V&#246;lz</strong>'s documentation of the <a href="http://www.kc85emu.de/scans/rfe0190/Basicode.htm">BASICODE cassette file format</a></li>
 </ul>
+<h5 id="acks_serial-ports">Serial ports</h5>
+<ul>
+<li><strong>Craig Peacock</strong>'s documentation on <a href="http://retired.beyondlogic.org/serial/serial.htm">interfacing the serial port</a></li>
+<li><strong>Christopher E. Strangio</strong>'s tutorial on <a href="http://www.camiresearch.com/Data_Com_Basics/RS232_standard.html">the RS232 standard</a></li>
+<li><a href="http://www.qb64.net/wiki/index.php/Port_Access_Libraries#Serial_Communication_Registers">QB64 documentation</a></li>
+</ul>
 <h5 id="acks_technical-information-on-many-topics">Technical information on many topics</h5>
 <ul>
 <li><a href="http://www.vogons.org/">VOGONS</a></li>
-<li><strong>Erik S. Klein</strong>'s <a href="http://www.vintage-computer.com">Vintage computer forums</a></li>
+<li><strong>Erik S. Klein</strong>'s <a href="http://www.vintage-computer.com">vintage computer forums</a></li>
 <li><strong>Peter Berg</strong>'s <a href="http://www.petesqbsite.com/">Pete's QBasic/QuickBasic site</a></li>
 </ul>
 <h3 id="acks_fonts">Fonts</h3>
