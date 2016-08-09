@@ -28,8 +28,8 @@
     </ul>
 </nav>
 <header>
-<h1>PC-BASIC 15.08.9 documentation</h1>
-<small>Documentation compiled on 2016-06-18 18:15:23.</small>
+<h1>PC-BASIC 15.08.10 documentation</h1>
+<small>Last updated 2016-08-09 21:50:55.</small>
 </header>
 <nav class="toc">
     <h2 id="toc">Table of Contents</h2>
@@ -39,8 +39,8 @@
                 <li><a href="#quick-start-guide">Quick Start Guide</a>
                     <ul>
                         <li><a href="#installation">Installation</a></li>
-                        <li><a href="#usage-essentials">Usage essentials</a></li>
                         <li><a href="#basic-survival-kit">BASIC survival kit</a></li>
+                        <li><a href="#configuration">Configuration</a></li>
                         <li><a href="#getting-programs">Getting programs</a></li>
                     </ul>
                 </li>
@@ -445,17 +445,24 @@ read and write binary data files created by GW-BASIC.  </p>
 </ul>
 <p>If the options above are not applicable or you prefer to install from source, please
 consult <a href="https://github.com/robhagemans/pcbasic/blob/master/INSTALL.md"><code>INSTALL.md</code></a> for detailed instructions.</p>
-<h3 id="usage-essentials">Usage essentials</h3>
+<h3 id="basic-survival-kit">BASIC survival kit</h3>
 <p>Click on the PC-BASIC application icon or run <code>pcbasic</code> on the Windows, OSX or Linux command
 line and PC-BASIC will start in direct mode with no program loaded. The default emulation target is
 GW-BASIC 3.23 on a generic IBM-compatible PC with a VGA video card.  </p>
-<p>A few selected command-line options:<br>
-<code>pcbasic PROGRAM.BAS</code> runs the program file named <code>PROGRAM.BAS</code> directly.<br>
-<code>pcbasic --preset=tandy</code> starts with the emulation target set to Tandy GW-BASIC on a Tandy 1000.<br>
-<code>pcbasic --preset=pcjr</code> starts with the emulation target set to Cartridge BASIC on an IBM PCjr.<br>
-<code>pcbasic -h</code> shows all available command line options.  </p>
-<p>If you prefer to run PC-BASIC from a GUI, you can set the required options in the configuration file instead.
-The configuration file is stored in the following location:</p>
+<p>PC-BASIC starts in direct mode, a 1980s-style interface operated by executing
+BASIC commands directly. There is no menu, nor are there any of the visual clues
+that we've come to expect of modern software.  </p>
+<p>A few essential commands to help you get around:<br>
+<code>LOAD "PROGRAM"</code> loads the program file named <code>PROGRAM.BAS</code> into memory, but does not run it yet.<br>
+<code>LIST</code> displays the BASIC code of the current program.<br>
+<code>RUN</code> starts the current program.<br>
+<code>SAVE "PROGRAM",A</code> saves the current program to a human-readable text file named <code>PROGRAM.BAS</code>.<br>
+<code>NEW</code> immediately deletes the current program from memory.<br>
+<code>SYSTEM</code> exits PC-BASIC immediately, discarding any unsaved program or data.  </p>
+<p>Use one of the key combinations <code>Ctrl+Break</code>, <code>Ctrl+Scroll Lock</code>, <code>Ctrl+C</code> or <code>F12+B</code>
+to interrupt a running program and return to direct mode.  </p>
+<h3 id="configuration">Configuration</h3>
+<p>You can supply options to change PC-BASIC's behaviour by editing the configuration file. If you install the Windows package, the installer will automatically create a shortcut to this file in the PC-BASIC start menu folder. The file can also be found in the following location:</p>
 <table>
 <thead>
 <tr>
@@ -478,27 +485,16 @@ The configuration file is stored in the following location:</p>
 </tr>
 </tbody>
 </table>
-<p>The expression <code>%APPDATA%</code> is a Windows variable pointing to the folder in your roaming profile
-where applications store their data and settings. Typing the expression as above in the Windows Explorer
-should get you to the right place. Under Windows 7, <code>%APPDATA%</code> normally is the location
-<code>C:\Users\YourUsername\AppData\Roaming\</code> where you replace <code>YourUsername</code> with your Windows login name.</p>
-<p>For example, you could include the following line in the section <code>[pcbasic]</code> in <code>PCBASIC.INI</code>,
-to emulate IBM PCjr Cartridge Basic:</p>
-<pre><code>preset=pcjr
+<p>For example, to start with the emulation target set to Tandy 1000 GW-BASIC, include the following line under <code>[pcbasic]</code> in the configuration file:</p>
+<pre><code>preset=tandy
 </code></pre>
-<h3 id="basic-survival-kit">BASIC survival kit</h3>
-<p>PC-BASIC starts in direct mode, a 1980s-style interface operated by executing
-BASIC commands directly. There is no menu, nor are there any of the visual clues
-that we've come to expect of modern software.  </p>
-<p>A few essential commands to help you get around:<br>
-<code>LOAD "PROGRAM"</code> loads the program file named <code>PROGRAM.BAS</code> into memory, but does not run it yet.<br>
-<code>LIST</code> displays the BASIC code of the current program.<br>
-<code>RUN</code> starts the current program.<br>
-<code>SAVE "PROGRAM",A</code> saves the current program to a human-readable text file named <code>PROGRAM.BAS</code>.<br>
-<code>NEW</code> immediately deletes the current program from memory.<br>
-<code>SYSTEM</code> exits PC-BASIC immediately, discarding any unsaved program or data.  </p>
-<p>Use one of the key combinations <code>Ctrl+Break</code>, <code>Ctrl+Scroll Lock</code>, <code>Ctrl+C</code> or <code>F12+B</code>
-to interrupt a running program and return to direct mode.  </p>
+<p>A default configuration file will be created the first time you run PC-BASIC. See the comments in that file or consult the <a href="#settings">documentation</a> for more information and example options.</p>
+<p>If you start PC-BASIC from the command prompt (on Windows this is the <code>C:\&gt;</code> prompt), you can supply configuration options directly. For example:  </p>
+<p><code>pcbasic PROGRAM.BAS</code> runs the program file named <code>PROGRAM.BAS</code> directly.<br>
+<code>pcbasic --preset=tandy</code> starts with the emulation target set to Tandy GW-BASIC on a Tandy 1000.<br>
+<code>pcbasic --preset=pcjr</code> starts with the emulation target set to Cartridge BASIC on an IBM PCjr.<br>
+<code>pcbasic -h</code> shows all available command line options.  </p>
+<p>If you use PC-BASIC from the command prompt on Windows, make sure you run the <code>pcbasic.com</code> binary. You will not see any output if you call the <code>pcbasic.exe</code> binary.</p>
 <h3 id="getting-programs">Getting programs</h3>
 <p>The following pages have GW-BASIC program downloads, lots of information and further links.  </p>
 <ul>
@@ -963,7 +959,7 @@ to interrupt a running program and return to direct mode.  </p>
             However, many modern keyboards do not have a <kbd>Break</kbd> or
             <kbd>Scroll Lock</kbd> key, which would make it impossible to interrupt
             a program that does not exit. Therefore, by default, PC-BASIC treats <kbd>Ctrl</kbd>+<kbd>C</kbd>
-            as if it were <kbd>Ctrl</kbd>+<kbd>Break</kbd>. Set <code><a href="#--ctrl-c-break">ctrl-c-break</a>=False</code>
+            as if it were <kbd>Ctrl</kbd>+<kbd>Break</kbd>. Set the <a href="#settings">option</a> <code><a href="#--ctrl-c-break">ctrl-c-break</a>=False</code>
             if you prefer the GW-BASIC style behaviour. When using the text-based or command-line interface,
             this option is ignored.
         </p>
@@ -1018,18 +1014,33 @@ to interrupt a running program and return to direct mode.  </p>
         <section>
             <h4 id="mounting">Accessing your drives</h4>
             <p>
-                By default, drive letter <code>Z:</code> is mapped to the current working directory and
-                is the current drive. In particular, it is not mapped to the Windows <code>Z:</code>
-                drive, if that exists. You can map drives and other file system locations as PC-BASIC drive letters by
-                using the <code><a href="#--mount">mount</a></code> option. For example,
+                PC-BASIC emulates DOS disk devices, which are referred to by drive letters such as <code>Z:</code>.
+                These devices can be mapped to locations in your file system.
+                <em>Windows uses should note that they are not the same locations as Windows drive letters: the device <code>C:</code> on PC-BASIC
+                is not your Windows <code>C:</code> drive, unless you explicitly tell PC-BASIC to make it so.</em>
+            </p>
+            <p>
+                By default, <code>Z:</code> is PC-BASIC's current device. It is mapped to your home directory
+                if PC-BASIC is started from a graphical user interface. On Windows, your home directory is
+                <code>%USERPROFILE%</code>, which is usually a folder with your user name located under
+                <code>C:\Users\</code>; on other platforms, it is <code>&#732;</code>.
+                This is where files will be saved to and loaded from in BASIC if you do not specify another device.
+                Note that if PC-BASIC is started from the command prompt, <code>Z:</code> is mapped to
+                the current working directory instead.
+            </p>
+            <p>
+                You can map drives and other file system locations as PC-BASIC devices by
+                using the <code><a href="#--mount">mount</a></code> option in the <a href="#settings">configuration file or on the command prompt</a>. For example,
+                on Windows, the option
                 <code class="block">
-                    <b>pcbasic --mount=A:/home/me/BasicFloppy,C:/home/me/Stuff</b>
+                    <b>mount=A:C:\Users\Me\BasicFloppy</b>
                 </code>
-                or, on Windows,
+                will make the folder <code>C:\Users\Me\BasicFloppy</code> available as PC-BASIC's <code>A:</code> device.
+                On other platforms, an example mount option could look like
                 <code class="block">
-                    <b>pcbasic --mount=A:C:\Users\Me\BasicFloppy,C:C:\Users\Me\Stuff</b>
+                    <b>mount=A:/home/me/BasicFloppy</b>
                 </code>
-                will map those locations to the PC-BASIC <code>A:</code> and <code>C:</code> drives.
+                which would make the directory <code>/home/me/BasicFloppy</code> available as PC-BASIC's <code>A:</code> device.
             </p>
              <p>
                 If you want PC-BASIC's drive letters to be the same as those in Windows,
@@ -1955,11 +1966,9 @@ me@mybox$
 </p>
 <h5>Command-line options</h5>
 <p>
-    You can enter command-line options if you start PC-BASIC from the console
-    (also known as the <em>Command Prompt</em> or <em>Terminal</em>;
-    this is normally <code>CMD</code> or <code>PowerShell</code> on Windows),
-    by preceding the name of the option
-    with two dashes, like so:
+    You can enter command-line options if you start PC-BASIC from your operating system's command prompt, console or terminal
+    (the <code>C:\&gt;</code> prompt on Windows),
+    by supplying the option with two dashes in front, like so:
 </p>
 <code class="block"><b>pcbasic <a href="#--preset">--preset</a>=tandy <a href="#--ctrl-c-break">--ctrl-c-break</a>=True</b></code>
 <p>
@@ -2562,11 +2571,6 @@ me@mybox$
             Attach a resource to the <code>LPT1:</code> parallel device.
             <code><var>type</var><b>:</b><var>value</var></code> can be
             <dl>
-                <dt><code><b>PARPORT:</b><var>device_name</var></code></dt>
-                <dd>
-                    Connect to the parallel device <code><var>device_name</var></code>
-                    such as <code><b>LPT1</b></code> or <code><b>/dev/parport0</b></code>.
-                </dd>
 
                 <dt><code><b>PRINTER:</b><var>printer_name</var></code></dt>
                 <dd>
@@ -2577,8 +2581,8 @@ me@mybox$
 
                 <dt><code><b>FILE:</b><var>file_name</var></code></dt>
                 <dd>
-                    Connect to any file or to a Unix character device such as
-                    <code><b>/dev/stdout</b></code>.
+                    Connect to any file or device such as
+                    <code><b>/dev/stdout</b></code> on Unix or <code><b>LPT1</b></code> on Windows.
                 </dd>
 
                 <dt><code><b>STDIO</b>[<b>:</b>[<b>CRLF</b>]]</code></dt>
@@ -2587,6 +2591,15 @@ me@mybox$
                     If <code><b>CRLF</b></code> is specified, PC-BASIC replaces <code>CR</code>
                     characters with <code>LF</code> on its output. This is more intuitive on Unix shells.
                 </dd>
+
+                <dt><code><b>PARPORT:</b><var>port_number</var></code></dt>
+                <dd>
+                    Connect to a Centronics parallel port, where <code><var>port_number</var></code>
+                    is <code><b>0</b></code> for the first parallel port, etc.
+                    <code><b>PARPORT</b></code> only works with physical parallel ports; for example, a Windows printer or other
+                    device mapped with <code>NET USE LPT1:</code> can only be attached with <code><b>FILE:LPT1</b></code>
+                </dd>
+
             </dl>
             If this option is not specified, <code>LPT1:</code> is connected to the default printer.
         </dd>
@@ -3052,7 +3065,7 @@ me@mybox$
         with a command like <code>BASIC</code>, <code>BASICA</code>, or <code>GWBASIC</code>.
         These are matched by PC-BASIC with only minor modifications, usually just replacing the
         forward slash <code><b>/</b></code> with a dash <code><b>-</b></code>. The GW-BASIC syntax is shown here
-        for reference only; use the Unix-style syntax with PC-BASIC.
+        for reference only; only the syntax with the dash works with PC-BASIC.
     </p>
     <dl>
         <dt>
