@@ -17,6 +17,22 @@
     border: 1px solid darkgrey;
 }
 
+small {
+    display: block;
+    margin: 0;
+    position: absolute;
+    bottom: 2em;
+    right: 0;
+    left: 0;
+    text-align: center;
+    color: white;
+    font-family: sans;
+}
+
+a, a:visited {
+    color: white;
+}
+
 body {
     background-color: darkslategrey;
 }
