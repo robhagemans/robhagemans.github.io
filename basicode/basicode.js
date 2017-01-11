@@ -16,6 +16,59 @@
 
 
 ///////////////////////////////////////////////////////////////////////////////
+// compatibility/polyfills
+
+// Web Audio API
+// Safari still only has the experimental version of the Web Audio API
+// not sure if we're not breaking Safari elsewhere, though
+window.AudioContext = window.AudioContext || window.webkitAudioContext;
+
+// String repeat method
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/repeat
+if (!String.prototype.repeat) {
+  String.prototype.repeat = function(count) {
+    'use strict';
+    if (this == null) {
+      throw new TypeError('can\'t convert ' + this + ' to object');
+    }
+    var str = '' + this;
+    count = +count;
+    if (count != count) {
+      count = 0;
+    }
+    if (count < 0) {
+      throw new RangeError('repeat count must be non-negative');
+    }
+    if (count == Infinity) {
+      throw new RangeError('repeat count must be less than infinity');
+    }
+    count = Math.floor(count);
+    if (str.length == 0 || count == 0) {
+      return '';
+    }
+    // Ensuring count is a 31-bit integer allows us to heavily optimize the
+    // main part. But anyway, most current (August 2014) browsers can't handle
+    // strings 1 << 28 chars or longer, so:
+    if (str.length * count >= 1 << 28) {
+      throw new RangeError('repeat count must not overflow maximum string size');
+    }
+    var rpt = '';
+    for (;;) {
+      if ((count & 1) == 1) {
+        rpt += str;
+      }
+      count >>>= 1;
+      if (count == 0) {
+        break;
+      }
+      str += str;
+    }
+    return rpt;
+  }
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
 // errors
 
 function BasicError(message, detail, location)
@@ -82,7 +135,7 @@ function newOperatorToken(keyword, narity, precedence, operation) {
     } );
 }
 
-const SYMBOLS = {
+var SYMBOLS = {
     '^': newOperatorToken('^', 2, 12, Math.pow),
     '*': newOperatorToken('*', 2, 11, opMultiply),
     '/': newOperatorToken('/', 2, 11, opDivide),
@@ -96,7 +149,7 @@ const SYMBOLS = {
     '<>': newOperatorToken('<>', 2, 7, opNotEqual),
 }
 
-const KEYWORDS = {
+var KEYWORDS = {
     'ABS': newFunctionToken('ABS', Math.abs),
     'AND': newOperatorToken('AND', 2, 5, opAnd),
     'ASC': newFunctionToken('ASC', fnAsc),
@@ -496,7 +549,6 @@ function Next(loop_name, program)
     {
         var for_record = program.loop_stack[0];
         while (loop_name !== for_record.name) {
-            //throw ('Block error', 'Expected `NEXT '+for_record.name+'`, got `NEXT '+loop_name+'`')
             console.log('Popping from loop stack unexpectedly, did we jump out of a loop?');
             program.loop_stack.shift();
             for_record = program.loop_stack[0];
@@ -901,7 +953,7 @@ function Parser(expr_list)
         return last.next;
     }
 
-    const SUBS = {
+    var SUBS = {
         100: function(last) {last.next = new Node(subClearScreen, [], program); return last.next; },
         110: function(last) {last.next = new Node(subSetPos, [], program); return last.next; },
         120: function(last) {last.next = new Node(subGetPos, [], program); return last.next; },
@@ -1044,7 +1096,7 @@ function Parser(expr_list)
     // if we encounter it unexpectedly, this is where we get
     {
         if (token === undefined || token === null || token.payload !== 'NEXT') {
-            throw new BasicError(`Block error`, '`FOR` without `NEXT`', current_line);
+            throw new BasicError('Block error', '`FOR` without `NEXT`', current_line);
         }
         // only one variable allowed
         var next_variable = expr_list.shift();
@@ -1156,7 +1208,7 @@ function Parser(expr_list)
         return last.next;
     }
 
-    const PARSERS = {
+    var PARSERS = {
         'DATA': this.parseData,
         'DIM': this.parseRead,
         'FOR': this.parseFor,
@@ -1593,8 +1645,8 @@ function subClearScreen()
 function subSetPos()
 // GOSUB 110
 {
-    this.output.setColumn(this.variables.retrieve('HO', []));
-    this.output.setRow(this.variables.retrieve('VE', []));
+    this.output.setColumn(Math.round(this.variables.retrieve('HO', [])));
+    this.output.setRow(Math.round(this.variables.retrieve('VE', [])));
 }
 
 function subGetPos()
@@ -1639,7 +1691,7 @@ function subReadKey()
     // in BC-3c, CN contains the character code of the lowercase letter
     // if an uppercase key was entered, and vice versa
     //FIXME: we sould be able to switch this off for BC-2 and BC-3 programs
-    this.variables.assign(cn_keyval, 'CN', []);
+    //this.variables.assign(cn_keyval, 'CN', []);
 }
 
 function subSetTimer()
@@ -1863,12 +1915,13 @@ function subText()
     var x = this.variables.retrieve('HO', []);
     var y = this.variables.retrieve('VE', []);
     var text = this.variables.retrieve('SR$', []);
-    this.output.drawText(x, y, text);
+    var c = this.variables.retrieve('CN', []);
+    this.output.drawText(x, y, c, text);
 }
 
 function subSetColour()
 {
-    const COLOURS = {
+    var COLOURS = {
         0: 'black',
         1: 'blue',
         2: 'red',
@@ -1969,7 +2022,7 @@ function Display(output_element)
             0, 0, this.pixel_width, this.pixel_height-font_height);
         context.fillStyle = this.background;
         context.fillRect(0, this.pixel_height-font_height, this.pixel_width, font_height);
-        this.content = this.content.slice(0, -1).concat(' '.repeat(this.width));
+        this.content = this.content.slice(1).concat(' '.repeat(this.width));
     }
 
     this.write = function(output)
@@ -2018,17 +2071,23 @@ function Display(output_element)
 
     this.putChar = function(char)
     {
-        this.putText(this.col*font_width, this.row*font_height, char);
+        this.clearText(this.col*font_width, this.row*font_height, char);
+        this.putText(this.col*font_width, this.row*font_height, 0, char);
         // update content buffer
         this.content[this.row] = this.content[this.row].slice(0, this.col) + char + this.content[this.row].slice(this.col+1);
     }
 
-    this.putText = function(x, y, output)
+    this.clearText = function(x, y, output)
     // x,y are (approximate) top left corner of text box, not baseline
     {
         context.fillStyle = this.background;
         context.fillRect(x-0.5, y-0.5, output.length*font_width+0.5, font_height+0.5);
-        context.fillStyle = this.foreground;
+    }
+
+    this.putText = function(x, y, c, output)
+    // x,y are (approximate) top left corner of text box, not baseline
+    {
+        context.fillStyle = (c===0) ? this.foreground : this.background;
         // 0.75 seems about the right baseline offset for Chrome & Firefox...
         context.fillText(output, x, y+0.75*font_height);
     }
@@ -2121,11 +2180,11 @@ function Display(output_element)
         this.last_y = next_y;
     }
 
-    this.drawText = function(x, y, c)
+    this.drawText = function(x, y, c, text)
     {
         var pixel_x = x*output_element.width;
         var pixel_y = y*output_element.height;
-        this.putText(pixel_x, pixel_y, c);
+        this.putText(pixel_x, pixel_y, c, text);
     }
 }
 
@@ -2141,7 +2200,7 @@ function Keyboard(input_element)
     input_element.focus();
 
     // JavaScript to BASICODE keycode dictionary
-    const KEYS = {
+    var KEYS = {
         8: 127, // backspace
         13: 13, // enter
         37: 28, // left
@@ -2285,9 +2344,6 @@ function Printer() {
 ///////////////////////////////////////////////////////////////////////////////
 // speaker
 
-// Safari still only has the experimental version of the Web Audio API
-// not sure if we're not breaking Safari elsewhere, though
-window.AudioContext = window.AudioContext || window.webkitAudioContext;
 var context = new AudioContext();
 
 
@@ -2428,10 +2484,10 @@ function Floppy(id)
 ///////////////////////////////////////////////////////////////////////////////
 // user interface
 
-const BUSY_DELAY = 1;
-const IDLE_DELAY = 60;
+var BUSY_DELAY = 1;
+var IDLE_DELAY = 60;
 // minimum delay (nested delays are 'clamped' by the browser)
-const MIN_DELAY = 4;
+var MIN_DELAY = 4;
 
 
 function BasicodeApp(script)
@@ -2439,7 +2495,7 @@ function BasicodeApp(script)
     // create a canvas to work on
     var element = document.createElement('canvas');
     element.className = 'basicode';
-    document.body.appendChild(element);
+    document.body.insertBefore(element, script);
 
     this.display = new Display(element);
     this.keyboard = new Keyboard(element);
