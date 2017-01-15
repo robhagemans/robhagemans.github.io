@@ -2557,6 +2557,7 @@ function BasicodeApp(script)
         // create a canvas to work on
         element = document.createElement("canvas");
         element.className = "basicode";
+        element.innerHTML = "To use this interpreter, you need a browser that supports the CANVAS element."
         document.body.insertBefore(element, script);
     }
     // make canvas element focussable to catch keypresses
