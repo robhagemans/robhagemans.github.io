@@ -76,6 +76,13 @@ function BasicError(message, detail, location)
     this.message = message;
     this.detail = detail;
     this.where = location;
+    // capture stack trace, see http://stackoverflow.com/questions/464359/custom-exceptions-in-javascript
+    if ("captureStackTrace" in Error) {
+        Error.captureStackTrace(this, InvalidArgumentException);
+    }
+    else {
+        this.stack = (new Error()).stack;
+    }
 }
 
 BasicError.prototype = Object.create(Error.prototype);
@@ -2307,12 +2314,18 @@ function Keyboard(input_element)
 ///////////////////////////////////////////////////////////////////////////////
 // printer
 
-function Printer() {
+function Printer(element_id) {
 
-    // create hidden iframe for printing
-    var print_iframe = document.createElement("iframe");
-    print_iframe.hidden = true;
-    document.body.appendChild(print_iframe);
+    var print_iframe;
+    if (element_id) {
+        print_iframe = document.getElementById(element_id.value);
+    }
+    else {
+        // create hidden iframe for printing
+        print_iframe = document.createElement("iframe");
+        print_iframe.hidden = true;
+        document.body.appendChild(print_iframe);
+    }
     var print_element = document.createElement("pre");
     print_iframe.contentDocument.body.appendChild(print_element)
 
@@ -2339,7 +2352,7 @@ function Printer() {
 function Speaker()
 // tone generator
 {
-    var context = new AudioContext();
+    var context = AudioContext ? new AudioContext() : null;
     this.tones = 0;
 
     this.isBusy = function()
@@ -2352,6 +2365,7 @@ function Speaker()
     // caller should check we"re not busy first, otherwise first oscillator to stop
     // will unset the busy flag
     {
+        if (!context) return;
         // Oscillator node
         var oscillator = context.createOscillator();
         oscillator.type = "square";
@@ -2419,17 +2433,56 @@ function Timer()
 ///////////////////////////////////////////////////////////////////////////////
 // storage
 
-function Floppy(id)
+function Floppy(id, element_id)
 {
+    var element = null;
+    if (element_id) element = document.getElementById(element_id.value);
+
     this.id = id;
     this.open_file = null;
     this.open_key = null;
     this.open_mode = "";
     this.open_line = null;
 
+    var mime_type = "text/plain";
+    var prefix = "BASICODE"
+
+    // this is where we keep our blobs
+    var blobbery = {};
+
+    this.refresh = function()
+    {
+        if (!element) return;
+        while (element.firstChild) {
+            element.removeChild(element.firstChild);
+        }
+        for (var i=0; i < localStorage.length; ++i) {
+            var key = localStorage.key(i)
+            var key_list = key.split(":");
+            if (key_list[0] !== prefix) continue;
+            if (key_list[1] !== "" + this.id) continue;
+            // create content blob from local storage, if necessary
+            if (!(key in blobbery)) {
+                blobbery[key] = new Blob([localStorage.getItem(key)], {type: mime_type});
+            }
+            // create download link to file
+            var a = document.createElement("a");
+            a.textContent = key_list[2];
+            a.href = window.URL.createObjectURL(blobbery[key]);
+            a.download = key_list[2];
+            // drag-out support
+            a.dataset.downloadurl = [mime_type, a.download, a.href].join(":");
+            a.draggable = true;
+            a.addEventListener("dragstart", function(e) {
+                e.dataTransfer.setData("DownloadURL", a.dataset.downloadurl);
+            }, false);
+            element.appendChild(a);
+        }
+    }
+
     this.open = function(name, mode)
     {
-        this.open_key = this.id + ":" + name;
+        this.open_key = [prefix, this.id, name].join(":");
         var string = localStorage.getItem(this.open_key);
         this.open_mode = mode;
         this.open_line = 0;
@@ -2446,6 +2499,7 @@ function Floppy(id)
         else {
             this.open_file = string.split("\n");
         }
+        this.refresh();
         return true;
     }
 
@@ -2454,6 +2508,7 @@ function Floppy(id)
         if (this.open_key === null) return false;
         localStorage.setItem(this.open_key, this.open_file.join("\n"));
         this.open_file = null;
+        this.refresh();
         return true;
     }
 
@@ -2470,6 +2525,7 @@ function Floppy(id)
         this.open_file.push(line);
     }
 
+    this.refresh();
 }
 
 
@@ -2484,11 +2540,25 @@ var MIN_DELAY = 4;
 
 function BasicodeApp(script)
 {
-    // create a canvas to work on
-    var element = document.createElement("canvas");
-    element.className = "basicode";
-    document.body.insertBefore(element, script);
+    // should we use .dataset here?
+    var screen_id = script.attributes["data-canvas"];
+    var printer_id = script.attributes["data-printer"];
+    var flop1_id = script.attributes["data-floppy-1"];
+    var flop2_id = script.attributes["data-floppy-2"];
+    var flop3_id = script.attributes["data-floppy-3"];
 
+    // obtain screen/keyboard canvas
+    var element;
+    if (screen_id) {
+        // canvas is provided
+        element = document.getElementById(screen_id.value)
+    }
+    else {
+        // create a canvas to work on
+        element = document.createElement("canvas");
+        element.className = "basicode";
+        document.body.insertBefore(element, script);
+    }
     // make canvas element focussable to catch keypresses
     element.tabIndex = 1;
     element.focus();
@@ -2496,10 +2566,10 @@ function BasicodeApp(script)
     // set up emulator
     this.display = new Display(element);
     this.keyboard = new Keyboard(element);
-    this.printer = new Printer();
+    this.printer = new Printer(printer_id);
     this.speaker = new Speaker();
     this.timer = new Timer();
-    this.storage = [new Floppy(0), new Floppy(1), new Floppy(2), new Floppy(3)]
+    this.storage = [new Floppy(0), new Floppy(1, flop1_id), new Floppy(2, flop2_id), new Floppy(3, flop3_id)]
 
     // runtime members
     this.program = null;
