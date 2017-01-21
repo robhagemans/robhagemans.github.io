@@ -78,7 +78,7 @@ function BasicError(message, detail, location)
     this.where = location;
     // capture stack trace, see http://stackoverflow.com/questions/464359/custom-exceptions-in-javascript
     if ("captureStackTrace" in Error) {
-        Error.captureStackTrace(this, InvalidArgumentException);
+        Error.captureStackTrace(this, BasicError);
     }
     else {
         this.stack = (new Error()).stack;
@@ -1995,8 +1995,8 @@ function Display(output_element)
         this.background = "black";
     }
 
-    this.clear = function() {
-        this.resetColours();
+    this.clear = function()
+    {
         context.fillStyle = this.background;
         context.fillRect(0, 0, output_element.width, output_element.height);
         this.row = 0;
@@ -2007,7 +2007,8 @@ function Display(output_element)
         this.last_y = 0;
     }
 
-    this.clearRow = function(row) {
+    this.clearRow = function(row)
+    {
         context.fillStyle = this.background;
         context.fillRect(0, row*font_height, output_element.width, font_height);
         this.content[row] = " ".repeat(this.width);
@@ -2189,6 +2190,7 @@ function Display(output_element)
     }
 
     // initialise
+    this.resetColours();
     this.clear();
 }
 
@@ -2318,7 +2320,7 @@ function Printer(element_id) {
 
     var print_iframe;
     if (element_id) {
-        print_iframe = document.getElementById(element_id.value);
+        print_iframe = document.getElementById(element_id);
     }
     else {
         // create hidden iframe for printing
@@ -2352,7 +2354,14 @@ function Printer(element_id) {
 function Speaker()
 // tone generator
 {
-    var context = AudioContext ? new AudioContext() : null;
+    var context = null;
+    try {
+        var context = AudioContext ? new AudioContext() : null;
+    } catch (e) {
+        // NotSupportedError if too many contexts opened on one page
+        if (e instanceof DOMException) console.log(e);
+        else throw e;
+    }
     this.tones = 0;
 
     this.isBusy = function()
@@ -2436,7 +2445,7 @@ function Timer()
 function Floppy(id, element_id)
 {
     var element = null;
-    if (element_id) element = document.getElementById(element_id.value);
+    if (element_id) element = document.getElementById(element_id);
 
     this.id = id;
     this.open_file = null;
@@ -2540,25 +2549,25 @@ var MIN_DELAY = 4;
 
 function BasicodeApp(script)
 {
-    // should we use .dataset here?
-    var screen_id = script.attributes["data-canvas"];
-    var printer_id = script.attributes["data-printer"];
-    var flop1_id = script.attributes["data-floppy-1"];
-    var flop2_id = script.attributes["data-floppy-2"];
-    var flop3_id = script.attributes["data-floppy-3"];
+    var screen_id = script.dataset["canvas"];
+    var printer_id = script.dataset["printer"];
+    var flop1_id = script.dataset["floppy-1"];
+    var flop2_id = script.dataset["floppy-2"];
+    var flop3_id = script.dataset["floppy-3"];
+    var listing_id = script.dataset["listing"];
 
     // obtain screen/keyboard canvas
     var element;
     if (screen_id) {
         // canvas is provided
-        element = document.getElementById(screen_id.value)
+        element = document.getElementById(screen_id)
     }
     else {
         // create a canvas to work on
         element = document.createElement("canvas");
         element.className = "basicode";
         element.innerHTML = "To use this interpreter, you need a browser that supports the CANVAS element."
-        document.body.insertBefore(element, script);
+        script.parentNode.insertBefore(element, script);
     }
     // make canvas element focussable to catch keypresses
     element.tabIndex = 1;
@@ -2571,6 +2580,7 @@ function BasicodeApp(script)
     this.speaker = new Speaker();
     this.timer = new Timer();
     this.storage = [new Floppy(0), new Floppy(1, flop1_id), new Floppy(2, flop2_id), new Floppy(3, flop3_id)]
+    var listing = document.getElementById(listing_id);
 
     // runtime members
     this.program = null;
@@ -2618,6 +2628,8 @@ function BasicodeApp(script)
         this.display.clear();
         // reset keyboard buffer
         this.keyboard.reset();
+        // show program
+        if (listing) listing.value = code;
         try {
             // initialise program object
             this.program = new Program(code);
@@ -2648,6 +2660,7 @@ function BasicodeApp(script)
     this.splash = function()
     // intro screen if nothing was loaded
     {
+        if (listing) listing.value = '';
         this.display.invertColour();
         this.display.clearRow(0);
         this.display.writeCentre(0, "(c) 2016, 2017 Rob Hagemans");
@@ -2749,9 +2762,21 @@ function BasicodeApp(script)
         this.splash();
     }
 
+
     ///////////////////////////////////////////////////////////////////////////
     // event handlers
 
+    if (listing) {
+        var last_code = listing.value;
+
+        // reload code if listing changes
+        listing.onblur = function() {
+            if (listing.value === last_code) return;
+            last_code = listing.value;
+            app.stop();
+            app.load(listing.value);
+        }
+    }
     // run file on click
 
     element.addEventListener("click", function click(e) {
