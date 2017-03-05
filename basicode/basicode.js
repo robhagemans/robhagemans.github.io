@@ -3451,17 +3451,20 @@ function Printer(element_id) {
 ///////////////////////////////////////////////////////////////////////////////
 // speaker
 
+// create only a single global audiocontext
+// as they are a limited resource that can't be destroyed
+var AUDIO = null;
+try {
+    var AUDIO = AudioContext ? new AudioContext() : null;
+} catch (e) {
+    // NotSupportedError if too many contexts opened on one page
+    if (e instanceof DOMException) console.log(e);
+    else throw e;
+}
+
 function Speaker()
 // tone generator
 {
-    var context = null;
-    try {
-        var context = AudioContext ? new AudioContext() : null;
-    } catch (e) {
-        // NotSupportedError if too many contexts opened on one page
-        if (e instanceof DOMException) console.log(e);
-        else throw e;
-    }
     this.tones = 0;
 
     this.isBusy = function()
@@ -3474,23 +3477,23 @@ function Speaker()
     // caller should check we"re not busy first, otherwise first oscillator to stop
     // will unset the busy flag
     {
-        if (!context) return;
+        if (!AUDIO) return;
         // Oscillator node
-        var oscillator = context.createOscillator();
+        var oscillator = AUDIO.createOscillator();
         oscillator.type = "square";
         oscillator.frequency.value = frequency;
 
         // Gain node
-        var gain = context.createGain();
+        var gain = AUDIO.createGain();
         gain.gain.value = volume;
 
         // link nodes up
         oscillator.connect(gain);
-        gain.connect(context.destination);
+        gain.connect(AUDIO.destination);
 
         // play the tone
         ++this.tones;
-        var now = context.currentTime;
+        var now = AUDIO.currentTime;
         oscillator.start(now);
         oscillator.stop(now + duration);
 
@@ -3656,24 +3659,6 @@ function BasicodeApp(script)
     var flop2_id = script.dataset["floppy-2"];
     var flop3_id = script.dataset["floppy-3"];
     var listing_id = script.dataset["listing"];
-    // speed setting is (roughly) the number of empty loop cycles per second
-    if (script.dataset["speed"]) busy_delay = 1000 / script.dataset["speed"];
-    // screen settings
-    var columns = script.dataset["columns"] || 40;
-    var rows = script.dataset["rows"] || 24;
-    var font_name = script.dataset["font"] || "smooth";
-    // palette settings, use CGA colours by default
-    var colours = {
-        0: "black",
-        1: "#0000aa", // blue
-        2: "#aa0000", // red
-        3: "#aa00aa", // purple
-        4: "#00aa00", // green
-        5: "#00aaaa", // cyan
-        6: "#ffff55", // yellow
-        7: "white",
-    }
-    for (var i=0; i<8; ++i) colours[i] = script.dataset["color-" + i] || colours[i];
 
     // obtain screen/keyboard canvas
     var element;
@@ -3692,13 +3677,6 @@ function BasicodeApp(script)
     element.tabIndex = 1;
     element.focus();
 
-    // set up emulator
-    this.display = new Display(element, columns, rows, font_name, colours);
-    this.keyboard = new Keyboard(element);
-    this.printer = new Printer(printer_id);
-    this.speaker = new Speaker();
-    this.timer = new Timer();
-    this.storage = [new Floppy(0), new Floppy(1, flop1_id), new Floppy(2, flop2_id), new Floppy(3, flop3_id)]
     var listing = document.getElementById(listing_id);
 
     // runtime members
@@ -3706,6 +3684,40 @@ function BasicodeApp(script)
     this.running = null;
 
     var app = this;
+
+    this.reset = function()
+    {
+        // speed setting is (roughly) the number of empty loop cycles per second
+        if (script.dataset["speed"]) busy_delay = 1000 / script.dataset["speed"];
+        // screen settings
+        var columns = script.dataset["columns"] || 40;
+        var rows = script.dataset["rows"] || 24;
+        var font_name = script.dataset["font"] || "smooth";
+        // palette settings, use CGA colours by default
+        var colours = {
+            0: "black",
+            1: "#0000aa", // blue
+            2: "#aa0000", // red
+            3: "#aa00aa", // purple
+            4: "#00aa00", // green
+            5: "#00aaaa", // cyan
+            6: "#ffff55", // yellow
+            7: "white",
+        }
+        for (var i=0; i<8; ++i) colours[i] = script.dataset["color-" + i] || colours[i];
+
+        // set up emulator
+        this.display = new Display(element, columns, rows, font_name, colours);
+        this.keyboard = new Keyboard(element);
+        this.printer = new Printer(printer_id);
+        this.speaker = new Speaker();
+        this.timer = new Timer();
+        this.storage = [new Floppy(0), new Floppy(1, flop1_id), new Floppy(2, flop2_id), new Floppy(3, flop3_id)]
+
+        // stop any running program
+        this.stop();
+        if (listing) this.load(listing.value);
+    }
 
     this.handleError = function(e)
     {
@@ -3750,14 +3762,18 @@ function BasicodeApp(script)
         this.keyboard.reset();
         // show program
         if (listing) listing.value = code;
-        try {
-            // initialise program object
-            this.program = new Program(code);
-            this.program.attach(this);
-            // show title and description
-            this.show();
-        } catch (e) {
-            this.handleError(e);
+        if (code) {
+            try {
+                // initialise program object
+                this.program = new Program(code);
+                this.program.attach(this);
+                // show title and description
+                this.show();
+            } catch (e) {
+                this.handleError(e);
+            }
+        } else {
+            this.splash();
         }
     }
 
@@ -3781,6 +3797,7 @@ function BasicodeApp(script)
     // intro screen if nothing was loaded
     {
         if (listing) listing.value = '';
+        this.display.clear();
         this.display.invertColour();
         this.display.clearRow(0);
         this.display.writeCentre(0, "(c) 2016, 2017 Rob Hagemans");
@@ -3846,7 +3863,7 @@ function BasicodeApp(script)
         this.running = window.setTimeout(step, MIN_DELAY);
     }
 
-    this.stop = function()
+    this.release = function()
     // release resources upon program end
     {
         if (this.running) window.clearTimeout(this.running);
@@ -3855,11 +3872,22 @@ function BasicodeApp(script)
             this.display.release();
             this.printer.flush();
         }
+    }
+
+    this.stop = function()
+    // stop program
+    {
+        this.release();
         this.display.invertColour();
         this.display.clearRow(this.display.height - 1);
         this.display.writeCentre(this.display.height - 1, "-- click to run again --");
         this.display.invertColour();
     }
+
+    ///////////////////////////////////////////////////////////////////////////
+    // first initialisation
+
+    this.reset();
 
     // load & run the code provided in the element, if any
     var url = script.getAttribute("src");
@@ -3870,17 +3898,12 @@ function BasicodeApp(script)
         request.open("GET", url, true);
         request.onreadystatechange = function() {
             if (request.readyState === 4 && request.status === 200) {
-                app.load(request.responseText);
+                code = request.responseText;
             }
         }
         request.send(null);
     }
-    else if (code) {
-        this.load(code);
-    }
-    else {
-        this.splash();
-    }
+    this.load(code);
 
 
     ///////////////////////////////////////////////////////////////////////////
@@ -3929,15 +3952,25 @@ function BasicodeApp(script)
 
 }
 
+var apps = {};
+
 function launch() {
     var scripts = document.getElementsByTagName("script");
-    for(var i=0; i < scripts.length; ++i) {
+    for (var i=0; i < scripts.length; ++i) {
         if (scripts[i].type == "text/basicode") {
-            var app = new BasicodeApp(scripts[i]);
+            apps[scripts[i].id] = new BasicodeApp(scripts[i]);
         }
     }
 }
-// a bit of magic to run launcher() after the document is complete
+
+function restart() {
+    var keys = Object.keys(apps);
+    for (var i in keys) {
+        apps[keys[i]].reset();
+    }
+}
+
+// a bit of magic to run launch() after the document is complete
 // so that it can access all the <script> tags
 // http://stackoverflow.com/questions/807878/javascript-that-executes-after-page-load
 function downloadJSAtOnload() {
