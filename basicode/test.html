@@ -2,16 +2,46 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="demo.css">
     <script src="basicode.js"></script>
+
+    <script>
+    function loadFile(element) {
+        console.log(element.href);
+        settings = document.getElementById('basicode-script').dataset;
+        settings['src'] = element.href;
+        restart();
+        return false;
+    }
+    </script>
+
+    <style>
+
+    .basicode {
+        /* 4*3 aspect ratio */
+        height: 30em;
+        width: 40em;
+        border: 0.4rem solid black;
+        outline: none;
+    }
+    </style>
 </head>
 
 <body>
 
     <script type="text/basicode"
-        src="basicode/Basicode-2a/01_Welkom.bc2"
+        data-font="cga"
         id="basicode-script"
         ></script>
+
+    <ol>
+        <li>
+            <a href="basicode/Basicode-2a/01_Welkom.bc2" onclick="return loadFile(this);">WELKOM OP KANT 2</a>
+        </li>
+        <li>
+            <a href="basicode/Basicode-2a/02_Sea_Wars.bc2" onclick="return loadFile(this);">*ZEESLAG*</a>
+        </li>
+    </ol>
+
 
 </body>
 </html>
