@@ -21,6 +21,7 @@
                 if (request.readyState === 4 && request.status === 200) {
                     code = request.responseText;
                     console.log(code);
+                    app.stop()
                     app.load(code);
                 }
             }
