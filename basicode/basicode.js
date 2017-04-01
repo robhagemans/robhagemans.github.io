@@ -3917,12 +3917,12 @@ function BasicodeApp(script)
         request.onreadystatechange = function() {
             if (request.readyState === 4 && request.status === 200) {
                 code = request.responseText;
+                console.log(code);
+                this.load(code);
             }
         }
         request.send(null);
     }
-    console.log(code);
-    this.load(code);
 
 
     ///////////////////////////////////////////////////////////////////////////
