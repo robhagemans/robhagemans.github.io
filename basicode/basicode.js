@@ -3918,7 +3918,7 @@ function BasicodeApp(script)
             if (request.readyState === 4 && request.status === 200) {
                 code = request.responseText;
                 console.log(code);
-                this.load(code);
+                app.load(code);
             }
         }
         request.send(null);
