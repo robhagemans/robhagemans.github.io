@@ -16,12 +16,15 @@
             var request = new XMLHttpRequest();
             request.open("GET", url, true);
             request.onreadystatechange = function() {
+                console.log('!')
+                console.log(request)
                 if (request.readyState === 4 && request.status === 200) {
                     code = request.responseText;
                     console.log(code);
                     app.load(code);
                 }
             }
+            console.log(request)
         }
         return false;
     }
