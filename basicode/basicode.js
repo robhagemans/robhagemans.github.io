@@ -3908,9 +3908,11 @@ function BasicodeApp(script)
     // load & run the code provided in the element, if any
     var url = script.getAttribute("src");
     var code = script.innerHTML;
+    console.log(url);
     if (url !== undefined && url !== null && url) {
         var url = script.getAttribute("src");
         var request = new XMLHttpRequest();
+        console.log(url);
         request.open("GET", url, true);
         request.onreadystatechange = function() {
             if (request.readyState === 4 && request.status === 200) {
@@ -3919,6 +3921,7 @@ function BasicodeApp(script)
         }
         request.send(null);
     }
+    console.log(code);
     this.load(code);
 
 
