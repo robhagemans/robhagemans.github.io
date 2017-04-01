@@ -12,11 +12,13 @@
         settings = document.getElementById('basicode-script').dataset;
         url = element.href;
         if (url !== undefined && url !== null && url) {
+            console.log(url);
             var request = new XMLHttpRequest();
             request.open("GET", url, true);
             request.onreadystatechange = function() {
                 if (request.readyState === 4 && request.status === 200) {
                     code = request.responseText;
+                    console.log(code);
                     app.load(code);
                 }
             }
