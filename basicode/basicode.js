@@ -1894,10 +1894,11 @@ function Parser(expr_list, program)
     {
         var values = []
         var neg = false;
+        // allow completely empty DATA statements
+        if (expr_list[0].token_type === "\n") return last;
         while (expr_list.length > 0) {
             var value = expr_list.shift();
-            // only literals allowed in DATA
-            // we"re not allowing empty DATA statements or repeated commas
+            // only literals allowed in DATA; no empty entries (repeated commas)
             if (value === null || (value.token_type !== "literal" && (neg || (value.token_type !== "operator" || value.payload !== "-")))) {
                 throw new BasicError("Syntax error", "expected string or number literal, got `"+value.payload+"`", current_line);
             }
@@ -1970,13 +1971,10 @@ function Parser(expr_list, program)
             throw new BasicError("Syntax error", "expected line number, got `"+line_number.payload+"`", current_line);
         }
         // GOTO 20 is a BASICODE fixture, clear and jump to 1010
-        if (line_number.payload === 20) {
-            last.next = new Node(subClear, [], program);
-            last.next.next = new Jump(1010, program, false)
-            return last.next.next;
-        }
         // GOTO 950 means END
-        else if (line_number.payload === 950) return new End();
+        if (line_number.payload === 20 || line_number.payload === 950) {
+            return SUBS[line_number.payload](last)
+        }
         else if (line_number.payload < 1000) {
             throw new BasicError("Unimplemented BASICODE", "`GOTO "+line_number.payload+"` not implemented", current_line);
         }
@@ -2047,6 +2045,12 @@ function Parser(expr_list, program)
         650: function(last) {last.next = new Node(subText, [], program); return last.next; },
         // GOSUB 950 (unofficial) same as GOTO 950
         950: function(last) {last.next = new End(); return last.next; },
+        // GOSUB 20 (unofficial) same as GOTO 20
+        20 : function(last){
+            last.next = new Node(subClear, [], program);
+            last.next.next = new Jump(1010, program, false)
+            return last.next.next;
+        }
     }
 
     this.parseIf = function(token, last)
@@ -2353,7 +2357,11 @@ function Variables()
     // allocate an array
     {
         // no redefinitions allowed
-        if (name in this.dims || name in this.arrays) throw new BasicError("Duplicate definition", "`"+name+"()` was previously dimensioned", null);
+        if (name in this.dims || name in this.arrays) {
+            // ignore redefinitions of basicode-3c colour array, for compatibility
+            if (name == "CC") return;
+            throw new BasicError("Duplicate definition", "`"+name+"()` was previously dimensioned", null);
+        }
         // BASICODE arrays may have at most two indices
         if (indices.length > 2) throw new BasicError("Subscript out of range", "too many array dimensions", null);
         // set default to empty string if string name, 0 otherwise
@@ -2674,7 +2682,9 @@ function subClear()
     this.variables.assign(this.output.height - 1, "VE", []);
     this.variables.assign(this.output.pixel_width, "HG", []);
     this.variables.assign(this.output.pixel_height, "VG", []);
-    // basicode-3c
+    // basicode-3c version identifier
+    this.variables.assign(35, "SV", []);
+    // basicode-3c colour array
     this.variables.allocate("CC", [10]);
     this.variables.assign(7, "CC", [0]);
     this.variables.assign(0, "CC", [1]);
@@ -2711,12 +2721,16 @@ function subGetPos()
 function subWriteBold()
 // GOSUB 150
 {
+    this.output.write(" ");
+    var fg = this.output.foreground;
+    var bg = this.output.background;
     subSetColour.call(this);
     var text = "  " + this.variables.retrieve("SR$", []) + "  ";
-    this.output.write(" ");
     this.output.invertColour();
     this.output.write(text);
     this.output.invertColour();
+    this.output.foreground = fg;
+    this.output.background = bg;
     this.output.write(" ");
 }
 
@@ -2730,20 +2744,12 @@ function subReadKey()
     if ((keyval >= 32 && keyval <= 126) || keyval === 13) {
         key = String.fromCharCode(keyval);
         keyval = key.toUpperCase().charCodeAt(0);
-        cn_keyval = keyval;
-        if (key >= "A" && key <= "Z") {
-            cn_keyval = key.toLowerCase().charCodeAt(0);
-        }
         key = key.toUpperCase();
     }
     // IN$ and IN return capitalised key codes
     // special keys generate a code in IN but not IN$
     this.variables.assign(keyval, "IN", []);
     this.variables.assign(key, "IN$", []);
-    // in BC-3c, CN contains the character code of the lowercase letter
-    // if an uppercase key was entered, and vice versa
-    //FIXME: we sould be able to switch this off for BC-2 and BC-3 programs
-    //this.variables.assign(cn_keyval, "CN", []);
 }
 
 function subSetTimer()
@@ -2770,7 +2776,9 @@ function subReadChar()
     var col = this.variables.retrieve("HO", []);
     var row = this.variables.retrieve("VE", []);
     var ch = this.output.getScreenChar(row, col);
-    this.variables.assign(ch.charCodeAt(0), "IN", []);
+    this.variables.assign(ch.toUpperCase().charCodeAt(0), "IN", []);
+    // BASICODE-3C should set CN to zero here (or maybe 32 for a lowercase letter)
+    // which we omit to avoid breaking BASICODE-3 compatibility
 }
 
 function subBeep()
@@ -2867,20 +2875,20 @@ function subLineFeed()
 function subOpen()
 // GOSUB 500
 /*
-Open the file NF$ according to the code in NF:
-NF = even number: input: NF= uneven number: output
+    Open the file NF$ according to the code in NF:
+    NF = even number: input: NF= uneven number: output
     NF= 0 or 1 BASICODE cassette
-    NF= 2 or 3 own system memory
-    NF= 4 or 5 diskette
-    NF= 6 or 7 diskette
+    NF= 2 or 3 floppy, 1st file
+    NF= 4 or 5 floppy, 2nd file
+    NF= 6 or 7 floppy, 3rd file
     IN=0: all OK, IN=1: end of file, IN=-1: error
 */
 {
     var nf = this.variables.retrieve("NF", []);
     var name = this.variables.retrieve("NF$", []);
     var mode = (nf%2) ? "w" : "r";
-    var device = Math.floor(nf/2);
-    var status = this.storage[device].open(name, mode) ? 0 : -1;
+    var file_number = Math.floor(nf/2);
+    var status = this.storage[file_number].open(name, mode) ? 0 : -1;
     this.variables.assign(status, "IN", []);
 }
 
@@ -2889,8 +2897,8 @@ function subClose()
 // Read into IN$ from the opened file NF$ (in IN the status, see line 500)
 {
     var nf = this.variables.retrieve("NF", []);
-    var device = Math.floor(nf/2);
-    var status = this.storage[device].close() ? 0 : -1;
+    var file_number = Math.floor(nf/2);
+    var status = this.storage[file_number].close() ? 0 : -1;
     this.variables.assign(status, "IN", []);
 }
 
@@ -2899,11 +2907,11 @@ function subReadFile()
 // Send SR$ towards the opened file NF$ (in IN the status, see line 500)
 {
     var nf = this.variables.retrieve("NF", []);
-    var device = Math.floor(nf/2);
+    var file_number = Math.floor(nf/2);
     var status = 0;
     var str = "";
     try {
-        str = this.storage[device].readLine();
+        str = this.storage[file_number].readLine();
         if (str === null) {
             status = 1;
             str = "";
@@ -2922,11 +2930,11 @@ function subWriteFile()
 // Close the file with code NF
 {
     var nf = this.variables.retrieve("NF", []);
-    var device = Math.floor(nf/2);
+    var file_number = Math.floor(nf/2);
     var status = 0;
     var str = this.variables.retrieve("SR$", []);
     try {
-        this.storage[device].writeLine(str);
+        this.storage[file_number].writeLine(str);
     }
     catch (e) {
         if (typeof e !== "string") throw e;
@@ -2939,7 +2947,9 @@ function subPlot()
 // GOSUB 620
 // Plot a point at graphic position HO,VE (0<=HO<1 en 0<=VE<1) in fore/background color CN (=0/1; normally white/black)
 {
-    subSetColour.call(this);
+    // only set foreground colour, backround is set on CLS
+    var fg = this.variables.retrieve("CC", [0]);
+    this.output.foreground = this.output.colours[fg];
     var x = this.variables.retrieve("HO", []);
     var y = this.variables.retrieve("VE", []);
     var c = this.variables.retrieve("CN", []);
@@ -2950,7 +2960,9 @@ function subDraw()
 // GOSUB 630
 // Draw a line towards point HO,VE (0<=HO<1 en 0<=VE<1) in fore/background color CN (=0/1; normally white/black)
 {
-    subSetColour.call(this);
+    // only set foreground colour, backround is set on CLS
+    var fg = this.variables.retrieve("CC", [0]);
+    this.output.foreground = this.output.colours[fg];
     var x = this.variables.retrieve("HO", []);
     var y = this.variables.retrieve("VE", []);
     var c = this.variables.retrieve("CN", []);
@@ -2961,7 +2973,9 @@ function subText()
 // GOSUB 650
 // Print SR$ as text from graphic position HO,VE (0<=HO<1 en 0<=VE<1). HO and VE stay the same value.
 {
-    subSetColour.call(this);
+    // only set foreground colour, backround is set on CLS
+    var fg = this.variables.retrieve("CC", [0]);
+    this.output.foreground = this.output.colours[fg];
     var x = this.variables.retrieve("HO", []);
     var y = this.variables.retrieve("VE", []);
     var text = this.variables.retrieve("SR$", []);
@@ -3671,9 +3685,7 @@ function BasicodeApp(script)
     // optional target elements
     var screen_id = script.dataset["canvas"];
     var printer_id = script.dataset["printer"];
-    var flop1_id = script.dataset["floppy-1"];
-    var flop2_id = script.dataset["floppy-2"];
-    var flop3_id = script.dataset["floppy-3"];
+    var flop_id = script.dataset["floppy"];
     var listing_id = script.dataset["listing"];
 
     // obtain screen/keyboard canvas
@@ -3728,7 +3740,7 @@ function BasicodeApp(script)
         this.printer = new Printer(printer_id);
         this.speaker = new Speaker();
         this.timer = new Timer();
-        this.storage = [new Floppy(0), new Floppy(1, flop1_id), new Floppy(2, flop2_id), new Floppy(3, flop3_id)]
+        this.storage = [new Floppy(0), new Floppy(1, flop_id), new Floppy(1, flop_id), new Floppy(1, flop_id)]
 
         // stop any running program
         this.stop();
@@ -3909,7 +3921,6 @@ function BasicodeApp(script)
     var url = script.getAttribute("src");
     var code = script.innerHTML;
     if (url !== undefined && url !== null && url) {
-        var url = script.getAttribute("src");
         var request = new XMLHttpRequest();
         request.open("GET", url, true);
         request.onreadystatechange = function() {
