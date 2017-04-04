@@ -1975,6 +1975,12 @@ function Parser(expr_list, program)
         if (line_number.payload === 20 || line_number.payload === 950) {
             return SUBS[line_number.payload](last)
         }
+        else if (line_number.payload in SUBS) {
+            last = SUBS[line_number.payload](last);
+            // GOTO basicode routine == GOSUB basicode routine and then RETURN
+            last.next = new Return(program);
+            return last.next;
+        }
         else if (line_number.payload < 1000) {
             throw new BasicError("Unimplemented BASICODE", "`GOTO "+line_number.payload+"` not implemented", current_line);
         }
@@ -3812,6 +3818,9 @@ function BasicodeApp(script, id)
     this.load = function(code)
     // load program, parse to AST, connect to output
     {
+        if (!code) {
+            code = "";
+        }
         // stop any running program
         this.stop()
         // clear screen
