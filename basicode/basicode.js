@@ -1591,6 +1591,9 @@ function Next(loop_name, program)
     this.step = function()
     {
         var for_record = program.loop_stack[0];
+        if (for_record === null || for_record === undefined) {
+            throw new BasicError("Block error", "`NEXT` without `FOR`");
+        }
         while (loop_name !== for_record.name) {
             console.log("Popping from loop stack unexpectedly, did we jump out of a loop?");
             program.loop_stack.shift();
@@ -1621,7 +1624,9 @@ function Program(basicode)
     this.data = new Data();
     this.fns = new Functions();
     this.line_numbers = {};
-    this.tree = new Label();
+    // run clear at the start of each program
+    // and again for GOTO 20
+    this.tree = new Node(subClear, [], this);
 
     // build the tree
     var tokenised_code = new Lexer(basicode).tokenise();
@@ -1841,7 +1846,13 @@ function Parser(expr_list, program)
             }
             // parse arguments in statement-specific way
             // statement parsers must take care of maintaining the linked list
-            last = PARSERS[token.payload].call(this, token, last)
+            var parser = PARSERS[token.payload];
+            if (parser) {
+                last = parser.call(this, token, last)
+            }
+            else {
+                throw new BasicError("Syntax error", "expected statement, got `" + sep.payload + "`", current_line);
+            }
         }
         return last;
     }
@@ -2116,6 +2127,7 @@ function Parser(expr_list, program)
     this.parseFor = function(token, last)
     // parse FOR
     {
+        var for_line = current_line;
         var loop_variable = expr_list.shift();
         if (loop_variable.token_type !== "name" || loop_variable.payload.slice(-1) === "$") {
             throw new BasicError("Syntax error", "expected numerical variable name, got `"+loop_variable.payload+"`", current_line);
@@ -2147,18 +2159,17 @@ function Parser(expr_list, program)
         // parse body of FOR loop until NEXT is encountered
         last = this.parse(last, "NEXT");
         // parse NEXT
-        var next = this.parseNext(expr_list.shift(), last);
-        // pop the varible off the FOR stack
+        var next = this.parseNext(expr_list.shift(), last, for_line);
+        // pop the variable off the FOR stack
         for_stack.shift();
         return next;
     }
 
-    this.parseNext = function(token, last)
-    // regular NEXT is handled by FOR parser
-    // if we encounter it unexpectedly, this is where we get
+    this.parseNext = function(token, last, for_line)
+    // regular NEXT
     {
         if (token === undefined || token === null || token.payload !== "NEXT") {
-            throw new BasicError("Block error", "`FOR` without `NEXT`", current_line);
+            throw new BasicError("Block error", "`FOR` without `NEXT`", for_line);
         }
         // only one variable allowed
         var next_variable = expr_list.shift();
@@ -2167,7 +2178,7 @@ function Parser(expr_list, program)
             expr_list.unshift(next_variable);
         }
         else if (for_stack[0] !== next_variable.payload) {
-            throw new BasicError("Block error", "expected `NEXT `"+loop_variable+"`, got `NEXT " + next_variable.payload + "`", current_line);
+            throw new BasicError("Block error", "expected `NEXT "+for_stack[0]+"`, got `NEXT " + next_variable.payload + "`", current_line);
         }
         // create the iteration node
         last.next = new Next(for_stack[0], program);
@@ -2178,6 +2189,13 @@ function Parser(expr_list, program)
             expr_list.unshift(new SeparatorToken(":"));
         }
         return last.next;
+    },
+
+    this.parseNextWithoutFor = function(token, last)
+    // regular NEXT is handled by FOR parser
+    // if we encounter it unexpectedly, this is where we get
+    {
+        throw new BasicError("Block error", "`NEXT` without `FOR`", current_line);
     },
 
     this.parseInput = function(token, last)
@@ -2279,7 +2297,7 @@ function Parser(expr_list, program)
         "IF": this.parseIf,
         "INPUT": this.parseInput,
         "LET": this.parseLet,
-        "NEXT": this.parseNext,
+        "NEXT": this.parseNextWithoutFor,
         "ON": this.parseOn,
         "PRINT": this.parsePrint,
         "READ": this.parseRead,

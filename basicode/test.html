@@ -6,27 +6,20 @@
 
     <script>
     function loadFile(element) {
-        console.log(element.href);
         app = apps['basicode-script'];
-        console.log(app);
         settings = document.getElementById('basicode-script').dataset;
         url = element.href;
         if (url !== undefined && url !== null && url) {
-            console.log(url);
             var request = new XMLHttpRequest();
             request.open("GET", url, true);
             request.onreadystatechange = function() {
-                console.log('!')
-                console.log(request)
                 if (request.readyState === 4 && request.status === 200) {
                     code = request.responseText;
-                    console.log(code);
                     app.stop()
                     app.load(code);
                 }
             }
             request.send()
-            console.log(request)
         }
         return false;
     }
