@@ -5,50 +5,54 @@
     <script src="basicode.js"></script>
 
     <script>
-    function loadFile(element) {
-        app = apps['basicode-script'];
-        settings = document.getElementById('basicode-script').dataset;
-        url = element.href;
-        if (url !== undefined && url !== null && url) {
-            var request = new XMLHttpRequest();
-            request.open("GET", url, true);
-            request.onreadystatechange = function() {
-                if (request.readyState === 4 && request.status === 200) {
-                    code = request.responseText;
-                    app.stop()
-                    app.load(code);
+        function loadFile(element) {
+            app = apps['basicode-script'];
+            settings = document.getElementById('basicode-script').dataset;
+            url = element.href;
+            if (url !== undefined && url !== null && url) {
+                var request = new XMLHttpRequest();
+                request.open("GET", url, true);
+                request.onreadystatechange = function() {
+                    if (request.readyState === 4 && request.status === 200) {
+                        code = request.responseText;
+                        app.stop()
+                        app.load(code);
+                    }
                 }
+                request.send()
             }
-            request.send()
+            return false;
         }
-        return false;
-    }
-
     </script>
 
     <style>
+        .basicode {
+            /* 4*3 aspect ratio */
+            height: 30rem;
+            width: 40rem;
+            border: 0.4rem solid black;
+            outline: none;
+            /*margin-right: 20rem;*/
+            position: relative;
+        }
 
-    .basicode {
-        /* 4*3 aspect ratio */
-        height: 30em;
-        width: 40em;
-        border: 0.4rem solid black;
-        outline: none;
-        margin-left: 20rem;
-        position: relative;
-    }
+        #listing {
+            width: 40rem;
+            display: block;
+            height: 20em;
+        }
 
-    nav {
-        position: fixed;
-        overflow-y: scroll;
-        left: 0;
-        top: 0;
-        padding: 5rem 1em 0 1em;
-        width: 18rem;
-        height: 90vh;
-        line-height: 1.4em;
-        font-family: sans;
-    }
+        nav {
+            position: fixed;
+            overflow-y: scroll;
+            right: 0;
+            top: 0;
+            padding: 5rem 1em 0 1em;
+            width: 40em;
+            height: 90vh;
+            line-height: 1.4em;
+            font-family: sans;
+        }
     </style>
 </head>
 
@@ -56,11 +60,14 @@
 
     <script type="text/basicode"
         data-font="cga"
+        data-listing="listing"
         id="basicode-script"
         ></script>
 
+    <textarea id="listing"></textarea>
+
     <nav>
-        <ol>
+        <ul>
             <li>basicode/Basicode-2a
                 <ol>
                     <li><a href="basicode/Basicode-2a/01_Welkom.bc2" onclick="return loadFile(this);">Welkom Op Kant 2</a></li>
@@ -1267,7 +1274,7 @@
                     <li><a href="basicode/Wiegand_Fillinger_Basicode_2/15_Lohn_Einkommensteuer.bc2" onclick="return loadFile(this);">Steuer 1983</a></li>
                 </ol>
             </li>
-        </ol>
+        </ul>
 
     </nav>
 
