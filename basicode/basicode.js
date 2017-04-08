@@ -1192,20 +1192,20 @@ var SYMBOLS = {
 }
 
 var KEYWORDS = {
-    "ABS": newFunctionToken("ABS", Math.abs),
+    "ABS": newFunctionToken("ABS", fnAbs),
     "AND": newOperatorToken("AND", 2, 5, opAnd),
     "ASC": newFunctionToken("ASC", fnAsc),
-    "ATN": newFunctionToken("ATN", Math.atan),
-    "CHR$": newFunctionToken("CHR$", String.fromCharCode),
-    "COS": newFunctionToken("COS", Math.cos),
+    "ATN": newFunctionToken("ATN", fnAtan),
+    "CHR$": newFunctionToken("CHR$", fnChr),
+    "COS": newFunctionToken("COS", fnCos),
     "DIM": newStatementToken("DIM", stDim),
-    "EXP": newFunctionToken("EXP", Math.exp),
+    "EXP": newFunctionToken("EXP", fnExp),
     "INPUT": newStatementToken("INPUT", stInput),
-    "INT": newFunctionToken("INT", Math.trunc),
+    "INT": newFunctionToken("INT", fnInt),
     "LEFT$": newFunctionToken("LEFT$", fnLeft),
     "LEN": newFunctionToken("LEN", fnLen),
     "LET": newStatementToken("LET", stLet),
-    "LOG": newFunctionToken("LOG", Math.log),
+    "LOG": newFunctionToken("LOG", fnLog),
     "MID$": newFunctionToken("MID$", fnMid),
     "NOT": newOperatorToken("NOT", 1, 6, opNot),
     "OR": newOperatorToken("OR", 2, 4, opOr),
@@ -1213,11 +1213,11 @@ var KEYWORDS = {
     "READ": newStatementToken("READ", stRead),
     "RESTORE": newStatementToken("RESTORE", stRestore),
     "RIGHT$": newFunctionToken("RIGHT$", fnRight),
-    "SGN": newFunctionToken("SGN", Math.sign),
-    "SIN": newFunctionToken("SIN", Math.sin),
-    "SQR": newFunctionToken("SQR", Math.sqrt),
+    "SGN": newFunctionToken("SGN", fnSgn),
+    "SIN": newFunctionToken("SIN", fnSin),
+    "SQR": newFunctionToken("SQR", fnSqr),
     "TAB": newFunctionToken("TAB", fnTab),
-    "TAN": newFunctionToken("TAN", Math.tan),
+    "TAN": newFunctionToken("TAN", fnTan),
     "VAL": newFunctionToken("VAL", fnVal),
     // declarations with no runtime effect
     "DATA": newStatementToken("DATA", null),
@@ -2377,6 +2377,14 @@ function matchType(name, value)
     }
 }
 
+function equalType(left, right)
+{
+    if (typeof(left) !== typeof(right)) {
+        throw new BasicError("Type mismatch" , "", null);
+    }
+}
+
+
 function Variables()
 {
     this.clear = function()
@@ -2403,6 +2411,8 @@ function Variables()
             if (indices.length === 0) return default_value;
             else {
                 // allocate subarray; BASICODE arrays span 0..x inclusive
+                equalType(0, indices[0]);
+                if (indices[0] <= 0) throw new BasicError("Illegal function call", "", null);
                 var arr = new Array(indices[0]+1);
                 // feed remaining arguments to recursive call
                 var argarray = indices.slice(1);
@@ -2453,9 +2463,7 @@ function Variables()
     // set a variable
     {
         this.checkSubscript(name, indices);
-        if ((name.slice(-1) === "$") !== (typeof value === "string")) {
-            throw new BasicError("Type mismatch", "`"+name+"` can't be set to "+(typeof value)+" `"+value+"`", null)
-        }
+        matchType(name, value);
         if (indices.length === 0) {
             this.scalars[name] = value;
         }
@@ -2518,68 +2526,99 @@ function Functions()
 
 function opMultiply(x, y)
 {
+    equalType(0, x);
+    equalType(0, y);
     return x * y;
 }
 
 function opDivide(x, y)
 {
+    equalType(0, x);
+    equalType(0, y);
+    if (y === 0) throw new BasicError("Division by Zero", "", null);
     return x / y;
 }
 
 function opPlus(x, y)
 // + adds numbers or concatenates strings; unary plus leaves unchanged
 {
-    if (y === undefined) return x; else return x + y;
+    if (y === undefined) {
+        equalType(0, x);
+        return x;
+    }
+    else {
+        equalType(x, y);
+        return x + y;
+    }
 }
 
 function opMinus(x, y)
 // - can be unary negation or binary subtraction
 {
-    if (y === undefined) return -x; else return x - y;
+    equalType(0, x);
+    if (y === undefined) {
+        return -x;
+    }
+    else {
+        equalType(0, y);
+        return x - y;
+    }
 }
 
 function opEqual(x, y)
 {
+    equalType(x, y);
     return -(x === y);
 }
 
 function opGreaterThan(x, y)
 {
+    equalType(x, y);
     return -(x > y);
 }
 
 function opGreaterThanOrEqual(x, y)
 {
+    equalType(x, y);
     return -(x >= y);
 }
 
 function opLessThan(x, y)
 {
+    equalType(x, y);
     return -(x < y);
 }
 
 function opLessThanOrEqual(x, y)
 {
+    equalType(x, y);
     return -(x <= y);
 }
 
 function opNotEqual(x, y)
 {
+    equalType(x, y);
     return -(x !== y);
 }
 
 function opAnd(x, y)
 {
+    equalType(0, x);
+    equalType(0, y);
     return (x & y);
 }
 
 function opNot(x)
 {
+    equalType(0, x);
+    equalType(0, y);
     return (~x);
 }
 
 function opOr(x, y)
 {
+    equalType(0, x);
+    equalType(0, y);
     return (x | y);
 }
 
@@ -2604,6 +2643,7 @@ function fnTab(x)
 // outside of PRINT, this is not allowed
 // but we"re not throwing any errors
 {
+    equalType(0, x);
     this.output.setColumn(x);
     return "";
 }
@@ -2616,37 +2656,121 @@ function stComma()
 }
 
 
+function fnAbs(x)
+{
+    equalType(0, x);
+    return Math.abs(x);
+}
+
 function fnAsc(x)
 {
+    equalType("", x);
+    if (x === "") throw new BasicError("Illegal function call", "", null);
     return x.charCodeAt(0);
 }
 
+function fnAtan(x)
+{
+    equalType(0, x);
+    return Math.atan(x);
+}
+
+function fnChr(x)
+{
+    equalType(0, x);
+    if (x<0 || x > 255) throw new BasicError("Illegal function call", "", null);
+    return String.fromCharCode(x);
+}
+
+function fnCos(x)
+{
+    equalType(0, x);
+    return Math.cos(x);
+}
+
+function fnExp(x)
+{
+    equalType(0, x);
+    return Math.exp(x);
+}
+
+function fnInt(x)
+{
+    equalType(0, x);
+    return Math.trunc(x);
+}
+
+function fnLog(x)
+{
+    equalType(0, x);
+    if (x <= 0) throw new BasicError("Illegal function call", "", null);
+    return Math.log(x);
+}
+
+function fnSgn(x)
+{
+    equalType(0, x);
+    return Math.sign(x);
+}
+
+function fnSin(x)
+{
+    equalType(0, x);
+    return Math.sin(x);
+}
+
+function fnSqr(x)
+{
+    equalType(0, x);
+    if (x < 0) throw new BasicError("Illegal function call", "", null);
+    return Math.sqrt(x);
+}
+
+function fnTan(x)
+{
+    equalType(0, x);
+    return Math.tan(x);
+}
+
+
 function fnMid(x, start, n)
 {
+    equalType("", x);
+    equalType(0, start);
     if (n === undefined) return x.slice(start-1);
+    equalType(0, n);
     if (n === 0) return "";
-    else return x.slice(start-1, start+n-1);
+    if (n < 0) throw new BasicError("Illegal function call", "", null);
+    return x.slice(start-1, start+n-1);
 }
 
 function fnLeft(x, n)
 {
+    equalType("", x);
+    equalType(0, n);
     if (n === 0) return "";
+    if (n < 0) throw new BasicError("Illegal function call", "", null);
     return x.slice(0, n);
 }
 
 function fnRight(x, n)
 {
+    equalType("", x);
+    equalType(0, n);
     if (n === 0) return "";
+    if (n < 0) throw new BasicError("Illegal function call", "", null);
     return x.slice(-n);
 }
 
-function fnLen(x, n)
+function fnLen(x)
 {
+    equalType("", x);
     return x.length;
 }
 
 function fnVal(x)
 {
+    equalType("", x);
     return new Lexer(x).readValue();
 }
 
@@ -2703,6 +2827,7 @@ function stRead(name)
     if (name.slice(-1) === "$" && typeof value !== "string") {
         value = value.toString(10);
     }
+    matchType(name, value);
     this.variables.assign(value, name, indices);
 }
 
