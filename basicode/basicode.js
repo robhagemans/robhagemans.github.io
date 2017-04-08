@@ -2032,7 +2032,11 @@ function Parser(expr_list, program)
             return last.next.next;
         },
         220: function(last) {last.next = new Node(subReadChar, [], program); return last.next; },
-        250: function(last) {last.next = new Node(subBeep, [], program); return last.next; },
+        250: function(last) {
+            last.next = new Node(subBeep, [], program);
+            last.next.next = new Wait(function waitForTone() { return !program.speaker.isBusy(); });
+            return last.next.next;
+        },
         260: function(last) {last.next = new Node(subRandom, [], program); return last.next; },
         270: function(last) {last.next = new Node(subFree, [], program); return last.next; },
         280: function(last) {last.next = new Node(subToggleBreak, [], program); return last.next; },
@@ -2444,7 +2448,9 @@ function Variables()
     // set a variable
     {
         this.checkSubscript(name, indices);
-
+        if ((name.slice(-1) === "$") !== (typeof value === "string")) {
+            throw new BasicError("Type mismatch", "`"+name+"` can't be set to "+(typeof value)+" `"+value+"`", null)
+        }
         if (indices.length === 0) {
             this.scalars[name] = value;
         }
@@ -2603,16 +2609,19 @@ function fnAsc(x)
 function fnMid(x, start, n)
 {
     if (n === undefined) return x.slice(start-1);
+    if (n === 0) return "";
     else return x.slice(start-1, start+n-1);
 }
 
 function fnLeft(x, n)
 {
+    if (n === 0) return "";
     return x.slice(0, n);
 }
 
 function fnRight(x, n)
 {
+    if (n === 0) return "";
     return x.slice(-n);
 }
 
@@ -2675,6 +2684,10 @@ function stRead(name)
 {
     var indices = [].slice.call(arguments, 1);
     var value = this.data.read()
+    // convert numbers to strings, but not the other way around
+    if (name.slice(-1) === "$" && typeof value !== "string") {
+        value = value.toString(10);
+    }
     this.variables.assign(value, name, indices);
 }
 
