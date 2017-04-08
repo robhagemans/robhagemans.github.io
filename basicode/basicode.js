@@ -1887,6 +1887,11 @@ function Parser(expr_list, program)
                 last_node = last_node.next;
                 last = expr;
             }
+            else if (expr_list[0].token_type === ",") {
+                expr_list.shift();
+                last_node.next = new Node(stComma, [], program);
+                last_node = last_node.next;
+            }
             else if (expr_list[0].token_type !== ";") break;
             if (!expr_list.length) break;
             if (expr_list[0].token_type === ":" || expr_list[0].token_type === "\n") break;
@@ -2205,17 +2210,17 @@ function Parser(expr_list, program)
     this.parseInput = function(token, last)
     // parse INPUT
     {
-        var prompt = " ?";
+        var prompt = "? ";
         // allow a prompt string literal
         if ((expr_list[0].token_type === "literal") && (typeof expr_list[0].payload === "string")) {
-            prompt = expr_list.shift().payload;
+            prompt = expr_list.shift().payload + "? ";
             var semicolon = expr_list.shift();
             if (semicolon.token_type !== ";") {
                 throw new BasicError("Syntax error", "expected `;`, got `"+semicolon.payload+"`", current_line);
             }
         }
         // prompt
-        last.next = new Node(stPrint, [new Literal("? ")], program);
+        last.next = new Node(stPrint, [new Literal(prompt)], program);
         last = last.next;
         do {
             var name = expr_list.shift();
@@ -2592,6 +2597,8 @@ function opRetrieve(name)
     return value;
 }
 
+
+
 function fnTab(x)
 // set column to a given position during PRINT
 // outside of PRINT, this is not allowed
@@ -2600,6 +2607,14 @@ function fnTab(x)
     this.output.setColumn(x);
     return "";
 }
+
+function stComma()
+// jump to next tab stop during print
+// nothing like a function, but kind of related to TAB
+{
+    this.output.setColumn(8*Math.ceil(this.output.col/8));
+}
+
 
 function fnAsc(x)
 {
@@ -2781,7 +2796,6 @@ function subReadKey()
     if ((keyval >= 32 && keyval <= 126) || keyval === 13) {
         key = String.fromCharCode(keyval);
         keyval = key.toUpperCase().charCodeAt(0);
-        key = key.toUpperCase();
     }
     // IN$ and IN return capitalised key codes
     // special keys generate a code in IN but not IN$
