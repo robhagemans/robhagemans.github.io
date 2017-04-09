@@ -1628,6 +1628,7 @@ function Program(basicode)
     // run clear at the start of each program
     // and again for GOTO 20
     this.tree = new Node(subClear, [], this);
+    this.code = basicode;
 
     // build the tree
     var tokenised_code = new Lexer(basicode).tokenise();
@@ -1969,7 +1970,7 @@ function Parser(expr_list, program)
             if (rem[rem.length-1] === '"') rem = rem.slice(0, rem.length-1)
         }
         if (current_line === 1000) {
-            program.title = rem;
+            program.title = rem.trim();
         }
         else if (current_line >= 30000) {
             program.description += rem + "\n";
@@ -3733,52 +3734,18 @@ function Timer()
 ///////////////////////////////////////////////////////////////////////////////
 // storage
 
-function Floppy(id, element_id)
+function Floppy(id, onfilestore)
 {
-    var element = null;
-    if (element_id) element = document.getElementById(element_id);
 
     this.id = id;
     this.open_file = null;
     this.open_key = null;
     this.open_mode = "";
     this.open_line = null;
+    this.on_file_store = onfilestore;
+    if (!onfilestore) this.on_file_store = function(){};
 
-    var mime_type = "text/plain";
     var prefix = "BASICODE"
-
-    // this is where we keep our blobs
-    var blobbery = {};
-
-    this.refresh = function()
-    {
-        if (!element) return;
-        while (element.firstChild) {
-            element.removeChild(element.firstChild);
-        }
-        for (var i=0; i < localStorage.length; ++i) {
-            var key = localStorage.key(i)
-            var key_list = key.split(":");
-            if (key_list[0] !== prefix) continue;
-            if (key_list[1] !== "" + this.id) continue;
-            // create content blob from local storage, if necessary
-            if (!(key in blobbery)) {
-                blobbery[key] = new Blob([localStorage.getItem(key)], {type: mime_type});
-            }
-            // create download link to file
-            var a = document.createElement("a");
-            a.textContent = key_list[2];
-            a.href = window.URL.createObjectURL(blobbery[key]);
-            a.download = key_list[2];
-            // drag-out support
-            a.dataset.downloadurl = [mime_type, a.download, a.href].join(":");
-            a.draggable = true;
-            a.addEventListener("dragstart", function(e) {
-                e.dataTransfer.setData("DownloadURL", a.dataset.downloadurl);
-            }, false);
-            element.appendChild(a);
-        }
-    }
 
     this.open = function(name, mode)
     {
@@ -3800,7 +3767,6 @@ function Floppy(id, element_id)
         else {
             this.open_file = string.split("\n");
         }
-        this.refresh();
         return true;
     }
 
@@ -3809,7 +3775,7 @@ function Floppy(id, element_id)
         if (this.open_key === null) return false;
         localStorage.setItem(this.open_key, this.open_file.join("\n"));
         this.open_file = null;
-        this.refresh();
+        this.on_file_store(this);
         return true;
     }
 
@@ -3826,7 +3792,7 @@ function Floppy(id, element_id)
         this.open_file.push(line);
     }
 
-    this.refresh();
+    this.on_file_store(this);
 }
 
 
@@ -3918,8 +3884,8 @@ function BasicodeApp(script, id)
     // optional target elements
     var screen_id = script.dataset["canvas"];
     var printer_id = script.dataset["printer"];
-    var flop_id = script.dataset["floppy"];
-    var listing_id = script.dataset["listing"];
+    var store_func = script.dataset["store"];
+    var load_func = script.dataset["load"];
 
     // obtain screen/keyboard canvas
     var element;
@@ -3938,7 +3904,9 @@ function BasicodeApp(script, id)
     element.tabIndex = 1;
     element.focus();
 
-    var listing = document.getElementById(listing_id);
+    // event function on loading new program
+    this.on_program_load = window[load_func];
+    if (this.on_program_load === undefined) this.on_program_load = function(){};
 
     // runtime members
     this.program = null;
@@ -3973,7 +3941,8 @@ function BasicodeApp(script, id)
         this.printer = new Printer(printer_id);
         this.speaker = new Speaker();
         this.timer = new Timer();
-        var floppy = new Floppy(1, flop_id)
+
+        var floppy = new Floppy(1, window[store_func])
         this.storage = [new Tape(0), floppy, floppy, floppy]
 
 
@@ -3995,13 +3964,8 @@ function BasicodeApp(script, id)
             var code = script.innerHTML;
             // only check for persistent program if nothing was provided in script
             if (!code) {
-                if (listing && listing.value) {
-                    code = listing.value;
-                }
-                else {
-                    // if nothing in storage, this will return null
-                    code = localStorage.getItem(["BASICODE", this.id, "program"].join(":"))
-                }
+                // if nothing in storage, this will return null
+                code = localStorage.getItem(["BASICODE", this.id, "program"].join(":"))
             }
             this.load(code);
         }
@@ -4053,45 +4017,28 @@ function BasicodeApp(script, id)
         this.display.clear();
         // reset keyboard buffer
         this.keyboard.reset();
-        // show program
-        if (listing) listing.value = code;
         // put code in persistent storage
         localStorage.setItem(["BASICODE", this.id, "program"].join(":"), code);
+        try {
+            // initialise program object
+            this.program = new Program(code);
+            this.program.attach(this);
+        } catch (e) {
+            this.handleError(e);
+        }
         if (code) {
-            try {
-                // initialise program object
-                this.program = new Program(code);
-                this.program.attach(this);
-                // show title and description
-                this.show();
-            } catch (e) {
-                this.handleError(e);
-            }
+            this.run();
         } else {
+            this.program = null;
             this.splash();
         }
-    }
-
-    this.show = function()
-    // show program title and description
-    {
-        this.display.invertColour();
-        this.display.clearRow(0);
-        this.display.writeCentre(0, this.program.title);
-        this.display.write("\n\n");
-        this.display.invertColour();
-        this.display.write(this.program.description);
-        this.display.invertColour();
-        this.display.clearRow(this.display.height - 1);
-        this.display.writeCentre(this.display.height - 1, "-- click to run --");
-        this.display.invertColour();
-        this.display.curtain();
+        // call on_program_load function
+        this.on_program_load(this.program);
     }
 
     this.splash = function()
     // intro screen if nothing was loaded
     {
-        if (listing) listing.value = '';
         this.display.clear();
         this.display.invertColour();
         this.display.clearRow(0);
@@ -4187,16 +4134,6 @@ function BasicodeApp(script, id)
     ///////////////////////////////////////////////////////////////////////////
     // event handlers
 
-    if (listing) {
-        var last_code = listing.value;
-
-        // reload code if listing changes
-        listing.onblur = function() {
-            if (listing.value === last_code) return;
-            last_code = listing.value;
-            app.load(last_code);
-        }
-    }
     // run file on click
 
     element.addEventListener("click", function click(e) {

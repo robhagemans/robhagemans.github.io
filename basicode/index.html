@@ -6,6 +6,9 @@
     <script src="basicode.js"></script>
 
     <script>
+
+        // settings
+
         function loadSettings() {
             settings = document.getElementById('basicode-script').dataset;
             settings['columns'] = document.getElementById('columns').value;
@@ -61,17 +64,88 @@
             }
             loadSettings();
         }
+
+        // listing
+
+        function setupListing() {
+            var listing = document.getElementById('listing0');
+            var last_code = listing.value;
+
+            // reload code if listing changes
+            listing.onblur = function() {
+                if (listing.value === last_code) return;
+                last_code = listing.value;
+                apps['basicode-script'].load(last_code);
+            }
+        }
+
+        function onProgramLoad(program) {
+            var listing = document.getElementById('listing0');
+            var info = document.getElementById('info0');
+            if (program === null) {
+                listing.value = "";
+                info.innerHTML = "";
+            }
+            else {
+                listing.value = program.code;
+                info.innerHTML = "<h2>" + program.title + "</h2>\n\n" +program.description;
+            }
+        }
+
+        // storage
+
+        // this is where we keep our blobs
+        var blobbery = {};
+        var mime_type = "text/plain";
+
+        this.onFileStore = function(floppy)
+        {
+            var element = document.getElementById("flop1");
+            var prefix = "BASICODE";
+
+            if (!element) return;
+            while (element.firstChild) {
+                element.removeChild(element.firstChild);
+            }
+            for (var i=0; i < localStorage.length; ++i) {
+                var key = localStorage.key(i)
+                var key_list = key.split(":");
+                if (key_list[0] !== prefix) continue;
+                if (key_list[1] !== "" + floppy.id) continue;
+                // create content blob from local storage, if necessary
+                if (!(key in blobbery)) {
+                    blobbery[key] = new Blob([localStorage.getItem(key)], {type: mime_type});
+                }
+                // create download link to file
+                var a = document.createElement("a");
+                a.textContent = key_list[2];
+                a.href = window.URL.createObjectURL(blobbery[key]);
+                a.download = key_list[2];
+                // drag-out support
+                a.dataset.downloadurl = [mime_type, a.download, a.href].join(":");
+                a.draggable = true;
+                a.addEventListener("dragstart", function(e) {
+                    e.dataTransfer.setData("DownloadURL", a.dataset.downloadurl);
+                }, false);
+                element.appendChild(a);
+            }
+        }
+
+        function setup() {
+            loadSettings();
+            setupListing();
+        }
     </script>
 </head>
 
-<body onload="loadSettings();">
+<body onload="setup();">
 
     <script type="text/basicode"
-        data-floppy="flop1"
         data-printer="printer0"
         data-canvas="canvas0"
         data-input="screen"
-        data-listing="listing0"
+        data-load="onProgramLoad"
+        data-store="onFileStore"
         id="basicode-script"
         ></script>
 
@@ -194,6 +268,13 @@
             <a class="tab" href="#listing">Listing</a>
             <div>
                 <textarea id="listing0"></textarea>
+            </div>
+        </div>
+
+        <div id="info">
+            <a class="tab" href="#info">Info</a>
+            <div>
+                <pre id="info0"></pre>
             </div>
         </div>
 
