@@ -1633,7 +1633,12 @@ function Program(basicode)
     // build the tree
     var tokenised_code = new Lexer(basicode).tokenise();
     var parser = new Parser(tokenised_code, this);
-    parser.parse(this.tree);
+    try {
+        parser.parse(this.tree);
+    }
+    catch (e) {
+        this.error = e;
+    }
 
     // runtime state
     this.variables = new Variables();
@@ -1997,7 +2002,8 @@ function Parser(expr_list, program)
             return last.next;
         }
         else if (line_number.payload < 1000) {
-            throw new BasicError("Unimplemented BASICODE", "`GOTO "+line_number.payload+"` not implemented", current_line);
+            // do not throw error during parsing, Jump will throw at runtime
+            console.log("Incorrect or unimplemented BASICODE routine `GOTO "+line_number.payload+"`");
         }
         // other line numbers are resolved at run time
         last.next = new Jump(line_number.payload, program, false);
@@ -2018,7 +2024,8 @@ function Parser(expr_list, program)
             return SUBS[line_number.payload](last);
         }
         else if (line_number.payload < 1000) {
-            throw new BasicError("Unimplemented BASICODE", "`GOSUB "+line_number.payload+"` not implemented", current_line);
+            // do not throw error during parsing, Jump will throw at runtime
+            console.log("Incorrect or unimplemented BASICODE routine `GOSUB "+line_number.payload+"`");
         }
         last.next = new Jump(line_number.payload, program, true);
         return last.next;
@@ -4019,15 +4026,16 @@ function BasicodeApp(script, id)
         this.keyboard.reset();
         // put code in persistent storage
         localStorage.setItem(["BASICODE", this.id, "program"].join(":"), code);
-        try {
+        if (code) {
             // initialise program object
             this.program = new Program(code);
-            this.program.attach(this);
-        } catch (e) {
-            this.handleError(e);
-        }
-        if (code) {
-            this.run();
+            if (this.program.error) {
+                this.handleError(this.program.error);
+            }
+            else {
+                this.program.attach(this);
+                this.run();
+            }
         } else {
             this.program = null;
             this.splash();
