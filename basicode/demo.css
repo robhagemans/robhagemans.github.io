@@ -19,9 +19,8 @@ small a, small a:visited {
     /* 4*3 aspect ratio */
     height: 36em;
     width: 48em;
-    padding: 0.4rem 0.2rem 0.4rem 0.2rem;
-    background-color: grey;
-    border-radius: 0.4rem;
+    background-color: #333;
+    border: 0.4em solid grey;
     outline: none;
     /* this centers the screen horizontally, for some reason */
     margin: auto;
@@ -31,8 +30,7 @@ small a, small a:visited {
 }
 
 .basicode:focus {
-    background-color: grey;
-    border: 1px solid darkgrey;
+    border: 0.4em solid black;
 }
 
 /* storage visualisation */
