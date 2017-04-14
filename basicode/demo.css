@@ -45,24 +45,33 @@ small a, small a:visited {
     padding: 2em 1em 2em 1em;
     background-color: white;
     word-wrap: break-word;
+    overflow: scroll;
 }
 .floppy a {
     font-family: sans;
-    float:left; clear: none;
-    padding: 0.5em 3em 0.5em 3em;
     margin: 0.2em 0.1em 0.2em 0.1em;
-    border: 0.2em solid steelblue;
-    border-left: 1px solid lightblue;
-    border-radius: 0.3em;
-    background-color: steelblue;
-    color: white;
-    text-decoration: none;
-};
-.floppy a:visited {
-    color: white;
+    color: steelblue;
     text-decoration: none;
 }
-
+.floppy a:hover {
+    background-color: steelblue;
+    color: white;
+}
+.floppy ul, .floppy ol {
+    font-family: sans;
+    list-style-type: none;
+    padding-left: 0;
+    margin-top:0;
+    margin-bottom: 1.5em;
+}
+.floppy ul > li {
+    background-color: steelblue;
+    color: white;
+}
+.floppy ol > li {
+    background-color: white;
+    color: red;
+}
 
 /* Tabbed example */
 /* https://www.w3.org/Style/Examples/007/target.en.html#tab3 */
