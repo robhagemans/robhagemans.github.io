@@ -3221,7 +3221,6 @@ function Display(output_element, columns, rows, font_name, colours)
     // release this interface
     {
         this.busy = false;
-        this.curtain();
         this.resetColours();
     }
 
@@ -3312,12 +3311,6 @@ function Display(output_element, columns, rows, font_name, colours)
                 line_error += dx;
             }
         }
-    }
-
-    this.curtain = function()
-    {
-        context.fillStyle = "rgba(225,225,225,0.25)";
-        context.fillRect(0, 0, output_element.width, output_element.height);
     }
 
     var cursor_now = 0;
@@ -3883,8 +3876,9 @@ function Tape(id)
 
 }
 
+
 ///////////////////////////////////////////////////////////////////////////////
-// user interface
+// emulated machine
 
 var busy_delay = 1;
 var IDLE_DELAY = 60;
@@ -3892,51 +3886,24 @@ var IDLE_DELAY = 60;
 var MIN_DELAY = 4;
 
 
-function BasicodeApp(script, id)
+function BasicodeApp(id, element, settings)
 {
     this.id = id;
-
-    // optional target elements
-    var screen_id = script.dataset["canvas"];
-    var printer_id = script.dataset["printer"];
-    var store_func = script.dataset["store"];
-    var load_func = script.dataset["load"];
-
-    // obtain screen/keyboard canvas
-    var element;
-    if (screen_id) {
-        // canvas is provided
-        element = document.getElementById(screen_id)
-    }
-    else {
-        // create a canvas to work on
-        element = document.createElement("canvas");
-        element.className = "basicode";
-        element.innerHTML = "To use this interpreter, you need a browser that supports the CANVAS element."
-        script.parentNode.insertBefore(element, script);
-    }
-    // make canvas element focussable to catch keypresses
-    element.tabIndex = 1;
-    element.focus();
-
-    // event function on loading new program
-    this.on_program_load = window[load_func];
-    if (this.on_program_load === undefined) this.on_program_load = function(){};
+    var app = this;
 
     // runtime members
     this.program = null;
     this.running = null;
 
-    var app = this;
 
     this.reset = function()
     {
         // speed setting is (roughly) the number of empty loop cycles per second
-        if (script.dataset["speed"]) busy_delay = 1000 / script.dataset["speed"];
+        if (settings.speed) busy_delay = 1000 / settings.speed;
         // screen settings
-        var columns = script.dataset["columns"] || 40;
-        var rows = script.dataset["rows"] || 24;
-        var font_name = script.dataset["font"] || "smooth";
+        var columns = settings.columns || 40;
+        var rows = settings.rows || 24;
+        var font_name = settings.font || "smooth";
         // palette settings, use CGA colours by default
         var colours = {
             0: "black",
@@ -3948,72 +3915,50 @@ function BasicodeApp(script, id)
             6: "#ffff55", // yellow
             7: "white",
         }
-        for (var i=0; i<8; ++i) colours[i] = script.dataset["color-" + i] || colours[i];
+        for (var i=0; i<8; ++i) colours[i] = settings["color-" + i] || colours[i];
+
+        // detach any previous program
+        this.stop();
 
         // set up emulator
         this.display = new Display(element, columns, rows, font_name, colours);
         this.keyboard = new Keyboard(element);
-        this.printer = new Printer(printer_id);
+        this.printer = new Printer(settings.printer);
         this.speaker = new Speaker();
         this.timer = new Timer();
 
-        var floppy = new Floppy(1, window[store_func])
+        var floppy = new Floppy(1, window[settings.store])
         this.storage = [new Tape(0), floppy, floppy, floppy]
 
+        // event function on loading new program
+        this.on_program_load = window[settings.load];
+        if (this.on_program_load === undefined) this.on_program_load = function(){};
 
-        // load & run the code provided in the element, if any
-        var url = script.getAttribute("src");
-        if (url !== undefined && url !== null && url) {
-            var request = new XMLHttpRequest();
-            request.open("GET", url, true);
-            request.onreadystatechange = function() {
-                if (request.readyState === 4 && request.status === 200) {
-                    code = request.responseText;
-                    // need to explicitly load here as this is called asynchronously
-                    app.load(code);
-                }
-            }
-            request.send(null);
-        }
-        else {
-            var code = script.innerHTML;
-            // only check for persistent program if nothing was provided in script
-            if (!code) {
-                // if nothing in storage, this will return null
-                code = localStorage.getItem(["BASICODE", this.id, "program"].join(":"))
-            }
-            this.load(code);
-        }
+        // load program from storage, if needed
+        if (!this.program) this.load(localStorage.getItem(["BASICODE", this.id, "program"].join(":")));
+        if (this.program) this.program.attach(this);
     }
 
     this.handleError = function(e)
     {
         this.stop();
+        this.display.write("\n");
         this.display.invertColour();
-        this.display.clearRow(0);
-        this.display.setRow(0);
-        this.display.setColumn(0);
         if (e instanceof BasicError) {
             this.display.write(e.message);
             var ln = e.where;
             if ((ln === undefined || ln === null) && this.program !== null) ln = this.program.current_line;
-            this.display.write(" in "+ ln +"\n");
+            this.display.write(" in "+ ln);
             this.display.invertColour();
+            this.display.write("\n");
             if (e.detail) {
-                this.display.clearRow(1);
-                this.display.clearRow(2);
-                this.display.setColumn(0);
-                this.display.setRow(1);
                 this.display.write(e.detail);
             }
         }
         else {
-            this.display.write("EXCEPTION\n")
+            this.display.write("EXCEPTION")
             this.display.invertColour();
-            this.display.clearRow(1);
-            this.display.clearRow(2);
-            this.display.setColumn(0);
-            this.display.setRow(1);
+            this.display.write("\n");
             this.display.write(e);
             console.log(e.stack);
             throw e;
@@ -4094,83 +4039,92 @@ function BasicodeApp(script, id)
         this.running = window.setTimeout(step, MIN_DELAY);
     }
 
-    this.release = function()
-    // release resources upon program end
+    this.stop = function()
+    // stop program and release resources
     {
         if (this.running) window.clearTimeout(this.running);
         this.running = null;
-        if (this.program !== null) {
+        if (this.program) {
             this.display.release();
             this.printer.flush();
         }
     }
 
-    this.stop = function()
-    // stop program
-    {
-        this.release();
-        this.display.invertColour();
-        this.display.clearRow(this.display.height - 1);
-        this.display.writeCentre(this.display.height - 1, "-- click to run again --");
-        this.display.invertColour();
-    }
 
     ///////////////////////////////////////////////////////////////////////////
     // first initialisation
 
     this.reset();
-
-    ///////////////////////////////////////////////////////////////////////////
-    // event handlers
-
-    // run file on click
-
-    element.addEventListener("click", function click(e) {
-        if (!app.running) app.run();
-    });
-
-    // load files on drag & drop
-
-    element.addEventListener("dragenter", function dragenter(e) {
-        e.stopPropagation();
-        e.preventDefault();
-    });
-
-    element.addEventListener("dragover", function dragover(e) {
-        e.stopPropagation();
-        e.preventDefault();
-    });
-
-    element.addEventListener("drop", function drop(e) {
-        e.stopPropagation();
-        e.preventDefault();
-        var files = e.dataTransfer.files;
-        var reader = new FileReader();
-        reader.onload = function() {
-            app.load(reader.result);
-        };
-        reader.readAsText(files[0]);
-    });
-
 }
 
+
+///////////////////////////////////////////////////////////////////////////////
+// initial setup
+
 var apps = {};
+
+function createCanvas(script)
+{
+    // optional target elements
+    var screen_id = script.dataset["canvas"];
+
+    // obtain screen/keyboard canvas
+    var element;
+    if (screen_id) {
+        // canvas is provided
+        element = document.getElementById(screen_id)
+    }
+    else {
+        // create a canvas to work on
+        element = document.createElement("canvas");
+        element.className = "basicode";
+        element.innerHTML = "To use this interpreter, you need a browser that supports the CANVAS element."
+        script.parentNode.insertBefore(element, script);
+    }
+    // make canvas element focussable to catch keypresses
+    element.tabIndex = 1;
+    element.focus();
+
+    return element;
+}
+
+function initProgram(script)
+{
+    var app = apps[script.id];
+    // load & run the code provided in the element, if any
+    var url = script.getAttribute("src");
+    if (url !== undefined && url !== null && url) {
+        var request = new XMLHttpRequest();
+        request.open("GET", url, true);
+        request.onreadystatechange = function() {
+            if (request.readyState === 4 && request.status === 200) {
+                code = request.responseText;
+                // need to explicitly load here as this is called asynchronously
+                app.load(code);
+            }
+        }
+        request.send(null);
+    }
+    else {
+        var code = script.innerHTML;
+        if (code) app.load(code);
+    }
+}
 
 function launch() {
     var scripts = document.getElementsByTagName("script");
     for (var i=0; i < scripts.length; ++i) {
-        if (scripts[i].type == "text/basicode") {
-            apps[scripts[i].id] = new BasicodeApp(scripts[i], scripts[i].id);
+        var script = scripts[i];
+        if (script.type == "text/basicode") {
+            var element = createCanvas(script);
+            apps[script.id] = new BasicodeApp(script.id, element, script.dataset);
+            initProgram(script);
         }
     }
 }
 
-function restart() {
-    var keys = Object.keys(apps);
-    for (var i in keys) {
-        apps[keys[i]].reset();
-    }
-}
+
+///////////////////////////////////////////////////////////////////////////////
 
 // a bit of magic to run launch() after the document is complete
 // so that it can access all the <script> tags

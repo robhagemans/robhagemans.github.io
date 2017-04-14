@@ -19,7 +19,7 @@
                 settings['color-' + i] = document.getElementById('color-' + i).value;
             }
             document.getElementById('showspeed').value = document.getElementById('speed').value;
-            restart();
+            apps['basicode-script'].reset();
             display = new Display(
                 document.getElementById('showfont'), 16, 6,
                 document.getElementById('font').value, apps['basicode-script'].display.colours);
@@ -131,14 +131,8 @@
                 element.appendChild(a);
             }
         }
-
-        function setup() {
-            loadSettings();
-            setupListing();
-        }
-
         function loadFile(element) {
-            app = apps['basicode-script'];
+            var app = apps['basicode-script'];
             settings = document.getElementById('basicode-script').dataset;
             url = element.href;
             if (url !== undefined && url !== null && url) {
@@ -155,6 +149,52 @@
             }
             return false;
         }
+
+        ///////////////////////////////////////////////////////////////////////////
+        // event handlers
+
+        function setupHandlers()
+        {
+            var app = apps['basicode-script'];
+            var element = document.getElementById('canvas0');
+
+            // run file on click
+
+            element.addEventListener("click", function click(e) {
+                if (!app.running) app.run();
+            });
+
+            // load files on drag & drop
+
+            element.addEventListener("dragenter", function dragenter(e) {
+                e.stopPropagation();
+                e.preventDefault();
+            });
+
+            element.addEventListener("dragover", function dragover(e) {
+                e.stopPropagation();
+                e.preventDefault();
+            });
+
+            element.addEventListener("drop", function drop(e) {
+                e.stopPropagation();
+                e.preventDefault();
+                var files = e.dataTransfer.files;
+                var reader = new FileReader();
+                reader.onload = function() {
+                    app.load(reader.result);
+                };
+                reader.readAsText(files[0]);
+            });
+        }
+
+        function setup() {
+            loadSettings();
+            setupListing();
+            setupHandlers();
+        }
+
+
     </script>
 </head>
 
@@ -1528,7 +1568,7 @@
     </div>
 
     <small>
-        BASICODE interpreter in Javascript. <noscript>Requires JavaScript.</noscript>
+        <a href="https://en.wikipedia.org/wiki/BASICODE">BASICODE</a> interpreter in Javascript. <noscript>Requires JavaScript.</noscript>
         <a href="https://github.com/robhagemans/basicode-interpreter">Source</a>.
         <a href="https://github.com/robhagemans/basicode">BASICODE programs</a>.
     </small>
