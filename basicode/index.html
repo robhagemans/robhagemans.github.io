@@ -99,7 +99,7 @@
         var blobbery = {};
         var mime_type = "text/plain";
 
-        this.onFileStore = function(floppy)
+        function onFileStore(floppy_id)
         {
             var element = document.getElementById("flop1");
             var prefix = "BASICODE";
@@ -112,7 +112,7 @@
                 var key = localStorage.key(i)
                 var key_list = key.split(":");
                 if (key_list[0] !== prefix) continue;
-                if (key_list[1] !== "" + floppy.id) continue;
+                if (key_list[1] !== "" + floppy_id) continue;
                 // create content blob from local storage, if necessary
                 if (!(key in blobbery)) {
                     blobbery[key] = new Blob([localStorage.getItem(key)], {type: mime_type});
@@ -148,6 +148,19 @@
                 request.send()
             }
             return false;
+        }
+
+
+        function onProgramRun() {
+            var button = document.getElementById('button0')
+            button.onclick = stop;
+            button.innerHTML = "&#9209;";
+        }
+
+        function onProgramEnd() {
+            var button = document.getElementById('button0')
+            button.onclick = run;
+            button.innerHTML = "&#9654;";
         }
 
         ///////////////////////////////////////////////////////////////////////////
@@ -186,14 +199,28 @@
                 };
                 reader.readAsText(files[0]);
             });
+
+            // application-defined events
+            app.on_file_store = onFileStore;
+            app.on_program_load = onProgramLoad;
+            app.on_program_run = onProgramRun;
+            app.on_program_end = onProgramEnd;
         }
 
         function setup() {
             loadSettings();
             setupListing();
             setupHandlers();
+            onFileStore(1);
         }
 
+        function run() {
+            apps['basicode-script'].run();
+        }
+
+        function stop() {
+            apps['basicode-script'].stop();
+        }
 
     </script>
 </head>
@@ -204,8 +231,6 @@
         data-printer="printer0"
         data-canvas="canvas0"
         data-input="screen"
-        data-load="onProgramLoad"
-        data-store="onFileStore"
         id="basicode-script"
         src="demo.bc3"
         >
@@ -1506,7 +1531,7 @@
                             <option value="wyse-serif">Wyse WY-700 serif</option>
                             <option value="wyse-sans">Wyse WY-700 sans serif</option>
                         </select>
-                        <canvas id="showfont" style="height: 9em; margin: 0 1em 0 1em;">
+                        <canvas id="showfont" style="height: 9em; margin: 0 1em 0 1em;"></canvas>
                     </fieldset>
                     <fieldset>
                         <legend>Speed</legend>
@@ -1562,6 +1587,9 @@
             <a class="tab" href="#screen">Screen</a>
             <div>
                 <canvas class="basicode" id="canvas0"></canvas>
+                <div class="buttons">
+                    <button onclick="run();" id="button0">&#9654;</button>
+                </div>
             </div>
         </div>
 

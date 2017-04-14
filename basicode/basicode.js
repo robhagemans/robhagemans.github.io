@@ -3742,7 +3742,7 @@ function Timer()
 ///////////////////////////////////////////////////////////////////////////////
 // storage
 
-function Floppy(id, onfilestore)
+function Floppy(id, parent)
 {
 
     this.id = id;
@@ -3750,8 +3750,7 @@ function Floppy(id, onfilestore)
     this.open_key = null;
     this.open_mode = "";
     this.open_line = null;
-    this.on_file_store = onfilestore;
-    if (!onfilestore) this.on_file_store = function(){};
+    this.parent = parent;
 
     var prefix = "BASICODE"
 
@@ -3783,7 +3782,7 @@ function Floppy(id, onfilestore)
         if (this.open_key === null) return false;
         localStorage.setItem(this.open_key, this.open_file.join("\n"));
         this.open_file = null;
-        this.on_file_store(this);
+        this.parent.on_file_store(this.id);
         return true;
     }
 
@@ -3799,8 +3798,6 @@ function Floppy(id, onfilestore)
         if (this.open_mode !== "w") throw "File not open for write";
         this.open_file.push(line);
     }
-
-    this.on_file_store(this);
 }
 
 
@@ -3895,6 +3892,12 @@ function BasicodeApp(id, element, settings)
     this.program = null;
     this.running = null;
 
+    // event functions
+    this.on_program_load = function(){};
+    this.on_file_store = function(){};
+    this.on_program_run = function(){};
+    this.on_program_end = function(){};
+
 
     this.reset = function()
     {
@@ -3918,7 +3921,7 @@ function BasicodeApp(id, element, settings)
         for (var i=0; i<8; ++i) colours[i] = settings["color-" + i] || colours[i];
 
         // detach any previous program
-        this.stop();
+        this.end();
 
         // set up emulator
         this.display = new Display(element, columns, rows, font_name, colours);
@@ -3927,21 +3930,21 @@ function BasicodeApp(id, element, settings)
         this.speaker = new Speaker();
         this.timer = new Timer();
 
-        var floppy = new Floppy(1, window[settings.store])
+        var floppy = new Floppy(1, this)
         this.storage = [new Tape(0), floppy, floppy, floppy]
 
-        // event function on loading new program
-        this.on_program_load = window[settings.load];
-        if (this.on_program_load === undefined) this.on_program_load = function(){};
 
         // load program from storage, if needed
         if (!this.program) this.load(localStorage.getItem(["BASICODE", this.id, "program"].join(":")));
-        if (this.program) this.program.attach(this);
+        if (this.program) {
+            this.program.attach(this);
+            element.focus();
+        }
     }
 
     this.handleError = function(e)
     {
-        this.stop();
+        this.end();
         this.display.write("\n");
         this.display.invertColour();
         if (e instanceof BasicError) {
@@ -3972,7 +3975,7 @@ function BasicodeApp(id, element, settings)
             code = "";
         }
         // stop any running program
-        this.stop()
+        this.end()
         // clear screen
         this.display.clear();
         // reset keyboard buffer
@@ -4021,7 +4024,7 @@ function BasicodeApp(id, element, settings)
                     if (current.delay) delay += current.delay;
                     current = current.step();
                     if (!current) {
-                        app.stop();
+                        app.end();
                         break;
                     }
                     if (app.keyboard.break_flag) throw new BasicError("Break", "");
@@ -4037,9 +4040,16 @@ function BasicodeApp(id, element, settings)
         }
         // get started
         this.running = window.setTimeout(step, MIN_DELAY);
+        element.focus();
+        this.on_program_run();
     }
 
     this.stop = function()
+    {
+        this.handleError(new BasicError("Break", ""));
+    }
+
+    this.end = function()
     // stop program and release resources
     {
         if (this.running) window.clearTimeout(this.running);
@@ -4048,6 +4058,7 @@ function BasicodeApp(id, element, settings)
             this.display.release();
             this.printer.flush();
         }
+        this.on_program_end();
     }
 
 
