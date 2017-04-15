@@ -1,13 +1,15 @@
 #!/usr/bin/env python2
 
 import os
+import json
 
 types = 'bc', 'bc2', 'bc3', 'b3c', 'bas', 'asc'
 
-print '<ol>'
+collection = {};
+
 for root, dirs, files in sorted(os.walk('basicode/')):
-    print '    <li>' + root
-    print '        <ol>'
+    root_name = root[len('basicode/'):]
+    collection[root_name] = {}
     for name in sorted(files):
         isbc = [name.lower().endswith(t) for t in types]
         if True in isbc:
@@ -19,6 +21,6 @@ for root, dirs, files in sorted(os.walk('basicode/')):
                             title = ''.join(c for c in title if c.isalnum() or c in (' ', '-', '.', ',')).strip().title()
                         except IndexError:
                             title = name
-                        print '            <li><a href="'+ os.path.join(root, name) + '" onclick="return loadFile(this);">' + title + '</a></li>'
-    print '        </ol>\n    </li>'
-print '</ol>'
+                        collection[root_name][title] = os.path.join(root, name)
+
+print json.dumps(collection)
