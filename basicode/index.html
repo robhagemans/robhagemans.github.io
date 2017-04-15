@@ -9,7 +9,19 @@
 
         // settings
 
-        function loadSettings() {
+        function retrieveSettings() {
+            settings = JSON.parse(localStorage.getItem("BASICODE:basicode-script:settings"));
+            if (settings) {
+                var keys = Object.keys(settings);
+                for (var k in keys) {
+                    var e = document.getElementById(keys[k]);
+                    if (e) e.value = settings[keys[k]];
+                }
+            }
+            updateSettings();
+        }
+
+        function updateSettings() {
             settings = document.getElementById('basicode-script').dataset;
             settings['columns'] = document.getElementById('columns').value;
             settings['rows'] = document.getElementById('rows').value;
@@ -18,6 +30,7 @@
             for (var i=0; i <=7; ++i) {
                 settings['color-' + i] = document.getElementById('color-' + i).value;
             }
+            localStorage.setItem("BASICODE:basicode-script:settings", JSON.stringify(settings))
             document.getElementById('showspeed').value = document.getElementById('speed').value;
             apps['basicode-script'].reset();
             display = new Display(
@@ -57,12 +70,12 @@
 
         }
 
-        function setSettings(preset) {
+        function loadPreset(preset) {
             var keys = Object.keys(presets[preset]);
             for (var k in keys) {
                 document.getElementById(keys[k]).value = presets[preset][keys[k]];
             }
-            loadSettings();
+            updateSettings();
         }
 
         // listing
@@ -99,38 +112,50 @@
         var blobbery = {};
         var mime_type = "text/plain";
 
-        function onFileStore(floppy_id)
+        function onFileStore()
         {
             var element = document.getElementById("flop1");
             var prefix = "BASICODE";
+
+            var drives = ["tape", "floppy"];
 
             if (!element) return;
             while (element.firstChild) {
                 element.removeChild(element.firstChild);
             }
-            for (var i=0; i < localStorage.length; ++i) {
-                var key = localStorage.key(i)
-                var key_list = key.split(":");
-                if (key_list[0] !== prefix) continue;
-                if (key_list[1] !== "" + floppy_id) continue;
-                // create content blob from local storage, if necessary
-                if (!(key in blobbery)) {
-                    blobbery[key] = new Blob([localStorage.getItem(key)], {type: mime_type});
+
+            for (var flop=0; flop < drives.length; ++flop) {
+                var floppy_id = drives[flop];
+
+                var topli = document.createElement("li");
+                topli.innerHTML = floppy_id;
+                var list = document.createElement("ol");
+                element.appendChild( document.createElement("ul")).appendChild(topli).appendChild(list);
+                for (var i=0; i < localStorage.length; ++i) {
+                    var key = localStorage.key(i)
+                    var key_list = key.split(":");
+                    if (key_list[0] !== prefix) continue;
+                    if (key_list[1] !== "" + floppy_id) continue;
+                    // create content blob from local storage, if necessary
+                    if (!(key in blobbery)) {
+                        blobbery[key] = new Blob([localStorage.getItem(key)], {type: mime_type});
+                    }
+                    // create download link to file
+                    var a = document.createElement("a");
+                    a.textContent = key_list[2];
+                    a.href = window.URL.createObjectURL(blobbery[key]);
+                    a.download = key_list[2];
+                    // drag-out support
+                    a.dataset.downloadurl = [mime_type, a.download, a.href].join(":");
+                    a.draggable = true;
+                    a.addEventListener("dragstart", function(e) {
+                        e.dataTransfer.setData("DownloadURL", a.dataset.downloadurl);
+                    }, false);
+                    list.appendChild(document.createElement("li")).appendChild(a);
                 }
-                // create download link to file
-                var a = document.createElement("a");
-                a.textContent = key_list[2];
-                a.href = window.URL.createObjectURL(blobbery[key]);
-                a.download = key_list[2];
-                // drag-out support
-                a.dataset.downloadurl = [mime_type, a.download, a.href].join(":");
-                a.draggable = true;
-                a.addEventListener("dragstart", function(e) {
-                    e.dataTransfer.setData("DownloadURL", a.dataset.downloadurl);
-                }, false);
-                element.appendChild(a);
             }
         }
+
         function loadFile(element) {
             var app = apps['basicode-script'];
             url = element.href;
@@ -148,7 +173,6 @@
             }
             return false;
         }
-
 
         function onProgramRun() {
             var button = document.getElementById('button0')
@@ -207,10 +231,10 @@
         }
 
         function setup() {
-            loadSettings();
+            retrieveSettings();
             setupListing();
             setupHandlers();
-            onFileStore(1);
+            onFileStore();
             onProgramLoad(apps['basicode-script'].program);
             // load demo program only if nothing stored
             if (!apps['basicode-script'].program) {
@@ -1460,7 +1484,7 @@
         <div id="settings">
             <a class="tab" href="#settings">Settings</a>
             <div style="font-family: sans">
-                <form onchange="loadSettings();">
+                <form onchange="updateSettings();">
                     <fieldset>
                         <legend>Colours</legend>
                         <table style="width:100%">
@@ -1471,17 +1495,17 @@
                             </tr>
                             <tr>
                                 <th align="right">Basicode 2 &amp; 3</th>
-                                <td colspan="3"><input type="color" id="color-0" value="#000000" style="width: 100%" onchange="loadSettings();"></td>
-                                <td colspan="3"><input type="color" id="color-7" value="#ffffff" style="width: 100%" onchange="loadSettings();"></td>
+                                <td colspan="3"><input type="color" id="color-0" value="#000000" style="width: 100%" onchange="updateSettings();"></td>
+                                <td colspan="3"><input type="color" id="color-7" value="#ffffff" style="width: 100%" onchange="updateSettings();"></td>
                             </tr>
                             <tr>
                                 <th align="right">Basicode 3C</th>
-                                <td><input type="color" id="color-1" value="#0000aa" style="width: 100%" onchange="loadSettings();"></td>
-                                <td><input type="color" id="color-2" value="#aa0000" style="width: 100%" onchange="loadSettings();"></td>
-                                <td><input type="color" id="color-3" value="#aa00aa" style="width: 100%" onchange="loadSettings();"></td>
-                                <td><input type="color" id="color-4" value="#00aa00" style="width: 100%" onchange="loadSettings();"></td>
-                                <td><input type="color" id="color-5" value="#00aaaa" style="width: 100%" onchange="loadSettings();"></td>
-                                <td><input type="color" id="color-6" value="#ffff55" style="width: 100%" onchange="loadSettings();"></td>
+                                <td><input type="color" id="color-1" value="#0000aa" style="width: 100%" onchange="updateSettings();"></td>
+                                <td><input type="color" id="color-2" value="#aa0000" style="width: 100%" onchange="updateSettings();"></td>
+                                <td><input type="color" id="color-3" value="#aa00aa" style="width: 100%" onchange="updateSettings();"></td>
+                                <td><input type="color" id="color-4" value="#00aa00" style="width: 100%" onchange="updateSettings();"></td>
+                                <td><input type="color" id="color-5" value="#00aaaa" style="width: 100%" onchange="updateSettings();"></td>
+                                <td><input type="color" id="color-6" value="#ffff55" style="width: 100%" onchange="updateSettings();"></td>
                             </tr>
                             <tr>
                                 <td></td>
@@ -1543,14 +1567,14 @@
                     </fieldset>
                     <fieldset>
                         <legend>Presets</legend>
-                        <button type="button" onclick="setSettings('cga');">CGA</button>
-                        <button type="button" onclick="setSettings('c64');">Commodore 64</button>
-                        <button type="button" onclick="setSettings('spectrum');">ZX Spectrum</button>
-                        <button type="button" onclick="setSettings('msx');">MSX</button>
-                        <button type="button" onclick="setSettings('cpc');">Amstrad CPC</button>
-                        <button type="button" onclick="setSettings('pcw');">Amstrad PCW</button>
-                        <button type="button" onclick="setSettings('bbc');">Acorn BBC Micro</button>
-                        <button type="button" onclick="setSettings('coco');">TRS-80 Color Computer</button>
+                        <button type="button" onclick="loadPreset('cga');">CGA</button>
+                        <button type="button" onclick="loadPreset('c64');">Commodore 64</button>
+                        <button type="button" onclick="loadPreset('spectrum');">ZX Spectrum</button>
+                        <button type="button" onclick="loadPreset('msx');">MSX</button>
+                        <button type="button" onclick="loadPreset('cpc');">Amstrad CPC</button>
+                        <button type="button" onclick="loadPreset('pcw');">Amstrad PCW</button>
+                        <button type="button" onclick="loadPreset('bbc');">Acorn BBC Micro</button>
+                        <button type="button" onclick="loadPreset('coco');">TRS-80 Color Computer</button>
                     </fieldset>
                 </form>
             </div>
