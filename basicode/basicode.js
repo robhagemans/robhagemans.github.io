@@ -3798,16 +3798,23 @@ function Floppy(id, parent)
         if (this.open_mode !== "w") throw "File not open for write";
         this.open_file.push(line);
     }
+
+    this.delete = function(name)
+    {
+        var string = localStorage.removeItem([prefix, this.id, name].join(":"));
+        this.parent.on_file_store();
+    }
 }
 
 
-function Tape(id)
+function Tape(id, parent)
 {
     this.id = id;
     this.open_file = null;
     this.open_key = null;
     this.open_mode = "";
     this.open_line = null;
+    this.parent = parent;
 
     this.pos = 0;
 
@@ -3855,6 +3862,7 @@ function Tape(id)
         if (this.open_key === null) return false;
         localStorage.setItem(this.open_key, this.open_file.join("\n"));
         this.open_file = null;
+        this.parent.on_file_store();
         return true;
     }
 
@@ -3871,6 +3879,11 @@ function Tape(id)
         this.open_file.push(line);
     }
 
+    this.delete = function(name)
+    {
+        var string = localStorage.removeItem([prefix, this.id, name].join(":"));
+        this.parent.on_file_store();
+    }
 }
 
 
@@ -3930,7 +3943,7 @@ function BasicodeApp(id, element, settings)
         this.speaker = new Speaker();
         this.timer = new Timer();
         var floppy = new Floppy("floppy", this)
-        this.storage = [new Tape("tape"), floppy, floppy, floppy]
+        this.storage = [new Tape("tape", this), floppy, floppy, floppy]
 
         // load program from storage, if needed
         if (!this.program) this.load(localStorage.getItem(["BASICODE", this.id, "program"].join(":")));
@@ -4043,6 +4056,7 @@ function BasicodeApp(id, element, settings)
     }
 
     this.stop = function()
+    // interrupt program
     {
         this.handleError(new BasicError("Break", ""));
     }
@@ -4059,6 +4073,25 @@ function BasicodeApp(id, element, settings)
         this.on_program_end();
     }
 
+    this.store = function(drive, name, text)
+    // store a file
+    {
+        if (drive === "tape") drive = 0;
+        if (drive === "floppy") drive = 1;
+        var floppy = this.storage[drive];
+        floppy.open(name, "w");
+        floppy.writeLine(text.replace(/(\r\n|\n|\r)/gm, "\n"));
+        floppy.close()
+    }
+
+    this.delete = function(drive, name)
+    // deletes a file
+    {
+        if (drive === "tape") drive = 0;
+        if (drive === "floppy") drive = 1;
+        var floppy = this.storage[drive];
+        floppy.delete(name);
+    }
 
     ///////////////////////////////////////////////////////////////////////////
     // first initialisation
