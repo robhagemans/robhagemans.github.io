@@ -18,9 +18,9 @@ for root, dirs, files in sorted(os.walk('basicode/')):
                     if line.strip().startswith('1000 '):
                         try:
                             title = line.split('REM')[1].strip() or name
-                            title = ''.join(c for c in title if c.isalnum() or c in (' ', '-', '.', ',')).strip().title()
+                            #title = ''.join(c for c in title if c.isalnum() or c in (' ', '-', '.', ',')).strip().title()
                         except IndexError:
-                            title = name
-                        collection[root_name][title] = os.path.join(root, name)
+                            title = ''
+                        collection[root_name][os.path.join(root, name)] = title
 
 print json.dumps(collection)
