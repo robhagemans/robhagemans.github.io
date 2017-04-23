@@ -1620,7 +1620,7 @@ function Next(loop_name, program)
 //////////////////////////////////////////////////////////////////////
 // program object
 
-function Program(basicode)
+function Program(machine, basicode)
 {
     // parsing output
     this.title = "";
@@ -1636,6 +1636,7 @@ function Program(basicode)
     // build the tree
     var tokenised_code = new Lexer(basicode).tokenise();
     var parser = new Parser(tokenised_code, this);
+    this.error = null;
     try {
         parser.parse(this.tree);
     }
@@ -1667,6 +1668,8 @@ function Program(basicode)
         this.timer = machine.timer;
         this.storage = machine.storage;
     }
+
+    this.attach(machine);
 }
 
 
@@ -3946,7 +3949,6 @@ function BasicodeApp(id, element, settings)
         // load program from storage, if needed
         if (!this.program) this.load(localStorage.getItem(["BASICODE", this.id, "program"].join(":")));
         if (this.program) {
-            this.program.attach(this);
             element.focus();
         }
     }
@@ -3980,7 +3982,7 @@ function BasicodeApp(id, element, settings)
     this.load = function(code)
     // load program, parse to AST, connect to output
     {
-        if (!code) {
+        if (!code || !code.trim()) {
             code = "";
         }
         // stop any running program
@@ -3993,13 +3995,7 @@ function BasicodeApp(id, element, settings)
         localStorage.setItem(["BASICODE", this.id, "program"].join(":"), code);
         if (code) {
             // initialise program object
-            this.program = new Program(code);
-            if (this.program.error) {
-                this.handleError(this.program.error);
-            }
-            else {
-                this.program.attach(this);
-            }
+            this.program = new Program(this, code);
         } else {
             this.program = null;
         }
@@ -4013,6 +4009,11 @@ function BasicodeApp(id, element, settings)
     {
         // exit if nothing loaded
         if (!this.program || this.program.tree === null) return;
+        // handle parse rrors
+        if (this.program.error) {
+            this.handleError(this.program.error);
+            return;
+        }
 
         // clear screen
         this.display.clear();
