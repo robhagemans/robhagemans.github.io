@@ -3902,10 +3902,11 @@ var IDLE_DELAY = 60;
 var MIN_DELAY = 4;
 
 
-function BasicodeApp(id, element, settings)
+function BasicodeApp(id, element, overlay, settings)
 {
     this.id = id;
     this.canvas = element;
+    this.overlay = overlay;
     var app = this;
 
     // runtime members
@@ -3945,7 +3946,7 @@ function BasicodeApp(id, element, settings)
 
         // set up emulator
         this.display = new Display(element, columns, rows, font_name, colours);
-        this.keyboard = new Keyboard(element);
+        this.keyboard = new Keyboard(overlay);
         this.printer = new Printer(this);
         this.speaker = new Speaker();
         this.timer = new Timer();
@@ -3955,7 +3956,7 @@ function BasicodeApp(id, element, settings)
         // load program from storage, if needed
         if (!this.program) this.load(localStorage.getItem(["BASICODE", this.id, "program"].join(":")));
         if (this.program) {
-            element.focus();
+            overlay.focus();
         }
     };
 
@@ -4058,7 +4059,7 @@ function BasicodeApp(id, element, settings)
         }
         // get started
         this.running = window.setTimeout(step, MIN_DELAY);
-        element.focus();
+        this.overlay.focus();
         this.on_program_run();
     };
 
@@ -4119,10 +4120,22 @@ function createCanvas(script)
     element.className = "basicode";
     element.innerHTML = "To use this interpreter, you need a browser that supports the CANVAS element.";
     script.parentNode.insertBefore(element, script);
-    // make canvas element focussable to catch keypresses
-    element.tabIndex = 1;
-    element.focus();
     return element;
+}
+function createOverlay(script)
+{
+    var overlay = document.createElement("textarea");
+    overlay.style.color = "transparent";
+    overlay.style.background = "transparent";
+    overlay.style.border = "none";
+    overlay.style.outline = "none";
+    overlay.style.resize = "none";
+    overlay.className = "basicode-input";
+    script.parentNode.insertBefore(overlay, script);
+    // make canvas element focussable to catch keypresses
+    overlay.tabIndex = 1;
+    overlay.focus();
+    return overlay;
 }
 
 function initProgram(script)
@@ -4154,7 +4167,8 @@ function launch() {
         var script = scripts[i];
         if (script.type == "text/basicode") {
             var element = createCanvas(script);
-            apps[script.id] = new BasicodeApp(script.id, element, script.dataset);
+            var overlay = createOverlay(script);
+            apps[script.id] = new BasicodeApp(script.id, element, overlay, script.dataset);
             initProgram(script);
         }
     }

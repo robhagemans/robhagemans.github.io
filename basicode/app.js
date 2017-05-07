@@ -45,7 +45,6 @@ function drawSettings() {
     var options = Array.prototype.slice.call(selector.children);
     var colours = { 0 : "black", 7: "white" };
     for (var option in options) {
-        console.log(options[option].value);
         var fontcanvas = document.createElement("canvas");
         var display = new Display(
             fontcanvas, 11, 1,
