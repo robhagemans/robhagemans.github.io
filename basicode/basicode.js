@@ -3519,27 +3519,45 @@ function Keyboard(input_element)
         123: -12, // F12
     };
 
+    // event listeners
+
     var self = this;
+    function onKeydown(event)
+    {
+       // use this for backspace, function keys
+       if (event.keyCode === 19 && event.ctrlKey && !self.suppress_break) {
+           self.break_flag = true;
+       }
+       if (event.keyCode in KEYS) {
+           self.buffer.push(KEYS[event.keyCode]);
+           // preventDefault will stop all keys from being caught by keypress, so use only for backspace and function keys to avoid browser actions
+           event.preventDefault();
+       }
+    }
 
-    input_element.addEventListener("keydown", function(event) {
-        // use this for backspace, function keys
-        if (event.keyCode === 19 && event.ctrlKey && !self.suppress_break) {
-            self.break_flag = true;
+    function onInput(event)
+    {
+        // use the input event and the content of a textarea to ensure
+        // we get a virtual keyboard on mobile and we trigger on each change
+        // not just on ENTER
+        if (input_element.value) {
+            self.buffer.push(input_element.value.charCodeAt(0));
+            input_element.value = "";
         }
-        if (event.keyCode in KEYS) {
-            self.buffer.push(KEYS[event.keyCode]);
-            // preventDefault will stop all keys from being caught by keypress, so use only for backspace and function keys to avoid browser actions
-            event.preventDefault();
-        }
-    });
-
-    input_element.addEventListener("keypress", function(event) {
-        self.buffer.push(event.charCode);
         event.preventDefault();
-    });
+    }
+
 
     // Break key combination has been pressed
     this.break_flag = false;
+
+
+    this.release = function()
+    {
+        // avoid ending up with multiple listeners belonging to discarded Keyboard instances
+        input_element.removeEventListener("keydown", onKeydown, false);
+        input_element.removeEventListener("input", onInput, false);
+    }
 
     this.reset = function()
     {
@@ -3550,10 +3568,15 @@ function Keyboard(input_element)
         this.break_flag = false;
         // interactive line buffer
         this.line_buffer = "";
+        // set up event listeners
+        input_element.removeEventListener("keydown", onKeydown, false);
+        input_element.removeEventListener("input", onInput, false);
+        input_element.addEventListener("keydown", onKeydown, false);
+        input_element.addEventListener("input", onInput, false);
     };
 
     this.keyPressed = function() {
-        return self.buffer.length > 0;
+        return this.buffer.length > 0;
     };
 
     this.readKey = function()
@@ -4076,6 +4099,7 @@ function BasicodeApp(id, element, overlay, settings)
         this.running = null;
         if (this.program) {
             this.display.release();
+            this.keyboard.release();
             this.printer.flush();
         }
         this.on_program_end();
