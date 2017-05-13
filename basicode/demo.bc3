@@ -12,8 +12,9 @@
 2040 READ N
 2050 VE=(VT-N)/2
 2060 FOR I=1 TO N
-2070   READ SR$:IF LEN(SR$)/2<>INT(LEN(SR$)/2) THEN SR$="."+SR$
-2075   FOR X=1 TO (HT-LEN(SR$)-5)/2: SR$="."+SR$+".":NEXT X
+2070   READ SR$
+2072   IF LEN(SR$)/2<>INT(LEN(SR$)/2) THEN SR$="."+SR$
+2075   FOR X=1 TO (HT-LEN(SR$)-5)/2:SR$="."+SR$+".":NEXT X
 2080   HO=0
 2090   GOSUB 110
 2100   GOSUB 150
@@ -55,13 +56,13 @@
 30000 REM Supports BASICODE-2, -3 and -3C.
 30010 REM
 30020 REM Load programs from the BASICODE-collection
-30030 REM by clicking on their titles in the "Programs" tab.
+30030 REM by clicking on their titles in the "Programs" tab
 30040 REM
-30050 REM Alternatively, drag and drop a local file onto the screen.
-30060 REM
+30050 REM Alternatively, drag and drop a local file
+30060 REM onto the screen.
 30065 REM
 30067 REM
 30070 REM Copyright 2016, 2017 Rob Hagemans
 30080 REM Released under the Expat MIT licence
 30090 REM
-30100 REM https://github.com/robhagemans/basicode-interpreter
+30100 REM github.com/robhagemans/basicode-interpreter
