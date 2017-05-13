@@ -246,6 +246,104 @@ function onPrint(text) {
     document.getElementById("printer0").innerText = text;
 }
 
+// keyboard
+
+var shift = false;
+function setShift(on) {
+    if (shift !== on) {
+        // toggle shift highlights
+        var shiftkeys = document.getElementsByClassName("shiftkey");
+        for (i=0; i < shiftkeys.length; ++i) {
+            shiftkeys[i].classList.toggle("pressed");
+        }
+    }
+    shift = on;
+    if (shift) {
+        var visible = document.getElementsByClassName("shift");
+        var invisible = document.getElementsByClassName("unshift");
+    }
+    else {
+        var visible = document.getElementsByClassName("unshift");
+        var invisible = document.getElementsByClassName("shift");
+    }
+    var i;
+    for (i=0; i < visible.length; ++i) {
+        visible[i].style["display"] = "inline";
+    }
+    for (i=0; i < invisible.length; ++i) {
+        invisible[i].style["display"] = "none";
+    }
+}
+
+var caps = false;
+function setCaps(on) {
+    var i;
+    if (caps !== on) {
+        // toggle caps highlight
+        var capskeys = document.getElementsByClassName("capskey");
+        for (i=0; i < capskeys.length; ++i) {
+            capskeys[i].classList.toggle("pressed");
+        }
+        // swap shift and unshift labels on letter keys
+        var letters = document.getElementsByClassName("letter");
+        for (i=0; i < letters.length; ++i) {
+            if (letters[i].classList.contains("shift")) {
+                letters[i].classList.remove("shift")
+                letters[i].classList.add("unshift")
+            }
+            else if (letters[i].classList.contains("unshift")) {
+                letters[i].classList.remove("unshift")
+                letters[i].classList.add("shift")
+            }
+        }
+        setShift(shift);
+    }
+    caps = on;
+}
+
+function pressKey(element) {
+    var keys = {
+        "Del": 127,
+        "Tab": 9,
+        "Enter": 13,
+        "Esc": 27,
+        "Brk": -255,
+        "F2": -1,
+        "F2": -2,
+        "F3": -3,
+        "F4": -4,
+        "F5": -5,
+        "F6": -6,
+        "F7": -7,
+        "F8": -8,
+        "F9": -9,
+        "F10": -10,
+        "F11": -11,
+        "F12": -12,
+        "\u2190": 28,
+        "\u2191": 31,
+        "\u2192": 29,
+        "\u2193": 30,
+    }
+    var key = element.innerText;
+    var app = apps[app_id];
+    if (key === "Shift"){
+        setShift(!shift);
+    }
+    else if (key === "Caps"){
+        setCaps(!caps);
+    }
+    else if (key in keys) {
+        app.pressKey(keys[key]);
+        setShift(false);
+    }
+    else {
+        app.pressKey(key.charCodeAt(0));
+        setShift(false);
+    }
+}
+
+
 ///////////////////////////////////////////////////////////////////////////
 // event handlers
 
@@ -323,6 +421,9 @@ function stop() {
     var app = apps[app_id];
     app.stop();
 }
+
+///////////////////////////////////////////////////////////////////////////////
+// setup
 
 function buildCollection(parent, collection)
 {

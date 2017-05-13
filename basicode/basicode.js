@@ -3518,46 +3518,29 @@ function Keyboard(input_element)
         122: -11, // F11
         123: -12, // F12
     };
-
-    // event listeners
+    // we'll use -255 as Break - not used in BASICODE
 
     var self = this;
-    function onKeydown(event)
-    {
-       // use this for backspace, function keys
-       if (event.keyCode === 19 && event.ctrlKey && !self.suppress_break) {
-           self.break_flag = true;
-       }
-       if (event.keyCode in KEYS) {
-           self.buffer.push(KEYS[event.keyCode]);
-           // preventDefault will stop all keys from being caught by keypress, so use only for backspace and function keys to avoid browser actions
-           event.preventDefault();
-       }
-    }
 
-    function onInput(event)
-    {
-        // use the input event and the content of a textarea to ensure
-        // we get a virtual keyboard on mobile and we trigger on each change
-        // not just on ENTER
-        if (input_element.value) {
-            self.buffer.push(input_element.value.charCodeAt(0));
-            input_element.value = "";
+    input_element.addEventListener("keydown", function(event) {
+        // use this for backspace, function keys
+        if (event.keyCode === 19 && event.ctrlKey && !self.suppress_break) {
+            self.break_flag = true;
         }
-        event.preventDefault();
-    }
+        if (event.keyCode in KEYS) {
+            self.buffer.push(KEYS[event.keyCode]);
+            // preventDefault will stop all keys from being caught by keypress, so use only for backspace and function keys to avoid browser actions
+            event.preventDefault();
+        }
+    });
 
+    input_element.addEventListener("keypress", function(event) {
+        self.buffer.push(event.charCode);
+        event.preventDefault();
+    });
 
     // Break key combination has been pressed
     this.break_flag = false;
-
-
-    this.release = function()
-    {
-        // avoid ending up with multiple listeners belonging to discarded Keyboard instances
-        input_element.removeEventListener("keydown", onKeydown, false);
-        input_element.removeEventListener("input", onInput, false);
-    }
 
     this.reset = function()
     {
@@ -3568,15 +3551,10 @@ function Keyboard(input_element)
         this.break_flag = false;
         // interactive line buffer
         this.line_buffer = "";
-        // set up event listeners
-        input_element.removeEventListener("keydown", onKeydown, false);
-        input_element.removeEventListener("input", onInput, false);
-        input_element.addEventListener("keydown", onKeydown, false);
-        input_element.addEventListener("input", onInput, false);
     };
 
     this.keyPressed = function() {
-        return this.buffer.length > 0;
+        return self.buffer.length > 0;
     };
 
     this.readKey = function()
@@ -3584,6 +3562,16 @@ function Keyboard(input_element)
         if (!this.buffer.length) return 0;
         return this.buffer.shift();
     };
+
+    this.insertKey = function(keycode) {
+        // we'll use -255 as Break - not used in BASICODE
+        if (keycode === -255) {
+            if (!this.suppress_break) this.break_flag = true;
+        }
+        else {
+            this.buffer.push(keycode);
+        }
+    }
 
     // INPUT support
 
@@ -3925,11 +3913,10 @@ var IDLE_DELAY = 60;
 var MIN_DELAY = 4;
 
 
-function BasicodeApp(id, element, overlay, settings)
+function BasicodeApp(id, element, settings)
 {
     this.id = id;
     this.canvas = element;
-    this.overlay = overlay;
     var app = this;
 
     // runtime members
@@ -3969,7 +3956,7 @@ function BasicodeApp(id, element, overlay, settings)
 
         // set up emulator
         this.display = new Display(element, columns, rows, font_name, colours);
-        this.keyboard = new Keyboard(overlay);
+        this.keyboard = new Keyboard(element);
         this.printer = new Printer(this);
         this.speaker = new Speaker();
         this.timer = new Timer();
@@ -3979,7 +3966,7 @@ function BasicodeApp(id, element, overlay, settings)
         // load program from storage, if needed
         if (!this.program) this.load(localStorage.getItem(["BASICODE", this.id, "program"].join(":")));
         if (this.program) {
-            overlay.focus();
+            element.focus();
         }
     };
 
@@ -4082,7 +4069,7 @@ function BasicodeApp(id, element, overlay, settings)
         }
         // get started
         this.running = window.setTimeout(step, MIN_DELAY);
-        this.overlay.focus();
+        element.focus();
         this.on_program_run();
     };
 
@@ -4099,7 +4086,6 @@ function BasicodeApp(id, element, overlay, settings)
         this.running = null;
         if (this.program) {
             this.display.release();
-            this.keyboard.release();
             this.printer.flush();
         }
         this.on_program_end();
@@ -4125,6 +4111,12 @@ function BasicodeApp(id, element, overlay, settings)
         floppy.delete(name);
     };
 
+    this.pressKey = function(keycode)
+    // inserts a keycode
+    {
+        this.keyboard.insertKey(keycode);
+    }
+
     ///////////////////////////////////////////////////////////////////////////
     // first initialisation
 
@@ -4144,22 +4136,10 @@ function createCanvas(script)
     element.className = "basicode";
     element.innerHTML = "To use this interpreter, you need a browser that supports the CANVAS element.";
     script.parentNode.insertBefore(element, script);
-    return element;
-}
-function createOverlay(script)
-{
-    var overlay = document.createElement("textarea");
-    overlay.style.color = "transparent";
-    overlay.style.background = "transparent";
-    overlay.style.border = "none";
-    overlay.style.outline = "none";
-    overlay.style.resize = "none";
-    overlay.className = "basicode-input";
-    script.parentNode.insertBefore(overlay, script);
     // make canvas element focussable to catch keypresses
-    overlay.tabIndex = 1;
-    overlay.focus();
-    return overlay;
+    element.tabIndex = 1;
+    element.focus();
+    return element;
 }
 
 function initProgram(script)
@@ -4191,8 +4171,7 @@ function launch() {
         var script = scripts[i];
         if (script.type == "text/basicode") {
             var element = createCanvas(script);
-            var overlay = createOverlay(script);
-            apps[script.id] = new BasicodeApp(script.id, element, overlay, script.dataset);
+            apps[script.id] = new BasicodeApp(script.id, element, script.dataset);
             initProgram(script);
         }
     }
