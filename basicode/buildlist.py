@@ -5,7 +5,12 @@ import json
 
 types = 'bc', 'bc2', 'bc3', 'b3c', 'bas', 'asc'
 
-collection = {};
+collection = {
+    'A few sample programs': {
+        'demo.bc3': 'BASICODE in the Browser - splash screen',
+        'showfont.bc2': 'Font sample'
+    },
+};
 
 for root, dirs, files in sorted(os.walk('basicode/')):
     root_name = root[len('basicode/'):]
