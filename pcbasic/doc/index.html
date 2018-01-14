@@ -28,8 +28,8 @@
     </ul>
 </nav>
 <header>
-<h1>PC-BASIC 15.08.10 documentation</h1>
-<small>Last updated 2016-11-13 11:01:56.</small>
+<h1>PC-BASIC 15.08.12 documentation</h1>
+<small>Last updated 2018-01-14 10:51:34.</small>
 </header>
 <nav class="toc">
     <h2 id="toc">Table of Contents</h2>
@@ -385,6 +385,12 @@
                                 <li><a href="#eascii">e-ASCII codes</a></li>
                             </ul>
                         </li>
+                        <li><a href="#memory">Memory model</a>
+                            <ul>
+                                <li><a href="#memory-overview">Overview</a></li>
+                                <li><a href="#memory-data">Data segment</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </li>
                 <li><a href="#acks_acknowledgements">Acknowledgements</a>
@@ -421,7 +427,7 @@ read and write binary data files created by GW-BASIC.  </p>
 <hr>
 <h2 id="quick-start-guide">Quick Start Guide</h2>
 <p>This quick start guide covers installation and elementary use of PC-BASIC. For more information, please refer to the <a href="#">full PC-BASIC documentation</a> which covers usage, command-line options and a <a href="#reference">comprehensive GW-BASIC language reference</a>. This documentation is also included with the current PC-BASIC release.</p>
-<p>If you find bugs, please report them on the <a href="https://sourceforge.net/p/pcbasic/discussion/bugs/">SourceForge discussion page</a> or <a href="https://github.com/robhagemans/pcbasic/issues">open an issue on GitHub</a>. It would be most helpful if you could include a short bit of BASIC code that triggers the bug.</p>
+<p>If you find bugs, please <a href="https://github.com/robhagemans/pcbasic/issues">open an issue on GitHub</a>. It would be most helpful if you could include a short bit of BASIC code that triggers the bug.</p>
 <h3 id="installation">Installation</h3>
 <p>Packaged distributions can be downloaded from one of the following locations:  </p>
 <ul>
@@ -4706,7 +4712,7 @@ me@mybox$
             </tr>
             <tr>
                 <td><a href="#CALLS"><code>CALLS</code></a></td>
-                <td>Call a FORTRAN subroutine</td>
+                <td>Call a machine code subroutine</td>
                 <td>Do nothing</td>
             </tr>
             <tr>
@@ -5187,13 +5193,23 @@ me@mybox$
         </tr>
     </table>
     </div>
-    <p>
-        Where necessary, the result of the operation will be upgraded to a data type
-        able to hold the result. For example, dividing integers 3 by 2 will yield a
-        single-precision 1.5. However, the exponentiation operator <code>^</code>
-        will give at most a single-precision result unless the <a href="#--double"><code>double</code></a>
-        option is used.
-    </p>
+    <h5>Notes</h5>
+    <ul>
+        <li>
+            Where necessary, the result of the operation will be upgraded to a data type
+            able to hold the result. For example, dividing integers 3 by 2 will yield a
+            single-precision 1.5.
+        </li>
+        <li>
+            However, the exponentiation operator <code>^</code>
+            will give at most a single-precision result unless the <a href="#--double"><code>double</code></a>
+            option is used.
+        </li>
+        <li>
+            The expression <code>0^0</code> will return <code>1</code> and not raise an error,
+            even though, mathematically, raising zero to the zeroeth power is undefined.
+        </li>
+    </ul>
     <h5>Errors</h5>
     <ul>
         <li>
@@ -6755,7 +6771,8 @@ me@mybox$
         </code>
         <p>
             Returns a substring of <code><var>string</var></code> starting at <code><var>position</var></code>, counting from 1. The
-            substring has length <code><var>length</var></code> if specified, defaulting to 1.
+            substring has length <code><var>length</var></code> if specified.
+            If <code><var>length</var></code> is not specified, the substring extends to the end of the string.
         </p>
         <h5>Parameters</h5>
         <ul>
@@ -7269,12 +7286,29 @@ me@mybox$
         </code>
         <p>
             Returns a pseudorandom number in the interval <code>[0&#8212;1)</code>.
-            <code><var>x</var></code> is a numeric expression. If <code><var>x</var></code> is zero, <code>RND</code> repeats the last
-            pseudo-random number. If <code><var>x</var></code> is greater than zero, a new pseudorandom number is
-            returned. If <code><var>x</var></code> is negative, the value of <code><var>x</var></code> is used to generate a new
-            random number seed; after that, a new pseudorandom number is returned.
-            The seed is generated in a different way than by <code><a href="#RANDOMIZE">RANDOMIZE</a></code>.
         </p>
+        <h5>Parameters</h5>
+        <p>
+            <code><var>x</var></code> is a numeric expression.
+        </p>
+        <ul>
+            <li>
+                If <code><var>x</var></code> is zero, <code>RND</code> repeats the last
+                pseudo-random number.
+            </li>
+            <li>
+                If <code><var>x</var></code> is greater than zero, a new pseudorandom number is
+                returned.
+            </li>
+            <li>
+                If <code><var>x</var></code> is negative, <code><var>x</var></code> is converted to a single-precision floating-point value
+                and the random number seed is set to the absolute value of its mantissa.
+                The function then generates a new pseudorandom numer with this seed.
+                Since the only the mantissa of <code><var>x</var></code> is used, any two values whose ratio is a
+                power of 2 will produce the same seed.
+                Note that this procedure for generating a new seed differs from that used by <code><a href="#RANDOMIZE">RANDOMIZE</a></code>.
+            </li>
+        </ul>
         <h5>Notes</h5>
         <ul>
             <li>
@@ -8250,6 +8284,15 @@ me@mybox$
                 If <code><var>line_number_expr</var></code> does not evaluate to an existing line number in the
                 new program, <samp>Illegal function call</samp> is raised but the load or merge is
                 being performed.
+            </li>
+            <li>
+                A loaded text file contains lines without line numbers:
+                <samp>Direct statement in file</samp>.
+            </li>
+            <li>
+                A loaded text file contains lines longer than 255 characters:
+                <samp>Line buffer overflow</samp>.
+                Attempting to load a text file that has <code><i>LF</i></code> rather than <code><i>CR LF</i></code> line endings may cause this error.
             </li>
         </ul>
     </section>
@@ -11233,6 +11276,11 @@ me@mybox$
                 A loaded text file contains lines without line numbers:
                 <samp>Direct statement in file</samp>.
             </li>
+            <li>
+                A loaded text file contains lines longer than 255 characters:
+                <samp>Line buffer overflow</samp>.
+                Attempting to load a text file that has <code><i>LF</i></code> rather than <code><i>CR LF</i></code> line endings may cause this error.
+            </li>
         </ul>
     </section>
 <hr>
@@ -11442,6 +11490,11 @@ me@mybox$
             <li>
                 A loaded text file contains lines without line numbers:
                 <samp>Direct statement in file</samp>.
+            </li>
+            <li>
+                A loaded text file contains lines longer than 255 characters:
+                <samp>Line buffer overflow</samp>.
+                Attempting to load a text file that has <code><i>LF</i></code> rather than <code><i>CR LF</i></code> line endings may cause this error.
             </li>
         </ul>
     </section>
@@ -11822,7 +11875,7 @@ me@mybox$
                     <td><code>KEY(<var>n</var>)</code></td>
                     <td>
                         The event is triggered if key <code><var>n</var></code> is pressed.
-                        <code><var>n</var></code> is the key number <code>[1&#8212;10]</code>
+                        <code><var>n</var></code> is the key number <code>[1&#8212;20]</code>
                         defined in the <code><a href="#KEY-event-def">KEY</a></code> statement.
                     </td>
                 </tr>
@@ -14522,12 +14575,12 @@ me@mybox$
                 If <code><b>,A</b></code> is specified, the program will be saved in plain text format.
             </li>
             <li>
-                If <code><b>,P</b></code> is specified, the program will be saved in protected format.
+                If <code><b>,P</b></code> is specified, the program will be saved in <a href="#protected-file-format">protected format</a>.
                 When a protected program is loaded in GW-BASIC, it cannot be <code>LIST</code>ed or <code>SAVE</code>d in non-protected
                 format.
             </li>
             <li>
-                If neither is specified, the program will be saved in tokenised format.
+                If neither is specified, the program will be saved in <a href="#tokenised-file-format">tokenised format</a>.
             </li>
         </ul>
         <h5>Parameters</h5>
@@ -15852,7 +15905,8 @@ me@mybox$
                         An <a href="#INPUT"><code>INPUT</code></a> or
                         <a href="#LINE-INPUT"><code>LINE INPUT</code></a> statement encountered
                         an input string longer than 255 characters or the plain-text program file
-                        being loaded contains a line with more than 255 characters.
+                        being loaded by <a href="#LOAD"><code>LOAD</code></a>, <a href="#CHAIN"><code>CHAIN</code></a> or <a href="#MERGE"><code>MERGE</code></a> contains a line with more than 255 characters.
+                        Attempting to load a text file that has <code><i>LF</i></code> rather than <code><i>CR LF</i></code> line endings may cause this error.
                     </p>
                 </td>
             </tr>
@@ -18695,6 +18749,199 @@ me@mybox$
     </section>
     <hr>
 
+    <section>
+        <h3 id="memory">Memory model</h3>
+        <p>
+            PC-BASIC (rather imperfectly) emulates the memory of real-mode MS-DOS.
+            This means that memory can be addressed in <em>segments</em> of 64 KiB.
+            Each memory address is given by the segment value and the <code>0--65535</code> byte offset with respect to that segment.
+            Note that segments overlap: the actual memory address is found by <code><var>segment</var>*16 + <var>offset</var></code>.
+            The maximum memory size that can be addressed by this scheme is thus 1 MiB, which was the size of the <em>conventional</em> and <em>upper</em>
+            memory in real-mode MS-DOS.
+        </p>
+        <h4 id="memory-overview">Overview</h4>
+        <p>
+            Areas of memory with a special importance are:
+        </p>
+        <table>
+            <tr>
+                <th>
+                    Segment
+                </th>
+                <th>
+                    Name
+                </th>
+                <th>
+                    Purpose
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <code>&amp;h0000</code>
+                </td>
+                <td>
+                    Low memory
+                </td>
+                <td>
+                    Holds machine information, among other things
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>&amp;h13AD</code> (may vary)
+                </td>
+                <td>
+                    Data segment
+                </td>
+                <td>
+                    Program code, variables, arrays, strings
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>&amp;hA000</code> (EGA) <br>
+                    <code>&amp;hB000</code> (MDA) <br>
+                    <code>&amp;hB800</code> (CGA) <br>
+                </td>
+                <td>
+                    Video segment
+                </td>
+                <td>
+                    Text and graphics on visible and virtual screens
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>&amp;hC000</code>
+                </td>
+                <td>
+                    --
+                </td>
+                <td>
+                    RAM font definition, among other things
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>&amp;hF000</code>
+                </td>
+                <td>
+                    Read-only memory
+                </td>
+                <td>
+                    ROM font definition, among other things
+                </td>
+            </tr>
+        </table>
+
+        <h4 id="memory-data">Data segment</h4>
+        <p>
+            The data segment is organised as follows. The addresses may vary depending on
+            the settings of various options; given here are the default values for GW-BASIC 3.21.
+        </p>
+        <table>
+            <tr>
+                <th>
+                    Offset
+                </th>
+                <th>
+                    Size (bytes)
+                </th>
+                <th>
+                    Function
+                </th>
+            </tr>
+            <tr>
+                <td>
+                    <code>&amp;h0000</code>
+                </td>
+                <td>
+                    <code>3429</code>
+                </td>
+                <td>
+                    Interpreter workarea. Unused in PC-BASIC; can be adjusted with
+                    the <code><a href="#--reserved-memory">--reserved-memory</a></code> option.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>&amp;h0D65</code>
+                </td>
+                <td>
+                    <code>(<var>max-files</var>+1) * 322</code>
+                </td>
+                <td>
+                    File blocks: one for the program plus one for each file allowed by <code><a href="#--max-files">--max-files</a><code>.
+                </code></code></td>
+            </tr>
+                <td>
+                    <code>&amp;h126D</code>
+                </td>
+                <td>
+                    <code>3 + <var>c</var></code>
+                </td>
+                <td>
+                    Program code. An empty program uses 3 bytes.
+                </td>
+            
+            <tr>
+                <td>
+                    <code>&amp;h1270 + <var>c</var></code>
+                </td>
+                <td>
+                    <code><var>v</var></code>
+                </td>
+                <td>
+                    Scalar variables.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>&amp;h1270 + <var>c</var> + <var>v</var></code>
+                </td>
+                <td>
+                    <code><var>a</var></code>
+                </td>
+                <td>
+                    Array variables.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>&amp;hFDFC - <var>s</var></code>
+                </td>
+                <td>
+                    <code><var>a</var></code>
+                </td>
+                <td>
+                    String variables, filled downward from <code>&amp;hFDFC</code>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>&amp;hFDFC</code>
+                </td>
+                <td>
+                    <code>512</code>
+                </td>
+                <td>
+                    BASIC stack, size set by <code><a href="#CLEAR">CLEAR</a></code> statement.
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <code>&amp;hFFFE</code>
+                </td>
+                <td>
+                </td>
+                <td>
+                    Top of data segment, set by <code><a href="#CLEAR">CLEAR</a></code> statement.
+                </td>
+            </tr>
+        </table>
+    </section>
+    <hr>
+
 </article>
 <article>
 <h2 id="acks_acknowledgements">Acknowledgements</h2>
@@ -18702,14 +18949,17 @@ me@mybox$
 <p>PC-BASIC would not exist without those contributing code, reporting bugs,
 sending in patches, and documenting GW-BASIC's behaviour. Thank you all!</p>
 <ul>
-<li><strong>Rob Hagemans</strong>,   lead author</li>
-<li><strong>Wengier Wu</strong>,     bug fixes, advice for CJK support</li>
-<li><strong>WJB</strong>,            bug fixes</li>
-<li><strong>Jan Bredenbeek</strong>, bug fixes, advice for BASICODE support</li>
-<li><strong>Ronald Herrera</strong>, testing, bug hunting</li>
-<li><strong>Miguel Dorta</strong>,   testing, serial ports</li>
-<li><strong>Patrik</strong>,         testing, serial ports</li>
-<li><strong>Duane</strong>,          testing, serial ports</li>
+<li><strong>Rob Hagemans</strong>,         lead author</li>
+<li><strong>Wengier Wu</strong>,           bug fixes, CJK guidance</li>
+<li><strong>Jan Bredenbeek</strong>,       bug fixes, BASICODE guidance</li>
+<li><strong>WJB</strong>,                  bug fixes</li>
+<li><strong>Ronald Herrera</strong>,       testing, bug hunting</li>
+<li><strong>Kenneth Wayne Boyd</strong>,   testing, bug hunting</li>
+<li><strong>Nauman Umer</strong>,          testing, bug hunting</li>
+<li><strong>Steve Pagliarulo</strong>,     testing, bug hunting</li>
+<li><strong>Miguel Dorta</strong>,         testing, serial ports</li>
+<li><strong>Patrik</strong>,               testing, serial ports</li>
+<li><strong>Duane</strong>,                testing, serial ports</li>
 </ul>
 <h3 id="acks_shoulders-of-giants">Shoulders of Giants</h3>
 <p>PC-BASIC depends on the following open-source projects:</p>
@@ -18824,7 +19074,7 @@ behaviour of various Microsoft BASIC dialects.</p>
 <footer>
 <h2 id="licence">Licences</h2>
 <h3 id="pc-basic-interpreter">PC-BASIC interpreter</h3>
-<p><strong>Copyright &#169; 2013&#8212;2016 Rob Hagemans.</strong></p>
+<p><strong>Copyright &#169; 2013&#8212;2018 Rob Hagemans.</strong></p>
 <p><em>Source code available at <a href="https://github.com/robhagemans/pcbasic">https://github.com/robhagemans/pcbasic</a>.</em></p>
 <p>This program is free software: you can redistribute it and/or modify
 it under the terms of the <a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License</a> as published by
@@ -18838,7 +19088,7 @@ GNU General Public License for more details.</p>
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p><hr>
 <h3 id="pc-basic-documentation">PC-BASIC documentation</h3>
-<p><strong>Copyright &#169; 2014&#8212;2016 Rob Hagemans.</strong></p>
+<p><strong>Copyright &#169; 2014&#8212;2018 Rob Hagemans.</strong></p>
 <p>This work is licensed under a
 <a href="http://creativecommons.org/licenses/by-sa/4.0/legalcode">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
 </footer>
