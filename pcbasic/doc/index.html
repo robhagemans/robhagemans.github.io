@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2015 Rob Hagemans
+    Copyright (c) 2014-2018 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 --><html>
@@ -28,8 +28,8 @@
     </ul>
 </nav>
 <header>
-<h1>PC-BASIC 15.08.12 documentation</h1>
-<small>Last updated 2018-01-14 10:51:34.</small>
+<h1>PC-BASIC 1.2.13 documentation</h1>
+<small>Last updated 2018-03-19 09:50:12.</small>
 </header>
 <nav class="toc">
     <h2 id="toc">Table of Contents</h2>
@@ -41,7 +41,6 @@
                         <li><a href="#installation">Installation</a></li>
                         <li><a href="#basic-survival-kit">BASIC survival kit</a></li>
                         <li><a href="#location-for-basic-programs">Location for BASIC programs</a></li>
-                        <li><a href="#configuration">Configuration</a></li>
                         <li><a href="#getting-programs">Getting programs</a></li>
                     </ul>
                 </li>
@@ -61,7 +60,7 @@
                                 <li><a href="#mounting">Accessing your drives</a></li>
                                 <li><a href="#program-files">Compatible BASIC files</a></li>
                                 <li><a href="#packages">Packages</a></li>
-                                <li><a href="#cassette">Tapes and BASICODE</a></li>
+                                <li><a href="#cassette">Cassette tapes</a></li>
                                 <li><a href="#security">Security</a></li>
                             </ul>
                         </li>
@@ -459,13 +458,41 @@ GW-BASIC 3.23 on a generic IBM-compatible PC with a VGA video card.  </p>
 <p>PC-BASIC starts in direct mode, a 1980s-style interface operated by executing
 BASIC commands directly. There is no menu, nor are there any of the visual clues
 that we've come to expect of modern software.  </p>
-<p>A few essential commands to help you get around:<br>
-<code>LOAD "PROGRAM"</code> loads the program file named <code>PROGRAM.BAS</code> into memory, but does not run it yet.<br>
-<code>LIST</code> displays the BASIC code of the current program.<br>
-<code>RUN</code> starts the current program.<br>
-<code>SAVE "PROGRAM",A</code> saves the current program to a human-readable text file named <code>PROGRAM.BAS</code>.<br>
-<code>NEW</code> immediately deletes the current program from memory.<br>
-<code>SYSTEM</code> exits PC-BASIC immediately, discarding any unsaved program or data.  </p>
+<p>A few essential commands to help you get around:</p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LOAD "PROGRAM"</code></td>
+<td>loads the program file named <code>PROGRAM.BAS</code> into memory</td>
+</tr>
+<tr>
+<td><code>LIST</code></td>
+<td>displays the BASIC code of the current program</td>
+</tr>
+<tr>
+<td><code>RUN</code></td>
+<td>starts the current program</td>
+</tr>
+<tr>
+<td><code>SAVE "PROGRAM",A</code></td>
+<td>saves the current program to a text file named <code>PROGRAM.BAS</code></td>
+</tr>
+<tr>
+<td><code>NEW</code></td>
+<td>immediately deletes the current program from memory</td>
+</tr>
+<tr>
+<td><code>SYSTEM</code></td>
+<td>exits PC-BASIC immediately, discarding any unsaved program</td>
+</tr>
+</tbody>
+</table>
 <p>Use one of the key combinations <code>Ctrl+Break</code>, <code>Ctrl+Scroll Lock</code>, <code>Ctrl+C</code> or <code>F12+B</code>
 to interrupt a running program and return to direct mode.  </p>
 <h3 id="location-for-basic-programs">Location for BASIC programs</h3>
@@ -475,40 +502,6 @@ to interrupt a running program and return to direct mode.  </p>
 <li>On <strong>Mac</strong> and <strong>Linux</strong> this is the directory <code>~/</code>.</li>
 </ul>
 <p>See <a href="#mounting">the documentation on accessing your drives</a> for more information.</p>
-<h3 id="configuration">Configuration</h3>
-<p>You can supply options to change PC-BASIC's behaviour by editing the configuration file. If you install the Windows package, the installer will automatically create a shortcut to this file in the PC-BASIC start menu folder. The file can also be found in the following location:</p>
-<table>
-<thead>
-<tr>
-<th>OS</th>
-<th>Configuration file</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Windows</td>
-<td><code>%APPDATA%\pcbasic\PCBASIC.INI</code></td>
-</tr>
-<tr>
-<td>Mac</td>
-<td><code>~/Library/Application Support/pcbasic/PCBASIC.INI</code></td>
-</tr>
-<tr>
-<td>Linux</td>
-<td><code>~/.config/pcbasic/PCBASIC.INI</code></td>
-</tr>
-</tbody>
-</table>
-<p>For example, to start with the emulation target set to Tandy 1000 GW-BASIC, include the following line under <code>[pcbasic]</code> in the configuration file:</p>
-<pre><code>preset=tandy
-</code></pre>
-<p>A default configuration file will be created the first time you run PC-BASIC. See the comments in that file or consult the <a href="#settings">documentation</a> for more information and example options.</p>
-<p>If you start PC-BASIC from the command prompt (on Windows this is the <code>C:\&gt;</code> prompt), you can supply configuration options directly. For example:  </p>
-<p><code>pcbasic PROGRAM.BAS</code> runs the program file named <code>PROGRAM.BAS</code> directly.<br>
-<code>pcbasic --preset=tandy</code> starts with the emulation target set to Tandy GW-BASIC on a Tandy 1000.<br>
-<code>pcbasic --preset=pcjr</code> starts with the emulation target set to Cartridge BASIC on an IBM PCjr.<br>
-<code>pcbasic -h</code> shows all available command line options.  </p>
-<p>If you use PC-BASIC from the command prompt on Windows, make sure you run the <code>pcbasic.com</code> binary. You will not see any output if you call the <code>pcbasic.exe</code> binary.</p>
 <h3 id="getting-programs">Getting programs</h3>
 <p>The following pages have GW-BASIC program downloads, lots of information and further links.  </p>
 <ul>
@@ -1030,18 +1023,42 @@ to interrupt a running program and return to direct mode.  </p>
             <p>
                 PC-BASIC emulates DOS disk devices, which are referred to by drive letters such as <code>Z:</code>.
                 These devices can be mapped to locations in your file system.
-                <em>Windows uses should note that they are not the same locations as Windows drive letters: the device <code>C:</code> on PC-BASIC
-                is not your Windows <code>C:</code> drive, unless you explicitly tell PC-BASIC to make it so.</em>
             </p>
             <p>
-                By default, <code>Z:</code> is PC-BASIC's current device. It is mapped to your home directory
-                if PC-BASIC is started from a graphical user interface. On Windows, your home directory is
-                <code>%USERPROFILE%</code>, which is usually a folder with your user name located under
-                <code>C:\Users\</code>; on other platforms, it is <code>&#732;</code>.
-                This is where files will be saved to and loaded from in BASIC if you do not specify another device.
-                Note that if PC-BASIC is started from the command prompt, <code>Z:</code> is mapped to
-                the current working directory instead.
+                By default, <code>Z:</code> is PC-BASIC's current device.
+                If PC-BASIC is started from a start menu shortcut, the current device will be the shortcut's <i>Start In</i> folder.
             </p>
+            <ul>
+                <li>
+                    By default, this is
+                    <code>%USERPROFILE%</code> on Windows. Uusually this will be a folder named something like
+                    <code>C:\Users\YourName</code>.
+                </li>
+                <li>
+                    On other platforms, the default location is the home directory <code>&#732;</code>.
+                </li>
+            </ul>
+            <p>
+                This default location is where files will be saved to and loaded from in BASIC if you do not specify another device.
+                Note that if PC-BASIC is started from the command prompt, the default location will be the current working directory.
+            </p>
+            <p>
+                <strong>Notes for Windows users</strong>
+            </p>
+            <ul>
+                <li>
+                    <em>PC-BASIC's DOS disk devices are not Windows drive letters</em>.
+                    The device <code>C:</code> on PC-BASIC is <em>not</em> your Windows <code>C:</code> drive.
+                    If you want PC-BASIC's drive letters to be the same as those in Windows, you have to explicitly
+                    enable the option <code><a href="#--map-drives">map-drives</a></code>. Use this with caution, since it
+                    means that your programs can now read from and write to all drives that Windows
+                    allows you access to.
+                </li>
+                <li>
+                    If PC-BASIC's current device or <i>Start In</i> folder is changed to a system folder such as <code>C:\Program Files\PC-BASIC</code>,
+                    Windows will move files written there to <code>%LocalAppData%\VirtualStore</code> instead.
+                </li>
+            </ul>
             <p>
                 You can map drives and other file system locations as PC-BASIC devices by
                 using the <code><a href="#--mount">mount</a></code> option in the <a href="#settings">configuration file or on the command prompt</a>. For example,
@@ -1055,12 +1072,6 @@ to interrupt a running program and return to direct mode.  </p>
                     <b>mount=A:/home/me/BasicFloppy</b>
                 </code>
                 which would make the directory <code>/home/me/BasicFloppy</code> available as PC-BASIC's <code>A:</code> device.
-            </p>
-             <p>
-                If you want PC-BASIC's drive letters to be the same as those in Windows,
-                enable the option <code><a href="#--map-drives">map-drives</a></code>. Use this with caution, since it
-                means that your programs can now read and write on all drives that Windows
-                allows you access to.
             </p>
             <p>
                 PC-BASIC uses <a href="#eightpointthree">DOS conventions</a> for filenames and paths.
@@ -1130,7 +1141,7 @@ to interrupt a running program and return to direct mode.  </p>
         <hr>
 
         <section>
-            <h4 id="cassette">Tapes and BASICODE</h4>
+            <h4 id="cassette">Cassette tapes</h4>
             <p>
                 The <code>CAS1</code> device interfaces with the cassette tape emulator.
                 Tapes were never very popular on the IBM PC, and indeed only available with the
@@ -1149,27 +1160,13 @@ to interrupt a running program and return to direct mode.  </p>
                 with tape images for the <a href="http://www.hampa.ch/pce/">PCE</a> IBM PC emulator.
             </p>
             <p>
-                BASICODE was a considerably more common audio encoding format, which enjoyed
-                huge popularity in particular in the Netherlands, the UK and East Germany.
-                BASICODE was distributed through tapes or as audio broadcast over radio.
-                Reading it into a PC required special hardware, usually hooking up a tape
-                recorder to a serial or parallel port.
-                In PC-BASIC, BASICODE tapes are read through the <code>CAS1</code> device instead,
-                by attaching a <code>.WAV</code> file with the <code><b><a href="#--cas1">cas1</a>=BC:</b><var>filename</var></code>
-                option. PC-BASIC will load the BASICODE, inserting the necessary spaces
-                between keywords where the BASICODE standard leaves these out.
-                Note that you will need a Bascoder program to run the BASICODE, and this is not
-                currently distributed with PC-BASIC.
+                Previous versions of PC-BASIC included support for BASICODE cassettes; this has
+                been discontinued in favour of a separate
+                <a href="https://github.com/robhagemans/basicode">BASICODE decoder</a>.
+                Use this decoder to convert the BASICODE program to PC-BASIC format
+                before loading it into PC-BASIC.
             </p>
-            <p>
-                If you have a Bascoder named <code>BASCODER.BAS</code>, the way to run
-                a BASICODE program named <code>PROGRAM</code> from tape is:
-            </p>
-            <code class="block">
-                LOAD "BASCODER"<br>
-                CHAIN MERGE "CAS1:PROGRAM"
-            </code>
-        </section>
+            </section>
         <hr>
 
         <section>
@@ -1998,9 +1995,9 @@ me@mybox$
     which can be found in the following location:
 </p>
 <dl>
-    <dt>Windows</dt><dd><code>%AppData%\pcbasic\PCBASIC.INI</code></dd>
-    <dt>OS X</dt><dd><code>~/Library/Application Support/pcbasic/PCBASIC.INI</code></dd>
-    <dt>Linux</dt><dd><code>~/.config/pcbasic/PCBASIC.INI</code></dd>
+    <dt>Windows</dt><dd><code>%AppData%\pcbasic-1.2\PCBASIC.INI</code></dd>
+    <dt>OS X</dt><dd><code>~/Library/Application Support/pcbasic-1.2/PCBASIC.INI</code></dd>
+    <dt>Linux</dt><dd><code>~/.config/pcbasic-1.2/PCBASIC.INI</code></dd>
 </dl>
 <p>
     Change an option in the configuration file by adding a line in the section named <code>[pcbasic]</code>, like so:
@@ -2245,11 +2242,6 @@ me@mybox$
                     <code><var>cas_file</var></code>.
                 </dd>
 
-                <dt><code><b>BC:</b><var>wav_file</var></code></dt>
-                <dd>
-                    Connect to the RIFF Wave file <code><var>wav_file</var></code>
-                    with data modulated in BASICODE format.
-                </dd>
             </dl>
         </dd>
 
@@ -18951,7 +18943,7 @@ sending in patches, and documenting GW-BASIC's behaviour. Thank you all!</p>
 <ul>
 <li><strong>Rob Hagemans</strong>,         lead author</li>
 <li><strong>Wengier Wu</strong>,           bug fixes, CJK guidance</li>
-<li><strong>Jan Bredenbeek</strong>,       bug fixes, BASICODE guidance</li>
+<li><strong>Jan Bredenbeek</strong>,       bug fixes</li>
 <li><strong>WJB</strong>,                  bug fixes</li>
 <li><strong>Ronald Herrera</strong>,       testing, bug hunting</li>
 <li><strong>Kenneth Wayne Boyd</strong>,   testing, bug hunting</li>
@@ -19004,11 +18996,6 @@ apologies to those whose contribution I have failed to acknowledge here.</p>
 <ul>
 <li><strong>Mike Brutman</strong>'s <a href="http://www.brutman.com/Cassette_Waveforms/Cassette_Waveforms.html">Analysis of the IBM PC data cassette format</a></li>
 <li><strong>Dan Tobias</strong>' <a href="http://fileformats.archiveteam.org/wiki/IBM_PC_data_cassette">IBM PC data cassette format documentation</a></li>
-</ul>
-<h5 id="acks_basicode">BASICODE</h5>
-<ul>
-<li><strong>Janny Looyenga</strong>'s documentation of the <a href="http://www.nostalgia8.nl/basicode.htm">BASICODE format</a></li>
-<li><strong>Prof. Dr. Horst V&#246;lz</strong>'s documentation of the <a href="http://www.kc85emu.de/scans/rfe0190/Basicode.htm">BASICODE cassette file format</a></li>
 </ul>
 <h5 id="acks_serial-ports">Serial ports</h5>
 <ul>
