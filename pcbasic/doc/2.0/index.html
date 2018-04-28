@@ -27,21 +27,48 @@
         <li class="pure-menu-item"><a href="https://sourceforge.net/p/pcbasic/discussion/" class="pure-menu-link">Discuss</a></li>
     </ul>
 </nav>
+
 <header>
-<h1>PC-BASIC 2.0.dev2 documentation</h1>
-<small>Last updated 2018-03-07 21:13:11.</small>
+    <h1>PC-BASIC documentation</h1>
+    <small>Version 2.0.dev4</small>
 </header>
+<article>
+    <h2 id="top">PC-BASIC</h2>
+    <p>
+        <em>A free, cross-platform emulator for the GW-BASIC family of interpreters.</em>
+    </p>
+    <p>
+        PC-BASIC is a free, cross-platform interpreter for GW-BASIC, Advanced BASIC (BASICA), PCjr Cartridge Basic and Tandy 1000 GWBASIC.
+It interprets these BASIC dialects with a high degree of accuracy, aiming for bug-for-bug compatibility.
+PC-BASIC emulates the most common video and audio hardware on which these BASICs used to run.
+PC-BASIC runs plain-text, tokenised and protected .BAS files.
+It implements floating-point arithmetic in the Microsoft Binary Format (MBF) and can therefore
+read and write binary data files created by GW-BASIC.
+    </p>
+    <p>
+        This is the documentation for <strong>PC-BASIC 2.0.dev4</strong>, last updated <em>2018-04-28 20:15:25</em>.<br>
+        It consists of the following documents:
+    </p>
+    <ul>
+        <li><strong><a href="#quick-start-guide">Quick Start Guide</a></strong>, the essentials needed to get started.</li>
+        <li><strong><a href="#using">User's Guide</a></strong>, in-depth guide to using the emulator</li>
+        <li><strong><a href="#settings">Configuration Guide</a></strong>, settings and options</li>
+        <li><strong><a href="#guide">Language Guide</a></strong>, overview of the BASIC language by topic</li>
+        <li><strong><a href="#reference">Language Reference</a></strong>, comprehensive reference to BASIC</li>
+        <li><strong><a href="#technical">Technical Reference</a></strong>, file formats and internals</li>
+        <li><strong><a href="#dev">Developer's Guide</a></strong>, using PC-BASIC as a Python module</li>
+    </ul>
+</article>
 <nav class="toc">
     <h2 id="toc">Table of Contents</h2>
 
             <ul>
-                <li><a href="#pc-basic">Overview</a></li>
+                <li><a href="#top">PC-BASIC</a></li>
                 <li><a href="#quick-start-guide">Quick Start Guide</a>
                     <ul>
                         <li><a href="#installation">Installation</a></li>
                         <li><a href="#basic-survival-kit">BASIC survival kit</a></li>
                         <li><a href="#program-location">Program location</a></li>
-                        <li><a href="#configuration">Configuration</a></li>
                         <li><a href="#external-resources">External resources</a></li>
                     </ul>
                 </li>
@@ -54,6 +81,7 @@
                                 <li><a href="#alternative-keys">Alternative keys</a></li>
                                 <li><a href="#clipboard-operations">Clipboard operations</a></li>
                                 <li><a href="#emulator-keys">Emulator control keys</a></li>
+                                <li><a href="#system-keys">Compatibility</a></li>
                             </ul>
                         </li>
                         <li><a href="#programs">Programs and files</a>
@@ -83,8 +111,9 @@
                         </li>
                     </ul>
                 </li>
-                <li><a href="#settings">Settings and options</a>
+                <li><a href="#settings">Configuration guide</a>
                     <ul>
+                        <li><a href="#changing-settings">Changing settings</a></li>
                         <li><a href="#synopsis">Synopsis</a></li>
                         <li><a href="#parameters">Positional arguments</a></li>
                         <li><a href="#options">Options</a></li>
@@ -427,79 +456,62 @@
             </li></ul>
 </nav>
 <article>
-<h2 id="pc-basic">Overview</h2>
-<p><em>A free, cross-platform emulator for the GW-BASIC family of interpreters.</em></p>
-<p>PC-BASIC is a free, cross-platform interpreter for GW-BASIC, Advanced BASIC (BASICA), PCjr Cartridge Basic and Tandy 1000 GWBASIC.
-It interprets these BASIC dialects with a high degree of accuracy, aiming for bug-for-bug compatibility.
-PC-BASIC emulates the most common video and audio hardware on which these BASICs used to run.
-PC-BASIC runs plain-text, tokenised and protected .BAS files.
-It implements floating-point arithmetic in the Microsoft Binary Format (MBF) and can therefore
-read and write binary data files created by GW-BASIC.  </p>
-<p>PC-BASIC is free and open source software released under the GPL version 3.  </p>
-<p>See also the <a href="http://robhagemans.github.io/pcbasic/">PC-BASIC home page</a>.</p>
-<p><img alt="" src="https://robhagemans.github.io/pcbasic/screenshots/pcbasic.png"></p>
-<hr>
+
 <h2 id="quick-start-guide">Quick Start Guide</h2>
-<p>This quick start guide covers installation and elementary use of PC-BASIC. For more information, please refer to the <a href="#">full PC-BASIC documentation</a> which covers usage, command-line options and a <a href="#reference">comprehensive GW-BASIC language reference</a>. This documentation is also included with the current PC-BASIC release.</p>
+<p>This quick start guide covers installation and elementary use of PC-BASIC. For more information, please refer to the <a href="#">PC-BASIC documentation</a>.</p>
 <p>If you find bugs, please <a href="https://github.com/robhagemans/pcbasic/issues">open an issue on GitHub</a>. It would be most helpful if you could include a short bit of BASIC code that triggers the bug.</p>
 <h3 id="installation">Installation</h3>
-<p>The <em>stable release</em> is preferred for desktop use. It can be downloaded from one of the following locations:  </p>
-<ul>
-<li><a href="https://github.com/robhagemans/pcbasic/releases">PC-BASIC releases on GitHub</a>  </li>
-<li><a href="https://sourceforge.net/projects/pcbasic/files/">PC-BASIC releases on SourceForge</a>  </li>
-</ul>
-<p>Installers are provided in the form of a Windows <code>.exe</code> and a Mac OS <code>.dmg</code> which can be installed in the usual way for those platforms. For Linux and other Unix-based systems, a <code>.tgz</code> archive is provided which includes an install script. Please consult the documentation inside the package for further instructions.</p>
-<p>Python users can obtain <em>development releases</em> from <a href="https://pypi.org/project/pcbasic/">PyPI</a> through <code>pip install pcbasic</code>.</p>
-<p>If the options above are not applicable or if you prefer to install from the repository source by yourself: please
-consult <a href="https://github.com/robhagemans/pcbasic/blob/master/INSTALL.md"><code>INSTALL.md</code></a> for detailed instructions.</p>
+<p>PC-BASIC desktop installers for Windows, Mac, and Linux can be downloaded from <a href="https://github.com/robhagemans/pcbasic/releases">GitHub</a>.</p>
+<p>Python users can obtain the PC-BASIC package from <a href="https://pypi.org/project/pcbasic/">PyPI</a> through <code>pip install pcbasic</code>.</p>
 <h3 id="basic-survival-kit">BASIC survival kit</h3>
-<p>Click on the PC-BASIC application icon or run <code>pcbasic</code> on the command prompt to start PC-BASIC. The default emulation target is
-GW-BASIC 3.23 on a generic IBM-compatible PC with a VGA video card.  </p>
-<p>PC-BASIC starts in direct mode, a 1980s-style interface operated by executing
-BASIC commands directly. There is no menu, nor are there any of the visual clues
+<p>PC-BASIC has a 1980s-style interface operated by executing
+typed commands. There is no menu, nor are there any of the visual clues
 that we've come to expect of modern software.  </p>
-<p>A few essential commands to help you get around:<br>
-<code>LOAD "PROGRAM"</code> loads the program file named <code>PROGRAM.BAS</code> into memory.<br>
-<code>LIST</code> displays the BASIC code of the current program.<br>
-<code>RUN</code> starts the current program.<br>
-<code>SAVE "PROGRAM",A</code> saves the current program to a text file named <code>PROGRAM.BAS</code>.<br>
-<code>NEW</code> immediately deletes the current program from memory.<br>
-<code>SYSTEM</code> exits PC-BASIC immediately, discarding any unsaved program or data.  </p>
+<p>A few essential commands to help you get around:  </p>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>LOAD "PROGRAM"</code></td>
+<td>loads the program file named <code>PROGRAM.BAS</code> into memory</td>
+</tr>
+<tr>
+<td><code>LIST</code></td>
+<td>displays the BASIC code of the current program</td>
+</tr>
+<tr>
+<td><code>RUN</code></td>
+<td>starts the current program</td>
+</tr>
+<tr>
+<td><code>SAVE "PROGRAM",A</code></td>
+<td>saves the current program to a text file named <code>PROGRAM.BAS</code></td>
+</tr>
+<tr>
+<td><code>NEW</code></td>
+<td>immediately deletes the current program from memory</td>
+</tr>
+<tr>
+<td><code>SYSTEM</code></td>
+<td>exits PC-BASIC immediately, discarding any unsaved program</td>
+</tr>
+</tbody>
+</table>
 <p>Use one of the key combinations <code>Ctrl+Break</code>, <code>Ctrl+Scroll Lock</code>, <code>Ctrl+C</code> or <code>F12+B</code>
-to interrupt a running program and return to direct mode.  </p>
+to interrupt a running program.  </p>
 <h3 id="program-location">Program location</h3>
 <p>If started through the start-menu shortcut, PC-BASIC looks for programs in the shortcut's start-in folder. By default, this will be your home folder.</p>
 <ul>
 <li>On <strong>Windows</strong>, this is usually a folder with your user name, located under <code>C:\Users\</code>. You can find this folder in Windows Explorer by typing <code>%USERPROFILE%</code> in the address bar.</li>
 <li>On <strong>Mac</strong> and <strong>Linux</strong> this is the directory <code>~/</code>.</li>
 </ul>
-<p>If started from the command prompt, PC-BASIC looks for programs in the current working directory. See <a href="#mounting">the documentation on accessing your drives</a> for more information.</p>
-<h3 id="configuration">Configuration</h3>
-<p>You can supply options to change PC-BASIC's behaviour by editing the configuration file. If you install the Windows package, the installer will automatically create a shortcut to this file in the PC-BASIC start menu folder. The file can also be found in the following location:</p>
-<table>
-<thead>
-<tr>
-<th>OS</th>
-<th>Configuration file</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Windows</td>
-<td><code>%APPDATA%\pcbasic\PCBASIC.INI</code></td>
-</tr>
-<tr>
-<td>Mac</td>
-<td><code>~/Library/Application Support/pcbasic/PCBASIC.INI</code></td>
-</tr>
-<tr>
-<td>Linux</td>
-<td><code>~/.config/pcbasic/PCBASIC.INI</code></td>
-</tr>
-</tbody>
-</table>
-<p>A default configuration file will be created the first time you run PC-BASIC. See the comments in that file or consult the <a href="#settings">documentation</a> for more information and example options.</p>
-<p>If you start PC-BASIC from the command prompt (on Windows this is the <code>C:\&gt;</code> prompt), you can supply configuration options directly. Run <code>pcbasic -h</code> on the command prompt to see a list of available command-line options.  </p>
+<p>If started from the command prompt, PC-BASIC looks for programs in the current working directory.</p>
+<p>See <a href="#mounting">the documentation on accessing your drives</a> for more information.</p>
 <h3 id="external-resources">External resources</h3>
 <p>The following pages have GW-BASIC program downloads, lots of information and further links.  </p>
 <ul>
@@ -507,7 +519,7 @@ to interrupt a running program and return to direct mode.  </p>
 <li><a href="http://archive.is/AUm6G">PeatSoft</a> provides GW-BASIC documentation, utilities and some more games.  </li>
 <li><a href="http://www.gw-basic.com/">Neil C. Obremski's gw-basic.com</a> has some fun new games made recently in GW-BASIC.  </li>
 <li><a href="http://peyre.x10.mx/GWBASIC/">Leon Peyre</a> has a nice collection of GW-BASIC programs, including the (in)famous first IBM PC game <code>DONKEY.BAS</code>.  </li>
-<li><a href="http://www.brooksdeforest.com/tandy1000/">Brooks deForest</a> provides his amazing Tandy GW-BASIC games, all released into the public domain.  </li>
+<li><a href="https://web.archive.org/web/20170222075609/brooksdeforest.com/tandy1000">Brooks deForest</a> provides his amazing Tandy GW-BASIC games, all released into the public domain.  </li>
 <li><a href="http://www.oldskool.org/guides/tvdog/">TVDog's Archive</a> is a great source of information and GW-BASIC programs for the Tandy 1000.  </li>
 <li><a href="http://www.scn.org/~bh162/basic_programs.html">Phillip Bigelow</a> provides scientific programs written in GW-BASIC.  </li>
 <li><a href="http://www.garypeek.com/basic/gwprograms.htm">Gary Peek</a> provides miscellaneous GW-BASIC sources which he released into the public domain.  </li>
@@ -668,7 +680,7 @@ to interrupt a running program and return to direct mode.  </p>
                     </tr>
                     <tr>
                         <td><kbd>Pause</kbd> or <kbd>Ctrl</kbd>+<kbd>Num Lock</kbd></td>
-                        <td>Pause. Press another key to resume.</td>
+                        <td>Pause. Press another key to resume. The latter key press will not be detected by BASIC.</td>
                     </tr>
                     <tr>
                         <td><kbd>Ctrl</kbd>+<kbd>Prt Sc</kbd></td>
@@ -936,6 +948,31 @@ to interrupt a running program and return to direct mode.  </p>
                 In PC-BASIC, <kbd>F11</kbd>+<kbd>F</kbd> toggles fullscreen mode.
             </p>
         </section>
+        <section>
+            <h4 id="system-keys">Compatibility</h4>
+            <p>
+                Some key combinations may have a different effect than described above,
+                depending on the operating system and the choice of interface to use with PC-BASIC.
+            </p>
+            <ul>
+                <li>
+                    Certain key combinations will be interpreted by the operating system or
+                    window manager and cause special actions. For example, on most systems,
+                    <kbd>Alt</kbd>+<kbd>F4</kbd> will terminate PC-BASIC unless
+                    the <a href="#--nokill"><code>nokill</code></a> option is set; <kbd>F1</kbd>
+                    may open your operating system's help system. It may be possible to avoid
+                    some of these effects by using the graphical interface in full-screen mode.
+                </li>
+                <li>
+                    In the command-line interface on Windows, <kbd>Ctrl</kbd>+<kbd>C</kbd>
+                    terminates PC-BASIC.
+                </li>
+                <li>
+                    In the command-line interface on Linux and Mac, <kbd>Ctrl</kbd>+<kbd>D</kbd>
+                    terminates PC-BASIC.
+                </li>
+            </ul>
+        </section>
         <hr>
     </section>
 
@@ -1025,18 +1062,42 @@ to interrupt a running program and return to direct mode.  </p>
             <p>
                 PC-BASIC emulates DOS disk devices, which are referred to by drive letters such as <code>Z:</code>.
                 These devices can be mapped to locations in your file system.
-                <em>Windows uses should note that they are not the same locations as Windows drive letters: the device <code>C:</code> on PC-BASIC
-                is not your Windows <code>C:</code> drive, unless you explicitly tell PC-BASIC to make it so.</em>
             </p>
             <p>
-                By default, <code>Z:</code> is PC-BASIC's current device. It is mapped to your home directory
-                if PC-BASIC is started from a graphical user interface. On Windows, your home directory is
-                <code>%USERPROFILE%</code>, which is usually a folder with your user name located under
-                <code>C:\Users\</code>; on other platforms, it is <code>&#732;</code>.
-                This is where files will be saved to and loaded from in BASIC if you do not specify another device.
-                Note that if PC-BASIC is started from the command prompt, <code>Z:</code> is mapped to
-                the current working directory instead.
+                By default, <code>Z:</code> is PC-BASIC's current device.
+                If PC-BASIC is started from a start menu shortcut, the current device will be the shortcut's <i>Start In</i> folder.
             </p>
+            <ul>
+                <li>
+                    By default, this is
+                    <code>%USERPROFILE%</code> on Windows. Uusually this will be a folder named something like
+                    <code>C:\Users\YourName</code>.
+                </li>
+                <li>
+                    On other platforms, the default location is the home directory <code>&#732;</code>.
+                </li>
+            </ul>
+            <p>
+                This default location is where files will be saved to and loaded from in BASIC if you do not specify another device.
+                Note that if PC-BASIC is started from the command prompt, the default location will be the current working directory.
+            </p>
+            <p>
+                <strong>Notes for Windows users</strong>
+            </p>
+            <ul>
+                <li>
+                    <em>PC-BASIC's DOS disk devices are not Windows drive letters</em>.
+                    The device <code>C:</code> on PC-BASIC is <em>not</em> your Windows <code>C:</code> drive.
+                    If you want PC-BASIC's drive letters to be the same as those in Windows, you have to explicitly
+                    enable the option <code><a href="#--map-drives">map-drives</a></code>. Use this with caution, since it
+                    means that your programs can now read from and write to all drives that Windows
+                    allows you access to.
+                </li>
+                <li>
+                    If PC-BASIC's current device or <i>Start In</i> folder is changed to a system folder such as <code>C:\Program Files\PC-BASIC</code>,
+                    Windows will move files written there to <code>%LocalAppData%\VirtualStore</code> instead.
+                </li>
+            </ul>
             <p>
                 You can map drives and other file system locations as PC-BASIC devices by
                 using the <code><a href="#--mount">mount</a></code> option in the <a href="#settings">configuration file or on the command prompt</a>. For example,
@@ -1050,12 +1111,6 @@ to interrupt a running program and return to direct mode.  </p>
                     <b>mount=A:/home/me/BasicFloppy</b>
                 </code>
                 which would make the directory <code>/home/me/BasicFloppy</code> available as PC-BASIC's <code>A:</code> device.
-            </p>
-             <p>
-                If you want PC-BASIC's drive letters to be the same as those in Windows,
-                enable the option <code><a href="#--map-drives">map-drives</a></code>. Use this with caution, since it
-                means that your programs can now read and write on all drives that Windows
-                allows you access to.
             </p>
             <p>
                 PC-BASIC uses <a href="#eightpointthree">DOS conventions</a> for filenames and paths.
@@ -1085,17 +1140,16 @@ to interrupt a running program and return to direct mode.  </p>
             </p>
             <p>
                 PC-BASIC will accept both DOS and Unix newline conventions for programs
-                stored as plain text. Any line not starting with a number will be considered a
-                continuation (through <code><i>LF</i></code>) of the previous line.
+                stored as plain text.
                 This behaviour is different from GW-BASIC, which only
                 accepts text files with <code><i>CR LF</i></code> line endings.
                 As a consequence, in exceptional cases where a program line is continued through <code><i>LF</i></code>
-                just before a number, correct GW-BASIC text files may not be loaded correctly.
+                correct GW-BASIC text files may not be loaded correctly.
                 If you encounter such a case, use
                 the <code><a href="#--strict-newline">strict-newline</a></code> option to enable GW-BASIC behaviour. If
                 <code>strict-newline</code> is enabled, text files in standard Unix format
-                (<code><i>LF</i></code> line endings, no end-of-file character) will fail to load. On
-                Linux or Mac, use a utility such as
+                (<code><i>LF</i></code> line endings, no end-of-file character) will fail to load, as they do in GW-BASIC.
+                On Linux or Mac, use a utility such as
                 <a href="http://waterlan.home.xs4all.nl/dos2unix.html"><code>unix2dos</code></a>
                 to convert programs saved as text files before loading them. When saving as text,
                 PC-BASIC always uses <code><i>CR LF</i></code> line endings and <code>&amp;h1A</code> at end-of-file.
@@ -1949,13 +2003,15 @@ to interrupt a running program and return to direct mode.  </p>
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
 
-<h2 id="settings">Settings and options</h2>
+<h2 id="settings">Configuration guide</h2>
+<p>
+    This documentation discusses how to change settings and options for PC-BASIC.
+</p>
+<h3 id="changing-settings">Changing settings</h3>
 <p>
     PC-BASIC has a number of settings that change the way it operates.
-    These settings can be changed by setting options on the command line
+    Settings can be changed by setting options on the command line
     or through editing the configuration file.
-</p>
-<p>
     In either method, the options have the same name and syntax. In what follows, we will often refer to
     a particular option setting; remember that you can set this from the command line as well as from the configuration file.
 </p>
@@ -2033,8 +2089,8 @@ to interrupt a running program and return to direct mode.  </p>
 <a href="#--dimensions" class="option-link">[<b>--dimensions=</b><var>x</var>,<var>y</var>]</a>
 <a href="#--double" class="option-link">[<b>-d</b>]</a>
 <a href="#--double" class="option-link">[<b>--double</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--exec" class="option-link">[<b>-e=</b><var>compound_statement</var>]</a>
-<a href="#--exec" class="option-link">[<b>--exec=</b><var>compound_statement</var>]</a>
+<a href="#--exec" class="option-link">[<b>-e=</b><var>statement</var>[<b>:</b><var>statement</var> ...]]</a>
+<a href="#--exec" class="option-link">[<b>--exec=</b><var>statement</var>[<b>:</b><var>statement</var> ...]]</a>
 <a href="#--extension" class="option-link">[<b>--extension=</b><var>module_name</var>[<b>,</b><var>module_name</var> ... ]]</a>
 <a href="#--font" class="option-link">[<b>--font=</b><var>font_name</var>[<b>,</b><var>font_name</var> ... ]]</a>
 <a href="#--fullscreen" class="option-link">[<b>--fullscreen</b>[<b>=True</b>|<b>=False</b>]]</a>
@@ -2078,7 +2134,7 @@ to interrupt a running program and return to direct mode.  </p>
 <a href="#--serial-buffer-size" class="option-link">[<b>-c=</b><var>size</var>]</a>
 <a href="#--serial-buffer-size" class="option-link">[<b>--serial-buffer-size=</b><var>size</var>]</a>
 <a href="#--shell" class="option-link">[<b>--shell=</b>[<var>shell-executable</var>]]</a>
-<a href="#--sound-engine" class="option-link">[<b>--sound-engine=</b>[<b>none</b>|<b>beep</b><b>portaudio</b>]]</a>
+<a href="#--sound-engine" class="option-link">[<b>--sound-engine=</b>[<b>none</b>|<b>beep</b>|<b>portaudio</b>]]</a>
 <a href="#--state" class="option-link">[<b>--state=</b><var>state_file</var>]</a>
 <a href="#--strict-hidden-lines" class="option-link">[<b>--strict-hidden-lines</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--strict-newline" class="option-link">[<b>--strict-newline</b>[<b>=True</b>|<b>=False</b>]]</a>
@@ -2444,14 +2500,17 @@ to interrupt a running program and return to direct mode.  </p>
         </dd>
 
         <dt id="--exec">
-            <code id="-e"><b>-e=</b><var>compound_statement</var></code>
-            <code><b>--exec=</b><var>compound_statement</var></code>
+            <code id="-e"><b>-e=</b><var>statement</var>[<b>:</b><var>statement</var> ...]</code>
+            <code><b>--exec=</b><var>statement</var>[<b>:</b><var>statement</var> ...]</code>
         </dt>
         <dd>
-            Execute a BASIC compound statement. The <code><var>compound_statement</var></code> is executed
-            before entering into direct mode or
-            running a program. Multiple statements can be entered by separating them with <code>:</code>, but note that no
-            further statements are executed after e.g. <code>RUN</code>, <code>GOTO</code>.
+            Execute BASIC statements. The <code><var>statement</var></code>s are executed
+            after loading any program but before entering into direct mode or
+            running it. Multiple statements can be entered by separating them with colons <code><b>:</b></code>.
+            These will be executed as if they were entered as separate statements, not as a single compound statement;
+            even if statements such as <code>GOTO</code> can be included, the following statements will be executed.
+            If a <code><b>:</b></code> is intended to be part of a statement, the statement must be quoted with
+            single quotes <code><b>'</b></code>. If your calling shell interprets such quotes, you should properly escape them.
         </dd>
 
         <dt id="--extension">
@@ -2893,17 +2952,17 @@ to interrupt a running program and return to direct mode.  </p>
             <code><b>--shell=</b>[<var>shell-executable</var>]</code>
         </dt>
         <dd>
-            Set the <code><a href="#SHELL">SHELL</a></code>
-            command to run the operating system shell executable <code><var>shell-executable</var></code>.
-            The executable <code><var>shell-executable</var></code> should support the
-            command-line conventions of the primary shell of the host operating system
-            (<code>CMD.EXE</code> on Windows and <code>/bin/sh</code> on Unix).
-            By default <code><var>command</var></code> is empty,
-            which disables the <code><a href="#SHELL">SHELL</a></code> command.
+            Enable the <code><a href="#SHELL">SHELL</a></code>
+            statement to run the operating system command interpreter <code><var>shell-executable</var></code>.
+            The executable <code><var>shell-executable</var></code> should support MS-DOS's
+            <code>COMMAND.COM</code> calling conventions, in particular its <code>/C</code> switch.
+            Example command interpreters are <code>CMD.EXE</code> on Windows and <code>"wine cmd.exe"</code> on Unix.
+            If <code><var>shell-executable</var></code> is empty (as it is by default),
+            the <code><a href="#SHELL">SHELL</a></code> statement is disabled.
         </dd>
 
         <dt id="--sound-engine">
-            <code><b>--sound-engine=</b>[<b>none</b>|<b>beep</b><b>portaudio</b>]</code>
+            <code><b>--sound-engine=</b>[<b>none</b>|<b>beep</b>|<b>portaudio</b>]</code>
         </dt>
         <dd>
             Choose the engine to use for audio output. If omitted, the
@@ -2942,7 +3001,7 @@ to interrupt a running program and return to direct mode.  </p>
             <code><b>--strict-newline</b>[<b>=True</b>|<b>=False</b>]</code>
         </dt>
         <dd>
-            Parse <code>CR</code> and <code>LF</code> in files strictly
+            Parse <code>CR</code> and <code>LF</code> in text and program files strictly
             like GW-BASIC. On Unix, you will need to convert your files to DOS
             text first if using this option.
         </dd>
@@ -2994,7 +3053,7 @@ to interrupt a running program and return to direct mode.  </p>
             <code><b>--utf8</b>[<b>=True</b>|<b>=False</b>]</code>
         </dt>
         <dd>
-            Use UTF-8 for plain-text programs. If <code><b>True</b></code>,
+            Use UTF-8 for plain-text programs and redirected I/O. If <code><b>True</b></code>,
             programs stored as plain text will be converted
             from UTF-8 on <code><a href="#LOAD">LOAD</a></code> and to UTF-8 on
             <code><a href="#SAVE">SAVE</a></code>. If <code><b>False</b></code>,
@@ -5005,6 +5064,10 @@ to interrupt a running program and return to direct mode.  </p>
         with <code><a href="#CLEAR">CLEAR</a></code> or
         <code><a href="#ERASE">ERASE</a></code>.
     </p>
+    <p>
+        Multi-dimensional arrays are stored in column-major order, such that <code>A%(2,0)</code> immediately
+        follows <code>A%(1,0)</code>.
+    </p>
 
     <h4 id="conversions">Conversions</h4>
     <p>
@@ -5667,6 +5730,8 @@ to interrupt a running program and return to direct mode.  </p>
         </code>
         <p>
             Converts the numeric expression <code><var>x</var></code> to a signed integer.
+            Halves are rounded away from zero, so that e.g.
+            <code>CINT(2.5) = 3</code> and <code>CINT(-2.5) = -3</code>.
         </p>
         <h5>Errors</h5>
         <ul>
@@ -5719,7 +5784,8 @@ to interrupt a running program and return to direct mode.  </p>
             <var>y</var> <b>= CSNG(</b><var>x</var><b>)</b>
         </code>
         <p>
-            Converts the numeric expression <code><var>x</var></code> to a single-precision value.
+            Converts the numeric expression <code><var>x</var></code> to a single-precision value
+            by Gaussian rounding.
         </p>
         <h5>Errors</h5>
         <ul>
@@ -6742,9 +6808,8 @@ to interrupt a running program and return to direct mode.  </p>
         <h5>Notes</h5>
         <ul>
             <li>
-                In GW-BASIC, when entering direct mode, <code>LPT1:</code> (but not other printers)
-                is flushed and its position is reset to 1. This is not implemented in
-                PC-BASIC.
+                When entering direct mode, <code>LPT1:</code> (but not other printers)
+                is flushed and its position is reset to 1.
             </li>
         </ul>
         <h5>Errors</h5>
@@ -7015,7 +7080,7 @@ to interrupt a running program and return to direct mode.  </p>
             <var>length</var> <b>= PLAY(</b><var>voice</var><b>)</b>
         </code>
         <p>
-            Returns the number of notes in the background music queue. The return value is in <code>[0&#8212;16]</code>.
+            Returns the number of notes in the background music queue. The return value is in <code>[0&#8212;32]</code>.
         </p>
         <h5>Parameters</h5>
         <ul>
@@ -7030,9 +7095,10 @@ to interrupt a running program and return to direct mode.  </p>
         <h5>Notes</h5>
         <ul>
             <li>
-                There are at most 16 notes in the music queue. Some GW-BASIC manuals
-                claim there can be up to 32, but in reality <code>PLAY</code> only returns at the
-                last 16 notes.
+                There are at most 32 notes in the music queue. However, unless the articulation is
+                set to legato, there are short gaps between each note; these are counted as
+                separate notes in the queue. Effectively, the queue length is thus 16 for the default
+                and staccato articulations and 32 for legato.
             </li>
         </ul>
         <h5>Errors</h5>
@@ -9990,7 +10056,7 @@ to interrupt a running program and return to direct mode.  </p>
             </li>
             <li>
                 <code><var>file_number</var></code> is not the number of an open file:
-                <samp>Bad file number</samp>.
+                <samp>Bad file mode</samp>.
             </li>
             <li>
                 <code><var>file_number</var></code> is open under a mode other than <code>RANDOM</code>:
@@ -10901,29 +10967,43 @@ to interrupt a running program and return to direct mode.  </p>
     <section>
         <h4 id="KILL"><code>KILL</code></h4>
         <code class="flow">
-            <b>KILL</b> <var>file_spec</var>
+            <b>KILL</b> <var>filter_spec</var>
         </code>
         <p>
-            Deletes a file on a disk device.
+            Deletes one or more files on a disk device.
         </p>
         <h5>Parameters</h5>
         <ul>
             <li>
-                The string expression <code><var>file_spec</var></code> is a
-                valid <a href="#filespec">file specification</a> indicating the file to delete.
-                It must point to an existing file on a disk device.
+                The string expression <code><var>filter_spec</var></code> is a
+                valid <a href="#filespec">file specification</a> indicating the files to delete.
+                Wildcards are allowed. See <a href="#FILES"><code>FILES</code></a> for a description
+                of wildcards.
+            </li>
+        </ul>
+        <h5>Notes</h5>
+        <ul>
+            <li>
+                Be very careful with the use of wildcards in this statement: the DOS matching rules may
+                not be the same as what is usual on your operating system, which could result in
+                unexpected files being deleted.
+            </li>
+            <li>
+                This statement may not delete hidden file and files that do not have short names
+                which are legal DOS names. However, this behaviour is not guaranteed
+                so you must not depend on it.
             </li>
         </ul>
         <h5>Errors</h5>
         <ul>
             <li>
-                <code><var>file_spec</var></code> has a number value: <samp>Type mismatch</samp>.
+                <code><var>filter_spec</var></code> is a numeric value: <samp>Type mismatch</samp>.
             </li>
             <li>
-                The file <code><var>file_spec</var></code> is open: <samp>File already open</samp>
+                A file with a base name equal to that of a file matching <code><var>filter_spec</var></code> is open: <samp>File already open</samp>
             </li>
             <li>
-                The file or path <code><var>file_spec</var></code> does not exist: <samp>File not found</samp>
+                No file matches <code><var>filter_spec</var></code> : <samp>File not found</samp>
             </li>
             <li>
                 The user has no write permission: <samp>Permission denied</samp>
@@ -11403,6 +11483,13 @@ to interrupt a running program and return to direct mode.  </p>
                 <code><var>record_1</var></code>. An non-matching <code>UNLOCK</code> will raise
                 <samp>Permission denied</samp>.
             </li>
+            <li>
+                To check if another open file is the same file, PC-BASIC only looks at the base name
+                of the file, i.e. its DOS name without directories. As a consequence, if a file <samp>"test.txt"</samp>
+                is open and locked, an attempt to lock a file <samp>"dir\test.txt"</samp> will fail, even if these are
+                different files. Conversely, if two file names are different but point to the same file in the
+                file system (for example due to file system links), then these will be considered as different files by BASIC.
+            </li>
         </ul>
         <h5>Errors</h5>
         <ul>
@@ -11419,7 +11506,7 @@ to interrupt a running program and return to direct mode.  </p>
                 <code><var>file_num</var></code> is not an open file: <samp>Bad file number</samp>.
             </li>
             <li>
-                <code>LOCK</code> (part of) a file already locked: <samp>Permission denied</samp>.
+                <code>LOCK</code> (part of) a file with the same name as a file already locked: <samp>Permission denied</samp>.
             </li>
             <li>
                 <code><var>record_0</var></code> or <code><var>record_1</var></code> is not in <code>[1&#8212;2^25-2]</code>: <samp>Bad record number</samp>.
@@ -11682,7 +11769,7 @@ to interrupt a running program and return to direct mode.  </p>
                 <code><var>old_name</var></code> does not exist: <samp>File not found</samp>.
             </li>
             <li>
-                <code><var>old_name</var></code> is open: <samp>File already open</samp>.
+                A file with a base name equal to that of <code><var>old_name</var></code> or <code><var>new_name</var></code> is open: <samp>File already open</samp>.
             </li>
             <li>
                 <code><var>new_name</var></code> exists: <samp>File already exists</samp>.
@@ -12177,6 +12264,13 @@ to interrupt a running program and return to direct mode.  </p>
             the locks are only implemented internally. Whether other processes may access
             the file will depend on the host OS.
         </p>
+        <li>
+            To check if another open file is the same file, PC-BASIC only looks at the base name
+            of the file, i.e. its DOS name without directories. As a consequence, if a file <samp>"test.txt"</samp>
+            is open and locked, an attempt to lock a file <samp>"dir\test.txt"</samp> will fail, even if these are
+            different files. Conversely, if two file names are different but point to the same file in the
+            file system (for example due to file system links), then these will be considered as different files by BASIC.
+        </li>
         <h5 id="filespec">File specifications</h5>
         <p>
             A <dfn>file specification</dfn> <code><var>file_spec</var></code>
@@ -12508,7 +12602,7 @@ to interrupt a running program and return to direct mode.  </p>
                 <samp>Bad file number</samp>.
             </li>
             <li>
-                A file is already open for <code>OUTPUT</code> or <code>APPEND</code>: <samp>File already open</samp>.
+                A file with the same name is already open for <code>OUTPUT</code> or <code>APPEND</code>: <samp>File already open</samp>.
                 This is only raised for <code>COMn:</code>, <code>CASn:</code> and disk devices.
             </li>
             <li>
@@ -13226,7 +13320,8 @@ to interrupt a running program and return to direct mode.  </p>
         <h5>Parameters</h5>
         <ul>
             <li>
-                <code><var>int_array_name</var></code> is an array of integers (<code>%</code>) that will supply the
+                <code><var>int_array_name</var></code> is a single- or multidimensional
+                array of integers (<code>%</code>) that will supply the
                 new values for the palette.
             </li>
             <li>
@@ -13234,9 +13329,16 @@ to interrupt a running program and return to direct mode.  </p>
                 indicates at which index in the array to start mapping to the palette.
             </li>
         </ul>
-        <p>
-            If an array entry has value <code>-1</code>, the matching attribute is left unchanged.
-        </p>
+        <h5>Notes</h5>
+        <ul>
+            <li>
+                Array values are assigned to palette entries in the order in which they are stored in memory.
+                See <a href="#arrays">Arrays</a> for details about the layout of arrays in memory.
+            </li>
+            <li>
+                If an array entry has value <code>-1</code>, the matching attribute is left unchanged.
+            </li>
+        </ul>
         <h5>Errors</h5>
         <ul>
             <li>
@@ -13456,8 +13558,10 @@ to interrupt a running program and return to direct mode.  </p>
                     <td>
                         Turns on background mode; sound commands exit without waiting for the
                         music to finish. The music keeps playing while other commands are
-                        executed. There can be up to 16 notes in the background music queue;
-                        if more notes are played, <code>PLAY</code> will block until there are only 16 left.
+                        executed. There can be up to 32 notes in the background music queue;
+                        if more notes are played, <code>PLAY</code> will block until there are only 32 left.
+                        Note that the gaps between notes in the default articulation and in staccato
+                        are counted as separate notes on the queue.
                     </td>
                 </tr>
                 <tr>
@@ -14077,7 +14181,7 @@ to interrupt a running program and return to direct mode.  </p>
             </li>
             <li>
                 <code><var>file_number</var></code> is not the number of an open file:
-                <samp>Bad file number</samp>.
+                <samp>Bad file mode</samp>.
             </li>
             <li>
                 <code><var>file_number</var></code> is open under a mode other than <code>RANDOM</code>:
@@ -14477,10 +14581,13 @@ to interrupt a running program and return to direct mode.  </p>
                 <code><var>dir_spec</var></code> has a numeric value: <samp>Type mismatch</samp>.
             </li>
             <li>
-                <code><var>dir_spec</var></code> is an empty string: <samp>Bad file name</samp> .
+                <code><var>dir_spec</var></code> is an empty string: <samp>Bad file name</samp>.
             </li>
             <li>
-                No matching path is found: <samp>Path not found</samp> .
+                No matching path is found: <samp>Path not found</samp>.
+            </li>
+            <li>
+                Directory to remove is not empty: <samp>Path/File access error</samp>.
             </li>
         </ul>
     </section>
@@ -14881,11 +14988,13 @@ to interrupt a running program and return to direct mode.  </p>
             <b>SHELL</b> [<var>command</var>]
         </code>
         <p>
-            Starts a subshell on the console.
-            The type of shell is determined by your OS. On Unix systems, an <code>sh</code> shell is
-            started. On Windows systems, a <code>CMD.EXE</code> shell is started.
+            Starts an operating system subshell on the console.
             If <code><var>command</var></code> is specified, the command is executed on the shell and execution
             returns to the program.
+        </p>
+        <p>
+            To enable this statement, the <code><a href="#--shell">shell</a></code> option must be set to
+            a valid command interpreter.
         </p>
         <h5>Parameters</h5>
         <ul>
@@ -14896,14 +15005,14 @@ to interrupt a running program and return to direct mode.  </p>
         <h5>Notes</h5>
         <ul>
             <li>
-                If the <code><a href="#--shell">shell</a>=native</code> option is not specified, this statement does nothing.
-            </li>
-            <li>
             Be careful when enabling this command, as it allows the running BASIC program full access to your files and operating system.
             </li>
         </ul>
         <h5>Errors</h5>
         <ul>
+            <li>
+                <code><a href="#--shell">shell</a></code> option is not specified: <samp>Illegal function call</samp>.
+            </li>
             <li>
                 <code><var>command</var></code> has a number value: <samp>Type mismatch</samp>.
             </li>
@@ -16053,8 +16162,9 @@ to interrupt a running program and return to direct mode.  </p>
                     <p>
                         An attempt is made to open a file to a file number that is already in use;
                         or an attempt is made to open a file for <code>OUTPUT</code> or <code>APPEND</code>  on a serial, disk or cassette device
-                        when a file is already open for <code>OUTPUT</code> or <code>APPEND</code> on that device;
-                        or a <a href="#KILL"><code>KILL</code></a> or <a href="#NAME"><code>NAME</code></a> statement is executed on an open disk file.
+                        when a file (or, on a disk device, a file with the same name) is already open for <code>OUTPUT</code> or <code>APPEND</code> on that device;
+                        or a <a href="#KILL"><code>KILL</code></a> or <a href="#NAME"><code>NAME</code></a> statement is executed on a disk file
+                        when a file with the same name is open on the same device.
                     </p>
                 </td>
             </tr>
@@ -19088,10 +19198,10 @@ to interrupt a running program and return to direct mode.  </p>
         </p>
         <p>
             By default, the Session object grabs the standard input and output
-            as keyboard an screen. This may be undesirable in some applications:
-            for example, if run from an interactive Python session, this
-            means Python and PC-BASIC are competing for keystrokes. In such cases,
-            use the keyword argument <code>stdio=False</code>.
+            as keyboard an screen. This may be undesirable in some applications;
+            in such cases,
+            set the keyword arguments <code>input_streams</code> and <code>output_streams</code>
+            explicitly (for example, to <code>None</code>).
         </p>
 
         <h5 id="session.execute"><code>execute(<var>basic_code</var>)</code>
@@ -19216,39 +19326,53 @@ with pcbasic.Session(extension=random) as s:
 <h3 id="acks_contributors">Contributors</h3>
 <p>PC-BASIC would not exist without those contributing code, reporting bugs,
 sending in patches, and documenting GW-BASIC's behaviour. Thank you all!</p>
+<p>Development is led by</p>
 <ul>
-<li><strong>Rob Hagemans</strong>,         lead author</li>
-<li><strong>Wengier Wu</strong>,           bug fixes, CJK guidance</li>
-<li><strong>Jan Bredenbeek</strong>,       bug fixes, BASICODE guidance</li>
-<li><strong>WJB</strong>,                  bug fixes</li>
-<li><strong>Ronald Herrera</strong>,       testing, bug hunting</li>
-<li><strong>Kenneth Wayne Boyd</strong>,   testing, bug hunting</li>
-<li><strong>Nauman Umer</strong>,          testing, bug hunting</li>
-<li><strong>Steve Pagliarulo</strong>,     testing, bug hunting</li>
-<li><strong>Danitegue</strong>,            testing, bug hunting</li>
-<li><strong>Miguel Dorta</strong>,         testing, serial ports</li>
-<li><strong>Patrik</strong>,               testing, serial ports</li>
-<li><strong>Duane</strong>,                testing, serial ports</li>
+<li><strong>Rob Hagemans</strong></li>
+</ul>
+<p>Bug fixes and guidance by</p>
+<ul>
+<li><strong>Wengier Wu</strong></li>
+<li><strong>Jan Bredenbeek</strong></li>
+<li><strong>WJB</strong></li>
+</ul>
+<p>Avid testers and bug hunters</p>
+<ul>
+<li><strong>Ronald Herrera</strong></li>
+<li><strong>Kenneth Wayne Boyd</strong></li>
+<li><strong>Nauman Umer</strong></li>
+<li><strong>Steve Pagliarulo</strong></li>
+<li><strong>Daniel Santana</strong></li>
+<li><strong>Miguel Dorta</strong></li>
+<li><strong>Patrik</strong></li>
+<li><strong>Duane</strong></li>
 </ul>
 <h3 id="acks_shoulders-of-giants">Shoulders of Giants</h3>
+<p>PC-BASIC incorporates code derived from other projects, in particular:</p>
+<ul>
+<li><strong>J-L Morel</strong>'s <a href="http://search.cpan.org/~jlmorel/Win32-Console-ANSI-1.11/lib/Win32/Console/ANSI.pm">Win32::Console::ANSI</a></li>
+<li><strong>Valentin Lab</strong>'s <a href="https://gist.github.com/vaab/2ad7051fc193167f15f85ef573e54eb9">win_subprocess.py</a></li>
+<li><strong>Marcus von Appen</strong>'s <a href="https://pysdl2.readthedocs.org/en/latest/">PySDL2</a></li>
+</ul>
 <p>PC-BASIC depends on the following open-source projects:</p>
 <ul>
 <li><a href="http://www.python.org">Python</a></li>
+<li><a href="https://pypi.python.org/pypi/setuptools">Setuptools</a></li>
+<li><a href="http://www.numpy.org">NumPy</a></li>
+<li><a href="https://github.com/pyserial/pyserial">PySerial</a></li>
+<li><a href="https://github.com/pyserial/pyparallel">PyParallel</a></li>
 <li><a href="http://www.libsdl.org">Simple DirectMedia Layer (SDL)</a></li>
 <li><a href="http://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/">SDL2_gfx</a></li>
-<li><a href="https://pysdl2.readthedocs.org/en/latest/">PySDL2</a></li>
-<li><a href="http://www.numpy.org">NumPy</a></li>
-<li><a href="https://sourceforge.net/projects/pywin32/">Python for Windows Extensions (PyWin32)</a></li>
-<li><a href="http://pyserial.sourceforge.net/pyserial.html">PySerial</a></li>
-<li><a href="http://pexpect.readthedocs.org/en/latest/">PExpect</a></li>
-<li><a href="https://github.com/robhagemans/ansipipe">ANSI|pipe</a></li>
+<li><a href="http://www.pygame.org">PyGame</a></li>
+<li><a href="http://people.csail.mit.edu/hubert/pyaudio/">PyAudio</a></li>
 </ul>
 <h3 id="acks_fond-memories">Fond memories</h3>
 <p>PC-BASIC would not have been what it is without the following open-source projects
 which it has depended on in the past:</p>
 <ul>
-<li><a href="http://www.pygame.org">PyGame</a></li>
 <li><strong>Tom Rothamel</strong>'s <a href="https://web.archive.org/web/20150712040220/http://pygame.renpy.org/">PyGame Subset for Android</a> (superseded by <a href="http://www.renpy.org/doc/html/android.html">RAPT</a>)</li>
+<li><a href="https://sourceforge.net/projects/pywin32/">Python for Windows Extensions (PyWin32)</a></li>
+<li><a href="http://pexpect.readthedocs.org/en/latest/">PExpect</a></li>
 </ul>
 <h3 id="acks_technical-documentation">Technical Documentation</h3>
 <p>Building PC-BASIC would have been impossible without the immense amounts of
@@ -19329,18 +19453,33 @@ apologies to those whose contribution I have failed to acknowledge here.</p>
 <li><strong>David I. Schneider</strong>, <em>Handbook of BASIC: Third Edition for the IBM PC, XT, AT, PS/2, and Compatibles</em>, Brady, 1988.</li>
 </ul>
 <h3 id="acks_development-tools">Development tools</h3>
-<p>PC-BASIC is developed using <a href="https://git-scm.com/">Git</a> source control,
-<a href="https://wiki.gnome.org/Apps/Gedit">GEdit</a> and <a href="https://atom.io/">Atom</a> text
-editors on an <a href="http://www.ubuntu.com/">Ubuntu</a> Linux system and hosted on
-<a href="https://github.com/">GitHub</a> and <a href="https://sourceforge.net/">SourceForge</a>.</p>
-<p>Packaging and documentation depends on the following projects:</p>
+<p>Development tools:</p>
 <ul>
-<li><a href="http://www.pyinstaller.org">PyInstaller</a></li>
-<li><a href="http://nsis.sourceforge.net">Nullsoft Scriptable Install System</a></li>
-<li><a href="http://www.7-zip.org">7-Zip</a></li>
+<li><a href="https://git-scm.com/">Git</a></li>
+<li><a href="https://atom.io/">Atom</a></li>
+<li><a href="https://pypi.python.org/pypi/pylint/1.7.6">PyLint</a></li>
+<li><a href="https://pypi.python.org/pypi/coverage">Coverage</a></li>
+<li><a href="http://www.ubuntu.com/">Ubuntu</a></li>
 <li><a href="http://www.gnu.org/">The GNU Base System</a></li>
+</ul>
+<p>Documentation tools:</p>
+<ul>
 <li><a href="http://lxml.de">LXML</a></li>
 <li><a href="https://pypi.python.org/pypi/Markdown">Markdown</a></li>
+<li><a href="https://www.princexml.com/download/">Prince</a></li>
+</ul>
+<p>Packaging tools:</p>
+<ul>
+<li><a href="https://pypi.python.org/pypi/wheel">Wheel</a></li>
+<li><a href="https://pypi.python.org/pypi/twine">Twine</a></li>
+<li><a href="https://anthony-tuininga.github.io/cx_Freeze/">cx_Freeze</a></li>
+<li><a href="https://github.com/jordansissel/fpm">fpm</a></li>
+</ul>
+<p>Source code and releases are hosted on:</p>
+<ul>
+<li><a href="https://github.com/">GitHub</a></li>
+<li><a href="https://sourceforge.net/">SourceForge</a></li>
+<li><a href="https://pypi.org/project/pcbasic/">PyPI</a></li>
 </ul>
 <h3 id="acks_emulators">Emulators</h3>
 <p>These excellent emulators have been indispensable tools in documenting the
