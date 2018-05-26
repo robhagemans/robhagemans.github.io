@@ -22,33 +22,41 @@
         var suffix_osx = '-osx.dmg';
         var plat_osx = "OS X";
         var suffix_src = '.tgz';
-        var plat_src = "Linux and Unix"
+        var plat_src = "Linux and Unix";
 
-        // get latest release form GitHub
-        var json_url = "https://api.github.com/repos/robhagemans/pcbasic/releases/latest";
+        function setStableRelease(tag_name) {
+            var url_base = "https://github.com/robhagemans/pcbasic/releases/download/" + tag_name + '/';
+            var bin_base = url_base + "pcbasic-" + tag_name;
+            document.getElementById("win32-link").setAttribute('href', bin_base + suffix_win32);
+            document.getElementById("win32-link").innerHTML = "PC-BASIC " + tag_name + " for " + plat_win32;
+            // osx
+            document.getElementById("osx-link").setAttribute('href', bin_base + suffix_osx);
+            document.getElementById("osx-link").innerHTML = ("PC-BASIC " + tag_name + " for " + plat_osx);
+            // src
+            document.getElementById("src-link").setAttribute('href', bin_base + suffix_src);
+            document.getElementById("src-link").innerHTML = ("PC-BASIC " + tag_name + " for " + plat_src);
+            // readme
+            document.getElementById("readme-link").setAttribute('href', url_base + 'README.md');
+            document.getElementById("generaldownload").innerHTML = 'These and older releases can also be found on the <a href="https://github.com/robhagemans/pcbasic/releases/latest">PC-BASIC release page on GitHub</a>';
+        };
+
+        // get latest release from GitHub
+        var json_url = "https://api.github.com/repos/robhagemans/pcbasic/releases";
         var request = new XMLHttpRequest();
         request.open('GET', json_url, true);
 
         request.onload = function() {
-          if (request.status >= 200 && request.status < 400) {
-            var result = JSON.parse(request.responseText);
-            var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
-                            + result.tag_name + '/';
-            var bin_base = url_base + "pcbasic-" + result.tag_name;
-            // result.assets[i].updated_at
-            // result.assets[i].download_count
-            document.getElementById("win32-link").setAttribute('href', bin_base + suffix_win32);
-            document.getElementById("win32-link").innerHTML = "PC-BASIC " + result.tag_name + " for " + plat_win32;
-            // osx
-            document.getElementById("osx-link").setAttribute('href', bin_base + suffix_osx);
-            document.getElementById("osx-link").innerHTML = ("PC-BASIC " + result.tag_name + " for " + plat_osx);
-            // src
-            document.getElementById("src-link").setAttribute('href', bin_base + suffix_src);
-            document.getElementById("src-link").innerHTML = ("PC-BASIC " + result.tag_name + " for " + plat_src);
-            // readme
-            document.getElementById("readme-link").setAttribute('href', url_base + 'README.md');
-            document.getElementById("generaldownload").innerHTML = 'These and older releases can also be found on the <a href="https://github.com/robhagemans/pcbasic/releases/latest">PC-BASIC release page on GitHub</a>';
-          }
+            if (request.status >= 200 && request.status < 400) {
+                var result = JSON.parse(request.responseText);
+                for (var i=0; i < result.length; ++i) {
+                    console.log(result[i]);
+                    // results are returned latestfirst, fo first v1 tag is latest stable
+                    if (result[i].tag_name.startsWith('v1')) {
+                        setStableRelease(result[i].tag_name);
+                        break;
+                    }
+                }
+            }
         };
 
         request.send();
