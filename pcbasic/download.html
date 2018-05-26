@@ -17,14 +17,14 @@
 
     <script>
         // without JS, generic links are left which is also OK
-        var suffix_win32 = '-win32.exe';
         var plat_win32 = "Windows";
-        var suffix_osx = '-osx.dmg';
-        var plat_osx = "OS X";
-        var suffix_src = '.tgz';
-        var plat_src = "Linux and Unix";
+        var plat_osx = "MacOS";
+        var plat_src = "Python";
 
         function setStableRelease(tag_name) {
+            var suffix_win32 = '-win32.exe';
+            var suffix_osx = '-osx.dmg';
+            var suffix_src = '.tgz';
             var url_base = "https://github.com/robhagemans/pcbasic/releases/download/" + tag_name + '/';
             var bin_base = url_base + "pcbasic-" + tag_name;
             document.getElementById("win32-link").setAttribute('href', bin_base + suffix_win32);
@@ -33,11 +33,37 @@
             document.getElementById("osx-link").setAttribute('href', bin_base + suffix_osx);
             document.getElementById("osx-link").innerHTML = ("PC-BASIC " + tag_name + " for " + plat_osx);
             // src
-            document.getElementById("src-link").setAttribute('href', bin_base + suffix_src);
-            document.getElementById("src-link").innerHTML = ("PC-BASIC " + tag_name + " for " + plat_src);
+            //document.getElementById("src-link").setAttribute('href', bin_base + suffix_src);
+            //document.getElementById("src-link").innerHTML = ("PC-BASIC " + tag_name + " for " + plat_src);
             // readme
-            document.getElementById("readme-link").setAttribute('href', url_base + 'README.md');
+            //document.getElementById("readme-link").setAttribute('href', url_base + 'README.md');
             document.getElementById("generaldownload").innerHTML = 'These and older releases can also be found on the <a href="https://github.com/robhagemans/pcbasic/releases/latest">PC-BASIC release page on GitHub</a>';
+        };
+
+
+        function setNewRelease(tag_name, assets) {
+            var platform = {
+                '.msi': 'Windows',
+                '.dmg': 'MacOS',
+                '.deb': 'Linux (.deb)',
+                '.rpm': 'Linux (.rpm)',
+            };
+            var suffix_win32 = '.msi';
+            var suffix_osx = '.dmg';
+            var suffix_src = '.tgz';
+            var suffix_deb = '.deb';
+            var suffix_rpm = '.rpm';
+            var url_base = "https://github.com/robhagemans/pcbasic/releases/download/" + tag_name + '/';
+            for (var i=0; i < assets.length; ++i) {
+                var ext = assets[i].name.slice(-4);
+                console.log(ext);
+                if (ext in platform) {
+                    document.getElementById("new" + ext).setAttribute('href', url_base + assets[i].name);
+                    document.getElementById("new" + ext).innerHTML = "PC-BASIC " + tag_name + " for " + platform[ext];
+                }
+            }
+            // src
+            document.getElementById("src-new").innerHTML = ("PC-BASIC " + tag_name + " for " + plat_src);
         };
 
         // get latest release from GitHub
@@ -50,7 +76,14 @@
                 var result = JSON.parse(request.responseText);
                 for (var i=0; i < result.length; ++i) {
                     console.log(result[i]);
-                    // results are returned latestfirst, fo first v1 tag is latest stable
+                    if (result[i].tag_name.startsWith('v2')) {
+                        setNewRelease(result[i].tag_name, result[i].assets);
+                        break;
+                    }
+                }
+                for (var i=0; i < result.length; ++i) {
+                    console.log(result[i]);
+                    // results are returned latest first, fo first v1 tag is latest stable
                     if (result[i].tag_name.startsWith('v1')) {
                         setStableRelease(result[i].tag_name);
                         break;
@@ -87,31 +120,66 @@
                 </tr>
                 <tr>
                     <td><img src="icons/windows.png" class="icon" alt="Windows"></td>
-                    <td><a id="win32-link" href="https://github.com/robhagemans/pcbasic/releases/latest">
+                    <td><a id="win32-link" href="https://github.com/robhagemans/pcbasic/releases">
                     PC-BASIC release page on GitHub</a></td>
                     <td>Windows XP and above</td>
                 </tr
                 ><tr>
                     <td><img src="icons/apple.png" class="icon" alt="OS X"></td>
-                    <td><a id="osx-link" href="https://github.com/robhagemans/pcbasic/releases/latest">
+                    <td><a id="osx-link" href="https://github.com/robhagemans/pcbasic/releases">
                     PC-BASIC release page on GitHub</a></td>
-                    <td>OS X 10.6 and above</td>
+                    <td>MacOS 10.8 and above</td>
+                </tr>
+                <!--
+                <tr>
+                    <td><img src="icons/python.png" class="icon" alt="Python"/></td>
+                    <td><a id="src-link" href="https://github.com/robhagemans/pcbasic/releases">
+                    PC-BASIC release page on GitHub</a></td>
+                    <td>Any system that runs Python 2.7</td>
+                </tr>
+            -->
+            </table>
+        </section>
+        <section class="pure-u-1">
+            <h2>Development releases</h2>
+            <table>
+                <tr>
+                    <th></th>
+                    <th>Download</th>
+                    <th>Requirements</th>
+                </tr>
+                <tr>
+                    <td><img src="icons/windows.png" class="icon" alt="Windows"></td>
+                    <td><a id="new.msi" href="https://github.com/robhagemans/pcbasic/releases/latest">
+                    PC-BASIC release page on GitHub</a></td>
+                    <td>Windows 7 and above</td>
+                </tr
+                ><tr>
+                    <td><img src="icons/apple.png" class="icon" alt="MacOS"></td>
+                    <td><a id="new.dmg" href="https://github.com/robhagemans/pcbasic/releases/latest">
+                    PC-BASIC release page on GitHub</a></td>
+                    <td>MacOS 10.9 and above</td>
+                </tr>
+                <tr>
+                    <td><img src="icons/debian.png" class="icon" alt="Debian"/></td>
+                    <td><a id="new.deb" href="https://github.com/robhagemans/pcbasic/releases/latest">
+                    PC-BASIC release page on GitHub</a></td>
+                    <td>Debian, Ubuntu, Mint, ...</td>
+                </tr>
+                <tr>
+                    <td><img src="icons/fedora.png" class="icon" alt="Fedora"/></td>
+                    <td><a id="new.rpm" href="https://github.com/robhagemans/pcbasic/releases/latest">
+                    PC-BASIC release page on GitHub</a></td>
+                    <td>Fedora, CentOS, ...</td>
                 </tr>
                 <tr>
                     <td><img src="icons/python.png" class="icon" alt="Python"/></td>
-                    <td><a id="src-link" href="https://github.com/robhagemans/pcbasic/releases/latest">
-                    PC-BASIC release page on GitHub</a></td>
-                    <td>Linux, FreeBSD or any other system that runs Python 2.7</td>
+                    <td><a id="src-new" href="https://pypi.org/project/pcbasic/">
+                    PC-BASIC release page on PyPI</a></td>
+                    <td>Any system that runs Python 2.7</td>
                 </tr>
             </table>
             <p id="generaldownload" class="centre"></p>
-        </section>
-        <section class="pure-u-1">
-            <h2>Latest development release</h2>
-            <p class="centre">
-                For the latest development (pre-)releases, please visit the
-                <a href="https://github.com/robhagemans/pcbasic/releases/">PC-BASIC release page on GitHub</a>.
-            </p>
         </section>
     </article>
 
@@ -122,12 +190,10 @@
         <section class="pure-u-1 pure-u-lg-1-2">
             <h3>Get going</h3>
             <p>
-                PC-BASIC will run on any system that supports <a href="https://www.python.org/">Python</a> and, for a graphical interface, <a href="http://pygame.org">PyGame</a>. The packaged releases for Windows and OS X run out of the box. So does the source release on Debian, Ubuntu,
-                Mint and Fedora; on all architectures. On other Linux and Unix systems, the source distribution will install automatically but you will need to manually install dependencies.
+                PC-BASIC will run on any system that supports <a href="https://www.python.org/">Python</a> and, for a graphical interface, <a href="https://www.libsdl.org">SDL2</a>.
+                The packaged releases run out of the box.
             </p>
-            <p>
-                See the <a href="https://github.com/robhagemans/pcbasic/blob/master/README.md" id="readme-link">PC-BASIC README</a> for a list of packages and installation instructions.
-            </p>
+
         </section>
         <section class="pure-u-1 pure-u-lg-1-2">
             <h3>Bugs and features</h3>
