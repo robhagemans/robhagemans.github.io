@@ -41,21 +41,32 @@
             suffix = suffix_src;
             plat = plat_src
         }
+        console.log('here');
 
         // get latest release form GitHub
-        var json_url = "https://api.github.com/repos/robhagemans/pcbasic/releases/latest";
+        var json_url = "https://api.github.com/repos/robhagemans/pcbasic/releases";
         var request = new XMLHttpRequest();
         request.open('GET', json_url, true);
 
         request.onload = function() {
-          if (request.status >= 200 && request.status < 400) {
-            var result = JSON.parse(request.responseText);
-            var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
-                            + result.tag_name + "/pcbasic-" + result.tag_name;
-            document.getElementById("maindownloaddesc").innerHTML = "Release " + result.tag_name + " for " + plat;
-            document.getElementById("maindownload").setAttribute('href', url_base + suffix);
-            document.getElementById("otherdownloads").innerHTML = "[ other operating systems ]";
-          }
+            console.log('onload')
+            if (request.status >= 200 && request.status < 400) {
+                var result = JSON.parse(request.responseText);
+                console.log(result);
+                for (var i=0; i < result.length; ++i) {
+                    console.log(result[i]);
+                    // results are returned latest first, so first v1 tag is latest stable
+                    if (result[i].tag_name.startsWith('v1')) {
+                        console.log(result[i].tag_name);
+                        var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
+                                        + result[i].tag_name + "/pcbasic-" + result[i].tag_name;
+                        document.getElementById("maindownloaddesc").innerHTML = "Stable release " + result[i].tag_name + " for " + plat;
+                        document.getElementById("maindownload").setAttribute('href', url_base + suffix);
+                        document.getElementById("otherdownloads").innerHTML = "[ other operating systems and development releases ]";
+                        break;
+                    }
+                }
+            }
         };
 
         request.send();
