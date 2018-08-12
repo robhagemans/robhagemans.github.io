@@ -1,32 +1,656 @@
 <!DOCTYPE html>
+<html lang="en">
 <!--
     PC-BASIC documentation
     Copyright (c) 2014-2018 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
---><html>
+-->
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="../../icons/icon.png">
     <!--[if gt IE 8]><!-->
-    <link rel="stylesheet" href="../../style/pure-min.css">
-    <link rel="stylesheet" href="../../style/menu.css">
-    <link rel="stylesheet" href="doc.css">
+    <style id="doc.css">
+/*!
+    PC-BASIC documentation
+    Copyright (c) 2014-2018 Rob Hagemans
+    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
+    http://creativecommons.org/licenses/by-sa/4.0/legalcode
+*/
+
+html {
+    background-color: white;
+    overflow-x: hidden;
+}
+
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, monospace;
+  font-size: 1rem;
+}
+
+hr {
+    display: none;
+}
+
+.block, .flow {
+    display: block;
+}
+
+figure, .scrollable {
+    max-width: 45rem;
+    width: 100%;
+    overflow-x: auto;
+}
+
+figure {
+    margin: 0;
+    padding: 0;
+}
+
+article, header, nav.toc, footer {
+    margin-left: 0;
+    margin-right: 0;
+    max-width: 45em;
+    max-width: 45em;
+    background-color: white;
+    padding: 1em;
+    line-height: 1.4em;
+    font-family: sans-serif;
+}
+
+/* screenshot image */
+img {
+    max-width: 45em;
+    width: 100%;
+}
+
+nav.toc {
+    line-height: 2em;
+}
+
+nav.toc li {
+    border-top: 1px solid #eeeeee;
+    list-style: none;
+    padding-left: 0;
+}
+nav.toc ul {
+    padding-left: 0.8em;
+    padding-right: 0.8em;
+}
+
+a, nav.toc a:visited {
+    color: inherit;
+}
+
+nav.toc a, nav.toc a:visited {
+    text-decoration: none;
+}
+
+nav.toc>ul  {
+    font-weight: bold;
+    color: black;
+}
+nav.toc>ul>li>ul  {
+    font-weight: normal;
+}
+nav.toc>ul>li>ul>li>ul  {
+    color: #444444;
+}
+nav.toc>ul>li>ul>li>ul>li>ul  {
+    color: grey;
+}
+nav.toc a:hover {
+    color: black;
+    text-decoration: underline;
+}
+
+h1 {
+    font-size: 1.3em;
+    padding: 0.2em;
+    padding-left: 0;
+    color: #000044;
+}
+h2, h3 {
+    font-size: 1.3em;
+    background: #000044;
+    padding: 0.2em;
+    color: white;
+}
+h3 {
+    background: #444444;
+    margin-top: 3rem;
+}
+
+h4 {
+    margin-top: 2rem;
+    margin-bottom: 0;
+    font-size: 1.2em;
+    border-bottom: 2px solid #333333;
+}
+
+h5 {
+    margin-bottom: 0em;
+    font-size: 1.1em;
+}
+
+h6 {
+    margin-top: 0em;
+    margin-bottom: 0em;
+    font-weight: 600;
+    font-size: 1em;
+    font-style: italic;
+}
+
+
+ul {
+    margin-top: 0em;
+    padding-left: 1em;
+}
+
+/* compact def lists */
+dl.compact {
+    display: inline-block;
+    width: 100%;
+}
+.compact dt {
+    float: left;
+    clear: left;
+    width: 6em;
+    margin: 0;
+    margin-right: 1em;
+}
+.compact dd {
+    float: left;
+    clear: right;
+    margin: 0;
+}
+
+/* compact list */
+.compact li {
+    display: inline-block;
+    width: 5em;
+}
+
+.compact10 li {
+    display: inline-block;
+    width: 10em;
+}
+
+/* horizontal list */
+.horizontal {
+    padding-left: 0;
+}
+
+.horizontal li {
+    display: inline-block;
+}
+
+p {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+
+dl {
+    margin-top: 0.5em;
+    margin-bottom: 1em;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin-bottom: 1em;
+    padding-right: 1em;
+}
+
+code, samp {
+    font-size: 0.8em;
+    word-break: keep-all;
+    /*white-space: nowrap;*/
+}
+
+dd>code, p>code, dt>code, li>code,
+dd>samp, p>samp, dt>samp, li>samp
+{
+    background-color: #eeeeff;
+    border-radius: 0.2em;
+    padding: 0.1em 0.5em 0.1em 0.5em;
+}
+
+th {
+    text-align: left;
+    background-color: #ccccdd;
+}
+
+table {
+    font-size: 1em;
+    margin-top: 1em;
+    margin-bottom: 1em;
+    line-height: 140%;
+    border-bottom: 1px dotted lightblue;
+    width: 100%;
+    max-width: 45em;
+}
+
+tr:nth-child(odd)		{ background-color:#eeeeff; }
+tr:nth-child(even)		{ background-color:#ffffff; }
+
+td, th {
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    vertical-align: top;
+}
+
+kbd {
+    font-size: 0.7em;
+    word-break: keep-all;
+    white-space: nowrap;
+    background-color: gray;
+    color: white;
+    border-radius: 0.2em;
+    padding: 0.1em 0.5em 0.1em 0.5em;
+    margin: 0px 1px 0px 1px;
+}
+pre, code.block, samp.block {
+    font-size: 0.8em;
+    background-color: #eeeeff;
+    margin-top: 0.5em;
+    border-top: 1px dotted;
+    border-bottom: 1px dotted;
+    padding: 0.1em 0.5em 0.1em 0.5em;
+    max-width: 45rem;
+    width: 100%;
+    overflow-x: auto;
+}
+code.flow, samp.flow {
+    font-size: 0.8em;
+    background-color: #eeeeff;
+    margin-top: 0.5em;
+    border-top: 1px dotted;
+    border-bottom: 1px dotted;
+    padding: 0.1em 0.5em 0.1em 2.5em;
+    text-indent: -2em;
+    max-width: 42rem;
+    width: 100%;
+    overflow-x: auto;
+}
+
+dt code {
+    font-weight: normal;
+}
+
+.option-link {
+    white-space: nowrap;
+}
+/* tablets and desktops */
+
+@media (min-width: 55em) {
+    /* header on offline docs */
+
+    .standalone header {
+        position:fixed;
+        z-index:4;
+        left: 0;
+        top: 0;
+        width: 100%;
+        max-width: 100%;
+        height: 3.2rem;
+        background: #0000aa;
+        border-bottom: 1em solid grey;
+        font-family: sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+    .standalone header h1, .standalone header h2, .standalone header small {
+        background: none;
+        color: white;
+        margin: 0.5rem 0 0 1rem;
+        display: inline-block;
+    }
+    .standalone header small {
+        color: grey;
+        float: right;
+        margin: 0.7rem 1rem 0 0;
+    }
+
+    /* push link target below fixed menu */
+    :target::before {
+        display: block;
+        content: "";
+        height: 5rem;
+        background: white;
+        /* we need to cut off the padding to :target
+           so we don't get a box. this compensates a bot */
+        margin-bottom: 0.2em;
+    }
+    :target {
+        margin-top: -3rem;
+        padding-left: 0;
+        padding-right: 0;
+        padding-top: 0;
+    }
+
+    /*
+        we need the space in between or the ::before block will
+        go over the last bit of the previous article. Somehow, fortunately,
+        doesn't happen with sections... */
+    article, header, footer {
+        margin-top: 4rem;
+    }
+
+    article, header, footer {
+        /* make space for scroll-under menu */
+        position: relative;
+        margin-left: 20rem;
+        line-height: 1.5em;
+    }
+
+    nav.toc {
+        position: fixed;
+        overflow-y: scroll;
+        left: 0;
+        top: 0;
+        padding: 5rem 1em 0 1em;
+        width: 18rem;
+        background: #000044;
+        height: 90vh;
+        line-height: 1.4em;
+    }
+    nav.toc h2 {
+        display: none;
+    }
+    nav.toc a:hover {
+        color: white;
+    }
+
+    nav.toc li {
+        border: none;
+    }
+    nav.toc ul  {
+        padding-right: 0;
+    }
+
+    nav.toc>ul  {
+        color: white;
+    }
+    nav.toc>ul>li>ul {
+        color: lightsteelblue;
+    }
+    nav.toc>ul>li>ul>li>ul  {
+        color: steelblue;
+    }
+}
+
+
+/*  this stylesheet is used when generating a PDF with PrinceXML or any other tool that understands the CSS used.
+    see https://www.smashingmagazine.com/2015/01/designing-for-print-with-css/
+    and public domain examples by Rachel Andrew https://github.com/rachelandrew/css-for-print */
+@media print {
+    article {
+        page-break-before: always;
+    }
+    h1, h2, h3, h4, h4 {
+        page-break-after: avoid;
+    }
+    p, table, section {
+        page-break-inside: avoid;
+    }
+
+    /* define a page */
+    @page {
+        size: A4;
+        margin: 70pt 60pt 70pt;
+    }
+
+    @page:first {
+        size: A4;
+        margin: 0;
+    }
+
+    img {
+        max-width: 100%;
+    }
+
+    header {
+        page: cover;
+        background-size: cover;
+        background-image: url("../docsrc/cover.png");
+        width: 100%;
+        max-width: 100%;
+        height: 100%;
+        position: absolute;
+        top:0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+
+    /*  styles for the right hand spread
+        Bottom left we display the title of the book,
+        bottom right the page using a CSS counter,
+        top right the content of the current chapter */
+    @page:right{
+        @bottom-left {
+            margin: 10pt 0 30pt 0;
+            border-top: .25pt solid #666;
+            content: string(doctitle);
+            font-size: 9pt;
+            color: #333;
+        }
+        @bottom-right {
+            margin: 10pt 0 30pt 0;
+            border-top: .25pt solid #666;
+            content: counter(page);
+            font-size: 9pt;
+        }
+        @top-right {
+            content:  string(sectitle);
+            margin: 30pt 0 10pt 0;
+            font-size: 9pt;
+            color: #333;
+        }
+    }
+
+    /*  styles for the left hand spread
+        Bottom right book title, bottom left current page */
+    @page:left {
+
+        @bottom-right {
+            margin: 10pt 0 30pt 0;
+            border-top: .25pt solid #666;
+            content: 'PC-BASIC';
+            font-size: 9pt;
+            color: #333;
+        }
+        @bottom-left {
+            margin: 10pt 0 30pt 0;
+            border-top: .25pt solid #666;
+            content: counter(page);
+            font-size: 9pt;
+        }
+    }
+
+    /* first page */
+    @page:first {
+        @bottom-right {
+            content: normal;
+            margin: 0;
+        }
+
+        @bottom-left {
+            content: normal;
+            margin: 0;
+        }
+    }
+
+    /* reset chapter and figure counters on the body */
+    body {
+        counter-reset: chapternum figurenum sectionnum;
+        font-family: "Trebuchet MS", "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Tahoma, sans-serif;
+        line-height: 1.5;
+        font-size: 11pt;
+    }
+
+    /*  get the title of the current chapter - this will be the content of the h1
+        reset figure counter as figures start from 1 in each chapter */
+    h2 {
+        string-set: doctitle content();
+        page-break-before: always;
+        counter-reset: figurenum;
+        counter-reset: footnote;
+        counter-reset: sectionnum;
+        line-height: 1.3;
+    }
+
+    h3 {
+        string-set: sectitle content();
+        page-break-before: always;
+        counter-reset: figurenum;
+        counter-reset: footnote;
+    }
+
+    /* increment chapter counter */
+    article h2:before {
+        counter-increment: chapternum;
+        content: counter(chapternum) ". ";
+    }
+    article h3:before {
+        counter-increment: sectionnum;
+        content: counter(chapternum) "." counter(sectionnum) ". ";
+    }
+
+    /* increment and display figure counter */
+    figcaption:before {
+        counter-increment: figurenum;
+        content: counter(chapternum) "-" counter(figurenum) ". ";
+    }
+
+    /* footnotes */
+    .fn {
+        float: footnote;
+    }
+
+    .fn {
+        counter-increment: footnote;
+    }
+
+    .fn::footnote-call {
+        content: counter(footnote);
+        font-size: 9pt;
+        vertical-align: super;
+        line-height: none;
+    }
+
+    .fn::footnote-marker {
+        font-weight: bold;
+    }
+
+    @page {
+        @footnotes {
+            border-top: 0.6pt solid black;
+            padding-top: 8pt;
+        }
+    }
+
+    h2,h3,h4,h5 {
+        font-weight: bold;
+        page-break-after: avoid;
+        page-break-inside: avoid;
+        color: black;
+        background: white;
+        padding-left: 0;
+    }
+    h1 {
+        font-size: 4em;
+        font-family: serif;
+        line-height: 1em;
+        border-bottom: 2pt solid black;
+        text-align: right;
+        margin-left: 3.5em;
+        margin-right: 6rem;
+        margin-top: 4em;
+        color: black;
+    }
+    header small {
+        text-align: right;
+        font-size: 1.5em;
+        font-family: serif;
+        font-style: italic;
+        margin-right: 7rem;
+        display: block;
+        color: black;
+    }
+    h2 {
+        color: white;
+        background: grey;
+        padding: 2pt 8pt 2pt 8pt;
+        border: 2pt solid black;
+        font-size: 2em;
+    }
+    article h2, footer h2 {
+        margin-top: 8em;
+    }
+    h3 {
+        border-bottom: 2pt solid black;
+        font-size: 2em;
+    }
+    h4 {
+        border-bottom: 1pt solid black;
+        font-size: 1.2em;
+    }
+
+    h1+p, h2+p, h3+p {
+    	page-break-before: avoid;
+    }
+
+    table, figure {
+    	page-break-inside: avoid;
+    }
+
+    nav.toc ul {
+    	list-style: none;
+    	margin: 0;
+    	padding: 0;
+    }
+
+    /* create page numbers using target-counter in the TOC */
+    nav.toc ul a::after {
+        content: leader('.') target-counter(attr(href), page);
+    }
+
+    nav.toc ul li {
+        line-height: 2;
+        border-top: 0;
+    }
+
+    nav.toc ul li a {
+        text-decoration: none;
+    }
+
+    a {
+        color: #000;
+    }
+
+    /* add page number to cross references */
+    a.xref:after {
+        content: " (page " target-counter(attr(href, url), page) ")";
+    }
+
+}
+
+    </style>
     <!--<![endif]-->
     <title>PC-BASIC Documentation</title>
 </head>
-<body>
+<body class="standalone">
 
-<nav class="home-menu pure-menu pure-menu-responsive pure-menu-fixed">
-    <a class="pure-menu-heading" href="../index.html">PC-BASIC</a>
-    <ul class="pure-menu-list">
-        <li class="pure-menu-item pure-menu-selected"><a href="../download.html" class="pure-menu-link">Download</a></li>
-        <li class="pure-menu-item"><a href="https://github.com/robhagemans/pcbasic/" class="pure-menu-link">Source</a></li>
-        <li class="pure-menu-item"><a href="." class="pure-menu-link">Documentation</a></li>
-        <li class="pure-menu-item"><a href="https://sourceforge.net/p/pcbasic/discussion/" class="pure-menu-link">Discuss</a></li>
-    </ul>
-</nav>
+<header>
+    <h1>PC-BASIC documentation</h1>
+    <small>Version 2.0.0</small>
+</header>
 
 <article>
     <h2 id="top">PC-BASIC 2.0.0</h2>
@@ -42,7 +666,7 @@ It implements floating-point arithmetic in the Microsoft Binary Format (MBF) and
 read and write binary data files created by GW-BASIC.
     </p>
     <p>
-        This is the documentation for <strong>PC-BASIC 2.0.0</strong>, last updated <em>2018-08-12 13:46:34</em>.<br>
+        This is the documentation for <strong>PC-BASIC 2.0.0</strong>, last updated <em>2018-08-12 13:46:35</em>.<br>
         It consists of the following documents:
     </p>
     <ul>
@@ -55,20 +679,6 @@ read and write binary data files created by GW-BASIC.
         <li><strong><a href="#dev">Developer's Guide</a></strong>, using PC-BASIC as a Python module</li>
     </ul>
 
-
-    <p>
-        Offline versions of this documentation are available in the following formats:
-    </p>
-    <ul>
-        <li><a href="PC-BASIC_documentation.html">Single-file HTML</a></li>
-        <li><a href="PC-BASIC_documentation.pdf">PDF</a></li>
-    </ul>
-    <p>
-        Documentation for other versions of PC-BASIC:
-    </p>
-    <ul>
-        <li><a href="http://pc-basic.org/doc/">PC-BASIC 1.2</a></li>
-    </ul>
 </article>
 <nav class="toc">
     <h2 id="toc">Table of Contents</h2>
