@@ -29,58 +29,30 @@
 </nav>
 
 <article>
-    <h2 id="top">PC-BASIC 2.0.1</h2>
+    <h2>
+        PC-BASIC 1.2.13
+    </h2>
     <p>
-        <em>A free, cross-platform emulator for the GW-BASIC family of interpreters.</em>
+        This is the documentation for <strong>PC-BASIC 1.2.13</strong>, last updated <em>2018-12-01 11:54:18</em>.
     </p>
-    <p>
-        PC-BASIC is a free, cross-platform interpreter for GW-BASIC, Advanced BASIC (BASICA), PCjr Cartridge Basic and Tandy 1000 GWBASIC.
-It interprets these BASIC dialects with a high degree of accuracy, aiming for bug-for-bug compatibility.
-PC-BASIC emulates the most common video and audio hardware on which these BASICs used to run.
-PC-BASIC runs plain-text, tokenised and protected .BAS files.
-It implements floating-point arithmetic in the Microsoft Binary Format (MBF) and can therefore
-read and write binary data files created by GW-BASIC.
-    </p>
-    <p>
-        This is the documentation for <strong>PC-BASIC 2.0.1</strong>, last updated <em>2018-12-01 11:58:00</em>.<br>
-        It consists of the following documents:
-    </p>
-    <ul>
-        <li><strong><a href="#quick-start-guide">Quick Start Guide</a></strong>, the essentials needed to get started</li>
-        <li><strong><a href="#using">User's Guide</a></strong>, in-depth guide to using the emulator</li>
-        <li><strong><a href="#settings">Configuration Guide</a></strong>, settings and options</li>
-        <li><strong><a href="#guide">Language Guide</a></strong>, overview of the BASIC language by topic</li>
-        <li><strong><a href="#reference">Language Reference</a></strong>, comprehensive reference to BASIC</li>
-        <li><strong><a href="#technical">Technical Reference</a></strong>, file formats and internals</li>
-        <li><strong><a href="#dev">Developer's Guide</a></strong>, using PC-BASIC as a Python module</li>
-    </ul>
-
-
-    <p>
-        Offline versions of this documentation are available in the following formats:
-    </p>
-    <ul>
-        <li><a href="PC-BASIC_documentation.html">Single-file HTML</a></li>
-        <li><a href="PC-BASIC_documentation.pdf">PDF</a></li>
-    </ul>
     <p>
         Documentation for other versions of PC-BASIC:
     </p>
     <ul>
-        <li><a href="http://pc-basic.org/doc/1.2/">PC-BASIC 1.2</a></li>
+        <li><a href="http://pc-basic.org/doc/2.0/">PC-BASIC 2.0</a></li>
     </ul>
 </article>
 <nav class="toc">
     <h2 id="toc">Table of Contents</h2>
 
             <ul>
-                <li><a href="#top">PC-BASIC 2.0.1</a></li>
+                <li><a href="#pc-basic">Overview</a></li>
                 <li><a href="#quick-start-guide">Quick Start Guide</a>
                     <ul>
                         <li><a href="#installation">Installation</a></li>
                         <li><a href="#basic-survival-kit">BASIC survival kit</a></li>
-                        <li><a href="#program-location">Program location</a></li>
-                        <li><a href="#external-resources">External resources</a></li>
+                        <li><a href="#location-for-basic-programs">Location for BASIC programs</a></li>
+                        <li><a href="#getting-programs">Getting programs</a></li>
                     </ul>
                 </li>
                 <li><a href="#using">User's guide</a>
@@ -92,7 +64,6 @@ read and write binary data files created by GW-BASIC.
                                 <li><a href="#alternative-keys">Alternative keys</a></li>
                                 <li><a href="#clipboard-operations">Clipboard operations</a></li>
                                 <li><a href="#emulator-keys">Emulator control keys</a></li>
-                                <li><a href="#system-keys">Compatibility</a></li>
                             </ul>
                         </li>
                         <li><a href="#programs">Programs and files</a>
@@ -122,12 +93,13 @@ read and write binary data files created by GW-BASIC.
                         </li>
                     </ul>
                 </li>
-                <li><a href="#settings">Configuration guide</a>
+                <li><a href="#settings">Settings and options</a>
                     <ul>
-                        <li><a href="#changing-settings">Changing settings</a></li>
                         <li><a href="#synopsis">Synopsis</a></li>
                         <li><a href="#parameters">Positional arguments</a></li>
                         <li><a href="#options">Options</a></li>
+                        <li><a href="#gwbasic-options">GW-BASIC options
+    </a></li>
                         <li><a href="#examples">Examples</a></li>
                     </ul>
                 </li>
@@ -268,7 +240,8 @@ read and write binary data files created by GW-BASIC.
                                 <li><a href="#BEEP-switch"><code>BEEP</code> (switch)</a></li>
                                 <li><a href="#BLOAD"><code>BLOAD</code></a></li>
                                 <li><a href="#BSAVE"><code>BSAVE</code></a></li>
-                                <li><a href="#CALL"><code>CALL</code> and <code>CALLS</code></a></li>
+                                <li><a href="#CALL"><code>CALL</code></a></li>
+                                <li><a href="#CALLS"><code>CALLS</code></a></li>
                                 <li><a href="#CHAIN"><code>CHAIN</code></a></li>
                                 <li><a href="#CHDIR"><code>CHDIR</code></a></li>
                                 <li><a href="#CIRCLE"><code>CIRCLE</code></a></li>
@@ -409,13 +382,6 @@ read and write binary data files created by GW-BASIC.
                         <li><a href="#protected-file-format">Protected file format</a></li>
                         <li><a href="#bsave-file-format"><code>BSAVE</code> file format</a></li>
                         <li><a href="#tape-file-format">Cassette file format</a></li>
-                        <li><a href="#emulator-file-formats">Emulator file formats</a>
-                            <ul>
-                                <li><a href="#hex-file-format">HEX font file format</a></li>
-                                <li><a href="#ucp-file-format">UCP code page file format</a></li>
-                                <li><a href="#cas-file-format">CAS tape file format</a></li>
-                            </ul>
-                        </li>
                         <li><a href="#character-codes">Character codes</a>
                             <ul>
                                 <li><a href="#ascii">ASCII</a></li>
@@ -437,18 +403,10 @@ read and write binary data files created by GW-BASIC.
                         </li>
                     </ul>
                 </li>
-                <li><a href="#dev">Developer's guide</a>
-                    <ul>
-                        <li><a href="#session-api">Session API</a></li>
-                        <li><a href="#dev-extensions">Extensions</a></li>
-                        <li><a href="#dev-examples">Examples</a></li>
-                    </ul>
-                </li>
                 <li><a href="#acks_acknowledgements">Acknowledgements</a>
                     <ul>
                         <li><a href="#acks_contributors">Contributors</a></li>
                         <li><a href="#acks_shoulders-of-giants">Shoulders of Giants</a></li>
-                        <li><a href="#acks_fond-memories">Fond memories</a></li>
                         <li><a href="#acks_technical-documentation">Technical Documentation</a></li>
                         <li><a href="#acks_fonts">Fonts</a></li>
                         <li><a href="#acks_unicode-codepage-mappings">Unicode-codepage mappings</a></li>
@@ -465,18 +423,53 @@ read and write binary data files created by GW-BASIC.
             </li></ul>
 </nav>
 <article>
-
+<h2 id="pc-basic">Overview</h2>
+<p><em>A free, cross-platform emulator for the GW-BASIC family of interpreters.</em></p>
+<p>PC-BASIC is a free, cross-platform interpreter for GW-BASIC, Advanced BASIC (BASICA), PCjr Cartridge Basic and Tandy 1000 GWBASIC.
+It interprets these BASIC dialects with a high degree of accuracy, aiming for bug-for-bug compatibility.
+PC-BASIC emulates the most common video and audio hardware on which these BASICs used to run.
+PC-BASIC runs plain-text, tokenised and protected .BAS files.
+It implements floating-point arithmetic in the Microsoft Binary Format (MBF) and can therefore
+read and write binary data files created by GW-BASIC.  </p>
+<p>PC-BASIC is free and open source software released under the GPL version 3.  </p>
+<p>See also the <a href="http://robhagemans.github.io/pcbasic/">PC-BASIC home page</a>.</p>
+<p><img alt="" src="https://robhagemans.github.io/pcbasic/screenshots/pcbasic.png"></p>
+<hr>
 <h2 id="quick-start-guide">Quick Start Guide</h2>
-<p>This quick start guide covers installation and elementary use of PC-BASIC. For more information, please refer to the <a href="#">PC-BASIC documentation</a>.</p>
+<p>This quick start guide covers installation and elementary use of PC-BASIC. For more information, please refer to the <a href="#">full PC-BASIC documentation</a> which covers usage, command-line options and a <a href="#reference">comprehensive GW-BASIC language reference</a>. This documentation is also included with the current PC-BASIC release.</p>
 <p>If you find bugs, please <a href="https://github.com/robhagemans/pcbasic/issues">open an issue on GitHub</a>. It would be most helpful if you could include a short bit of BASIC code that triggers the bug.</p>
 <h3 id="installation">Installation</h3>
-<p>PC-BASIC desktop installers for Windows, Mac, and Linux can be downloaded from <a href="https://github.com/robhagemans/pcbasic/releases">GitHub</a>.</p>
-<p>Python users can obtain the PC-BASIC package from <a href="https://pypi.org/project/pcbasic/">PyPI</a> through <code>pip install pcbasic</code>.</p>
+<p>Packaged distributions can be downloaded from one of the following locations:  </p>
+<ul>
+<li><a href="https://github.com/robhagemans/pcbasic/releases">PC-BASIC releases on GitHub</a>  </li>
+<li><a href="https://sourceforge.net/projects/pcbasic/files/">PC-BASIC releases on SourceForge</a>  </li>
+</ul>
+<p>On <strong>Windows</strong>:  </p>
+<ul>
+<li>run the installer  </li>
+<li>to start, click PC-BASIC in your Start menu  </li>
+</ul>
+<p>On <strong>Mac</strong>:  </p>
+<ul>
+<li>mount the disk image  </li>
+<li>to start, double click the PC-BASIC app  </li>
+</ul>
+<p>On <strong>Linux</strong> and <strong>other Unix</strong>:  </p>
+<ul>
+<li>untar the archive  </li>
+<li>run <code>sudo ./install.sh</code>. You may be asked to install further dependencies through your OS's package management system.  </li>
+<li>to start, click PC-BASIC in your Applications menu or run <code>pcbasic</code> on the command line.  </li>
+</ul>
+<p>If the options above are not applicable or you prefer to install from source, please
+consult <a href="https://github.com/robhagemans/pcbasic/blob/master/INSTALL.md"><code>INSTALL.md</code></a> for detailed instructions.</p>
 <h3 id="basic-survival-kit">BASIC survival kit</h3>
-<p>PC-BASIC has a 1980s-style interface operated by executing
-typed commands. There is no menu, nor are there any of the visual clues
+<p>Click on the PC-BASIC application icon or run <code>pcbasic</code> on the Windows, OSX or Linux command
+line and PC-BASIC will start in direct mode with no program loaded. The default emulation target is
+GW-BASIC 3.23 on a generic IBM-compatible PC with a VGA video card.  </p>
+<p>PC-BASIC starts in direct mode, a 1980s-style interface operated by executing
+BASIC commands directly. There is no menu, nor are there any of the visual clues
 that we've come to expect of modern software.  </p>
-<p>A few essential commands to help you get around:  </p>
+<p>A few essential commands to help you get around:</p>
 <table>
 <thead>
 <tr>
@@ -512,36 +505,29 @@ that we've come to expect of modern software.  </p>
 </tbody>
 </table>
 <p>Use one of the key combinations <code>Ctrl+Break</code>, <code>Ctrl+Scroll Lock</code>, <code>Ctrl+C</code> or <code>F12+B</code>
-to interrupt a running program.  </p>
-<h3 id="program-location">Program location</h3>
-<p>If started through the start-menu shortcut, PC-BASIC looks for programs in the shortcut's start-in folder.</p>
+to interrupt a running program and return to direct mode.  </p>
+<h3 id="location-for-basic-programs">Location for BASIC programs</h3>
+<p>By default, PC-BASIC looks for programs in your home folder.  </p>
 <ul>
-<li>On <strong>Windows</strong>, this is your <code>Documents</code> folder by default.</li>
-<li>On <strong>Mac</strong> and <strong>Linux</strong> this is your home directory <code>~/</code> by default.</li>
+<li>On <strong>Windows</strong>, this is usually a folder with your user name, located under <code>C:\Users\</code>. You can find this folder in Windows Explorer by typing <code>%USERPROFILE%</code> in the address bar.</li>
+<li>On <strong>Mac</strong> and <strong>Linux</strong> this is the directory <code>~/</code>.</li>
 </ul>
-<p>If started from the command prompt, PC-BASIC looks for programs in the current working directory.</p>
 <p>See <a href="#mounting">the documentation on accessing your drives</a> for more information.</p>
-<h3 id="external-resources">External resources</h3>
+<h3 id="getting-programs">Getting programs</h3>
 <p>The following pages have GW-BASIC program downloads, lots of information and further links.  </p>
 <ul>
 <li><a href="http://www.oocities.org/KindlyRat/GWBASIC.html">KindlyRat</a>'s archived Geocities page has a number of classic games and utilities.  </li>
 <li><a href="http://archive.is/AUm6G">PeatSoft</a> provides GW-BASIC documentation, utilities and some more games.  </li>
+<li><a href="http://www.gw-basic.com/">Neil C. Obremski's gw-basic.com</a> has some fun new games made recently in GW-BASIC.  </li>
 <li><a href="http://peyre.x10.mx/GWBASIC/">Leon Peyre</a> has a nice collection of GW-BASIC programs, including the (in)famous first IBM PC game <code>DONKEY.BAS</code>.  </li>
-<li><a href="https://web.archive.org/web/20170222075609/brooksdeforest.com/tandy1000">Brooks deForest</a> provides his amazing Tandy GW-BASIC games, all released into the public domain.  </li>
+<li><a href="http://www.brooksdeforest.com/tandy1000/">Brooks deForest</a> provides his amazing Tandy GW-BASIC games, all released into the public domain.  </li>
 <li><a href="http://www.oldskool.org/guides/tvdog/">TVDog's Archive</a> is a great source of information and GW-BASIC programs for the Tandy 1000.  </li>
-<li><a href="https://web.archive.org/web/20160810162309/http://www.scn.org/~bh162/basic_programs.html">Phillip Bigelow</a> provides scientific programs written in GW-BASIC.  </li>
+<li><a href="http://www.scn.org/~bh162/basic_programs.html">Phillip Bigelow</a> provides scientific programs written in GW-BASIC.  </li>
 <li><a href="http://www.garypeek.com/basic/gwprograms.htm">Gary Peek</a> provides miscellaneous GW-BASIC sources which he released into the public domain.  </li>
 <li><a href="http://www.moorecad.com/classicbasic/index.html">S.A. Moore's Classic BASIC Games page</a> provides the BASIC games from David Ahl's classic book.  </li>
 <li><a href="http://www.geocities.ws/joseph_sixpack/btoc.html">Joseph Sixpack's Last Book of GW-BASIC</a> has lots of office and utility programs, including the PC-CALC spreadsheet.  </li>
 <li><a href="https://web.archive.org/web/20060410121551/http://scottserver.net/basically/geewhiz.html">Thomas C. McIntyre</a>'s GeeWhiz Collection has business applications, games and reference material.</li>
 <li><a href="http://cd.textfiles.com">cd.textfiles.com</a> has tons of old shareware, among which some good GW-BASIC games.  </li>
-<li><a href="https://www.pcjs.org/disks/pcx86/shareware/pcsig08/">PC-SIG Library 8th Edition CD-ROM (April 1990)</a> hosts many disk images and features a "live" DOS box.  </li>
-<li><a href="https://github.com/Microsoft/MS-DOS/tree/master/v1.25/bin">The MS-DOS source code</a>, as released by Microsoft, contains the original IBM PC Samples BASIC demos and games.</li>
-<li><a href="http://antonis.de">Antonis.de</a> focusses on Q-BASIC but has a number of GW-BASIC resources, tutorials, e-books etc.  </li>
-<li><a href="http://antonis.de/qbebooks/index.htm#gwbasman">Microsoft GW-BASIC Manual</a>: an online version of the original User' Guide and User's Reference.  </li>
-<li><a href="http://www.o-bizz.de/qbtuts/gw-train/">BASIC Training</a>: a GW-BASIC tutorial by Steve Estvanik.  </li>
-<li><a href="http://www.o-bizz.de/qbtuts/blastoff/_start.htm">Blast Off With BASIC</a>: a GW-BASIC tutorial by Brian R. Page.  </li>
-<li><a href="http://www.antonis.de/qbebooks/bluebas.zip">The BLUE Book about GW-BASIC and QuickBASIC</a>: the excellent "BASIC Language User Essay" by Thomas C. McIntire is full of expert knowledge about GW-BASIC.  </li>
 </ul></article>
 <!--
     PC-BASIC documentation
@@ -695,7 +681,7 @@ to interrupt a running program.  </p>
                     </tr>
                     <tr>
                         <td><kbd>Pause</kbd> or <kbd>Ctrl</kbd>+<kbd>Num Lock</kbd></td>
-                        <td>Pause. Press another key to resume. The latter key press will not be detected by BASIC.</td>
+                        <td>Pause. Press another key to resume.</td>
                     </tr>
                     <tr>
                         <td><kbd>Ctrl</kbd>+<kbd>Prt Sc</kbd></td>
@@ -882,7 +868,7 @@ to interrupt a running program.  </p>
             <table>
                 <tr>
                     <td><kbd>F12</kbd>+<kbd>B</kbd></td>
-                    <td><kbd>Ctrl</kbd>+<kbd>Break</kbd></td>
+                    <td><kbd>Break</kbd></td>
                 </tr>
                 <tr>
                     <td><kbd>F12</kbd>+<kbd>P</kbd></td>
@@ -899,10 +885,6 @@ to interrupt a running program.  </p>
                 <tr>
                     <td><kbd>F12</kbd>+<kbd>S</kbd></td>
                     <td><kbd>Scroll Lock</kbd></td>
-                </tr>
-                <tr>
-                    <td><kbd>F12</kbd>+<kbd>H</kbd></td>
-                    <td><kbd>Print Screen</kbd></td>
                 </tr>
             </table>
             <p>
@@ -963,31 +945,6 @@ to interrupt a running program.  </p>
                 In PC-BASIC, <kbd>F11</kbd>+<kbd>F</kbd> toggles fullscreen mode.
             </p>
         </section>
-        <section>
-            <h4 id="system-keys">Compatibility</h4>
-            <p>
-                Some key combinations may have a different effect than described above,
-                depending on the operating system and the choice of interface to use with PC-BASIC.
-            </p>
-            <ul>
-                <li>
-                    Certain key combinations will be interpreted by the operating system or
-                    window manager and cause special actions. For example, on most systems,
-                    <kbd>Alt</kbd>+<kbd>F4</kbd> will terminate PC-BASIC unless
-                    the <a href="#--prevent_close"><code>prevent_close</code></a> option is set; <kbd>F1</kbd>
-                    may open your operating system's help system. It may be possible to avoid
-                    some of these effects by using the graphical interface in full-screen mode.
-                </li>
-                <li>
-                    In the command-line interface on Windows, <kbd>Ctrl</kbd>+<kbd>C</kbd>
-                    terminates PC-BASIC.
-                </li>
-                <li>
-                    In the command-line interface on Linux and Mac, <kbd>Ctrl</kbd>+<kbd>D</kbd>
-                    terminates PC-BASIC.
-                </li>
-            </ul>
-        </section>
         <hr>
     </section>
 
@@ -1043,7 +1000,7 @@ to interrupt a running program.  </p>
             Protected mode offered little protection anyway; disallowing access is a small
             security hazard as it would allow someone to send you a program that you cannot
             inspect before running it. However, it is possible to disable access of
-            protected files by enabling the option <code><a href="#--hide-protects">hide-protected</a></code>. </p> <p>You
+            protected files by enabling the option <code><a href="#--strict-protect">strict-protect</a></code>. </p> <p>You
             can read a program file into memory with <code><a href="#LOAD">LOAD</a> "MYPROG"</code>. This will
             erase the program currently in memory and replace it with the one read from the
             current working directory. To access files in a different directory, specify a path from the current
@@ -1076,59 +1033,46 @@ to interrupt a running program.  </p>
             <h4 id="mounting">Accessing your drives</h4>
             <p>
                 PC-BASIC emulates DOS disk devices, which are referred to by drive letters such as <code>Z:</code>.
-                One of the drive letters is the <em>current device</em>.
+                These devices can be mapped to locations in your file system.
             </p>
             <p>
-                On <strong>Windows</strong>:
+                By default, <code>Z:</code> is PC-BASIC's current device.
+                If PC-BASIC is started from a start menu shortcut, the current device will be the shortcut's <i>Start In</i> folder.
             </p>
             <ul>
                 <li>
-                    By default, PC-BASIC disk devices will agree with Windows drive letters at the
-                    start of the PC-BASIC session.
+                    By default, this is
+                    <code>%USERPROFILE%</code> on Windows. Uusually this will be a folder named something like
+                    <code>C:\Users\YourName</code>.
                 </li>
                 <li>
-                    If PC-BASIC is started from the start menu shortcut, the current device will be
-                    your <i>Documents</i> folder (or <i>My Documents</i> on some versions of Windows).
-                    You can change this location by setting the shortcut's <i>Start In</i> folder.
+                    On other platforms, the default location is the home directory <code>&#732;</code>.
                 </li>
+            </ul>
+            <p>
+                This default location is where files will be saved to and loaded from in BASIC if you do not specify another device.
+                Note that if PC-BASIC is started from the command prompt, the default location will be the current working directory.
+            </p>
+            <p>
+                <strong>Notes for Windows users</strong>
+            </p>
+            <ul>
                 <li>
-                    If PC-BASIC is started from the command prompt, the current device will be set to
-                    the current working directory of the command prompt.
+                    <em>PC-BASIC's DOS disk devices are not Windows drive letters</em>.
+                    The device <code>C:</code> on PC-BASIC is <em>not</em> your Windows <code>C:</code> drive.
+                    If you want PC-BASIC's drive letters to be the same as those in Windows, you have to explicitly
+                    enable the option <code><a href="#--map-drives">map-drives</a></code>. Use this with caution, since it
+                    means that your programs can now read from and write to all drives that Windows
+                    allows you access to.
                 </li>
                 <li>
                     If PC-BASIC's current device or <i>Start In</i> folder is changed to a system folder such as <code>C:\Program Files\PC-BASIC</code>,
                     Windows will move files written there to <code>%LocalAppData%\VirtualStore</code> instead.
-                    This is best avoided.
-                </li>
-                <li>
-                    Note that <em>PC-BASIC's DOS disk devices are not the same thing as Windows drive letters</em>.
-                    The device <code>C:</code> on PC-BASIC is <em>not</em> always your Windows <code>C:</code> drive.
-                    By default, Windows drive letters are mapped to PC-BASIC devices at the start
-                    of the PC-BASIC session. However, if you use the <code><a href="#--mount">mount</a></code> option;
-                    or if Windows drive letters change while PC-BASIC is running (through e.g. <code>net use</code> or
-                    <i>Map Network Drive</i> operations), they will no longer agree.
                 </li>
             </ul>
-            <p>
-                On <strong>other systems</strong>:
-            </p>
-            <ul>
-                <li>
-                    By default, <code>Z:</code> will point to the current working directory from where PC-BASIC was started.
-                    It will be the current device.
-                </li>
-                <li>
-                    If started from a menu or app package, this will usually be your home directory <code>&#732;</code>.
-                </li>
-            </ul>
-            <p>
-                This current device is where files will be saved to and loaded from in BASIC if you do not specify another device.
-                You can change the current device using the <code><a href="#--current-device">current-device</a></code>
-                option in the <a href="#settings">configuration file or on the command prompt</a>.
-            </p>
             <p>
                 You can map drives and other file system locations as PC-BASIC devices by
-                using the <code><a href="#--mount">mount</a></code> option. For example,
+                using the <code><a href="#--mount">mount</a></code> option in the <a href="#settings">configuration file or on the command prompt</a>. For example,
                 on Windows, the option
                 <code class="block">
                     <b>mount=A:C:\Users\Me\BasicFloppy</b>
@@ -1168,16 +1112,17 @@ to interrupt a running program.  </p>
             </p>
             <p>
                 PC-BASIC will accept both DOS and Unix newline conventions for programs
-                stored as plain text.
+                stored as plain text. Any line not starting with a number will be considered a
+                continuation (through <code><i>LF</i></code>) of the previous line.
                 This behaviour is different from GW-BASIC, which only
                 accepts text files with <code><i>CR LF</i></code> line endings.
                 As a consequence, in exceptional cases where a program line is continued through <code><i>LF</i></code>
-                correct GW-BASIC text files may not be loaded correctly.
+                just before a number, correct GW-BASIC text files may not be loaded correctly.
                 If you encounter such a case, use
-                the <code><a href="#--soft-linefeed">soft-linefeed</a></code> option to enable GW-BASIC behaviour. If
-                <code>soft-linefeed</code> is enabled, text files in standard Unix format
-                (<code><i>LF</i></code> line endings, no end-of-file character) will fail to load, as they do in GW-BASIC.
-                On Linux or Mac, use a utility such as
+                the <code><a href="#--strict-newline">strict-newline</a></code> option to enable GW-BASIC behaviour. If
+                <code>strict-newline</code> is enabled, text files in standard Unix format
+                (<code><i>LF</i></code> line endings, no end-of-file character) will fail to load. On
+                Linux or Mac, use a utility such as
                 <a href="http://waterlan.home.xs4all.nl/dos2unix.html"><code>unix2dos</code></a>
                 to convert programs saved as text files before loading them. When saving as text,
                 PC-BASIC always uses <code><i>CR LF</i></code> line endings and <code>&amp;h1A</code> at end-of-file.
@@ -1232,7 +1177,7 @@ to interrupt a running program.  </p>
                 Use this decoder to convert the BASICODE program to PC-BASIC format
                 before loading it into PC-BASIC.
             </p>
-        </section>
+            </section>
         <hr>
 
         <section>
@@ -1262,11 +1207,11 @@ to interrupt a running program.  </p>
             </p>
 
             <p>
-                The output will be sent to the printer when one of the following happens:
-                a file open to <code>LPT1:</code> is closed, a program terminates, or PC-BASIC is closed.
-                If you prefer, you can instead send every page separately to the printer by setting
-                <code>lpt1=PRINTER:MyPrinter:page</code>. You can even send every line separately, but
-                this only makes sense on a tractor-fed printer (as was common in GW-BASIC's heyday).
+                The output will be sent to the printer when you close PC-BASIC. If you prefer,
+                you can instead send every page separately to the printer by setting
+                <code>print-trigger=page</code>. You can even send every line separately, but
+                this only makes sense on a tractor-fed printer (as was common in GW-BASIC's
+                heyday).
             </p>
 
             <p>
@@ -1982,10 +1927,10 @@ to interrupt a running program.  </p>
             <p>
                 You can use the command-line interface to run one or a few BASIC commands directly, like so:
             </p>
-            <samp class="block">me@mybox$ <b>pcbasic -bqe="?1+1"</b>
-                <b>2</b>
-                me@mybox$
-            </samp>
+<pre><samp>me@mybox$ <b>pcbasic -bqe="?1+1"</b>
+ <b>2</b>
+me@mybox$
+</samp></pre>
             <p>
                 For scripting purposes, it is also possible to run PC-BASIC without any
                 interface by setting <code><a href="#--interface">interface</a>=none</code> or
@@ -2005,18 +1950,18 @@ to interrupt a running program.  </p>
                 interface is very similar to the default graphical interface, but runs in your
                 Command Prompt or Terminal window.
             </p>
+
             <p>
-                Graphical screen modes can be used in text and command-line interface,
-                but only the text on the screen will be visible.
-                pre, many <kbd>Ctrl</kbd> and <kbd>Alt</kbd>
+                In the text-based and command-line interfaces, graphics are not available.
+                Attempting to open a graphical screen mode will lead to an <samp>Illegal
+                function call</samp> error. Furthermore, many <kbd>Ctrl</kbd> and <kbd>Alt</kbd>
                 key combinations are not available.
             </p>
+
             <p>
-                The text and command-line interfaces will attempt to use the PC speaker
-                for sound. Only single-voice sound can be produced this way.
-                On Linux systems under X11, you may need to install the <code>beep</code> utility and
-                enable the PC-speaker driver or emulation; direct speaker access is often
-                limited to root or tty logins, and on Ubuntu systems it is disabled by default.
+                On Unix systems only, you can get sound in the text and command-line
+                interfaces over the PC speaker if you install the <code>beep</code> utility and
+                enable the legacy PC-speaker driver or emulation.
             </p>
         </section>
         <hr>
@@ -2031,15 +1976,13 @@ to interrupt a running program.  </p>
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
 
-<h2 id="settings">Configuration guide</h2>
-<p>
-    This documentation discusses how to change settings and options for PC-BASIC.
-</p>
-<h3 id="changing-settings">Changing settings</h3>
+<h2 id="settings">Settings and options</h2>
 <p>
     PC-BASIC has a number of settings that change the way it operates.
-    Settings can be changed by setting options on the command line
+    These settings can be changed by setting options on the command line
     or through editing the configuration file.
+</p>
+<p>
     In either method, the options have the same name and syntax. In what follows, we will often refer to
     a particular option setting; remember that you can set this from the command line as well as from the configuration file.
 </p>
@@ -2063,9 +2006,9 @@ to interrupt a running program.  </p>
     which can be found in the following location:
 </p>
 <dl>
-    <dt>Windows</dt><dd><code>%AppData%\pcbasic-2.0\PCBASIC.INI</code></dd>
-    <dt>OS X</dt><dd><code>~/Library/Application Support/pcbasic-2.0/PCBASIC.INI</code></dd>
-    <dt>Linux</dt><dd><code>~/.config/pcbasic-2.0/PCBASIC.INI</code></dd>
+    <dt>Windows</dt><dd><code>%AppData%\pcbasic-1.2\PCBASIC.INI</code></dd>
+    <dt>OS X</dt><dd><code>~/Library/Application Support/pcbasic-1.2/PCBASIC.INI</code></dd>
+    <dt>Linux</dt><dd><code>~/.config/pcbasic-1.2/PCBASIC.INI</code></dd>
 </dl>
 <p>
     Change an option in the configuration file by adding a line in the section named <code>[pcbasic]</code>, like so:
@@ -2098,34 +2041,35 @@ to interrupt a running program.  </p>
         [<var><a href="#p-program">program</a></var>|<var><a href="#p-package">package</a></var>
         [<var><a href="#p-output">output</a></var>]]
         <span><a href="#--allow-code-poke" class="option-link">[<b>--allow-code-poke</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--altgr" class="option-link">[<b>--altgr</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--append" class="option-link">[<b>--append</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--aspect" class="option-link">[<b>--aspect=</b><var>x</var>,<var>y</var>]</a>
 <a href="#-b" class="option-link">[<b>-b</b>]</a>
 <a href="#--border" class="option-link">[<b>--border=</b><var>width</var>]</a>
 <a href="#--caption" class="option-link">[<b>--caption=</b><var>title</var>]</a>
+<a href="#--capture-caps" class="option-link">[<b>--capture-caps</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--cas1" class="option-link">[<b>--cas1=</b><var>type</var><b>:</b><var>value</var>]</a>
-<a href="#--codepage" class="option-link">[<b>--codepage=</b><var>codepage_id</var>[<b>:nobox</b>]]</a>
+<a href="#--cga-low" class="option-link">[<b>--cga-low</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--codepage" class="option-link">[<b>--codepage=</b><var>codepage_id</var>]</a>
 <a href="#--config" class="option-link">[<b>--config=</b><var>config_file</var>]</a>
 <a href="#--com1" class="option-link">[<b>--com1=</b><var>type</var><b>:</b><var>value</var>]</a>
 <a href="#--com2" class="option-link">[<b>--com2=</b><var>type</var><b>:</b><var>value</var>]</a>
 <a href="#--convert" class="option-link">[<b>--convert=</b>{<b>A</b>|<b>B</b>|<b>P</b>}]</a>
-<a href="#--mouse-clipboard" class="option-link">[<b>--mouse-clipboard</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--copy-paste" class="option-link">[<b>--copy-paste=</b><var>copy_button</var><b>,</b><var>paste_button</var>]</a>
 <a href="#--ctrl-c-break" class="option-link">[<b>--ctrl-c-break</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--current-device" class="option-link">[<b>--current-device=</b>{<b>CAS1</b>|<b>@</b>|<b>A</b>|<b>B</b> ... |<b>Z</b>}]</a>
-<a href="#--debug" class="option-link">[<b>--debug</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--dimensions" class="option-link">[<b>--dimensions=</b><var>x</var>,<var>y</var>]</a>
 <a href="#--double" class="option-link">[<b>-d</b>]</a>
 <a href="#--double" class="option-link">[<b>--double</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--exec" class="option-link">[<b>-e=</b><var>statement</var>[<b>:</b><var>statement</var> ...]]</a>
-<a href="#--exec" class="option-link">[<b>--exec=</b><var>statement</var>[<b>:</b><var>statement</var> ...]]</a>
-<a href="#--extension" class="option-link">[<b>--extension=</b><var>module_name</var>[<b>,</b><var>module_name</var> ... ]]</a>
+<a href="#--exec" class="option-link">[<b>-e=</b><var>command_line</var>]</a>
+<a href="#--exec" class="option-link">[<b>--exec=</b><var>command_line</var>]</a>
 <a href="#--font" class="option-link">[<b>--font=</b><var>font_name</var>[<b>,</b><var>font_name</var> ... ]]</a>
 <a href="#--fullscreen" class="option-link">[<b>--fullscreen</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--help" class="option-link">[<b>-h</b>]</a>
 <a href="#--help" class="option-link">[<b>--help</b>]</a>
-<a href="#--hide-listing" class="option-link">[<b>--hide-listing=</b><var>line_number</var>]</a>
-<a href="#--hide-protected" class="option-link">[<b>--hide-protected</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#-i" class="option-link">[<b>-i</b>]</a>
 <a href="#--input" class="option-link">[<b>--input=</b><var>input_file</var>]</a>
-<a href="#--interface" class="option-link">[<b>--interface=</b>[<b>none</b>|<b>cli</b>|<b>text</b>|<b>graphical</b>]]</a>
+<a href="#--interface" class="option-link">[<b>--interface=</b>{<b>none</b>|<b>cli</b>|<b>text</b>|<b>graphical</b>}]</a>
 <a href="#--keys" class="option-link">[<b>-k=</b><var>keystring</var>]</a>
 <a href="#--keys" class="option-link">[<b>--keys=</b><var>keystring</var>]</a>
 <a href="#--load" class="option-link">[<b>-l=</b><var>program</var>]</a>
@@ -2134,18 +2078,26 @@ to interrupt a running program.  </p>
 <a href="#--lpt1" class="option-link">[<b>--lpt1=</b><var>type</var><b>:</b><var>value</var>]</a>
 <a href="#--lpt2" class="option-link">[<b>--lpt2=</b><var>type</var>:<var>value</var>]</a>
 <a href="#--lpt3" class="option-link">[<b>--lpt3=</b><var>type</var>:<var>value</var>]</a>
+<a href="#--map-drives" class="option-link">[<b>--map-drives</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--max-files" class="option-link">[<b>-f=</b><var>number_of_files</var>]</a>
 <a href="#--max-files" class="option-link">[<b>--max-files=</b><var>number_of_files</var>]</a>
+<a href="#--max-memory" class="option-link">[<b>-m=</b><var>max_memory</var>[<b>,</b><var>basic_memory_blocks</var>]]</a>
 <a href="#--max-memory" class="option-link">[<b>--max-memory=</b><var>max_memory</var>[<b>,</b><var>basic_memory_blocks</var>]]</a>
 <a href="#--max-reclen" class="option-link">[<b>-s=</b><var>record_length</var>]</a>
 <a href="#--max-reclen" class="option-link">[<b>--max-reclen=</b><var>record_length</var>]</a>
-<a href="#--monitor" class="option-link">[<b>--monitor=</b>{<b>rgb</b>|<b>composite</b>|<b>green</b>|<b>amber</b>|<b>grey</b>|<b>mono</b>}]</a>
+<a href="#--monitor" class="option-link">[<b>--monitor=</b>{<b>rgb</b>|<b>composite</b>|<b>mono</b>}]</a>
+<a href="#--mono-tint" class="option-link">[<b>--mono-tint=</b><var>r</var><b>,</b><var>g</var><b>,</b><var>b</var>]</a>
 <a href="#--mount" class="option-link">[<b>--mount=</b><var>drive</var><b>:</b><var>path</var><b>,</b>[<var>drive</var><b>:</b><var>path</var> ... ]]</a>
 <a href="#-n" class="option-link">[<b>-n</b>]</a>
-<a href="#--output" class="option-link">[<b>--output=</b><var>output_file</var>[<b>:append</b>]]</a>
+<a href="#--nobox" class="option-link">[<b>--nobox</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--nokill" class="option-link">[<b>--nokill</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--nosound" class="option-link">[<b>--nosound</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--output" class="option-link">[<b>--output=</b><var>output_file</var>]</a>
+<a href="#--pcjr-term" class="option-link">[<b>--pcjr-term=</b><var>terminal_program</var>]</a>
 <a href="#--peek" class="option-link">[<b>--peek=</b>[<var>seg</var><b>:</b><var>addr</var><b>:</b><var>val</var>[<b>,</b><var>seg</var><b>:</b><var>addr</var><b>:</b><var>val</var> ... ]]]</a>
+<a href="#--pen" class="option-link">[<b>--pen=</b>{<b>left</b>|<b>middle</b>|<b>right</b>|<b>none</b>}]</a>
 <a href="#--preset" class="option-link">[<b>--preset=</b><var>option_block</var>]</a>
-<a href="#--prevent-close" class="option-link">[<b>--prevent-close</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--print-trigger" class="option-link">[<b>--print-trigger=</b>{<b>line</b>|<b>page</b>|<b>close</b>}]</a>
 <a href="#--quit" class="option-link">[<b>-q</b>]</a>
 <a href="#--quit" class="option-link">[<b>--quit</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--reserved-memory" class="option-link">[<b>--reserved-memory=</b><var>number_of_bytes</var>]</a>
@@ -2153,33 +2105,29 @@ to interrupt a running program.  </p>
 <a href="#--run" class="option-link">[<b>-r=</b><var>program</var>]</a>
 <a href="#--run" class="option-link">[<b>--run=</b><var>program</var>]</a>
 <a href="#--scaling" class="option-link">[<b>--scaling=</b>{<b>smooth</b>|<b>crisp</b>|<b>native</b>}]</a>
+<a href="#--serial-buffer-size" class="option-link">[<b>-c=</b><var>size</var>]</a>
 <a href="#--serial-buffer-size" class="option-link">[<b>--serial-buffer-size=</b><var>size</var>]</a>
-<a href="#--shell" class="option-link">[<b>--shell=</b>[<var>shell-executable</var>]]</a>
-<a href="#--soft-linefeed" class="option-link">[<b>--soft-linefeed</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--sound" class="option-link">[<b>--sound=</b>[<b>none</b>|<b>beep</b>|<b>portaudio</b>|<b>interface</b>]]</a>
+<a href="#--shell" class="option-link">[<b>--shell=</b>{<b>none</b>|<b>native</b>|<var>command</var>]]</a>
 <a href="#--state" class="option-link">[<b>--state=</b><var>state_file</var>]</a>
+<a href="#--strict-hidden-lines" class="option-link">[<b>--strict-hidden-lines</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--strict-newline" class="option-link">[<b>--strict-newline</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--strict-protect" class="option-link">[<b>--strict-protect</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--syntax" class="option-link">[<b>--syntax=</b>{<b>advanced</b>|<b>pcjr</b>|<b>tandy</b>}]</a>
 <a href="#-t" class="option-link">[<b>-t</b>]</a>
-<a href="#--term" class="option-link">[<b>--term=</b><var>terminal_program</var>]</a>
 <a href="#--text-width" class="option-link">[<b>--text-width=</b>{<b>40</b>|<b>80</b>}]</a>
 <a href="#--utf-8" class="option-link">[<b>--utf8</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--version" class="option-link">[<b>-v</b>]</a>
 <a href="#--version" class="option-link">[<b>--version</b>]</a>
-<a href="#--video" class="option-link">[<b>--video=</b><var>adapter</var>[<b>:low</b>]]</a>
+<a href="#--video" class="option-link">[<b>--video=</b><var>card</var>]</a>
 <a href="#--video-memory" class="option-link">[<b>--video-memory=</b><var>size</var>]</a>
 <a href="#--wait" class="option-link">[<b>-w</b>]</a>
 <a href="#--wait" class="option-link">[<b>--wait</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--options" class="option-link">[<b>--options=</b><var>gwbasic_options</var>]</a>
 </span></code>
 </section>
 <hr>
 
 <section>
     <h3 id="parameters">Positional arguments</h3>
-    <p>
-        Positional arguments must come before any options, must not start with a dash <code><b>-</b></code>.
-        Any positional arguments that follow options will be ignored.
-    </p>
     <dl>
         <dt id="p-program"><code><var>program</var></code></dt>
         <dd>
@@ -2224,6 +2172,24 @@ to interrupt a running program.  </p>
             Allow programs to <code><a href="#POKE">POKE</a></code> into code memory.
         </dd>
 
+        <dt id="--altgr">
+            <code><b>--altgr</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            If <code><b>True</b></code> (default), interpret the right
+            <kbd>Alt</kbd> key as <kbd>Alt Gr</kbd> instead of <kbd>Alt</kbd>.
+            The left <kbd>Alt</kbd> key is always seen as <kbd>Alt</kbd>.
+        </dd>
+
+        <dt id="--append">
+            <code><b>--append</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            If used with
+            <code><b><a href="#--output">--output</a>=</b><var>output_file</var></code>,
+            the <code><var>output_file</var></code> is appended to rather than overwritten.
+        </dd>
+
         <dt id="--aspect">
             <code><b>--aspect=</b><var>x</var>,<var>y</var></code>
         </dt>
@@ -2259,6 +2225,15 @@ to interrupt a running program.  </p>
             Default <code><var>title</var></code> is <em>PC-BASIC</em>.
         </dd>
 
+        <dt id="--capture-caps">
+            <code><b>--capture-caps</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            Let PC-BASIC handle the <kbd>Caps Lock</kbd> key. This
+            may or may not interfere with the operating system's own handling of that key.
+            Only has an effect if combined with <code><b><a href="#--interface">--interface</a>=graphical</b></code>.
+        </dd>
+
         <dt id="--cas1">
             <code><b>--cas1=</b><var>type</var><b>:</b><var>value</var></code>
         </dt>
@@ -2281,8 +2256,16 @@ to interrupt a running program.  </p>
             </dl>
         </dd>
 
+        <dt id="--cga-low">
+            <code><b>--cga-low</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            Use low-intensity palettes in CGA modes.
+            Only has an effect if combined with <code><b><a href="#--video">--video</a>=</b>{<b>cga</b>|<b>cga_old</b>|<b>ega</b>|<b>vga</b>}</code>.
+        </dd>
+
         <dt id="--codepage">
-            <code><b>--codepage=</b><var>codepage_id</var>[<b>:nobox</b>]</code>
+            <code><b>--codepage=</b><var>codepage_id</var></code>
         </dt>
         <dd>
             Load the specified codepage. The codepage determines which
@@ -2352,13 +2335,6 @@ to interrupt a running program.  </p>
                 <li><code><b>viscii</b></code></li>
             </ul>.
             See the <a href="#codepages">list of codepages</a> in the User's Guide for details.
-            <br>
-            The specifier <code><b>nobox</b></code> disables box-drawing recognition
-            for double-byte character set code pages. By
-            default, sequences of box-drawing characters are recognised by an
-            algorithm that isn't as smart as it thinks it is, and displayed as
-            box drawing rather than as DBCS characters. If <code><b>nobox</b></code>
-            is set, they will be displayed as DBCS.
         </dd>
 
         <dt id="--config">
@@ -2394,14 +2370,7 @@ to interrupt a running program.  </p>
                     local host.
                 </dd>
                 <dt>
-                    <code><b>RFC2217:</b><var>host</var><b>:</b><var>socket</var></code>
-                </dt>
-                <dd>
-                    Connect using the RFC2217 protocol to a TCP socket on a remote or
-                    local host.
-                </dd>
-                <dt>
-                    <code><b>STDIO:</b>[<b>CRLF</b>]</code>
+                    <code><b>STDIO</b>[<b>:</b>[<b>CRLF</b>]]</code>
                 </dt>
                 <dd>
                     Connect to standard I/O of the calling shell.
@@ -2445,12 +2414,13 @@ to interrupt a running program.  </p>
             <code><b>--run</b></code> and <code><b>--load</b></code>.
         </dd>
 
-        <dt id="--mouse-clipboard">
-            <code><b>--mouse-clipboard</b>[<b>=True</b>|<b>=False</b>]</code>
+        <dt id="--copy-paste">
+            <code><b>--copy-paste=</b><var>copy_button</var><b>,</b><var>paste_button</var></code>
         </dt>
         <dd>
-            Enable clipboard operations with the mouse. If <code><b>True</b></code> (default),
-            select text with the left mouse button to copy and paste with the middle mouse button.
+            Choose the mouse buttons for clipboard operations.
+            <code><var>copy_button</var></code> and <code><var>paste_button</var></code> are
+            chosen from <code><b>left</b></code>,<code><b>middle</b></code>,<code><b>right</b></code>,<code><b>none</b></code>.
         </dd>
 
         <dt id="--ctrl-c-break">
@@ -2478,15 +2448,8 @@ to interrupt a running program.  </p>
             <code><b>CAS1</b></code> for the cassette device. The device chosen
             should be mounted to an actual location using
             <code><a href="#--mount">--mount</a></code> (or <code><a href="#--cas1">--cas1</a></code>
-            if the cassette device is chosen).
-        </dd>
-
-        <dt id="--debug">
-            <code><b>--debug</b>[<b>=True</b>|<b>=False</b>]</code>
-        </dt>
-        <dd>
-            <em>Developer option - use only if you know what you're doing. </em><br>
-            Enable debugging extension.
+            if the cassette device is chosen). Default is <code><b>Z</b></code>,
+            with the <code>Z:</code> device mounted to your current drive.
         </dd>
 
         <dt id="--dimensions">
@@ -2506,29 +2469,17 @@ to interrupt a running program.  </p>
         </dt>
         <dd>
             Enable double-precision transcendental math functions. This is
-            equivalent to the <code><b><a href="#--options">/d</a></b></code> option in GW-BASIC.
+            equivalent to the <code><b><a href="#gwbasic-options">/d</a></b></code> option in GW-BASIC.
         </dd>
 
         <dt id="--exec">
-            <code id="-e"><b>-e=</b><var>statement</var>[<b>:</b><var>statement</var> ...]</code>
-            <code><b>--exec=</b><var>statement</var>[<b>:</b><var>statement</var> ...]</code>
+            <code id="-e"><b>-e=</b><var>command_line</var></code>
+            <code><b>--exec=</b><var>command_line</var></code>
         </dt>
         <dd>
-            Execute BASIC statements. The <code><var>statement</var></code>s are executed
-            after loading any program but before entering into direct mode or
-            running it. Multiple statements can be entered by separating them with colons <code><b>:</b></code>.
-            These will be executed as if they were entered as separate statements, not as a single compound statement;
-            even if statements such as <code>GOTO</code> can be included, the following statements will be executed.
-            If a <code><b>:</b></code> is intended to be part of a statement, the statement must be quoted with
-            single quotes <code><b>'</b></code>. If your calling shell interprets such quotes, you should properly escape them.
-        </dd>
-
-        <dt id="--extension">
-            <code><b>--extension=</b><var>module_name</var>[<b>,</b><var>module_name</var> ... ]</code>
-        </dt>
-        <dd>
-            <em>Developer option - use only if you know what you're doing. </em><br>
-            Load extension module(s).
+            Execute BASIC <code><var>command_line</var></code>. The specified
+            commands are executed before entering into direct mode or
+            running a program.
         </dd>
 
         <dt id="--font">
@@ -2569,22 +2520,12 @@ to interrupt a running program.  </p>
             Show a usage message and exit.
         </dd>
 
-        <dt id="--hide-listing">
-            <code><b>--hide-listing=</b><var>line_number</var></code>
+        <dt id="-i">
+            <code><b>-i</b></code>
         </dt>
         <dd>
-            Disable listing and saving to plain text of lines beyond <code><var>line_number</var></code>, as in
-            GW-BASIC beyond <code>65530</code>. Use with care as this allows execution of hidden
-            lines of code. Default is to list all lines.
-        </dd>
-
-        <dt id="--hide-protected">
-            <code><b>--hide-protected</b>[<b>=True</b>|<b>=False</b>]</code>
-        </dt>
-        <dd>
-            Disable listing and saving to plain text of protected files, as in
-            GW-BASIC. Use with care as this allows execution of hidden
-            lines of code.
+            This option is ignored. It is included only for compatibility with
+            GW-BASIC <code><b><a href="#gwbasic-options">/i</a></b></code>.
         </dd>
 
         <dt id="--input">
@@ -2595,17 +2536,13 @@ to interrupt a running program.  </p>
             except if <code>KYBD:</code> is read explicitly. Input from
             <code>KYBD:</code> files is always read from the keyboard,
             following GW-BASIC behaviour.
-            <br>
-            If <code><var>input_file</var></code> is <code><b>STDIO:</b></code>
-            or <code><b>STDIN:</b></code>, keyboard input will be read from standard input.
         </dd>
 
         <dt id="--interface">
-            <code><b>--interface=</b>[<b>none</b>|<b>cli</b>|<b>text</b>|<b>graphical</b>]</code>
+            <code><b>--interface=</b>{<b>none</b>|<b>cli</b>|<b>text</b>|<b>graphical</b>}</code>
         </dt>
         <dd>
-            Choose the type of interface. Not all interfaces will be available on all systems.
-            The following interface types may be
+            Choose the type of interface. The following interface types are
             available:
             <dl class="compact">
                 <dt><code><b>none</b></code></dt>
@@ -2613,17 +2550,9 @@ to interrupt a running program.  </p>
                 <dt><code><b>cli</b></code></dt>
                 <dd>Command-line interface. Also <code><b><a href="#-b">-b</a></b></code>.</dd>
                 <dt><code><b>text</b></code></dt>
-                <dd>Text interface. Also <code><b><a href="#-t">-t</a></b></code>.</dd>
+                <dd>Text-based interface. Also <code><b><a href="#-t">-t</a></b></code>.</dd>
                 <dt><code><b>graphical</b></code></dt>
                 <dd>Graphical interface.</dd>
-                <dt><code><b>sdl2</b></code></dt>
-                <dd>SDL2 graphical interface.</dd>
-                <dt><code><b>pygame</b></code></dt>
-                <dd>PyGame graphical interface.</dd>
-                <dt><code><b>ansi</b></code></dt>
-                <dd>ANSI text interface.</dd>
-                <dt><code><b>curses</b></code></dt>
-                <dd>NCurses text interface.</dd>
             </dl>
             The default is <code><b>graphical</b></code>.
         </dd>
@@ -2634,11 +2563,6 @@ to interrupt a running program.  </p>
         </dt>
         <dd>
             Insert the <code><var>keystring</var></code> into the keyboard buffer.
-            <code><var>keystring</var></code> may contain escape codes such as <code>\r</code> for return,
-            <code>\n</code> for line feed and <code>\x<var>XX</var></code> to enter <code>CHR$(&amp;H<var>XX</var>)</code>.
-            <code><var>keystring</var></code> may contain <a href="#eascii">e-ASCII codes</a> to
-            indicate keypresses that do not have a regular character encoding. For example,
-            <code>\0\x0F</code> indicates Shift+Tab.
         </dd>
 
         <dt id="--load">
@@ -2665,26 +2589,11 @@ to interrupt a running program.  </p>
             <code><var>type</var><b>:</b><var>value</var></code> can be
             <dl>
 
-                <dt><code><b>PRINTER:</b>[<var>printer_name</var>][<b>:</b><var>trigger</var>]</code></dt>
+                <dt><code><b>PRINTER:</b><var>printer_name</var></code></dt>
                 <dd>
                     Connect to a Windows, LPR or CUPS printer. If
                     <code><var>printer_name</var></code> is not specified, the default
-                    printer is used. <br>
-                    The printer is activated when a file open to it is closed,
-                    a program terminates or PC-BASIC exits. Note that, unlike <code>LPT1:</code>,
-                    printers connected to <code>LPT2:</code> or <code>LPT3:</code>
-                    do <em>not</em> get activated when a program terminates.
-                    If specified, <code><var>trigger</var></code> sets an additional trigger
-                    to activate the printer:
-                    <dl class="compact">
-                        <dt><code><b>line</b></code>
-                        </dt><dd>After every line break.</dd>
-                        <dt><code><b>page</b></code>
-                        </dt><dd>After every page break.</dd>
-                        <dt><code><b>close</b></code>
-                        </dt><dd>No additional trigger</dd>
-                    </dl>
-                    The default behaviour is that of <code><b>close</b></code>.
+                    printer is used.
                 </dd>
 
                 <dt><code><b>FILE:</b><var>file_name</var></code></dt>
@@ -2693,7 +2602,7 @@ to interrupt a running program.  </p>
                     <code><b>/dev/stdout</b></code> on Unix or <code><b>LPT1</b></code> on Windows.
                 </dd>
 
-                <dt><code><b>STDIO:</b>[<b>CRLF</b>]</code></dt>
+                <dt><code><b>STDIO</b>[<b>:</b>[<b>CRLF</b>]]</code></dt>
                 <dd>
                     Connect to standard output of the calling shell.
                     If <code><b>CRLF</b></code> is specified, PC-BASIC replaces <code>CR</code>
@@ -2730,6 +2639,22 @@ to interrupt a running program.  </p>
             If this option is not specified, <code>LPT3:</code> is unavailable.
         </dd>
 
+        <dt id="--map-drives">
+            <code><b>--map-drives</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            On Windows, assign all Windows drive letters to PC-BASIC drive
+            letters. On other systems, assign to:
+            <dl class="compact">
+                <dt><code>Z:</code></dt>
+                <dd>the current working directory</dd>
+                <dt><code>C:</code></dt>
+                <dd>the filesystem root</dd>
+                <dt><code>H:</code></dt>
+                <dd>the user's home directory.</dd>
+            </dl>
+        </dd>
+
         <dt id="--max-files">
             <code id="-f"><b>-f=</b><var>number_of_files</var></code>
             <code><b>--max-files=</b><var>number_of_files</var></code>
@@ -2737,11 +2662,12 @@ to interrupt a running program.  </p>
         <dd>
             Set maximum number of open files to
             <code><var>number_of_files</var></code>. This is
-            equivalent to the <code><b><a href="#--options">/f</a></b></code> option in GW-BASIC.
+            equivalent to the <code><b><a href="#gwbasic-options">/f</a></b></code> option in GW-BASIC.
             Default is <code><b>3</b></code>.
         </dd>
 
         <dt id="--max-memory">
+            <code id="-m"><b>-m=</b><var>max_memory</var>[<b>,</b><var>basic_memory_blocks</var>]</code>
             <code><b>--max-memory=</b><var>max_memory</var>[<b>,</b><var>basic_memory_blocks</var>]</code>
         </dt>
         <dd>
@@ -2751,7 +2677,7 @@ to interrupt a running program.  </p>
             <code><var>basic_memory_blocks</var>*16</code>. In PC-BASIC, the
             minimum of these values is simply the data memory size; the two
             values are allowed for compatibility with the
-            <code><b><a href="#--options">/m</a></b></code> option in GW-BASIC.
+            <code><b><a href="#gwbasic-options">/m</a></b></code> option in GW-BASIC.
         </dd>
 
         <dt id="--max-reclen">
@@ -2762,11 +2688,11 @@ to interrupt a running program.  </p>
             Set maximum record length for <code>RANDOM</code> files to
             <code><var>record_length</var></code>. Default is <code><b>128</b></code>, maximum is
             <code><b>32767</b></code>. This is equivalent to the
-            <code><b><a href="#--options">/s</a></b></code> option in GW-BASIC.
+            <code><b><a href="#gwbasic-options">/s</a></b></code> option in GW-BASIC.
         </dd>
 
         <dt id="--monitor">
-            <code><b>--monitor=</b>{<b>rgb</b>|<b>composite</b>|<b>green</b>|<b>amber</b>|<b>grey</b>|<b>mono</b>}</code>
+            <code><b>--monitor=</b>{<b>rgb</b>|<b>composite</b>|<b>mono</b>}</code>
         </dt>
         <dd>
             Sets the monitor type to emulate. Available types are:
@@ -2779,30 +2705,21 @@ to interrupt a running program.  </p>
                     Composite colour monitor.
                 </dd>
 
-                <dt><code><b>green</b></code></dt>
-                <dd>
-                    Green-tinted monochrome monitor.
-                </dd>
-
-                <dt><code><b>amber</b></code></dt>
-                <dd>
-                    Amber-tinted monochrome monitor.
-                </dd>
-
-                <dt><code><b>grey</b></code></dt>
-                <dd>
-                    Greyscale monochrome monitor.
-                </dd>
-
                 <dt><code><b>mono</b></code></dt>
-                <dd>
-                    Green-tinted monochrome monitor (same as <code><b>green</b></code>).
-                </dd>
+                <dd>Monochrome monitor.</dd>
             </dl>
             On
             <code><a href="#SCREEN-statement">SCREEN</a> 2</code> with
             <code><b><a href="#--video">--video</a>=</b>{<b>pcjr</b>|<b>tandy</b>|<b>cga</b>|<b>cga_old</b>}</code>,
             <code><b>--monitor=composite</b></code> enables (crude) colour artifacts.
+        </dd>
+
+        <dt id="--mono-tint">
+            <code><b>--mono-tint=</b><var>r</var><b>,</b><var>g</var><b>,</b><var>b</var></code>
+        </dt>
+        <dd>
+            Specify the monochrome tint as the red-green-blue values <code><var>r</var>,<var>g</var>,<var>b</var></code>, each in the range 0&#8212;255.
+            Only has an effect if combined with <code><b><a href="#--monitor">--monitor</a>=mono</b></code>.
         </dd>
 
         <dt id="--mount">
@@ -2811,11 +2728,9 @@ to interrupt a running program.  </p>
         <dd>
             Assign the path
             <code><var>path</var></code> to drive letter <code><var>drive</var>:</code>.
-            The path can be absolute or relative.
-            <br>
-            If this option is not specified: on Windows, all Windows drive letters
-            will be assigned to PC-BASIC drive
-            letters; on other systems, the current working directory is assigned to <code>Z:</code>.
+            The path can be absolute or relative. By
+            default, <code>Z:</code> is assigned to the current working
+            directory and no other drive letters are assigned.
         </dd>
 
         <dt id="-n">
@@ -2826,20 +2741,54 @@ to interrupt a running program.  </p>
             <code><b><a href="#--interface">--interface</a>=none</b></code>.
         </dd>
 
+        <dt id="--nobox">
+            <code><b>--nobox</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            Disable box-drawing recognition for double-byte character set code pages. By
+            default, sequences of box-drawing characters are recognised by an
+            algorithm that isn't as smart as it thinks it is, and displayed as
+            box drawing rather than as DBCS characters. If <code><b>--nobox</b></code>
+            is set, they will be displayed as DBCS.
+        </dd>
+
+        <dt id="--nokill">
+            <code><b>--nokill</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            Allow BASIC to capture <kbd>Alt+F4</kbd>.
+            Graphical interface only. By default,
+            <kbd>Alt</kbd>+<kbd>F4</kbd> is captured by most operating
+            systems as a quit signal, and will terminate PC-BASIC. Set
+            <code><b>--nokill</b></code> to allow BASIC to capture
+            <kbd>Alt</kbd>+<kbd>F4</kbd> instead. This is useful if
+            your program uses this key combination.
+        </dd>
+
+        <dt id="--nosound">
+            <code><b>--nosound</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            Disable sound output.
+        </dd>
+
         <dt id="--output">
-            <code><b>--output=</b><var>output_file</var>[<b>:append</b>]</code>
+            <code><b>--output=</b><var>output_file</var></code>
         </dt>
         <dd>
             Send screen output to <code><var>output_file</var></code>, except
             if <code>SCRN:</code> is written to explicitly. Output to
             <code>SCRN:</code> files will always be shown on the screen, as in
             GW-BASIC.
-            <br>
-            If the specifier <code><b>append</b></code> is given,
-            the output file is appended to rather than overwritten.
-            <br>
-            If <code><var>output_file</var></code> is <code><b>STDIO:</b></code>
-            or <code><b>STDOUT:</b></code>, screen output will be sent to standard output.
+        </dd>
+
+        <dt id="--pcjr-term">
+            <code><b>--pcjr-term=</b><var>terminal_program</var></code>
+        </dt>
+        <dd>
+            Set the terminal program run by the PCjr <code><a href="#TERM">TERM</a></code>
+            command to <code><var>terminal_program</var></code>. This only has an
+            effect with <code><b><a href="#--syntax">--syntax</a>=</b>{<b>pcjr</b>|<b>tandy</b>}</code>.
         </dd>
 
         <dt id="--peek">
@@ -2847,8 +2796,17 @@ to interrupt a running program.  </p>
         </dt>
         <dd>
             Define <code><a href="#PEEK">PEEK</a></code> preset values. If defined,
-            <code>DEF SEG <var>seg</var>:? PEEK(<var>addr</var>)</code> will return
+            <code>DEF SEG:? PEEK(<var>addr</var>)</code> will return
             <samp><var>val</var></samp>.
+        </dd>
+
+        <dt id="--pen">
+            <code><b>--pen=</b>{<b>left</b>|<b>middle</b>|<b>right</b>|<b>none</b>}</code>
+        </dt>
+        <dd>
+            Set the mouse button for light pen emulation. Default is <code><b>left</b></code>.
+            If set to <code><b>none</b></code>, light pen emulation is switched off.
+            On Android, <code><b>left</b></code> means touch input.
         </dd>
 
         <dt id="--preset">
@@ -2862,17 +2820,20 @@ to interrupt a running program.  </p>
             configuration file. See the <a href="#presets">list of default presets</a> in the User's Guide.
         </dd>
 
-        <dt id="--prevent-close">
-            <code><b>--prevent-close</b>[<b>=True</b>|<b>=False</b>]</code>
+        <dt id="--print-trigger">
+            <code><b>--print-trigger=</b>{<b>line</b>|<b>page</b>|<b>close</b>}</code>
         </dt>
         <dd>
-            Suppress window close event. This allows BASIC to capture
-            key combinations that normally close the window.
-            Graphical interface only. By default, the operating system's key combination to close a window
-            (usually <kbd>Alt</kbd>+<kbd>F4</kbd>) terminates PC-BASIC. Set
-            <code><b>--prevent-close</b></code> to allow BASIC to capture
-            this key combination instead. This is useful if
-            your program uses this key combination.
+            Set the trigger to flush the print buffer to the printer.
+            <dl class="compact">
+                <dt><code><b>line</b></code>
+                </dt><dd>The printer is activated after every line break.</dd>
+                <dt><code><b>page</b></code>
+                </dt><dd>The printer is activated after every page break.</dd>
+                <dt><code><b>close</b></code>
+                </dt><dd>The printer is activated only when PC-BASIC exits.</dd>
+            </dl>
+            Default is <code><b>close</b></code>.
         </dd>
 
         <dt id="--quit">
@@ -2943,6 +2904,7 @@ to interrupt a running program.  </p>
         </dd>
 
         <dt id="--serial-buffer-size">
+            <code id="-c"><b>-c=</b><var>size</var></code>
             <code><b>--serial-buffer-size=</b><var>size</var></code>
         </dt>
         <dd>
@@ -2951,44 +2913,13 @@ to interrupt a running program.  </p>
         </dd>
 
         <dt id="--shell">
-            <code><b>--shell=</b>[<var>shell-executable</var>]</code>
+            <code><b>--shell=</b>{<b>none</b>|<b>native</b>|<var>command</var>]</code>
         </dt>
         <dd>
-            Enable the <code><a href="#SHELL">SHELL</a></code>
-            statement to run the operating system command interpreter <code><var>shell-executable</var></code>.
-            The executable <code><var>shell-executable</var></code> should support MS-DOS's
-            <code>COMMAND.COM</code> calling conventions, in particular its <code>/C</code> switch.
-            Example command interpreters are <code>CMD.EXE</code> on Windows and <code>"wine cmd.exe"</code> on Unix.
-            If <code><var>shell-executable</var></code> is empty (as it is by default),
-            the <code><a href="#SHELL">SHELL</a></code> statement is disabled.
-        </dd>
-
-        <dt id="--soft-linefeed">
-            <code><b>--soft-linefeed</b>[<b>=True</b>|<b>=False</b>]</code>
-        </dt>
-        <dd>
-            Do not treat <code>LF</code> in text and program files as a line break. This enables
-            the highest level of compatibility with GW-BASIC files. If this option is set,
-            any Linux or Mac text files need to be converted to DOS text before using then with PC-BASIC.
-        </dd>
-
-        <dt id="--sound">
-            <code><b>--sound=</b>[<b>none</b>|<b>beep</b>|<b>portaudio</b>|<b>interface</b>]</code>
-        </dt>
-        <dd>
-            Choose the sound engine to use.
-            Not all sound engines will be available on all systems.
-            <dl class="compact">
-                <dt><code><b>none</b></code></dt>
-                <dd>Suppress sound output.</dd>
-                <dt><code><b>beep</b></code></dt>
-                <dd>Use the built-in speaker.</dd>
-                <dt><code><b>portaudio</b></code></dt>
-                <dd>Use the PortAudio sound generator.</dd>
-                <dt><code><b>interface</b></code></dt>
-                <dd>Use the native sound engine of the interface, if available.</dd>
-            </dl>
-            Default is <code><b>interface</b></code>.
+            Set the command interpreter run on the <code><a href="#SHELL">SHELL</a></code>
+            command to the operating system's native shell or a custom shell
+            run by <code><var>command</var></code>. Default is <code><b>none</b></code>,
+            which disables the <code><a href="#SHELL">SHELL</a></code> command.
         </dd>
 
         <dt id="--state">
@@ -2996,8 +2927,35 @@ to interrupt a running program.  </p>
         </dt>
         <dd>
             Set the save-state file to <code><var>state_file</var></code>.
-            Default is <code>pcbasic.session</code> in the Application Data
+            Default is <code>PCBASIC.SAV</code> in the Application Data
             directory.
+        </dd>
+
+        <dt id="--strict-hidden-lines">
+            <code><b>--strict-hidden-lines</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            Disable listing and saving to plain text of lines beyond <code>65530</code>, as in
+            GW-BASIC. Use with care as this allows execution of hidden
+            lines of code.
+        </dd>
+
+        <dt id="--strict-newline">
+            <code><b>--strict-newline</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            Parse <code>CR</code> and <code>LF</code> in files strictly
+            like GW-BASIC. On Unix, you will need to convert your files to DOS
+            text first if using this option.
+        </dd>
+
+        <dt id="--strict-protect">
+            <code><b>--strict-protect</b>[<b>=True</b>|<b>=False</b>]</code>
+        </dt>
+        <dd>
+            Disable listing and saving to plain text of protected files, as in
+            GW-BASIC. Use with care as this allows execution of hidden
+            lines of code.
         </dd>
 
         <dt id="--syntax">
@@ -3026,15 +2984,6 @@ to interrupt a running program.  </p>
             <code><b><a href="#--interface">--interface</a>=text</b></code>.
         </dd>
 
-        <dt id="--term">
-            <code><b>--term=</b><var>terminal_program</var></code>
-        </dt>
-        <dd>
-            Set the terminal program run by the PCjr <code><a href="#TERM">TERM</a></code>
-            command to <code><var>terminal_program</var></code>. This only has an
-            effect with <code><b><a href="#--syntax">--syntax</a>=</b>{<b>pcjr</b>|<b>tandy</b>}</code>.
-        </dd>
-
         <dt id="--text-width">
             <code><b>--text-width=</b>{<b>40</b>|<b>80</b>}</code>
         </dt>
@@ -3047,7 +2996,7 @@ to interrupt a running program.  </p>
             <code><b>--utf8</b>[<b>=True</b>|<b>=False</b>]</code>
         </dt>
         <dd>
-            Use UTF-8 for plain-text programs and redirected I/O. If <code><b>True</b></code>,
+            Use UTF-8 for plain-text programs. If <code><b>True</b></code>,
             programs stored as plain text will be converted
             from UTF-8 on <code><a href="#LOAD">LOAD</a></code> and to UTF-8 on
             <code><a href="#SAVE">SAVE</a></code>. If <code><b>False</b></code>,
@@ -3063,10 +3012,10 @@ to interrupt a running program.  </p>
         </dd>
 
         <dt id="--video">
-            <code><b>--video=</b><var>adapter</var>[<b>:low</b>]</code>
+            <code><b>--video=</b><var>card</var></code>
         </dt>
         <dd>
-            Set the video adapter to emulate. Available adapters:
+            Set the video card to emulate. Available video cards:
             <dl class="compact">
                 <dt><code><b>vga</b></code></dt>
                 <dd>Video Graphics Array</dd>
@@ -3096,9 +3045,6 @@ to interrupt a running program.  </p>
                 <dd>Olivetti M24 graphics</dd>
             </dl>
             Default is <code><b>vga</b></code>.
-            <br>
-            If the specifier <code><b>low</b></code> is given, use low-intensity palettes in CGA modes.
-            This only has an effect with adapters <code>{<b>cga</b>|<b>cga_old</b>|<b>ega</b>|<b>vga</b>}</code>.
         </dd>
 
         <dt id="--video-memory">
@@ -3125,86 +3071,96 @@ to interrupt a running program.  </p>
             <code><b><a href="#--interface">--interface</a>=graphical</b></code> or
             <code><b>--interface=text</b></code>. Default is <code><b>False</b></code>.
         </dd>
+    </dl>
+</section>
+<hr>
 
-        <dt id="--options">
-            <code><b>--options=</b><var>gwbasic_options</var></code>
+<section>
+    <h3 id="gwbasic-options">GW-BASIC options
+    </h3><p>
+        GW-BASIC recognised a number of DOS-style command-line options on the command-line when invoking it from DOS
+        with a command like <code>BASIC</code>, <code>BASICA</code>, or <code>GWBASIC</code>.
+        These are matched by PC-BASIC with only minor modifications, usually just replacing the
+        forward slash <code><b>/</b></code> with a dash <code><b>-</b></code>. The GW-BASIC syntax is shown here
+        for reference only; only the syntax with the dash works with PC-BASIC.
+    </p>
+    <dl>
+        <dt>
+            <code><b>/d</b></code>
+            becomes
+            <code><b><a href="#-d">-d</a></b></code>
         </dt>
         <dd>
-            Set GW-BASIC-style command-line switches. This is a convenience option to facilitate
-            migration from GW-BASIC. <code>gwbasic_options</code> is a string that may contain
-            the following options:
-            <dl>
-                <dt>
-                    <code><b>/d</b></code>
-                </dt>
-                <dd>
-                    Enable double-precision floating-point math functions.
-                    See also <code><b><a href="#--double">--double</a></b></code>.
-                </dd>
-                <dt>
-                    <code><b>/f:</b><var>n</var></code>
-                </dt>
-                <dd>
-                    Set the maximum number of open files.
-                    See also <code><b><a href="#--max-files">--max-files</a></b></code>.
-                </dd>
-                <dt>
-                    <code><b>/s:</b><var>n</var></code>
-                </dt>
-                <dd>
-                    Set the maximum record length for <code>RANDOM</code> files.
-                    See also <code><b><a href="#--max-reclen">--max-reclen</a></b></code>.
-                </dd>
-                <dt>
-                    <code><b>/c:</b><var>n</var></code>
-                </dt>
-                <dd>
-                    Set the size of the receive buffer for <code>COM</code> devices.
-                    See also <code><b><a href="#--serial-buffer-size">--serial-buffer-size</a></b></code>.
-                </dd>
-                <dt>
-                    <code><b>/i</b></code>
-                </dt>
-                <dd>
-                    Statically allocate file control blocks and data buffer. Note that this is already
-                    the default approach in GW-BASIC and PC-BASIC so that this option has no effect.
-                </dd>
-                <dt>
-                    <code><b>/m:</b><var>n</var>,<var>m</var></code>
-                </dt>
-                <dd>
-                    Set the highest memory location to <code><var>n</var></code> and maximum
-                    BASIC memory size to <code><var>m</var>*16</code> bytes.
-                    See also <code><b><a href="#--max-memory">--max-memory</a></b></code>.
-                </dd>
-                <dt>
-                    <code><b>&gt;</b><var>filename</var></code>
-                </dt>
-                <dd>
-                    Write screen output to <code><var>filename</var></code>.
-                    See also <code><b><a href="#--output">--output</a></b></code>.
-                </dd>
-                <dt>
-                    <code><b>&gt;&gt;</b><var>filename</var></code>
-                </dt>
-                <dd>
-                    Append screen output to <code><var>filename</var></code>.
-                    See also <code><b><a href="#--output">--output</a></b></code>.
-                </dd>
-                <dt>
-                    <code><b>&lt;</b><var>filename</var></code>
-                </dt>
-                <dd>
-                    Read keyboard input from <code><var>filename</var></code>.
-                    See also <code><b><a href="#--input">--input</a></b></code>.
-                </dd>
-            </dl>
-            GW-BASIC-style switches are not case sensitive.
-            Note that the symbols used in these switches may have different meaning in the shell
-            from which PC-BASIC is called; you should quote and escape the options as necessary.
+            Enable double-precision floating-point math functions.
+        </dd>
+        <dt>
+            <code><b>/f:</b><var>n</var></code>
+            becomes
+            <code><b><a href="#-f">-f</a>=</b><var>n</var></code>
+        </dt>
+        <dd>
+            Set the maximum number of open files.
+        </dd>
+        <dt>
+            <code><b>/s:</b><var>n</var></code>
+            becomes
+            <code><b><a href="#-s">-s</a>=</b><var>n</var></code>
+        </dt>
+        <dd>
+            Set the maximum record length for <code>RANDOM</code> files.
+        </dd>
+        <dt>
+            <code><b>/c:</b><var>n</var></code>
+            becomes
+            <code><b><a href="#-c">-c</a>=</b><var>n</var></code>
+        </dt>
+        <dd>
+            Set the size of the receive buffer for <code>COM</code> devices.
+        </dd>
+        <dt>
+            <code><b>/i:</b><var>n</var></code>
+            becomes
+            <code><b><a href="#-i">-i</a>=</b><var>n</var></code>
+        </dt>
+        <dd>
+            No effect.
+        </dd>
+        <dt>
+            <code><b>/m:</b><var>n</var>,<var>m</var></code>
+            becomes
+            <code><b><a href="#-m">-m</a>=</b><var>n</var>,<var>m</var></code>
+        </dt>
+        <dd>
+            Set the highest memory location to <code><var>n</var></code> and maximum
+            BASIC memory size to <code><var>m</var>*16</code> bytes.
+        </dd>
+        <dt>
+            <code><b>&gt;</b><var>filename</var></code>
+            becomes
+            <code><b><a href="#--output">--output</a>=</b><var>filename</var></code>
+        </dt>
+        <dd>
+            Write screen output to <code><var>filename</var></code>.
+        </dd>
+        <dt>
+            <code><b>&gt;&gt;</b><var>filename</var></code>
+            becomes
+            <code><b>--output=</b><var>filename</var> <b><a href="#--append">--append</a></b></code>
+        </dt>
+        <dd>
+            Append screen output to <code><var>filename</var></code>.
+        </dd>
+        <dt>
+            <code><b>&lt;</b><var>filename</var></code>
+            becomes
+            <code><b><a href="#--input">--input</a>=</b><var>filename</var></code>
+        </dt>
+        <dd>
+            Read keyboard input from <code><var>filename</var></code>.
         </dd>
     </dl>
 </section>
+
 <hr>
 <!--
     PC-BASIC documentation
@@ -3253,7 +3209,7 @@ to interrupt a running program.  </p>
             <code>A:</code> drive.
         </dd>
 
-        <dt><code><b>pcbasic Z:\INFO.BAS --preset=mda --monitor=amber</b></code></dt>
+        <dt><code><b>pcbasic Z:\INFO.BAS --preset=mda --mono-tint=255,128,0</b></code></dt>
         <dd>
             Run <code>INFO.BAS</code> in the current directory on an
             emulated MDA with amber tinted monitor.
@@ -3307,7 +3263,7 @@ to interrupt a running program.  </p>
 <p>
     The BASIC Language Guide covers the language topic by topic, thematically grouping
     language elements used for a related purpose. Please refer to the
-    <a href="#reference">BASIC Language Reference</a> for a formal description of
+    <a href="reference">BASIC Language Reference</a> for a formal description of
     the langage elements and their syntax.
 </p>
 
@@ -4095,6 +4051,9 @@ to interrupt a running program.  </p>
             <td>
                 Disk devices. These devices can be mounted to a directory on
                 the host file system with the <code><a href="#--mount">--mount</a></code> option.
+                 They do not automatically match drive letters on Windows,
+                unless the <code><a href="#--map-drives">--map-drives</a></code> option
+                 is set.
             </td>
             </tr>
             <tr>
@@ -4782,7 +4741,7 @@ to interrupt a running program.  </p>
             <tr>
                 <td><a href="#USR"><code>USR</code></a></td>
                 <td>Machine code function</td>
-                <td>Raise <samp>Illegal function call</samp></td>
+                <td>Return <code>0</code></td>
             </tr>
         </table>
     </div>
@@ -5047,10 +5006,6 @@ to interrupt a running program.  </p>
         access. To re-allocate an array, the old array must first be deleted
         with <code><a href="#CLEAR">CLEAR</a></code> or
         <code><a href="#ERASE">ERASE</a></code>.
-    </p>
-    <p>
-        Multi-dimensional arrays are stored in column-major order, such that <code>A%(2,0)</code> immediately
-        follows <code>A%(1,0)</code>.
     </p>
 
     <h4 id="conversions">Conversions</h4>
@@ -5714,8 +5669,6 @@ to interrupt a running program.  </p>
         </code>
         <p>
             Converts the numeric expression <code><var>x</var></code> to a signed integer.
-            Halves are rounded away from zero, so that e.g.
-            <code>CINT(2.5) = 3</code> and <code>CINT(-2.5) = -3</code>.
         </p>
         <h5>Errors</h5>
         <ul>
@@ -5768,8 +5721,7 @@ to interrupt a running program.  </p>
             <var>y</var> <b>= CSNG(</b><var>x</var><b>)</b>
         </code>
         <p>
-            Converts the numeric expression <code><var>x</var></code> to a single-precision value
-            by Gaussian rounding.
+            Converts the numeric expression <code><var>x</var></code> to a single-precision value.
         </p>
         <h5>Errors</h5>
         <ul>
@@ -6510,7 +6462,7 @@ to interrupt a running program.  </p>
         <h5>Parameters</h5>
         <ul>
             <li>
-                <code><var>number</var></code> is an expression.
+                <code><var>number</var></code> is a numeric expression.
             </li>
         </ul>
         <h5>Notes</h5>
@@ -6519,8 +6471,11 @@ to interrupt a running program.  </p>
                 <code><a href="#FIX">FIX</a></code> truncates towards zero: it removes the
                 fractional part. By contrast, <code>INT</code> truncates towards negative infinity.
             </li>
+        </ul>
+        <h5>Errors</h5>
+        <ul>
             <li>
-                If <code><var>number</var></code> is a string expression, <code>INT</code> returns its value unchanged.
+                <code><var>number</var></code> is a string expression, <samp>Type mismatch</samp> .
             </li>
         </ul>
     </section>
@@ -6792,8 +6747,9 @@ to interrupt a running program.  </p>
         <h5>Notes</h5>
         <ul>
             <li>
-                When entering direct mode, <code>LPT1:</code> (but not other printers)
-                is flushed and its position is reset to 1.
+                In GW-BASIC, when entering direct mode, <code>LPT1:</code> (but not other printers)
+                is flushed and its position is reset to 1. This is not implemented in
+                PC-BASIC.
             </li>
         </ul>
         <h5>Errors</h5>
@@ -7064,7 +7020,7 @@ to interrupt a running program.  </p>
             <var>length</var> <b>= PLAY(</b><var>voice</var><b>)</b>
         </code>
         <p>
-            Returns the number of notes in the background music queue. The return value is in <code>[0&#8212;32]</code>.
+            Returns the number of notes in the background music queue. The return value is in <code>[0&#8212;16]</code>.
         </p>
         <h5>Parameters</h5>
         <ul>
@@ -7079,10 +7035,9 @@ to interrupt a running program.  </p>
         <h5>Notes</h5>
         <ul>
             <li>
-                There are at most 32 notes in the music queue. However, unless the articulation is
-                set to legato, there are short gaps between each note; these are counted as
-                separate notes in the queue. Effectively, the queue length is thus 16 for the default
-                and staccato articulations and 32 for legato.
+                There are at most 16 notes in the music queue. Some GW-BASIC manuals
+                claim there can be up to 32, but in reality <code>PLAY</code> only returns at the
+                last 16 notes.
             </li>
         </ul>
         <h5>Errors</h5>
@@ -7826,7 +7781,7 @@ to interrupt a running program.  </p>
             <var>value</var> <b>= USR</b>[<var>n</var>]<b>(</b><var>expr</var><b>)</b>
         </code>
         <p>
-            Raises <samp>Illegal function call</samp>.
+            Returns zero.
         </p>
         <h5>Parameters</h5>
         <ul>
@@ -8057,7 +8012,7 @@ to interrupt a running program.  </p>
             <b>BEEP</b> {<b>ON</b>|<b>OFF</b>}
         </code>
         <p>
-            Switches the internal speaker on or off.
+            This statement has no effect.
         </p>
         <h5>Notes</h5>
         <ul>
@@ -8065,6 +8020,7 @@ to interrupt a running program.  </p>
                 Only legal with the <code><a href="syntax">syntax</a>={pcjr|tandy}</code> option.
             </li>
             <li>
+                On PCjr and Tandy computers, <code>BEEP OFF</code> would turn off the internal speaker.
                 On PC-BASIC, both the internal and the external speaker are emulated through
                 the same sound system.
             </li>
@@ -8163,9 +8119,9 @@ to interrupt a running program.  </p>
 <hr>
 
     <section>
-    <h4 id="CALL"><code>CALL</code> and <code>CALLS</code></h4>
+    <h4 id="CALL"><code>CALL</code></h4>
     <code class="flow">
-        {<b>CALL</b>|<b>CALLS</b>} <var>address_var</var> [<b>(</b> <var>p0</var> [<b>,</b> <var>p1</var>] ... <b>)</b>]
+        <b>CALL</b> <var>address_var</var> [<b>(</b> <var>p0</var> [<b>,</b> <var>p1</var>] ... <b>)</b>]
     </code>
     <p>
         Does nothing.
@@ -8173,7 +8129,7 @@ to interrupt a running program.  </p>
     <h5>Notes</h5>
     <ul>
         <li>
-            In GW-BASIC, <code>CALL</code> or <code>CALLS</code> executes a machine language subroutine.
+            In GW-BASIC, <code>CALL</code> executes a machine language subroutine.
         </li>
         <li>
             This statement is not implemented in PC-BASIC.
@@ -8182,10 +8138,10 @@ to interrupt a running program.  </p>
     <h5>Parameters</h5>
     <ul>
         <li>
-            <code><var>address_var</var></code> is a numeric variable name.
+            <code><var>address_var</var></code> is a numeric variable.
         </li>
         <li>
-            <code><var>p0</var>, <var>p1</var>, ...</code> are variable names or array elements.
+            <code><var>p0</var>, <var>p1</var>, ...</code> are variables.
         </li>
     </ul>
     <h5>Errors</h5>
@@ -8194,9 +8150,45 @@ to interrupt a running program.  </p>
             <code><var>address_var</var></code> is a string variable: <samp>Type mismatch</samp>.
         </li>
         <li>
-            <code><var>address_var</var></code> is a literal or expression: <samp>Syntax error</samp>.
+            <code><var>address_var</var></code> is a literal: <samp>Syntax error</samp>.
         </li>
     </ul>
+    </section>
+<hr>
+
+    <section>
+        <h4 id="CALLS"><code>CALLS</code></h4>
+        <code class="flow">
+            <b>CALLS</b> <var>address_var</var> [<b>(</b> <var>p0</var> [<b>,</b> <var>p1</var>] ... <b>)</b>]
+        </code>
+        <p>Does nothing.</p>
+        <h5>Notes</h5>
+        <ul>
+            <li>
+                In GW-BASIC, <code>CALLS</code> executes a FORTRAN subroutine.
+            </li>
+            <li>
+                This statement is not implemented in PC-BASIC.
+            </li>
+        </ul>
+        <h5>Parameters</h5>
+        <ul>
+            <li>
+                <code><var>address_var</var></code> is a numeric variable.
+            </li>
+            <li>
+                <code><var>p0</var>, <var>p1</var>, ...</code> are variables.
+            </li>
+        </ul>
+        <h5>Errors</h5>
+        <ul>
+            <li>
+                <code><var>address_var</var></code> is a string variable: <samp>Type mismatch</samp>.
+            </li>
+            <li>
+                <code><var>address_var</var></code> is a literal: <samp>Syntax error</samp>.
+            </li>
+        </ul>
     </section>
 <hr>
 
@@ -8247,6 +8239,9 @@ to interrupt a running program.  </p>
         <ul>
             <li>
                 <code>CHAIN</code> preserves the <code><a href="#OPTION-BASE">OPTION BASE</a></code> setting.
+            </li>
+            <li>
+                <code>COMMON</code> variables remain <code>COMMON</code> for the next CHAIN.
             </li>
             <li>
                 Only if <code>ALL</code> is specified, <code><a href="DEF-FN">DEF FN</a></code> definitions are preserved.
@@ -8399,8 +8394,8 @@ to interrupt a running program.  </p>
             <b>CLEAR</b> [<var>expr</var>] [<b>,</b> [<var>mem_limit</var>] [<b>,</b> [<var>stack_size</var>] [<b>,</b> <var>video_memory</var>]]]
         </code>
         <p>
-            Clears all variables, arrays,<code><a href="#DEF-FN">DEF FN</a></code> user functions and <code><a href="#DEFINT">DEF<var>type</var></a></code> type definitions.
-            Closes all files.
+            Clears all variables, arrays,<code><a href="#DEF-FN">DEF FN</a></code> user functions, <code><a href="#DEFINT">DEF<var>type</var></a></code> type definitions,
+            and <code><a href="#COMMON">COMMON</a></code> declarations. Closes all files.
             Turns off all sound. Resets <code><a href="#PLAY">PLAY</a></code> state and sets music to foreground.
             Clears all <code><a href="#ON-ERROR">ON ERROR</a></code> traps. Resets <code><a href="#ERR">ERR</a></code> and <code><a href="#ERL">ERL</a></code> to zero. Disables all events.
             Turns <code><a href="#PEN-statement">PEN</a></code> and <code><a href="#STRIG-switch">STRIG</a></code> off. Resets the random number generator.
@@ -8518,7 +8513,7 @@ to interrupt a running program.  </p>
         </p>
         <h5>Parameters</h5>
         <p>
-            <code><var>x</var></code> is a numeric valued expression.
+            <code><var>x</var></code> is a numeric valued expression that determines what is cleared:
         </p>
         <ul>
             <li>
@@ -8531,10 +8526,6 @@ to interrupt a running program.  </p>
                 If <code><var>x</var> = 2</code>, the text view region is cleared.
             </li>
         </ul>
-        <p>
-            The optional argument <code><var>x</var></code> is not available with
-            <code><a href="#--syntax">syntax</a>={pcjr|tandy}</code>.
-        </p>
         <h5>Errors</h5>
         <ul>
             <li>
@@ -8551,14 +8542,6 @@ to interrupt a running program.  </p>
             </li>
             <li>
                 A comma is specified followed by more: <samp>Syntax error</samp>.
-            </li>
-            <li>
-                <code><a href="#--syntax">syntax</a>=pcjr</code> is set
-                and an argument is specified: <samp>Syntax error</samp>.
-            </li>
-            <li>
-                <code><a href="#--syntax">syntax</a>=tandy</code> is set
-                and an argument is specified: <samp>Illegal function call</samp>.
             </li>
             <li>
                 If an error occurs, the screen is not cleared.
@@ -8815,7 +8798,7 @@ to interrupt a running program.  </p>
         <h5>Parameters</h5>
         <ul>
             <li>
-                <code><var>foreground</var></code> is a numeric expression in <code>[1&#8212;15]</code>
+                <code><var>foreground</var></code> is a numeric expression in <code>[0&#8212;15]</code>
                 This sets the new foreground attribute. This applies only to new characters
                 printed or pixels plotted.
             </li>
@@ -8955,66 +8938,27 @@ to interrupt a running program.  </p>
         <ul>
             <li>
                 <code><var>port</var></code> is a numeric expression with a value of <code>1</code> or <code>2</code>. This specifies which
-                serial port (<code>COM1:</code> or <code>COM2:</code>) is trapped. If <code><var>port</var></code> equals <code>0</code>, this statement does nothing.
+                serial port (<code>COM1:</code> or <code>COM2:</code>) is trapped.
             </li>
         </ul>
-        <h5>Errors</h5>
-        <ul>
-            <li>
-                <code><var>port</var></code> a string value: <samp>Type mismatch</samp>.
-            </li>
-            <li>
-                <code><var>port</var></code> is not in <code>[-32768&#8212;32767]</code>: <samp>Overflow</samp>.
-            </li>
-            <li>
-                <code><var>port</var></code> is not in <code>[0&#8212;3]</code>: <samp>Illegal function call</samp>.
-            </li>
-        </ul>
-
     </section>
 <hr>
 
     <section>
         <h4 id="COMMON"><code>COMMON</code></h4>
         <code class="flow">
-            <b>COMMON</b> [<var>var_0</var> [<b>(</b> [<var>index_0</var>] <b>)</b>] [<b>,</b> [<var>var_1</var> [<b>(</b> [<var>index_1</var>] <b>)</b>] ]] ...]
+            <b>COMMON</b> [<var>var_0</var> [<b>,</b> [<var>var_1</var>]] ...]
         </code>
         <p>
             Specifies variables to be passed as common variables to the program called
             with <code><a href="#CHAIN">CHAIN</a></code>.
+            The statement may end with one or more commas.
         </p>
         <h5>Parameters</h5>
         <ul>
             <li>
-                <code><var>var_0</var>, <var>var_1</var>, ...</code> are names of scalar or array variables.
-            </li>
-            <li>
-                <code><var>index_0</var>, <var>index_1</var>, ...</code> are optional number literals; they are ignored.
-            </li>
-        </ul>
-        <h5>Notes</h5>
-        <ul>
-            <li>
-                Array elements with square brackets and an index do not cause an error, but are ignored.
-            </li>
-            <li>
-                <code>COMMON</code> statements are not executed during run time; rather, when a <code>CHAIN</code> command is encountered where <code>ALL</code> is not specified,
-                all <code>COMMON</code> declarations in the program are parsed. As a consequence, the <code>DEFSTR</code>, <code>DEFINT</code>, <code>DEFSNG</code> or <code>DEFDBL</code> settings
-                used are those that are active at the time of execution of the <code>CHAIN</code> statement.
-            </li>
-            <li>
-                <code>COMMON</code> declarations need not be reachable in the program flow in order to be used.
-                They may occur anywhere before or after the <code>CHAIN</code> statement that uses them.
-            </li>
-            <li>
-                Variables may be repeated or occur in multiple <code>COMMON</code> declarations.
-            </li>
-            <li>
-                If the <code>COMMON</code> keyword is not the first element of the statement, the
-                declaration will be ignored. In particular, any <code>COMMON</code> declaration that occurs
-                directly after a <code>THEN</code> or <code>ELSE</code> keyword will not be used. <code>COMMON</code>
-                in the second or later statements of a compound statement after <code>THEN</code> or <code>ELSE</code>
-                will be used regardless of the value of the <code>IF</code> condition.
+                <code><var>var_0</var>, <var>var_1</var>, ...</code> are names of variables or arrays. Array names
+                must be followed by parentheses or square brackets. Brackets may also be mixed: <code>a(]</code> <code>b[)</code>.
             </li>
         </ul>
     </section>
@@ -9085,20 +9029,6 @@ to interrupt a running program.  </p>
                 statement.
             </li>
         </ul>
-        <h5>Notes</h5>
-        <ul>
-            <li>
-                <code>DATA</code> declarations need not be reachable in the program flow in order to be used.
-                They may occur anywhere before or after the <code>READ</code> statement that uses them.
-            </li>
-            <li>
-                If the <code>DATA</code> keyword is not the first element of the statement, the
-                declaration will be ignored. In particular, any <code>DATA</code> declaration that occurs
-                directly after a <code>THEN</code> or <code>ELSE</code> keyword will not be used. <code>DATA</code>
-                in the second or later statements of a compound statement after <code>THEN</code> or <code>ELSE</code>
-                will be used regardless of the value of the <code>IF</code> condition.
-            </li>
-        </ul>
         <h5>Errors</h5>
         <ul>
             <li>
@@ -9116,27 +9046,26 @@ to interrupt a running program.  </p>
         </code>
         <p>
             Sets the system date. <code><var>date</var></code> is a string expression that represents a
-            date in one of the formats: <code><b>"</b><var>mm</var>{<b>-</b>|<b>/</b>}<var>dd</var>{<b>-</b>|<b>/</b>}<var>yy</var><b>"</b></code> or
-            <code><b>"</b><var>mm</var>{<b>-</b>|<b>/</b>}<var>dd</var>{<b>-</b>|<b>/</b>}<var>yyyy</var><b>"</b></code>
+            date in one of the formats: <code>"mm-dd-yyyy"</code>, <code>"mm/dd/yyyy"</code>, <code>"mm-dd-yy"</code>, <code>"mm/dd/yy"</code>.
         </p>
         <p>
             Of these,
         </p>
         <ul>
             <li>
-                <code><var>mm</var></code> may be one or two characters long and must be in <code>[1&#8212;12]</code>.
+                <code>mm</code> must be in <code>[01&#8212;12]</code>.
             </li>
             <li>
-                <code><var>dd</var></code> may be one or two characters long and must be in <code>[1&#8212;31]</code>.
+                <code>dd</code> must be in <code>[01&#8212;31]</code>.
             </li>
             <li>
-                <code><var>yyyy</var></code> must be in <code>[1980&#8212;2099]</code>.
+                <code>yyyy</code> must be in <code>[1980&#8212;2099]</code>.
             </li>
             <li>
-                <code><var>yy</var></code> may be one or two characters long and must be in one of the ranges:
+                <code>yy</code> must be in one of the ranges:
                 <ul>
                     <li>
-                        <code>[0&#8212;77]</code>, interpreted as <code>2000&#8212;2077</code>; or
+                        <code>[00&#8212;77]</code>, interpreted as <code>2000&#8212;2077</code>; or
                     </li>
                     <li>
                         <code>[80&#8212;99]</code>, interpreted as <code>1980&#8212;1999</code>.
@@ -9384,23 +9313,23 @@ to interrupt a running program.  </p>
     <section>
         <h4 id="DIM"><code>DIM</code></h4>
         <code class="flow">
-            <b>DIM</b> <var>name</var> [{<b>(</b>|<b>[</b>} <var>limit_0</var> [<b>,</b> <var>limit_1</var>] ... {<b>)</b>|<b>]</b>}] [<b>,</b> ... ]
+            <b>DIM</b> <var>name</var> {<b>(</b>|<b>[</b>} <var>limit_0</var> [<b>,</b> <var>limit_1</var>] ... {<b>)</b>|<b>]</b>}
         </code>
         <p>
-            Allocates memory for one or more arrays.
+            Allocates memory for arrays.
             The <code>DIM</code> statement also fixes the number of indices of the array.
             An array can only be allocated once; to re-allocate an array, <code><a href="#ERASE">ERASE</a></code> or
             <code><a href="#CLEAR">CLEAR</a></code> must be executed first.
             If an array is first used without a <code>DIM</code> statement, it is automatically allocated with its maximum indices set at <code>10</code>
-            for each index position used.
-            A <code>DIM</code> entry with no brackets and no indices performs no operation. Empty brackets are not allowed.
+            for each index position used. If an array's <code>DIM</code> statement specifies no indices,
+            it is allocated with a single index with maximum <code>10</code>.
             The least index allowed is determined by <code><a href="#OPTION-BASE">OPTION BASE</a></code>.
         </p>
         <h5>Parameters</h5>
         <ul>
             <li>
-                <code><var>name</var>, ...</code> are legal variable names
-                specifying the arrays to be allocated.
+                <code><var>name</var></code> is a legal variable name
+                specifying the array to be allocated.
             </li>
             <li>
                 <code><var>limit_0</var>, <var>limit_1</var>, ...</code> are numeric
@@ -9955,14 +9884,10 @@ to interrupt a running program.  </p>
             has become greater than <code><var>stop</var></code>. Execution then continues at the statement
             following <code>NEXT</code>. The value of <code><var>loop_var</var></code> equals <code><var>stop</var>+<var>step</var></code> after the loop.
         </p>
-        <p>
-            <code><var>start</var></code>, <code><var>stop</var></code> and <code><var>step</var></code> are evaluated only once and the resulting
-            values are used throughout the loop.
-        </p>
         <h5>Parameters</h5>
         <ul>
             <li>
-                <code><var>loop_var</var></code> is an integer or single-precision variable.
+                <code><var>loop_var</var></code> is a numeric variable.
             </li>
             <li>
                 <code><var>start</var></code>, <code><var>stop</var></code> and <code><var>step</var></code> are numeric expressions.
@@ -9978,10 +9903,6 @@ to interrupt a running program.  </p>
             <li>
                 <code><var>loop_var</var></code> is a string variable or <code><var>start</var></code>,
                 <code><var>stop</var></code>, or <code><var>end</var></code> has a string value:
-                <samp>Type mismatch</samp>.
-            </li>
-            <li>
-                <code><var>loop_var</var></code> is a double-precision variable:
                 <samp>Type mismatch</samp>.
             </li>
             <li>
@@ -10039,7 +9960,7 @@ to interrupt a running program.  </p>
             </li>
             <li>
                 <code><var>file_number</var></code> is not the number of an open file:
-                <samp>Bad file mode</samp>.
+                <samp>Bad file number</samp>.
             </li>
             <li>
                 <code><var>file_number</var></code> is open under a mode other than <code>RANDOM</code>:
@@ -10950,43 +10871,29 @@ to interrupt a running program.  </p>
     <section>
         <h4 id="KILL"><code>KILL</code></h4>
         <code class="flow">
-            <b>KILL</b> <var>filter_spec</var>
+            <b>KILL</b> <var>file_spec</var>
         </code>
         <p>
-            Deletes one or more files on a disk device.
+            Deletes a file on a disk device.
         </p>
         <h5>Parameters</h5>
         <ul>
             <li>
-                The string expression <code><var>filter_spec</var></code> is a
-                valid <a href="#filespec">file specification</a> indicating the files to delete.
-                Wildcards are allowed. See <a href="#FILES"><code>FILES</code></a> for a description
-                of wildcards.
-            </li>
-        </ul>
-        <h5>Notes</h5>
-        <ul>
-            <li>
-                Be very careful with the use of wildcards in this statement: the DOS matching rules may
-                not be the same as what is usual on your operating system, which could result in
-                unexpected files being deleted.
-            </li>
-            <li>
-                This statement may not delete hidden file and files that do not have short names
-                which are legal DOS names. However, this behaviour is not guaranteed
-                so you must not depend on it.
+                The string expression <code><var>file_spec</var></code> is a
+                valid <a href="#filespec">file specification</a> indicating the file to delete.
+                It must point to an existing file on a disk device.
             </li>
         </ul>
         <h5>Errors</h5>
         <ul>
             <li>
-                <code><var>filter_spec</var></code> is a numeric value: <samp>Type mismatch</samp>.
+                <code><var>file_spec</var></code> has a number value: <samp>Type mismatch</samp>.
             </li>
             <li>
-                A file with a base name equal to that of a file matching <code><var>filter_spec</var></code> is open: <samp>File already open</samp>
+                The file <code><var>file_spec</var></code> is open: <samp>File already open</samp>
             </li>
             <li>
-                No file matches <code><var>filter_spec</var></code> : <samp>File not found</samp>
+                The file or path <code><var>file_spec</var></code> does not exist: <samp>File not found</samp>
             </li>
             <li>
                 The user has no write permission: <samp>Permission denied</samp>
@@ -11252,7 +11159,7 @@ to interrupt a running program.  </p>
                 <code>65531</code>&#8212;<code>65535</code> inclusive.
                 By default, PC-BASIC's <code>LIST</code> does show these lines. However,
                 showing them can be disabled with the option
-                <code><a href="#--hide-listing">hide-listing=65530</a></code>.
+                <code><a href="#--strict-hidden-lines">strict-hidden-lines</a></code>.
             </li>
         </ul>
         <h5>Parameters</h5>
@@ -11308,7 +11215,7 @@ to interrupt a running program.  </p>
                 <code>65531</code>&#8212;<code>65535</code> inclusive.
                 By default, PC-BASIC's <code>LLIST</code> does show these lines. However,
                 showing them can be disabled with the option
-                <code><a href="#--hide-listing">hide-listing=65530</a></code>.
+                <code><a href="#--strict-hidden-lines">strict-hidden-lines</a></code>.
             </li>
         </ul>
         <h5>Parameters</h5>
@@ -11346,6 +11253,12 @@ to interrupt a running program.  </p>
             <li>
                 The string expression <code><var>file_spec</var></code> is a valid <a href="#filespec">file specification</a> indicating
                 the file to read the program from.
+            </li>
+        </ul>
+        <h5>Notes</h5>
+        <ul>
+            <li>
+                Refer to
             </li>
         </ul>
         <h5>Errors</h5>
@@ -11466,13 +11379,6 @@ to interrupt a running program.  </p>
                 <code><var>record_1</var></code>. An non-matching <code>UNLOCK</code> will raise
                 <samp>Permission denied</samp>.
             </li>
-            <li>
-                To check if another open file is the same file, PC-BASIC only looks at the base name
-                of the file, i.e. its DOS name without directories. As a consequence, if a file <samp>"test.txt"</samp>
-                is open and locked, an attempt to lock a file <samp>"dir\test.txt"</samp> will fail, even if these are
-                different files. Conversely, if two file names are different but point to the same file in the
-                file system (for example due to file system links), then these will be considered as different files by BASIC.
-            </li>
         </ul>
         <h5>Errors</h5>
         <ul>
@@ -11489,7 +11395,7 @@ to interrupt a running program.  </p>
                 <code><var>file_num</var></code> is not an open file: <samp>Bad file number</samp>.
             </li>
             <li>
-                <code>LOCK</code> (part of) a file with the same name as a file already locked: <samp>Permission denied</samp>.
+                <code>LOCK</code> (part of) a file already locked: <samp>Permission denied</samp>.
             </li>
             <li>
                 <code><var>record_0</var></code> or <code><var>record_1</var></code> is not in <code>[1&#8212;2^25-2]</code>: <samp>Bad record number</samp>.
@@ -11752,7 +11658,7 @@ to interrupt a running program.  </p>
                 <code><var>old_name</var></code> does not exist: <samp>File not found</samp>.
             </li>
             <li>
-                A file with a base name equal to that of <code><var>old_name</var></code> or <code><var>new_name</var></code> is open: <samp>File already open</samp>.
+                <code><var>old_name</var></code> is open: <samp>File already open</samp>.
             </li>
             <li>
                 <code><var>new_name</var></code> exists: <samp>File already exists</samp>.
@@ -12247,13 +12153,6 @@ to interrupt a running program.  </p>
             the locks are only implemented internally. Whether other processes may access
             the file will depend on the host OS.
         </p>
-        <p>
-            To check if another open file is the same file, PC-BASIC only looks at the base name
-            of the file, i.e. its DOS name without directories. As a consequence, if a file <samp>"test.txt"</samp>
-            is open and locked, an attempt to lock a file <samp>"dir\test.txt"</samp> will fail, even if these are
-            different files. Conversely, if two file names are different but point to the same file in the
-            file system (for example due to file system links), then these will be considered as different files by BASIC.
-        </p>
         <h5 id="filespec">File specifications</h5>
         <p>
             A <dfn>file specification</dfn> <code><var>file_spec</var></code>
@@ -12300,7 +12199,7 @@ to interrupt a running program.  </p>
                     given by the preceding path, or the current directory if no preceding path is given.
                 </p>
                 <p>
-                    If the file name provided does not contain any dots, the <code><a href="#LOAD">LOAD</a></code>,
+                    The <code><a href="#LOAD">LOAD</a></code>,
                     <code><a href="#SAVE">SAVE</a></code>,
                     <code><a href="#BLOAD">BLOAD</a></code>,
                     <code><a href="#BSAVE">BSAVE</a></code>,
@@ -12308,10 +12207,10 @@ to interrupt a running program.  </p>
                     <code><a href="#MERGE">MERGE</a></code>,
                     <code><a href="#RUN">RUN</a></code>, and
                     <code><a href="#LIST">LIST</a></code> statements
-                    append the default
-                    extension <code>.BAS</code>. To refer
+                    (but not <code><a href="#OPEN">OPEN</a></code>) implicitly add a default
+                    extension <code>.BAS</code> if no extension is specified. To refer
                     to a file name without an extension, the file specification should
-                    end in a dot <code>.</code>. For other statements, appending a dot is allowed but not required.
+                    end in a dot <code>.</code>.
                 </p>
                 <h5>Compatibility notes</h5>
                 <p>
@@ -12326,41 +12225,56 @@ to interrupt a running program.  </p>
                     notably, this is the case on DOSBox.
                 </p>
                 <p>
-                    In order to allow access to files whose name on the host system does
-                    not conform to DOS standards while maintaining compatibility with GW-BASIC,
-                    PC-BASIC will follow these steps to match DOS-style file names to host file names:
+                    Since disk devices are mapped onto directories on the host system,
+                    DOS style names need to be mapped onto file names following the
+                    host system's (usually much less restrictive) standards.
+                    To allow access to files whose name on the host system does
+                    not conform to DOS standards, the following matching procedures are observed.
                 </p>
-                <ol>
-                    <li>
-                        Look for a file with the name as provided.
-                        This can be a long file name which may contain non-permissible characters and which will be case sensitive if
-                        your file system is.
-                    </li>
-                    <li>
-                        If such a file is not found, it will truncate the name
-                        provided to all-uppercase 8.3 format and look for an exact match.
-                        The truncated name consists of the first 8 characters before the first dot,
-                        followed by the first three characters after the first dot.
-                        If the resulting file name contains non-permissible characters, an error will be raised.
-                    </li>
-                    <li>
-                        Look for 8.3 names in mixed case which match the name
+                <dl>
+                    <dt>
+                        <code><a href="#OPEN">OPEN</a></code>,
+                        <code><a href="#KILL">KILL</a></code>,
+                        <code><a href="#NAME">NAME</a></code>,
+                        <code><a href="#CHDIR">CHDIR</a></code>,
+                        <code><a href="#MKDIR">MKDIR</a></code>,
+                        <code><a href="#RMDIR">RMDIR</a></code>
+                    </dt>
+                    <dd>
+                        PC-BASIC will first look for a file with the name
+                        exactly as provided. This can be a long name and will be case sensitive if
+                        your file system is. If such a file is not found, it will truncate the name
+                        provided to 8.3 format and convert to all uppercase. If that exact name is
+                        not found, it will look for 8.3 names in mixed case which match the name
                         provided in a case-insensitive way. Such files are searched in lexicographic
-                        order. File names longer than 8.3 will not be matched, unless their name is entered exactly.
+                        order. Files names longer than 8.3 will not be matched, unless their name is entered exactly.
                         On Windows, the name matched can be a short filename as well as a
                         long filename provided it is of 8.3 length &#8212; it may, for example, contain
                         spaces and thus not be a valid Windows short file name.
-                    </li>
-                </ol>
-                <p>
-                    If the file name provided ends in a single dot and contains no other dots,
-                    PC-BASIC will first match the name as provided; if this is not found, it will match
-                    the name as provided but without the single dot. The 8.3 format of such a file name will match
-                    file names with and without the dot, in lexicographic order.
-                </p>
+                    </dd>
+                    <dt>
+                        <code><a href="#LOAD">LOAD</a></code>,
+                        <code><a href="#SAVE">SAVE</a></code>,
+                        <code><a href="#BLOAD">BLOAD</a></code>,
+                        <code><a href="#BSAVE">BSAVE</a></code>,
+                        <code><a href="#CHAIN">CHAIN</a></code>,
+                        <code><a href="#MERGE">MERGE</a></code>,
+                        <code><a href="#RUN">RUN</a></code>,
+                        <code><a href="#LIST">LIST</a></code>
+                    </dt>
+                    <dd>
+                        No attempt is made to find an exact
+                        match. Instead, the search will first match the all-caps 8.3 version of the
+                        name and continue in lexicographic order as above. If no extension is
+                        specified, the extension <code>.BAS</code> will be implicitly added. To load a program
+                        with no extension, end the filename in a dot. On file systems without
+                        short filenames, it is not possible to load a program if its filename is
+                        longer than 8.3, contains non-permissible characters or ends in a dot.
+                    </dd>
+                </dl>
                 <p>
                     If no matching file is found for an output file name, a new file will be
-                    created with an all-uppercase 8.3 file name.
+                    created with an all-caps 8.3 file name.
                 </p>
             </dd>
             <dt>
@@ -12585,7 +12499,7 @@ to interrupt a running program.  </p>
                 <samp>Bad file number</samp>.
             </li>
             <li>
-                A file with the same name is already open for <code>OUTPUT</code> or <code>APPEND</code>: <samp>File already open</samp>.
+                A file is already open for <code>OUTPUT</code> or <code>APPEND</code>: <samp>File already open</samp>.
                 This is only raised for <code>COMn:</code>, <code>CASn:</code> and disk devices.
             </li>
             <li>
@@ -12753,7 +12667,7 @@ to interrupt a running program.  </p>
         <ul>
             <li>
                 <code><var>x</var></code>, <code><var>y</var></code> are numeric expressions in the range <code>[-32768&#8212;32767]</code>
-                If <code>STEP</code> is specified, <code><var>x</var></code> <code><var>y</var></code> are offsets
+                If STEP is specified, <code><var>x</var></code> <code><var>y</var></code> are offsets
                 from the current position. If the seed point is outside the visible screen
                 area, no flood fill is performed.
             </li>
@@ -13303,8 +13217,7 @@ to interrupt a running program.  </p>
         <h5>Parameters</h5>
         <ul>
             <li>
-                <code><var>int_array_name</var></code> is a single- or multidimensional
-                array of integers (<code>%</code>) that will supply the
+                <code><var>int_array_name</var></code> is an array of integers (<code>%</code>) that will supply the
                 new values for the palette.
             </li>
             <li>
@@ -13312,16 +13225,9 @@ to interrupt a running program.  </p>
                 indicates at which index in the array to start mapping to the palette.
             </li>
         </ul>
-        <h5>Notes</h5>
-        <ul>
-            <li>
-                Array values are assigned to palette entries in the order in which they are stored in memory.
-                See <a href="#arrays">Arrays</a> for details about the layout of arrays in memory.
-            </li>
-            <li>
-                If an array entry has value <code>-1</code>, the matching attribute is left unchanged.
-            </li>
-        </ul>
+        <p>
+            If an array entry has value <code>-1</code>, the matching attribute is left unchanged.
+        </p>
         <h5>Errors</h5>
         <ul>
             <li>
@@ -13541,10 +13447,8 @@ to interrupt a running program.  </p>
                     <td>
                         Turns on background mode; sound commands exit without waiting for the
                         music to finish. The music keeps playing while other commands are
-                        executed. There can be up to 32 notes in the background music queue;
-                        if more notes are played, <code>PLAY</code> will block until there are only 32 left.
-                        Note that the gaps between notes in the default articulation and in staccato
-                        are counted as separate notes on the queue.
+                        executed. There can be up to 16 notes in the background music queue;
+                        if more notes are played, <code>PLAY</code> will block until there are only 16 left.
                     </td>
                 </tr>
                 <tr>
@@ -13590,9 +13494,9 @@ to interrupt a running program.  </p>
                     <code><b>V</b><var>n</var></code>
                 </td>
                 <td>
-                    Set the volume to <code><var>n</var></code>, in the range <code>[-1&#8212;15]</code>. <code>-1</code> means full volume.
-                    If <code><a href="#SOUND-switch">SOUND ON</a></code>
-                    has not been executed, this has no effect.
+                    Set the volume to <code><var>n</var></code>, in the range <code>[0&#8212;15]</code>.
+                    On <code><a href="#--syntax">syntax</a>=pcjr</code>, if <code><a href="#SOUND-switch">SOUND ON</a></code>
+                    has not been executed, this has no effect. On <code><a href="#--syntax">syntax</a>=tandy</code> it does have.
                 </td>
             </tr>
         </table>
@@ -13633,8 +13537,8 @@ to interrupt a running program.  </p>
                 No MML string is specified: <samp>Missing operand</samp>.
             </li>
             <li>
-                If <code>SOUND ON</code> has not been executed, using the three-voice syntax
-                will raise <samp>Syntax error</samp>.
+                On PCjr, if <code>SOUND ON</code> has not been executed, using the three-voice syntax
+                will raise <samp>Syntax error</samp>. This is not the case on Tandy.
             </li>
         </ul>
     </section>
@@ -14099,10 +14003,6 @@ to interrupt a running program.  </p>
                 If an error is raised, the output before the error was encountered is
                 printed as normal.
             </li>
-            <li>
-                In GW-BASIC, when formatting a number with a dollar sign, if the number is in the range <code>[-10000&#8212;-32767]</code> and does not fit in the width of the number field,
-                the minus sign is omitted. This is not implemented in PC-BASIC.
-            </li>
         </ul>
         <h5>Errors</h5>
         <ul>
@@ -14164,7 +14064,7 @@ to interrupt a running program.  </p>
             </li>
             <li>
                 <code><var>file_number</var></code> is not the number of an open file:
-                <samp>Bad file mode</samp>.
+                <samp>Bad file number</samp>.
             </li>
             <li>
                 <code><var>file_number</var></code> is open under a mode other than <code>RANDOM</code>:
@@ -14399,8 +14299,8 @@ to interrupt a running program.  </p>
         <h5>Notes</h5>
         <ul>
             <li>
-                Line numbers afer the following keywords will be renumbered:
-                <code><a href="#AUTO">AUTO</a></code>, <code><a href="#EDIT">EDIT</a></code>,
+                The following keywords can reference line numbers, which will be renumbered
+                by <code>RENUM</code>: <code><a href="#AUTO">AUTO</a></code>, <code><a href="#EDIT">EDIT</a></code>,
                 <code><a href="#ELSE">ELSE</a></code>, <code><a href="#ERL">ERL</a></code>,
                 <code><a href="#DELETE">DELETE</a></code>, <code><a href="#GOSUB">GOSUB</a></code>,
                 <code><a href="#GOTO">GOTO</a></code>, <code><a href="#LIST">LIST</a></code>,
@@ -14410,20 +14310,19 @@ to interrupt a running program.  </p>
                 <code><a href="#THEN">THEN</a></code>.
             </li>
             <li>
-                Any line numbers in <code><a href="#CHAIN">CHAIN</a></code> statements will not be
-                renumbered; note that these line numbers refer to another program.
-            </li>
-            <li>
-                All arguments of <code>RENUM</code> or <code>AUTO</code> statements in a program will be renumbered,
-                including any line number offsets or increments, even though that does not make much sense.
+                One keyword contains line numbers in a different program, which will not be
+                renumbered: <code><a href="#CHAIN">CHAIN</a></code>. However, a line number
+                in a <code>RUN</code> statement that
+                opens a new file <em>will</em> be renumbered, and incorrectly so. Furthermore, any <code>RENUM</code>
+                or <code>AUTO</code> statements in a program will have all their arguments 'renumbered',
+                including any line number offsets or increments. However silly, this agrees with GW-BASIC's behaviour.
             </li>
             <li>
                 A zero line number following the keywords <code>ERROR GOTO</code> will not be renumbered.
             </li>
             <li>
-                If a referenced line number does not exist in the program, a
-                message <samp>Undefined line <var>ref</var> in <var>old_line</var></samp>
-                is printed. Here, <code><var>old_line</var></code>
+                If a referenced line number does not exist in the program, the statement prints a
+                message (not an error) <code>Undefined line <var>ref</var> in <var>old_line</var></code> where <code><var>old_line</var></code>
                 is the line number prior to renumbering. The referenced line number will be
                 left unchanged, but the line's old line number will be renumbered.
             </li>
@@ -14564,13 +14463,10 @@ to interrupt a running program.  </p>
                 <code><var>dir_spec</var></code> has a numeric value: <samp>Type mismatch</samp>.
             </li>
             <li>
-                <code><var>dir_spec</var></code> is an empty string: <samp>Bad file name</samp>.
+                <code><var>dir_spec</var></code> is an empty string: <samp>Bad file name</samp> .
             </li>
             <li>
-                No matching path is found: <samp>Path not found</samp>.
-            </li>
-            <li>
-                Directory to remove is not empty: <samp>Path/File access error</samp>.
+                No matching path is found: <samp>Path not found</samp> .
             </li>
         </ul>
     </section>
@@ -14680,7 +14576,6 @@ to interrupt a running program.  </p>
         <ul>
             <li>
                 If <code><b>,A</b></code> is specified, the program will be saved in plain text format.
-                In this case, program execution will stop and control will be returned to the user.
             </li>
             <li>
                 If <code><b>,P</b></code> is specified, the program will be saved in <a href="#protected-file-format">protected format</a>.
@@ -14712,7 +14607,7 @@ to interrupt a running program.  </p>
                 <samp>Bad file name</samp> (on disk devices).
             </li>
             <li>
-                <code><a href="#--hide-protected">hide-protected</a></code> is enabled, the current program is protected and <code>,P</code> is not specified:
+                <code><a href="#--strict-protect">strict-protect</a></code> is enabled, the current program is protected and <code>,P</code> is not specified:
                 <samp>Illegal function call</samp>.
             </li>
         </ul>
@@ -14971,13 +14866,11 @@ to interrupt a running program.  </p>
             <b>SHELL</b> [<var>command</var>]
         </code>
         <p>
-            Starts an operating system subshell on the console.
+            Starts a subshell on the console.
+            The type of shell is determined by your OS. On Unix systems, an <code>sh</code> shell is
+            started. On Windows systems, a <code>CMD.EXE</code> shell is started.
             If <code><var>command</var></code> is specified, the command is executed on the shell and execution
             returns to the program.
-        </p>
-        <p>
-            To enable this statement, the <code><a href="#--shell">shell</a></code> option must be set to
-            a valid command interpreter.
         </p>
         <h5>Parameters</h5>
         <ul>
@@ -14988,14 +14881,14 @@ to interrupt a running program.  </p>
         <h5>Notes</h5>
         <ul>
             <li>
+                If the <code><a href="#--shell">shell</a>=native</code> option is not specified, this statement does nothing.
+            </li>
+            <li>
             Be careful when enabling this command, as it allows the running BASIC program full access to your files and operating system.
             </li>
         </ul>
         <h5>Errors</h5>
         <ul>
-            <li>
-                <code><a href="#--shell">shell</a></code> option is not specified: <samp>Illegal function call</samp>.
-            </li>
             <li>
                 <code><var>command</var></code> has a number value: <samp>Type mismatch</samp>.
             </li>
@@ -15034,12 +14927,11 @@ to interrupt a running program.  </p>
                 <code><var>duration</var></code> is a numeric expression in <code>[0&#8212;65535]</code>.
             </li>
             <li>
-                <code><var>volume</var></code> is a numeric expression in <code>[-1&#8212;15]</code>. 0 is silent, 15 is full
-                volume; every step less reduces the volume by 2 dB. -1 is also full volume.
-                (For <code>syntax={pcjr | tandy}</code>).
+                <code><var>volume</var></code> is a numeric expression in [0, 15]. 0 is silent, 15 is full
+                volume; every step less reduces the volume by 2 dB. (For <code>syntax={pcjr | tandy}</code>)
             </li>
             <li>
-                <code><var>voice</var></code> is a numeric expression in <code>[0&#8212;2]</code>, indicating which of the
+                <code><var>voice</var></code> is a numeric expression in [0, 2], indicating which of the
                 three tone voice channels is used for this sound. (For <code><a href="#--syntax">syntax</a>={pcjr | tandy}</code>)
             </li>
         </ul>
@@ -15107,8 +14999,8 @@ to interrupt a running program.  </p>
             <b>SOUND</b> {<b>ON</b>|<b>OFF</b>}
         </code>
         <p>
-            Switches the external speaker on or off and toggles the availability of advanced sound capabilities on PCjr and Tandy. This includes 3-voice
-            sound, noise generation and volume control. Clears the background music queue.
+            Toggles the availability of advanced sound capabilities on PCjr and Tandy. This includes 3-voice
+            sound, noise generation and volume control.
         </p>
         <h5>Notes</h5>
         <ul>
@@ -15116,7 +15008,8 @@ to interrupt a running program.  </p>
                 Only available with <code>syntax={pcjr | tandy}</code>.
             </li>
             <li>
-                On PC-BASIC, both the
+               On PCjr and Tandy computers, <code>SOUND ON</code> would turn on the external speaker as
+                well as make advanced sound capabilities available. On PC-BASIC, both the
                 internal and the external speaker are emulated through the same sound
                 system.
             </li>
@@ -15235,15 +15128,14 @@ to interrupt a running program.  </p>
         <h5>Parameters</h5>
         <ul>
             <li>
-                <code><var>var_0</var></code> and <code><var>var_1</var></code> are variables or array elements of
-                the same type. <code><var>var_1</var></code>  must have been previously defined.
+                <code><var>var_0</var></code> and <code><var>var_1</var></code> are previously defined variables of
+                the same type.
             </li>
         </ul>
         <h5>Errors</h5>
         <ul>
             <li>
-                <code><var>var_1</var></code>is undefined: <samp>Illegal function call</samp>.
-                Note that no error is raised if <code><var>var_0</var></code> is undefined, and that after this error both variables will be defined.
+                <code><var>var_0</var></code> or <code><var>var_1</var></code> is undefined: <samp>Illegal function call</samp>.
             </li>
             <li>
                 The types of <code><var>var_0</var></code> and <code><var>var_1</var></code> are not the same: <samp>Type mismatch</samp>.
@@ -15276,7 +15168,7 @@ to interrupt a running program.  </p>
             <b>TERM</b>
         </code>
         <p>
-            Load and run the program defined by the <code><a href="#--term">term</a></code> option.
+            Load and run the program defined by the <code><a href="#--pcjr-term">pcjr-term</a></code> option.
             By default, as on the IBM PCjr, this is a
             built-in serial terminal emulator application.
             This statement is only available with
@@ -15285,7 +15177,7 @@ to interrupt a running program.  </p>
         <h5>Errors</h5>
         <ul>
             <li>
-                If <code><a href="#--term">term</a></code> is not set,
+                If <code><a href="#--pcjr-term">pcjr-term</a></code> is not set,
                 this statement raises <code>Internal error</code>.
             </li>
             <li>
@@ -15309,9 +15201,8 @@ to interrupt a running program.  </p>
         <ul>
             <li>
                 Time is a string expression
-                of the form <code><b>"</b><var>HH</var>{<b>:</b>|<b>.</b>}<var>mm</var>{<b>:</b>|<b>.</b>}<var>ss</var><b>"</b></code> where
-                <code>0 &lt;= <var>HH</var> &lt; 24</code>, <code>0 &lt;= <var>mm</var> &lt; 60</code> and <code>0 &lt;= <var>ss</var> &lt; 60</code>.
-                Each position may have one or two characters.
+                of the form <code>"HH:mm:ss"</code> where
+                <code>00&lt;=HH&lt;24</code>, <code>00&lt;=mm&lt;60</code> and <code>00&lt;=ss&lt;60</code>.
             </li>
         </ul>
         <h5>Notes</h5>
@@ -15755,7 +15646,7 @@ to interrupt a running program.  </p>
     <section>
         <h4 id="WRITE"><code>WRITE</code></h4>
         <code class="flow">
-            <b>WRITE</b> [<b>#</b> <var>file_num</var><b>,</b>] [<var>expr_0</var> [{<b>,</b>|<b>;</b>} <var>expr_1</var>] ... ]
+            <b>WRITE</b> [<b>#</b> <var>file_num</var><b>,</b>] <var>expr_0</var> [{<b>,</b>|<b>;</b>} <var>expr_1</var>] ...
         </code>
         <p>
             Writes values to a file or the screen in machine-readable form. Values are
@@ -16144,9 +16035,8 @@ to interrupt a running program.  </p>
                     <p>
                         An attempt is made to open a file to a file number that is already in use;
                         or an attempt is made to open a file for <code>OUTPUT</code> or <code>APPEND</code>  on a serial, disk or cassette device
-                        when a file (or, on a disk device, a file with the same name) is already open for <code>OUTPUT</code> or <code>APPEND</code> on that device;
-                        or a <a href="#KILL"><code>KILL</code></a> or <a href="#NAME"><code>NAME</code></a> statement is executed on a disk file
-                        when a file with the same name is open on the same device.
+                        when a file is already open for <code>OUTPUT</code> or <code>APPEND</code> on that device;
+                        or a <a href="#KILL"><code>KILL</code></a> or <a href="#NAME"><code>NAME</code></a> statement is executed on an open disk file.
                     </p>
                 </td>
             </tr>
@@ -16803,8 +16693,8 @@ to interrupt a running program.  </p>
             <li><code>FF97</code> <code>PEEK</code></li>
             <li><code>FF98</code> <code>SPACE$</code></li>
             <li><code>FF99</code> <code>OCT$</code></li>
-            <li><code>FF9B</code> <code>LPOS</code></li>
             <li><code>FF9A</code> <code>HEX$</code></li>
+            <li><code>FF9B</code> <code>LPOS</code></li>
             <li><code>FF9C</code> <code>CINT</code></li>
             <li><code>FF9D</code> <code>CSNG</code></li>
             <li><code>FF9E</code> <code>CDBL</code></li>
@@ -16823,6 +16713,13 @@ to interrupt a running program.  </p>
         <ul class="compact10">
             <li><code>FEA4</code> <code>NOISE</code></li>
             <li><code>FEA6</code> <code>TERM</code></li>
+        </ul>
+        <p>
+            The following additional reserved word is activated by the <code><a href="#--debug">debug</a></code> option.
+            It is specific to PC-BASIC and not present in GW-BASIC.
+        </p>
+        <ul class="compact10">
+            <li><code>FFFF</code> <code>DEBUG</code></li>
         </ul>
         <h5 id="internal-use-tokens">Internal use tokens</h5>
         <p>
@@ -17126,10 +17023,10 @@ to interrupt a running program.  </p>
                     </tr>
                     <tr>
                         <td>
-                            31 bits
+                            4 bytes
                         </td>
                         <td>
-                            30 1s followed by a 0.
+                            All <code>FF</code>
                         </td>
                         <td>
                             End of record marker.
@@ -17297,82 +17194,6 @@ to interrupt a running program.  </p>
     </section>
     <hr>
 
-    <section>
-        <h3 id="emulator-file-formats">Emulator file formats</h3>
-        <p>
-            PC-BASIC uses a number of file formats to support its emulation of
-            legacy hardware, which are documented in this section.
-            These file formats are not used by GW-BASIC or
-            contemporary software.
-        </p>
-        <h4 id="hex-file-format">HEX font file format</h4>
-        <p>
-            The HEX file format for bitfonts was developed by Roman Czyborra for the
-            GNU Unifont package. PC-BASIC uses this file format to store its fonts.
-        </p>
-        <p>
-            A HEX file is an ASCII text file, consisting of lines terminated by <code><i>LF</i></code>.
-            Each line of this file is one of the following:
-        </p>
-        <ul>
-            <li>
-                Empty
-            </li>
-            <li>
-                A comment, starting with a <code>#</code> character.
-            </li>
-            <li>
-                A 4 or 6-character hexadecimal Unicode code point, followed by a colon,
-                followed by a 16- or 32-character hexadecimal number representing the glyph.
-                A 16-character number represents a halfwidth (8x16) glyph, with
-                each row of 8 pixels represented by two hexadecimal characters.
-                A 32-character number represents a fullwidth (16x16) glyph, with
-                each row of 16 pixels represented by four hexadecimal characters.
-            </li>
-        </ul>
-        <p>
-            PC-BASIC also encodes 8- and 14-pixel high fonts in this manner; these
-            are encoded as 16-bit high fonts with the remaining rows set to zero.
-        </p>
-        <h4 id="ucp-file-format">UCP code page file format</h4>
-        <p>
-            Unicode-codepage mappings are stored in UCP files.
-        </p>
-        <p>
-            A UCP file is an ASCII text file, consisting of lines terminated by <code><i>LF</i></code>.
-            Each line of this file is one of the following:
-        </p>
-        <ul>
-            <li>
-                Empty
-            </li>
-            <li>
-                A comment, starting with a <code>#</code> character.
-            </li>
-            <li>
-                A 2- or 4-character hexadecimal codepage point, followed by a colon, followed
-                by a comma-separated list of 4- or 6-character hexadecimal Unicode code points.
-                If more than one Unicode code point is provided for a codepage point, the code points
-                must combine into a single glyph.
-            </li>
-        </ul>
-        <h4 id="cas-file-format">CAS tape file format</h4>
-        <p>
-            A CAS file is a bit-level representation of cassette data introduced by the PCE emulator.
-            CAS-files produced by PC-BASIC start with the characters
-            <code>PC-BASIC tape<i>EOF</i></code>. This sequence is followed by seven 0 bits,
-            followed by the tape contents. The seven zero bits are intended to
-            ensure that the tape contents are byte-aligned; the one bit is made up
-            by the synchronisation bit following the pilot wave.
-        </p>
-        <p>
-            Note that PC-BASIC does not require the introductory sequence to read
-            a CAS-file correctly, nor does it require the contents of a CAS-file
-            to be byte-aligned. However, new files produced by PC-BASIC follow
-            this convention.
-        </p>
-    </section>
-    <hr>
 
     <section>
         <h3 id="character-codes">Character codes</h3>
@@ -17579,30 +17400,10 @@ to interrupt a running program.  </p>
             This table shows the characters that
             are produced by the 256 single-byte code points when
             the DOS Latin USA codepage 437 is loaded, which is the default.
-            Other codepages can be loaded to assign other characters to these
-            code points.
+            Code points <code>&amp;h00</code> and <code>&amp;h20</code>&#8211;<code>&amp;h7E</code>
+            are fixed while the other characters, as well as any double-byte characters,
+            can be redefined by loading another codepage.
         </p>
-        <ul>
-            <li>
-                Code point <code>&amp;h00</code> cannot be redefined.
-            </li>
-            <li>
-                Redefining characters
-                in the printable ASCII code point range <code>&amp;h20</code>&#8211;<code>&amp;h7E</code>
-                will result in a different glyph being shown on the screen, but the
-                character will continue to be treated as the corresponding ASCII character.
-                It will retain its ASCII value when transcoded into UTF-8. This happens,
-                for example, with the Yen sign (<code>&#165;</code>) which is
-                assigned to ASCII code point <code>&amp;h5C</code> in code page 932:
-                in that codepage it is treated as if it were a backslash (<code>\</code>).
-            </li>
-            <li>
-                All other characters can be redefined by loading another <a href="#codepage">codepage</a>
-                with the <a href="#--codepage">codepage</a> option.
-                This will affect both the visual glyphs and Unicode
-                character values of those characters.
-            </li>
-        </ul>
         <div class="scrollable">
             <table>
                 <tr>
@@ -19039,7 +18840,7 @@ to interrupt a running program.  </p>
         <h4 id="memory-data">Data segment</h4>
         <p>
             The data segment is organised as follows. The addresses may vary depending on
-            the settings of various options; given here are the default values for GW-BASIC 3.23.
+            the settings of various options; given here are the default values for GW-BASIC 3.21.
         </p>
         <table>
             <tr>
@@ -19076,7 +18877,6 @@ to interrupt a running program.  </p>
                     File blocks: one for the program plus one for each file allowed by <code><a href="#--max-files">--max-files</a><code>.
                 </code></code></td>
             </tr>
-            <tr>
                 <td>
                     <code>&amp;h126D</code>
                 </td>
@@ -19086,7 +18886,7 @@ to interrupt a running program.  </p>
                 <td>
                     Program code. An empty program uses 3 bytes.
                 </td>
-            </tr>
+            
             <tr>
                 <td>
                     <code>&amp;h1270 + <var>c</var></code>
@@ -19142,219 +18942,40 @@ to interrupt a running program.  </p>
                 </td>
             </tr>
         </table>
-
     </section>
     <hr>
 
-</article>
-<!--
-    PC-BASIC documentation
-    Copyright (c) 2014-2018 Rob Hagemans
-    This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
-    http://creativecommons.org/licenses/by-sa/4.0/legalcode
--->
-
-<article>
-    <h2 id="dev">Developer's guide</h2>
-
-    <p>
-        <em>The features described in this guide are intended for Python developers only. They are experimental, may not work as expected,
-        and may be removed from future releases without warning. You may not be able to get help if you have any problems.
-        Luckily, none of the features described here are needed for the normal functioning of PC-BASIC.</em>
-    </p>
-    <section>
-        <h3 id="session-api">Session API</h3>
-        <p>
-            PC-BASIC can be loaded as a package from Python, which makes it possible to call BASIC code directly from Python.
-        </p>
-        <h5 id="session">class <code>Session(**<var>kwargs</var>)</code>
-        </h5><p>
-            Open a PC-BASIC session. The session object holds the interpreter state,
-            e.g. the value of variables, program code and pointers, screen state, etc.
-            Note that <code>Session</code> can be used as a context manager with
-            the <code>with</code> statement.
-        </p>
-        <p>
-            Keyword arguments are largely (but not entirely) analogous to
-            PC-BASIC command-line options.
-        </p>
-        <p>
-            By default, the Session object grabs the standard input and output
-            as keyboard an screen. This may be undesirable in some applications;
-            in such cases,
-            set the keyword arguments <code>input_streams</code> and <code>output_streams</code>
-            explicitly (for example, to <code>None</code>).
-        </p>
-
-        <h5 id="session.execute"><code>execute(<var>basic_code</var>)</code>
-        </h5><p>
-            Execute BASIC code. <code><var>basic_code</var></code> can be
-            commands or program lines, separated by <code>\n</code> or <code>\r</code>.
-        </p>
-
-        <h5 id="session.sevaluate"><code>evaluate(<var>basic_expr</var>)</code>
-        </h5><p>
-            Evaluate a BASIC expression and return its value as a Python value.
-            For type converson rules, see <a href="#session.get_variable"><code>get_variable</code></a>.
-        </p>
-
-        <h5 id="session.set_variable"><code>set_variable(<var>name</var>, <var>value</var>)</code>
-        </h5><p>
-            Set the value of a scalar or array to a Python value.
-        </p>
-        <p>
-            <code><var>name</var></code>
-            is a valid BASIC name, including the sigil, and is not case-sensitive.
-            If the target is an array, <code><var>name</var></code> should end with <code>()</code>.
-        </p>
-        <p>
-            <code><var>value</var></code> should be of a compatible type: <code>int</code>,
-            <code>bool</code> or <code>float</code> for numeric variables and <code>bytes</code>
-            or <code>unicode</code> for strings. If the target is an array, <code><var>value</var></code>
-            should be a <code>list</code> of such values. Multi-dimensional arrays should be specified as
-            nested <code>list</code>s.
-        </p>
-        <p>
-            <code>bool</code>s will be represented as in BASIC, with <code>-1</code> for <code>True</code>.
-            <code>unicode</code> will be converted according to the active codepage.
-        </p>
-
-
-        <h5 id="session.get_variable"><code>get_variable(<var>name</var>)</code>
-        </h5><p>
-            Retrieve the value of a scalar or array as a Python value.
-        </p>
-        <p>
-            <code><var>name</var></code>
-            is a valid BASIC name, including the sigil, and is not case-sensitive.
-            If the target is an array, <code><var>name</var></code> should end with <code>()</code>.
-        </p>
-        <p>
-            Integers will be returned as <code>int</code>, single- and double-precision
-            values as <code>float</code>, and string as <code>bytes</code>.
-            If the target is an array, the function returns a (nested) <code>list</code> of such values.
-        </p>
-        <h5 id="session.close"><code>close()</code>
-        </h5><p>
-            Close the session: closes all open files and exits PC-BASIC.
-            If used as a context manager, this method is called automatically.
-        </p>
-
-
-    </section>
-    <hr>
-
-    <section>
-        <h3 id="dev-extensions">Extensions</h3>
-        <p>
-            It's possible to enable your own BASIC statements using <em>extensions</em>.
-            An extension is a Python object or module loaded through the <a href="#--extension"><code>--extension</code></a> option or through
-            the <code>extension</code> parameter of the <a href="#session"><code>Session</code> object</a>.
-        </p>
-        <p>
-            Python functions and other callable objects in the extension's namespace will be made accessible
-            through basic as extension statements or functions whose name starts with an underscore <code>_</code>
-        </p>
-        <p>
-            In order for this to work, the function must have a name that is also a valid BASIC variable name: alphanumeric only, no underscores,
-            not equal to a BASIC keyword.
-            The name will be case-insensitive in BASIC; that is, <code>def mytestfunc(): print 1</code> and <code>def myTestFunc(): print 2</code>
-            both map to the extension statement or function <code>_MYTESTFUNC</code>. Which one of these functions would be chosen is not defined,
-            so avoid this situation.
-        </p>
-        <p>
-            Any arguments provided to the extension statement or function are supplied to the Python function as the corresponding type:
-            BASIC integers become <code>int</code>s, single- and double-precision numbers become <code>float</code>s and strings
-            become <code>bytes</code> (<em>not</em> <code>unicode</code> and no codepage conversions are applied).
-        </p>
-        <p>
-            For example, a call to <code>_MYTESTFUNC 5, "test-string"</code> would expect to find a Python function
-            <code>mytestfunc(i, s)</code> with two parameters, and will supply <code>i=int(5)</code>
-            and <code>a=bytes('test-string')</code>.
-        </p>
-        <p>
-            The same Python function can also be called as an extension function, e.g. <code>A = _MYTESTFUNC(5, "test-string")</code>.
-            If called as a function, <code>mytestfunc(i, s)</code> must return a value that is one of <code>int</code>, <code>float</code>,
-            both of which will be converted to a BASIC double-precision float; <code>bool</code>, which will be converted to a BASIC integer;
-            or <code>bytes</code> or <code>unicode</code>, which will be converted to a BASIC string.
-        </p>
-    </section>
-    <hr>
-
-    <section>
-        <h3 id="dev-examples">Examples</h3>
-        <pre><code>import pcbasic
-import random
-
-with pcbasic.Session(extension=random) as s:
-    s.execute('a=1')
-    print s.evaluate('string$(a+2, "@")')
-    s.set_variable('B$', 'abcd')
-    s.execute('''
-        10 a=5
-        20 print a
-        run
-        _seed(42)
-        b = _uniform(a, 25.6)
-        print a, b
-    ''')
-        </code></pre>
-
-    </section>
-    <hr>
 </article>
 <article>
 <h2 id="acks_acknowledgements">Acknowledgements</h2>
 <h3 id="acks_contributors">Contributors</h3>
 <p>PC-BASIC would not exist without those contributing code, reporting bugs,
 sending in patches, and documenting GW-BASIC's behaviour. Thank you all!</p>
-<p>Development is led by</p>
 <ul>
-<li><strong>Rob Hagemans</strong></li>
-</ul>
-<p>Bug fixes and guidance by</p>
-<ul>
-<li><strong>Wengier Wu</strong></li>
-<li><strong>Jan Bredenbeek</strong></li>
-<li><strong>WJB</strong></li>
-</ul>
-<p>Avid testers and bug hunters</p>
-<ul>
-<li><strong>Ronald Herrera</strong></li>
-<li><strong>Kenneth Wayne Boyd</strong></li>
-<li><strong>Nauman Umer</strong></li>
-<li><strong>Steve Pagliarulo</strong></li>
-<li><strong>Daniel Santana</strong></li>
-<li><strong>Miguel Dorta</strong></li>
-<li><strong>Patrik</strong></li>
-<li><strong>Duane</strong></li>
+<li><strong>Rob Hagemans</strong>,         lead author</li>
+<li><strong>Wengier Wu</strong>,           bug fixes, CJK guidance</li>
+<li><strong>Jan Bredenbeek</strong>,       bug fixes</li>
+<li><strong>WJB</strong>,                  bug fixes</li>
+<li><strong>Ronald Herrera</strong>,       testing, bug hunting</li>
+<li><strong>Kenneth Wayne Boyd</strong>,   testing, bug hunting</li>
+<li><strong>Nauman Umer</strong>,          testing, bug hunting</li>
+<li><strong>Steve Pagliarulo</strong>,     testing, bug hunting</li>
+<li><strong>Miguel Dorta</strong>,         testing, serial ports</li>
+<li><strong>Patrik</strong>,               testing, serial ports</li>
+<li><strong>Duane</strong>,                testing, serial ports</li>
 </ul>
 <h3 id="acks_shoulders-of-giants">Shoulders of Giants</h3>
-<p>PC-BASIC incorporates code derived from other projects, in particular:</p>
-<ul>
-<li><strong>J-L Morel</strong>'s <a href="http://search.cpan.org/~jlmorel/Win32-Console-ANSI-1.11/lib/Win32/Console/ANSI.pm">Win32::Console::ANSI</a></li>
-<li><strong>Valentin Lab</strong>'s <a href="https://gist.github.com/vaab/2ad7051fc193167f15f85ef573e54eb9">win_subprocess.py</a></li>
-<li><strong>Marcus von Appen</strong>'s <a href="https://pysdl2.readthedocs.org/en/latest/">PySDL2</a></li>
-</ul>
 <p>PC-BASIC depends on the following open-source projects:</p>
 <ul>
 <li><a href="http://www.python.org">Python</a></li>
-<li><a href="https://pypi.python.org/pypi/setuptools">Setuptools</a></li>
-<li><a href="http://www.numpy.org">NumPy</a></li>
-<li><a href="https://github.com/pyserial/pyserial">PySerial</a></li>
-<li><a href="https://github.com/pyserial/pyparallel">PyParallel</a></li>
-<li><a href="http://www.libsdl.org">Simple DirectMedia Layer (SDL)</a></li>
-<li><a href="http://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/">SDL2_gfx</a></li>
 <li><a href="http://www.pygame.org">PyGame</a></li>
-<li><a href="http://people.csail.mit.edu/hubert/pyaudio/">PyAudio</a></li>
-</ul>
-<h3 id="acks_fond-memories">Fond memories</h3>
-<p>PC-BASIC would not have been what it is without the following open-source projects
-which it has depended on in the past:</p>
-<ul>
-<li><strong>Tom Rothamel</strong>'s <a href="https://web.archive.org/web/20150712040220/http://pygame.renpy.org/">PyGame Subset for Android</a> (superseded by <a href="http://www.renpy.org/doc/html/android.html">RAPT</a>)</li>
+<li><a href="http://www.libsdl.org">Simple DirectMedia Layer (SDL)</a></li>
+<li><a href="http://www.numpy.org">NumPy</a></li>
+<li><a href="http://freedesktop.org/wiki/Software/pyxdg/">PyXDG</a></li>
 <li><a href="https://sourceforge.net/projects/pywin32/">Python for Windows Extensions (PyWin32)</a></li>
+<li><a href="http://pyserial.sourceforge.net/pyserial.html">PySerial</a></li>
 <li><a href="http://pexpect.readthedocs.org/en/latest/">PExpect</a></li>
+<li><a href="https://github.com/robhagemans/ansipipe">ANSI|pipe</a></li>
 </ul>
 <h3 id="acks_technical-documentation">Technical Documentation</h3>
 <p>Building PC-BASIC would have been impossible without the immense amounts of
@@ -19372,16 +18993,9 @@ apologies to those whose contribution I have failed to acknowledge here.</p>
 <ul>
 <li><strong>Paul Kocher</strong>, <em>The Cryptogram computer supplement</em> <strong>19</strong>, American Cryptogram Association, Summer 1994</li>
 </ul>
-<h5 id="acks_technical-information-on-many-topics">Technical information on many topics</h5>
-<ul>
-<li><a href="http://www.vogons.org/">VOGONS</a></li>
-<li><strong>Erik S. Klein</strong>'s <a href="http://www.vintage-computer.com">vintage computer forums</a></li>
-<li><strong>John Elliott</strong>'s <a href="http://www.seasip.info/VintagePC/">Vintage PC pages</a></li>
-<li><strong>Peter Berg</strong>'s <a href="http://www.petesqbsite.com/">Pete's QBasic/QuickBasic site</a></li>
-<li><strong>Vernon Brooks</strong>'s <a href="https://sites.google.com/site/pcdosretro/">PC-DOS retro</a></li>
-</ul>
 <h5 id="acks_video-hardware">Video hardware</h5>
 <ul>
+<li><strong>John Elliott</strong>'s <a href="http://www.seasip.info/VintagePC/">Vintage PC pages</a></li>
 <li><strong>Dan Rollins</strong>' <a href="http://webpages.charter.net/danrollins/techhelp/0089.HTM">TechHelp</a> pages on PC video memory layout</li>
 <li><strong>Great Hierophant</strong>'s <a href="http://nerdlypleasures.blogspot.com">Nerdly Pleasures Blog</a></li>
 </ul>
@@ -19400,12 +19014,11 @@ apologies to those whose contribution I have failed to acknowledge here.</p>
 <li><strong>Christopher E. Strangio</strong>'s tutorial on <a href="http://www.camiresearch.com/Data_Com_Basics/RS232_standard.html">the RS232 standard</a></li>
 <li><a href="http://www.qb64.net/wiki/index.php/Port_Access_Libraries#Serial_Communication_Registers">QB64 documentation</a></li>
 </ul>
-<h5 id="acks_keyboard-scancodes">Keyboard scancodes</h5>
+<h5 id="acks_technical-information-on-many-topics">Technical information on many topics</h5>
 <ul>
-<li><strong>John Savard</strong>'s <a href="http://www.quadibloc.com/comp/scan.htm">Scan Codes Demystified</a></li>
-<li><strong>Andries Brouwer</strong>'s extensive reference of <a href="https://www.win.tue.nl/~aeb/linux/kbd/scancodes.html">Keyboard scancodes</a></li>
-<li><strong>Philip Storr</strong>'s <a href="http://www.philipstorr.id.au/pcbook/book3/scancode.htm">PC Hardware book</a></li>
-<li>Altek Instruments documentation on <a href="http://www.barcodeman.co.uk/altek/mule/scandoc.php">PC Keyboard Scan Codes</a></li>
+<li><a href="http://www.vogons.org/">VOGONS</a></li>
+<li><strong>Erik S. Klein</strong>'s <a href="http://www.vintage-computer.com">vintage computer forums</a></li>
+<li><strong>Peter Berg</strong>'s <a href="http://www.petesqbsite.com/">Pete's QBasic/QuickBasic site</a></li>
 </ul>
 <h3 id="acks_fonts">Fonts</h3>
 <ul>
@@ -19432,36 +19045,21 @@ apologies to those whose contribution I have failed to acknowledge here.</p>
 <li><strong>William Barden, Jr.</strong>, <em>Graphics and Sound for the Tandy 1000s and PC Compatibles</em>, Microtrend, 1987.</li>
 <li><strong>Don Inman</strong> and <strong>Bob Albrecht</strong>, <em>The GW-BASIC Reference</em>, Osborne McGraw-Hill, 1990.</li>
 <li><strong>Thomas C. McIntyre</strong>, <em>BLUE: BASIC Language User Essay</em>, 1991, <a href="https://web.archive.org/web/20060410121551/http://scottserver.net/basically/geewhiz.html">available online</a>.</li>
-<li><strong>David I. Schneider</strong>, <em>Handbook of BASIC: Third Edition for the IBM PC, XT, AT, PS/2, and Compatibles</em>, Brady, 1988.</li>
 </ul>
 <h3 id="acks_development-tools">Development tools</h3>
-<p>Development tools:</p>
+<p>PC-BASIC is developed using <a href="https://git-scm.com/">Git</a> source control,
+<a href="https://wiki.gnome.org/Apps/Gedit">GEdit</a> and <a href="https://atom.io/">Atom</a> text
+editors on an <a href="http://www.ubuntu.com/">Ubuntu</a> Linux system and hosted on
+<a href="https://github.com/">GitHub</a> and <a href="https://sourceforge.net/">SourceForge</a>.</p>
+<p>Packaging and documentation depends on the following projects:</p>
 <ul>
-<li><a href="https://git-scm.com/">Git</a></li>
-<li><a href="https://atom.io/">Atom</a></li>
-<li><a href="https://pypi.python.org/pypi/pylint/1.7.6">PyLint</a></li>
-<li><a href="https://pypi.python.org/pypi/coverage">Coverage</a></li>
-<li><a href="http://www.ubuntu.com/">Ubuntu</a></li>
+<li><a href="http://www.pyinstaller.org">PyInstaller</a></li>
+<li><a href="http://nsis.sourceforge.net">Nullsoft Scriptable Install System</a></li>
+<li><a href="http://www.7-zip.org">7-Zip</a></li>
 <li><a href="http://www.gnu.org/">The GNU Base System</a></li>
-</ul>
-<p>Documentation tools:</p>
-<ul>
+<li><strong>Tom Rothamel</strong>'s <a href="https://web.archive.org/web/20150712040220/http://pygame.renpy.org/">Pygame Subset for Android</a> (superseded by <a href="http://www.renpy.org/doc/html/android.html">RAPT</a>)</li>
 <li><a href="http://lxml.de">LXML</a></li>
 <li><a href="https://pypi.python.org/pypi/Markdown">Markdown</a></li>
-<li><a href="https://www.princexml.com/download/">Prince</a></li>
-</ul>
-<p>Packaging tools:</p>
-<ul>
-<li><a href="https://pypi.python.org/pypi/wheel">Wheel</a></li>
-<li><a href="https://pypi.python.org/pypi/twine">Twine</a></li>
-<li><a href="https://anthony-tuininga.github.io/cx_Freeze/">cx_Freeze</a></li>
-<li><a href="https://github.com/jordansissel/fpm">fpm</a></li>
-</ul>
-<p>Source code and releases are hosted on:</p>
-<ul>
-<li><a href="https://github.com/">GitHub</a></li>
-<li><a href="https://sourceforge.net/">SourceForge</a></li>
-<li><a href="https://pypi.org/project/pcbasic/">PyPI</a></li>
 </ul>
 <h3 id="acks_emulators">Emulators</h3>
 <p>These excellent emulators have been indispensable tools in documenting the
