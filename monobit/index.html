@@ -22,6 +22,7 @@
 
 <script>
 
+    YAFF_BACK = ["_", ".", "-", "`", "0"]
     SCALE = 2;
     GRID = 0;
     FORE = "black";
@@ -111,8 +112,8 @@
                     // grid
                     context.fillStyle = BORDER;
                     context.fillRect((x+k*font_width+j)*SCALE, (y+i)*SCALE, SCALE, SCALE);
-                    if (glyph[i][j] != '-') context.fillStyle = FORE;
-                    else context.fillStyle = BACK;
+                    if (YAFF_BACK.includes(glyph[i][j])) context.fillStyle = BACK;
+                    else context.fillStyle = FORE;
                     context.fillRect((x+k*font_width+j)*SCALE, (y+i)*SCALE, SCALE-GRID, SCALE-GRID);
                 }
             }
