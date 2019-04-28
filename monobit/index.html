@@ -8,8 +8,7 @@
 <body>
 
 <p style="font-family: sans; margin: 1em;">
-    Choose a bitmap font from <a href="https://github.com/robhagemans/hoard-of-bitfonts">the hoard</a>
-    to see its character set:
+    Choose a bitmap font from <a href="https://github.com/robhagemans/hoard-of-bitfonts">the hoard</a>:
 </p>
 
 <form onchange="updateSettings();" style="float:left; margin:1em;">
@@ -22,15 +21,23 @@
 
 <script>
 
-    YAFF_BACK = ["_", ".", "-", "`", "0"]
     SCALE = 2;
     GRID = 0;
     FORE = "black";
     BACK = "#e0e0e0";
     BORDER = "#f0f0f0";
 
+    YAFF_BACK = "_.-";
+    ALPHANUMERIC = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    WHITESPACE = " \t";
+    YAFF_CODE = ALPHANUMERIC + WHITESPACE;
+
 
     function getList() {
+        /*
+        loadFont();
+        return;
+        */
         var url = "https://api.github.com/repos/robhagemans/hoard-of-bitfonts/git/trees/master?recursive=1";
         if (url !== undefined && url !== null && url) {
             var request1 = new XMLHttpRequest();
@@ -40,14 +47,14 @@
                     dir = JSON.parse(request1.responseText);
                     files = [];
                     for (var i = 0; i < dir.tree.length; ++i) {
-                        if (dir.tree[i].path.endsWith(".draw")) {
+                        if (dir.tree[i].path.endsWith(".draw") || dir.tree[i].path.endsWith(".yaff")) {
                             files.push(dir.tree[i].path);
                         }
                     }
                     select = document.getElementById("fontselector");
                     for (var i = 0; i < files.length; i++) {
                         var el = document.createElement("option");
-                        el.text = files[i];
+                        el.text = files[i].split("/").join(": ").split(".")[0];
                         el.value = files[i];
                         select.add(el);
                     }
@@ -63,6 +70,15 @@
     }
 
     function loadFont(path) {
+        /*
+        var fontfile = [
+            "test: ignore\n",
+            "01:\n", "\t...@@...\n", "\t...@@...\n", "\t.@@@@@@.\n", "\t...@@...\n","\t...@@...\n"
+        ].join("")
+        glyphs = parseFont(fontfile);
+        show(glyphs);
+        return;
+        */
         var url = "https://raw.githubusercontent.com/robhagemans/hoard-of-bitfonts/master/" + path;
         if (url !== undefined && url !== null && url) {
             var request = new XMLHttpRequest();
@@ -79,23 +95,40 @@
     }
 
     function parseFont(fontfile) {
-        preglyph = fontfile.split('\n');
-        glyphs = {};
-        current = 0;
+        var preglyph = fontfile.split('\n');
+        var glyphs = {};
+        var current_key = 0;
+        var current_value = []
         for (var i=0; i < preglyph.length; ++i) {
-            row = preglyph[i]
+            var row = preglyph[i]
             if (!row) continue;
-            if (row[0] == "#") continue;
+            // ignore comments
+            if (!YAFF_CODE.includes(row[0])) continue;
             row = row.trim();
             if (row.includes(":")) {
-                split = row.split(":");
-                current = parseInt(split[0].trim(), 16);
+                // store whatever we were working on, if it's a glyph
+                // i.e if it contains no alphanumerics
+                if (current_key && current_value && !current_value.join("").match(/[A-Za-z0-9]+/)) {
+                    glyphs[current_key] = current_value
+                }
+                var split = row.split(":");
+                var key = split[0].trim();
+                // non-hex or too long ('beef' will still work...)
+                if (key.length > 4 || !key.match(/^[0-9A-Fa-f]+$/)) {
+                    current_key = key;
+                }
+                else {
+                    current_key = parseInt(key, 16);
+                }
+                current_value = [];
                 row = split.slice(1).join("").trim();
-                glyphs[current] = [];
             }
             if (row) {
-                glyphs[current].push(row);
+                current_value.push(row);
             }
+        }
+        if (current_key && current_value && !current_value.join("").match(/[A-Za-z0-9]+/)) {
+            glyphs[current_key] = current_value
         }
         return (glyphs);
     }
@@ -106,7 +139,6 @@
         if (glyph && glyph[0]) {
             var k=0;
             var font_width = glyph[0].length;
-
             for (var i=0; i < glyph.length; ++i) {
                 for (var j=0; j < glyph[i].length; ++j) {
                     // grid
@@ -125,15 +157,16 @@
         var width = 0;
         var height = 0;
         var nchar = 0;
-        console.log(glyphs)
         for (var ord in glyphs) {
             glyph = glyphs[ord];
-            console.log(ord)
             if (!glyph) continue;
+            // ord is a strin representation of a decimal number
+            // because object keys must be str
+            if (!ord.match(/^[0-9]+$/)) continue;
             if (glyph.length > height) height = glyph.length;
             if (!glyph.length) continue;
             if (glyph[0].length > width) width = glyph[0].length;
-            if (parseInt(ord) > nchar) nchar = parseInt(ord);
+            if (parseInt(ord) >= nchar) nchar = parseInt(ord) + 1;
         }
         //var nchar = 256;
         var columns = 32;
