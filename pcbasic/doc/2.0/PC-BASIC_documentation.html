@@ -2,7 +2,7 @@
 <html lang="en">
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2019 Rob Hagemans
+    Copyright (c) 2014-2020 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -12,7 +12,7 @@
     <style id="doc.css">
 /*!
     PC-BASIC documentation
-    Copyright (c) 2014-2019 Rob Hagemans
+    Copyright (c) 2014-2020 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 */
@@ -649,24 +649,19 @@ dt code {
 
 <header>
     <h1>PC-BASIC documentation</h1>
-    <small>Version 2.0.2</small>
+    <small>Version 2.0.3</small>
 </header>
 
 <article>
-    <h2 id="top">PC-BASIC 2.0.2</h2>
+    <h2 id="top">PC-BASIC 2.0.3</h2>
     <p>
         <em>A free, cross-platform emulator for the GW-BASIC family of interpreters.</em>
     </p>
     <p>
-        PC-BASIC is a free, cross-platform interpreter for GW-BASIC, Advanced BASIC (BASICA), PCjr Cartridge Basic and Tandy 1000 GWBASIC.
-It interprets these BASIC dialects with a high degree of accuracy, aiming for bug-for-bug compatibility.
-PC-BASIC emulates the most common video and audio hardware on which these BASICs used to run.
-PC-BASIC runs plain-text, tokenised and protected .BAS files.
-It implements floating-point arithmetic in the Microsoft Binary Format (MBF) and can therefore
-read and write binary data files created by GW-BASIC.
+        PC-BASIC is a free, cross-platform interpreter for GW-BASIC, Advanced BASIC (BASICA), PCjr Cartridge Basic and Tandy 1000 GWBASIC. It interprets these BASIC dialects with a high degree of accuracy, aiming for bug-for-bug compatibility. PC-BASIC emulates the most common video and audio hardware on which these BASICs used to run. PC-BASIC runs plain-text, tokenised and protected .BAS files. It implements floating-point arithmetic in the Microsoft Binary Format (MBF) and can therefore read and write binary data files created by GW-BASIC.
     </p>
     <p>
-        This is the documentation for <strong>PC-BASIC 2.0.2</strong>, last updated <em>2019-02-10 11:23:31</em>.<br>
+        This is the documentation for <strong>PC-BASIC 2.0.3</strong>, last updated <em>2020-09-26 19:20:46</em>.<br>
         It consists of the following documents:
     </p>
     <ul>
@@ -684,7 +679,7 @@ read and write binary data files created by GW-BASIC.
     <h2 id="toc">Table of Contents</h2>
 
             <ul>
-                <li><a href="#top">PC-BASIC 2.0.2</a></li>
+                <li><a href="#top">PC-BASIC 2.0.3</a></li>
                 <li><a href="#quick-start-guide">Quick Start Guide</a>
                     <ul>
                         <li><a href="#installation">Installation</a></li>
@@ -1135,7 +1130,7 @@ to interrupt a running program.  </p>
 <p>See the <a href="https://github.com/robhagemans/hoard-of-gwbasic">collection of GW-BASIC programs and tutorials</a>.  </p></article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2019 Rob Hagemans
+    Copyright (c) 2014-2020 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -2616,7 +2611,7 @@ to interrupt a running program.  </p>
 <article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2019 Rob Hagemans
+    Copyright (c) 2014-2020 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -2676,7 +2671,7 @@ to interrupt a running program.  </p>
 <hr>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2019 Rob Hagemans
+    Copyright (c) 2014-2020 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -2756,7 +2751,7 @@ to interrupt a running program.  </p>
 <a href="#--utf8" class="option-link">[<b>--utf8</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--version" class="option-link">[<b>-v</b>]</a>
 <a href="#--version" class="option-link">[<b>--version</b>]</a>
-<a href="#--video" class="option-link">[<b>--video=</b><var>adapter</var>[<b>:low</b>]]</a>
+<a href="#--video" class="option-link">[<b>--video=</b><var>adapter</var>]</a>
 <a href="#--video-memory" class="option-link">[<b>--video-memory=</b><var>size</var>]</a>
 <a href="#--wait" class="option-link">[<b>-w</b>]</a>
 <a href="#--wait" class="option-link">[<b>--wait</b>[<b>=True</b>|<b>=False</b>]]</a>
@@ -3394,7 +3389,7 @@ to interrupt a running program.  </p>
             </dl>
             On
             <code><a href="#SCREEN-statement">SCREEN</a> 2</code> with
-            <code><b><a href="#--video">--video</a>=</b>{<b>pcjr</b>|<b>tandy</b>|<b>cga</b>|<b>cga_old</b>}</code>,
+            <code><b><a href="#--video">--video</a>=</b>{<b>pcjr</b>|<b>tandy</b>|<b>cga</b>}</code>,
             <code><b>--monitor=composite</b></code> enables (crude) colour artifacts.
         </dd>
 
@@ -3675,7 +3670,7 @@ to interrupt a running program.  </p>
         </dd>
 
         <dt id="--video">
-            <code><b>--video=</b><var>adapter</var>[<b>:low</b>]</code>
+            <code><b>--video=</b><var>adapter</var></code>
         </dt>
         <dd>
             Set the video adapter to emulate. Available adapters:
@@ -3688,9 +3683,6 @@ to interrupt a running program.  </p>
 
                 <dt><code><b>cga</b></code></dt>
                 <dd>Color/Graphics Adapter</dd>
-
-                <dt><code><b>cga_old</b></code></dt>
-                <dd>Color/Graphics Adapter (old version; affects composite)</dd>
 
                 <dt><code><b>mda</b></code></dt>
                 <dd>Monochrome Display Adapter</dd>
@@ -3709,8 +3701,6 @@ to interrupt a running program.  </p>
             </dl>
             Default is <code><b>vga</b></code>.
             <br>
-            If the specifier <code><b>low</b></code> is given, use low-intensity palettes in CGA modes.
-            This only has an effect with adapters <code>{<b>cga</b>|<b>cga_old</b>|<b>ega</b>|<b>vga</b>}</code>.
         </dd>
 
         <dt id="--video-memory">
@@ -3820,7 +3810,7 @@ to interrupt a running program.  </p>
 <hr>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2019 Rob Hagemans
+    Copyright (c) 2014-2020 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -3905,7 +3895,7 @@ to interrupt a running program.  </p>
 </article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2019 Rob Hagemans
+    Copyright (c) 2014-2020 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -5403,7 +5393,7 @@ to interrupt a running program.  </p>
 </article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2019 Rob Hagemans
+    Copyright (c) 2014-2020 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -6514,7 +6504,8 @@ to interrupt a running program.  </p>
         <ul>
             <li>
                 If <code><var>x</var></code> has a string value, returns the value for the environment variable <code><var>x</var></code> or the empty
-                string if no variable with the name <code><var>x</var></code> is set in the environment table.
+                string if no variable with the name <code><var>x</var></code> is set in the environment table. The environment variable must be an
+                ASCII string and will be converted to uppercase on case-sensitive systems.
             </li>
             <li>
                 If <code><var>x</var></code> has a numeric value, it must be in <code>[1&#8212;255]</code>. Returns the <code><var>x</var></code>th entry in
@@ -6525,6 +6516,9 @@ to interrupt a running program.  </p>
         <ul>
             <li>
                 <code><var>x</var></code> is the empty string: <samp>Illegal function call</samp>.
+            </li>
+            <li>
+                <code><var>x</var></code> contains non-ASCII characters: <samp>Illegal function call</samp>.
             </li>
             <li>
                 <code><var>x</var></code> is a number not in <code>[-32768&#8212;32767]</code>: <samp>Overflow</samp>.
@@ -10345,6 +10339,10 @@ to interrupt a running program.  </p>
                 to unset <code><var>VARIABLE</var></code>.
             </dd>
         </dl>
+        <p>
+            <code><var>VARIABLE</var></code> must be an
+            ASCII string and will be converted to uppercase on case-sensitive systems.
+        </p>
         <h5>Errors</h5>
         <ul>
             <li>
@@ -10352,6 +10350,9 @@ to interrupt a running program.  </p>
             </li>
             <li>
                 <code><var>command_string</var></code> is not of the required form: <samp>Illegal function call</samp>.
+            </li>
+            <li>
+                <code><var>VARIABLE</var></code> contains characters outside of ASCII: <samp>Illegal function call</samp>.
             </li>
         </ul>
     </section>
@@ -13850,11 +13851,16 @@ to interrupt a running program.  </p>
             A tiling flood fill also stops at scan line intervals that are the same as
             the tiling pattern for that line, unless a background pattern is specified
             and the interval also equals the background pattern for that line.</p>
+        <p>
+            The background tile pattern is constructed just like the tile pattern. However, only
+            the first row of the background tile is taken into account; the rest is ignored.
+            The background tile must not match the attribute tile, or more than two consecutive rows of it.
+        </p>
         <h5>Errors</h5>
         <ul>
             <li>
-                In <code>SCREEN 7</code>, <code>8</code>, <code>9</code>, if <code><var>background</var></code> equals <code><var>attrib</var></code> up to the length of
-                <code><var>attrib</var></code>: <samp>Illegal function call</samp>.
+                If more than two consecutive rows of the attribute tile (or all rows, if there are less than three)
+                equal the first row of the background tile: <samp>Illegal function call</samp>.
             </li>
             <li>
                 <code><var>background</var></code> has a number value: <samp>Illegal function call</samp>.
@@ -17020,7 +17026,7 @@ to interrupt a running program.  </p>
 </article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2019 Rob Hagemans
+    Copyright (c) 2014-2020 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -19772,7 +19778,7 @@ to interrupt a running program.  </p>
 </article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2019 Rob Hagemans
+    Copyright (c) 2014-2020 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -19955,20 +19961,18 @@ sending in patches, and documenting GW-BASIC's behaviour. Thank you all!</p>
 <h3 id="acks_shoulders-of-giants">Shoulders of Giants</h3>
 <p>PC-BASIC incorporates code derived from other projects, in particular:</p>
 <ul>
-<li><strong>J-L Morel</strong>'s <a href="http://search.cpan.org/~jlmorel/Win32-Console-ANSI-1.11/lib/Win32/Console/ANSI.pm">Win32::Console::ANSI</a></li>
-<li><strong>Valentin Lab</strong>'s <a href="https://gist.github.com/vaab/2ad7051fc193167f15f85ef573e54eb9">win_subprocess.py</a></li>
 <li><strong>Marcus von Appen</strong>'s <a href="https://pysdl2.readthedocs.org/en/latest/">PySDL2</a></li>
+<li><strong>Jonathan Hartley</strong>'s <a href="https://github.com/tartley/colorama">colorama</a></li>
+<li><strong>Valentin Lab</strong>'s <a href="https://gist.github.com/vaab/2ad7051fc193167f15f85ef573e54eb9">win_subprocess.py</a></li>
 </ul>
 <p>PC-BASIC depends on the following open-source projects:</p>
 <ul>
 <li><a href="http://www.python.org">Python</a></li>
 <li><a href="https://pypi.python.org/pypi/setuptools">Setuptools</a></li>
-<li><a href="http://www.numpy.org">NumPy</a></li>
-<li><a href="https://github.com/pyserial/pyserial">PySerial</a></li>
-<li><a href="https://github.com/pyserial/pyparallel">PyParallel</a></li>
 <li><a href="http://www.libsdl.org">Simple DirectMedia Layer (SDL)</a></li>
 <li><a href="http://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/">SDL2_gfx</a></li>
-<li><a href="http://www.pygame.org">PyGame</a></li>
+<li><a href="https://github.com/pyserial/pyserial">PySerial</a></li>
+<li><a href="https://github.com/pyserial/pyparallel">PyParallel</a></li>
 <li><a href="http://people.csail.mit.edu/hubert/pyaudio/">PyAudio</a></li>
 </ul>
 <h3 id="acks_fond-memories">Fond memories</h3>
@@ -19976,8 +19980,11 @@ sending in patches, and documenting GW-BASIC's behaviour. Thank you all!</p>
 which it has depended on in the past:</p>
 <ul>
 <li><strong>Tom Rothamel</strong>'s <a href="https://web.archive.org/web/20150712040220/http://pygame.renpy.org/">PyGame Subset for Android</a> (superseded by <a href="http://www.renpy.org/doc/html/android.html">RAPT</a>)</li>
+<li><strong>J-L Morel</strong>'s <a href="http://search.cpan.org/~jlmorel/Win32-Console-ANSI-1.11/lib/Win32/Console/ANSI.pm">Win32::Console::ANSI</a></li>
 <li><a href="https://sourceforge.net/projects/pywin32/">Python for Windows Extensions (PyWin32)</a></li>
 <li><a href="http://pexpect.readthedocs.org/en/latest/">PExpect</a></li>
+<li><a href="http://www.pygame.org">PyGame</a></li>
+<li><a href="http://www.numpy.org">NumPy</a></li>
 </ul>
 <h3 id="acks_technical-documentation">Technical Documentation</h3>
 <p>Building PC-BASIC would have been impossible without the immense amounts of
@@ -20097,7 +20104,7 @@ behaviour of various Microsoft BASIC dialects.</p>
 <footer>
 <h2 id="licence">Licences</h2>
 <h3 id="pc-basic-interpreter">PC-BASIC interpreter</h3>
-<p><strong>Copyright &#169; 2013&#8212;2018 Rob Hagemans.</strong></p>
+<p><strong>Copyright &#169; 2013&#8212;2020 Rob Hagemans.</strong></p>
 <p><em>Source code available at <a href="https://github.com/robhagemans/pcbasic">https://github.com/robhagemans/pcbasic</a>.</em></p>
 <p>This program is free software: you can redistribute it and/or modify
 it under the terms of the <a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License</a> as published by
@@ -20111,7 +20118,7 @@ GNU General Public License for more details.</p>
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p><hr>
 <h3 id="pc-basic-documentation">PC-BASIC documentation</h3>
-<p><strong>Copyright &#169; 2014&#8212;2019 Rob Hagemans.</strong></p>
+<p><strong>Copyright &#169; 2014&#8212;2020 Rob Hagemans.</strong></p>
 <p>This work is licensed under a
 <a href="http://creativecommons.org/licenses/by-sa/4.0/legalcode">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
 </footer>
