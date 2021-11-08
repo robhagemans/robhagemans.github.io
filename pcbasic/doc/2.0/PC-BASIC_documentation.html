@@ -2,7 +2,7 @@
 <html lang="en">
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2020 Rob Hagemans
+    Copyright (c) 2014-2021 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -12,7 +12,7 @@
     <style id="doc.css">
 /*!
     PC-BASIC documentation
-    Copyright (c) 2014-2020 Rob Hagemans
+    Copyright (c) 2014-2021 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 */
@@ -649,11 +649,11 @@ dt code {
 
 <header>
     <h1>PC-BASIC documentation</h1>
-    <small>Version 2.0.3</small>
+    <small>Version 2.0.4</small>
 </header>
 
 <article>
-    <h2 id="top">PC-BASIC 2.0.3</h2>
+    <h2 id="top">PC-BASIC 2.0.4</h2>
     <p>
         <em>A free, cross-platform emulator for the GW-BASIC family of interpreters.</em>
     </p>
@@ -661,7 +661,7 @@ dt code {
         PC-BASIC is a free, cross-platform interpreter for GW-BASIC, Advanced BASIC (BASICA), PCjr Cartridge Basic and Tandy 1000 GWBASIC. It interprets these BASIC dialects with a high degree of accuracy, aiming for bug-for-bug compatibility. PC-BASIC emulates the most common video and audio hardware on which these BASICs used to run. PC-BASIC runs plain-text, tokenised and protected .BAS files. It implements floating-point arithmetic in the Microsoft Binary Format (MBF) and can therefore read and write binary data files created by GW-BASIC.
     </p>
     <p>
-        This is the documentation for <strong>PC-BASIC 2.0.3</strong>, last updated <em>2020-09-26 19:20:46</em>.<br>
+        This is the documentation for <strong>PC-BASIC 2.0.4</strong>, last updated <em>2021-11-08 20:55:10</em>.<br>
         It consists of the following documents:
     </p>
     <ul>
@@ -679,7 +679,7 @@ dt code {
     <h2 id="toc">Table of Contents</h2>
 
             <ul>
-                <li><a href="#top">PC-BASIC 2.0.3</a></li>
+                <li><a href="#top">PC-BASIC 2.0.4</a></li>
                 <li><a href="#quick-start-guide">Quick Start Guide</a>
                     <ul>
                         <li><a href="#installation">Installation</a></li>
@@ -1076,7 +1076,7 @@ dt code {
 <p>If you find bugs, please <a href="https://github.com/robhagemans/pcbasic/issues">open an issue on GitHub</a>. It would be most helpful if you could include a short bit of BASIC code that triggers the bug.</p>
 <h3 id="installation">Installation</h3>
 <p>PC-BASIC desktop installers for Windows, Mac, and Linux can be downloaded from <a href="https://github.com/robhagemans/pcbasic/releases">GitHub</a>.</p>
-<p>Python users can obtain the PC-BASIC package from <a href="https://pypi.org/project/pcbasic/">PyPI</a> through <code>pip install pcbasic</code>.</p>
+<p>Python users can obtain the PC-BASIC package from <a href="https://pypi.org/project/pcbasic/">PyPI</a> through <code>pip3 install pcbasic</code>.</p>
 <h3 id="basic-survival-kit">BASIC survival kit</h3>
 <p>PC-BASIC has a 1980s-style interface operated by executing
 typed commands. There is no menu, nor are there any of the visual clues
@@ -1130,7 +1130,7 @@ to interrupt a running program.  </p>
 <p>See the <a href="https://github.com/robhagemans/hoard-of-gwbasic">collection of GW-BASIC programs and tutorials</a>.  </p></article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2020 Rob Hagemans
+    Copyright (c) 2014-2021 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -2075,12 +2075,6 @@ to interrupt a running program.  </p>
                     <td></td>
                 </tr>
                 <tr>
-                    <td><code>806</code></td>
-                    <td>IBM-PC Devanagari</td>
-                    <td>Hindi</td>
-                    <td></td>
-                </tr>
-                <tr>
                     <td><code>850</code></td>
                     <td>DOS Latin 1</td>
                     <td>Western European languages</td>
@@ -2273,66 +2267,6 @@ to interrupt a running program.  </p>
                     <td><a href="#bidi"><i>B</i></a></td>
                 </tr>
                 <tr>
-                    <td><code>iscii-as</code></td>
-                    <td>ISCII Assamese</td>
-                    <td>Assamese</td>
-                    <td><a href="#combi"><i>C</i></a></td>
-                </tr>
-                <tr>
-                    <td><code>iscii-be</code></td>
-                    <td>ISCII Bengali</td>
-                    <td>Bengali</td>
-                    <td><a href="#combi"><i>C</i></a></td>
-                </tr>
-                <tr>
-                    <td><code>iscii-de</code></td>
-                    <td>ISCII Devanagari</td>
-                    <td>Hindi, Marathi, Sanskrit, Konkani, Nepali</td>
-                    <td><a href="#combi"><i>C</i></a></td>
-                </tr>
-                <tr>
-                    <td><code>iscii-gu</code></td>
-                    <td>ISCII Gujarati</td>
-                    <td>Gujarati</td>
-                    <td><a href="#combi"><i>C</i></a></td>
-                </tr>
-                <tr>
-                    <td><code>iscii-ka</code></td>
-                    <td>ISCII Kannada</td>
-                    <td>Kannada</td>
-                    <td><a href="#combi"><i>C</i></a></td>
-                </tr>
-                <tr>
-                    <td><code>iscii-ma</code></td>
-                    <td>ISCII Malayalam</td>
-                    <td>Malayalam</td>
-                    <td><a href="#combi"><i>C</i></a></td>
-                </tr>
-                <tr>
-                    <td><code>iscii-or</code></td>
-                    <td>ISCII Oriya</td>
-                    <td>Oriya</td>
-                    <td><a href="#combi"><i>C</i></a></td>
-                </tr>
-                <tr>
-                    <td><code>iscii-pa</code></td>
-                    <td>ISCII Punjabi</td>
-                    <td>Punjabi</td>
-                    <td><a href="#combi"><i>C</i></a></td>
-                </tr>
-                <tr>
-                    <td><code>iscii-ta</code></td>
-                    <td>ISCII Tamil</td>
-                    <td>Tamil</td>
-                    <td><a href="#combi"><i>C</i></a></td>
-                </tr>
-                <tr>
-                    <td><code>iscii-te</code></td>
-                    <td>ISCII Telugu</td>
-                    <td>Telugu</td>
-                    <td><a href="#combi"><i>C</i></a></td>
-                </tr>
-                <tr>
                     <td><code>kamenicky</code></td>
                     <td>Kamenick&#253;; cp895</td>
                     <td>Czech</td>
@@ -2373,12 +2307,6 @@ to interrupt a running program.  </p>
                     <td>GOST Osnovnoj Variant</td>
                     <td>Russian</td>
                     <td></td>
-                </tr>
-                <tr>
-                    <td><code>pascii</code></td>
-                    <td>PASCII</td>
-                    <td>Kashmiri, Persian, Sindhi, Urdu</td>
-                    <td><a href="#bidi"><i>B</i></a></td>
                 </tr>
                 <tr>
                     <td><code>ruscii</code></td>
@@ -2428,15 +2356,10 @@ to interrupt a running program.  </p>
                 DOS Latin USA 437.
             </p>
             <p>
-                To support code pages beyond 437, PC-BASIC defaults to the <strong>CPIDOS</strong> font used by
-                default in FreeDOS and DOSBox. This font is very similar in style to the IBM VGA
+                PC-BASIC defaults to a font which is very similar in style to the IBM VGA
                 font but has support for many more code pages, in particular Western and Middle
-                Eastern alphabets. If CPIDOS does not include the characters you need, PC-BASIC
-                tries to find them in <strong>UNI-VGA</strong>, which is also very similar in style to VGA.
-                If that does not suffice, PC-BASIC falls back to <strong>GNU UniFont</strong> for the
-                missing characters. UniFont's Western glyphs are less similar to the VGA font, but
-                it provides support for the full Unicode Basic Multilingual Plane. For example, all Chinese,
-                Japanese and Korean glyphs in PC-BASIC are taken from UniFont.
+                Eastern alphabets. Chinese, Japanese and Korean are supported through "fullwidth"
+                glyphs which take the space of two regular characters.
             </p>
             <p>
                 It is possible to change the choice of font using the <code><a href="#--font">font=</a></code> option.
@@ -2444,7 +2367,7 @@ to interrupt a running program.  </p>
                 most preferred one.
             </p>
             <p>
-                PC-BASIC reads fonts in the <code>.hex</code> format introduced by UniFont. It's
+                PC-BASIC reads fonts in a variant of the <code>.hex</code> format introduced by UniFont. It's
                 easy to define custom fonts in this format: it can be edited in a regular text editor.
                 See the UniFont project for an authoring tool. You can add custom fonts to PC-BASIC by
                 installing them into the <code>font/</code> subdirectory of PC-BASIC's installation
@@ -2462,22 +2385,10 @@ to interrupt a running program.  </p>
                     <th>Codepages</th>
                 </tr>
                 <tr>
-                    <td><code>unifont</code></td>
-                    <td>GNU UniFont</td>
-                    <td>16</td>
-                    <td>all</td>
-                </tr>
-                <tr>
-                    <td><code>univga</code></td>
-                    <td>Uni-VGA font</td>
-                    <td>16</td>
-                    <td>many</td>
-                </tr>
-                <tr>
-                    <td><code>freedos</code></td>
-                    <td>FreeDOS CPIDOS font</td>
+                    <td><code>default</code></td>
+                    <td>PC-BASIC default font</td>
                     <td>8, 14, 16</td>
-                    <td>many</td>
+                    <td>all bundled codepages</td>
                 </tr>
                 <tr>
                     <td><code>cga</code></td>
@@ -2517,12 +2428,13 @@ to interrupt a running program.  </p>
                 </tr>
             </table></div>
             <p>
-                GNU UniFont contains glyphs for all the defined code points of the
-                Basic Multilingual Plane of Unicode 7.0, which makes it an
-                excellent fallback font. Its glyphs are not, however, very similar
-                to those that were used on DOS machines; both Uni-VGA and the
-                FreeDOS CPIDOS fonts are therefore more suitable, when they have
-                the required glyphs.
+                If not all glyphs are found in the specified font(s), the <code>default</code>
+                font is used as a fallback.
+            </p>
+            <p>
+                The font names <code>freedos</code>, <code>univga</code>, and <code>unifont</code>
+                are treated as synonyms of <code>default</code> unless a font with one of these names
+                is available. This behaviour is deprecated.
             </p>
         </section>
         <hr>
@@ -2567,8 +2479,9 @@ to interrupt a running program.  </p>
             <p>
                 You can use the command-line interface to run one or a few BASIC commands directly, like so:
             </p>
-            <samp class="block">me@mybox$ <b>pcbasic -bqe="?1+1"</b>
-                <b>2</b>
+            <samp class="block">
+                me@mybox$ <b>pcbasic -c '?1+1'</b><br>
+                <b>&#160;2</b><br>
                 me@mybox$
             </samp>
             <p>
@@ -2611,7 +2524,7 @@ to interrupt a running program.  </p>
 <article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2020 Rob Hagemans
+    Copyright (c) 2014-2021 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -2671,7 +2584,7 @@ to interrupt a running program.  </p>
 <hr>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2020 Rob Hagemans
+    Copyright (c) 2014-2021 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -2686,6 +2599,7 @@ to interrupt a running program.  </p>
 <a href="#--aspect" class="option-link">[<b>--aspect=</b><var>x</var>,<var>y</var>]</a>
 <a href="#-b" class="option-link">[<b>-b</b>]</a>
 <a href="#--border" class="option-link">[<b>--border=</b><var>width</var>]</a>
+<a href="#-c" class="option-link">[<b>-c=</b><var>statement</var>[<b>:</b><var>statement</var> ...]]</a>
 <a href="#--caption" class="option-link">[<b>--caption=</b><var>title</var>]</a>
 <a href="#--cas1" class="option-link">[<b>--cas1=</b><var>type</var><b>:</b><var>value</var>]</a>
 <a href="#--codepage" class="option-link">[<b>--codepage=</b><var>codepage_id</var>[<b>:nobox</b>]]</a>
@@ -2709,6 +2623,7 @@ to interrupt a running program.  </p>
 <a href="#--help" class="option-link">[<b>--help</b>]</a>
 <a href="#--hide-listing" class="option-link">[<b>--hide-listing=</b><var>line_number</var>]</a>
 <a href="#--hide-protected" class="option-link">[<b>--hide-protected</b>[<b>=True</b>|<b>=False</b>]]</a>
+<a href="#--input" class="option-link">[<b>-i=</b>{<var>input_file</var>|{<b>STDIO</b>|<b>STDIN</b>}[<b>:RAW</b>]}]</a>
 <a href="#--input" class="option-link">[<b>--input=</b>{<var>input_file</var>|{<b>STDIO</b>|<b>STDIN</b>}[<b>:RAW</b>]}]</a>
 <a href="#--interface" class="option-link">[<b>--interface=</b>[<b>none</b>|<b>cli</b>|<b>text</b>|<b>graphical</b>]]</a>
 <a href="#--keys" class="option-link">[<b>-k=</b><var>keystring</var>]</a>
@@ -2727,6 +2642,7 @@ to interrupt a running program.  </p>
 <a href="#--monitor" class="option-link">[<b>--monitor=</b>{<b>rgb</b>|<b>composite</b>|<b>green</b>|<b>amber</b>|<b>grey</b>|<b>mono</b>}]</a>
 <a href="#--mount" class="option-link">[<b>--mount=</b><var>drive</var><b>:</b><var>path</var><b>,</b>[<var>drive</var><b>:</b><var>path</var> ... ]]</a>
 <a href="#-n" class="option-link">[<b>-n</b>]</a>
+<a href="#--output" class="option-link">[<b>-o=</b><var>output_file</var>[<b>:append</b>]]</a>
 <a href="#--output" class="option-link">[<b>--output=</b><var>output_file</var>[<b>:append</b>]]</a>
 <a href="#--peek" class="option-link">[<b>--peek=</b>[<var>seg</var><b>:</b><var>addr</var><b>:</b><var>val</var>[<b>,</b><var>seg</var><b>:</b><var>addr</var><b>:</b><var>val</var> ... ]]]</a>
 <a href="#--preset" class="option-link">[<b>--preset=</b><var>option_block</var>]</a>
@@ -2835,6 +2751,19 @@ to interrupt a running program.  </p>
             width of the borders on both sides as a fraction of the usable
             screen width.
             Only has an effect if combined with <code><b><a href="#--interface">--interface</a>=graphical</b></code>.
+        </dd>
+
+
+        <dt id="-c">
+            <code id="-c"><b>-c=</b><var>statement</var>[<b>:</b><var>statement</var> ...]</code>
+        </dt>
+        <dd>
+            Execute commands as a shell. This is a convenience shorthand and identical to
+            <code>
+                <b><a href="#--interface">--interface</a>=none</b>
+                <b><a href="#--quit">--quit</a>=True</b>
+                <b><a href="#--exec">--exec</a>=</b><var>statement</var>[<b>:</b><var>statement</var> ...]
+            </code>.
         </dd>
 
         <dt id="--caption">
@@ -3103,10 +3032,10 @@ to interrupt a running program.  </p>
             Execute BASIC statements. The <code><var>statement</var></code>s are executed
             after loading any program but before entering into direct mode or
             running it. Multiple statements can be entered by separating them with colons <code><b>:</b></code>.
-            These will be executed as if they were entered as separate statements, not as a single compound statement;
-            even if statements such as <code>GOTO</code> can be included, the following statements will be executed.
-            If a <code><b>:</b></code> is intended to be part of a statement, the statement must be quoted with
-            single quotes <code><b>'</b></code>. If your calling shell interprets such quotes, you should properly escape them.
+            These will be executed as if they were entered as separate statements, not as a single compound statement:
+            even if statements such as <code>GOTO</code> or <code>LIST</code> are included, the following statements will still be executed.
+            The character <code><b>:</b></code> will be interpreted as part of a string if quoted with
+            single quotes <code><b>"</b></code>. If your calling shell interprets such quotes, you should properly escape them.
         </dd>
 
         <dt id="--extension">
@@ -3174,6 +3103,7 @@ to interrupt a running program.  </p>
         </dd>
 
         <dt id="--input">
+            <code id="-i"><b>-i=</b>{<var>input_file</var>|{<b>STDIO</b>|<b>STDIN</b>}[<b>:RAW</b>]}</code>
             <code><b>--input=</b>{<var>input_file</var>|{<b>STDIO</b>|<b>STDIN</b>}[<b>:RAW</b>]}</code>
         </dt>
         <dd>
@@ -3415,6 +3345,7 @@ to interrupt a running program.  </p>
         </dd>
 
         <dt id="--output">
+            <code id="-o"><b>-o=</b><var>output_file</var>[<b>:append</b>]</code>
             <code><b>--output=</b><var>output_file</var>[<b>:append</b>]</code>
         </dt>
         <dd>
@@ -3810,7 +3741,7 @@ to interrupt a running program.  </p>
 <hr>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2020 Rob Hagemans
+    Copyright (c) 2014-2021 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -3884,7 +3815,7 @@ to interrupt a running program.  </p>
             Resume the most recently closed PC-BASIC session.
         </dd>
 
-        <dt><code><b>pcbasic -qbe="?1+1"</b></code></dt>
+        <dt><code><b>pcbasic -c ?1+1</b></code></dt>
         <dd>
             Execute the BASIC command <code>PRINT 1+1</code> in the
             command-line interface and return to the calling shell.
@@ -3895,7 +3826,7 @@ to interrupt a running program.  </p>
 </article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2020 Rob Hagemans
+    Copyright (c) 2014-2021 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -5393,7 +5324,7 @@ to interrupt a running program.  </p>
 </article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2020 Rob Hagemans
+    Copyright (c) 2014-2021 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -11920,7 +11851,7 @@ to interrupt a running program.  </p>
             <b>LLIST</b> [<var>line_number_0</var>|<b>.</b>] [<b>-</b>[<var>line_number_1</var>|<b>.</b>]]
         </code>
         <p>
-            Prints the program to the screen, starting with <code><var>line_number_0</var></code> up to and
+            Prints the program to the line printer <code>LPT1:</code>, starting with <code><var>line_number_0</var></code> up to and
             including <code><var>line_number_1</var></code>.
             Also stops program execution and returns control to the user. Any further
             statements on a line after <code>LLIST</code> will be ignored, both in a program and in direct mode.
@@ -17026,7 +16957,7 @@ to interrupt a running program.  </p>
 </article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2020 Rob Hagemans
+    Copyright (c) 2014-2021 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -17937,7 +17868,7 @@ to interrupt a running program.  </p>
         <h4 id="hex-file-format">HEX font file format</h4>
         <p>
             The HEX file format for bitfonts was developed by Roman Czyborra for the
-            GNU Unifont package. PC-BASIC uses this file format to store its fonts.
+            GNU Unifont package. PC-BASIC uses an extended version of this file format to store its fonts.
         </p>
         <p>
             A HEX file is an ASCII text file, consisting of lines terminated by <code><i>LF</i></code>.
@@ -17951,18 +17882,15 @@ to interrupt a running program.  </p>
                 A comment, starting with a <code>#</code> character.
             </li>
             <li>
-                A 4 or 6-character hexadecimal Unicode code point, followed by a colon,
-                followed by a 16- or 32-character hexadecimal number representing the glyph.
-                A 16-character number represents a halfwidth (8x16) glyph, with
-                each row of 8 pixels represented by two hexadecimal characters.
-                A 32-character number represents a fullwidth (16x16) glyph, with
-                each row of 16 pixels represented by four hexadecimal characters.
+                One or more 4 or 6-character hexadecimal Unicode code points, separated by commas,
+                followed by a colon,
+                followed by a hexadecimal number representing the glyph.
+                A 64-hexdigit or longer number represents a fullwidth (16xN) glyph, with
+                each row of 16 pixels represented by four hexadecimal digits.
+                A shorter number represents a halfwidth (8xN) glyph, with
+                each row of 8 pixels represented by two hexadecimal digits.
             </li>
         </ul>
-        <p>
-            PC-BASIC also encodes 8- and 14-pixel high fonts in this manner; these
-            are encoded as 16-bit high fonts with the remaining rows set to zero.
-        </p>
         <h4 id="ucp-file-format">UCP code page file format</h4>
         <p>
             Unicode-codepage mappings are stored in UCP files.
@@ -17982,7 +17910,7 @@ to interrupt a running program.  </p>
                 A 2- or 4-character hexadecimal codepage point, followed by a colon, followed
                 by a comma-separated list of 4- or 6-character hexadecimal Unicode code points.
                 If more than one Unicode code point is provided for a codepage point, the code points
-                must combine into a single glyph.
+                combine into a single glyph.
             </li>
         </ul>
         <h4 id="cas-file-format">CAS tape file format</h4>
@@ -19778,7 +19706,7 @@ to interrupt a running program.  </p>
 </article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2020 Rob Hagemans
+    Copyright (c) 2014-2021 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -19946,6 +19874,8 @@ sending in patches, and documenting GW-BASIC's behaviour. Thank you all!</p>
 <li><strong>Wengier Wu</strong></li>
 <li><strong>Jan Bredenbeek</strong></li>
 <li><strong>WJB</strong></li>
+<li><strong>Rutger van Bergen</strong></li>
+<li><strong>Daniel Santana</strong></li>
 </ul>
 <p>Avid testers and bug hunters</p>
 <ul>
@@ -19953,10 +19883,10 @@ sending in patches, and documenting GW-BASIC's behaviour. Thank you all!</p>
 <li><strong>Kenneth Wayne Boyd</strong></li>
 <li><strong>Nauman Umer</strong></li>
 <li><strong>Steve Pagliarulo</strong></li>
-<li><strong>Daniel Santana</strong></li>
 <li><strong>Miguel Dorta</strong></li>
 <li><strong>Patrik</strong></li>
 <li><strong>Duane</strong></li>
+<li><strong>Justin R. Miller</strong></li>
 </ul>
 <h3 id="acks_shoulders-of-giants">Shoulders of Giants</h3>
 <p>PC-BASIC incorporates code derived from other projects, in particular:</p>
@@ -20104,7 +20034,7 @@ behaviour of various Microsoft BASIC dialects.</p>
 <footer>
 <h2 id="licence">Licences</h2>
 <h3 id="pc-basic-interpreter">PC-BASIC interpreter</h3>
-<p><strong>Copyright &#169; 2013&#8212;2020 Rob Hagemans.</strong></p>
+<p><strong>Copyright &#169; 2013&#8212;2021 Rob Hagemans.</strong></p>
 <p><em>Source code available at <a href="https://github.com/robhagemans/pcbasic">https://github.com/robhagemans/pcbasic</a>.</em></p>
 <p>This program is free software: you can redistribute it and/or modify
 it under the terms of the <a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License</a> as published by
@@ -20118,7 +20048,7 @@ GNU General Public License for more details.</p>
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p><hr>
 <h3 id="pc-basic-documentation">PC-BASIC documentation</h3>
-<p><strong>Copyright &#169; 2014&#8212;2020 Rob Hagemans.</strong></p>
+<p><strong>Copyright &#169; 2014&#8212;2021 Rob Hagemans.</strong></p>
 <p>This work is licensed under a
 <a href="http://creativecommons.org/licenses/by-sa/4.0/legalcode">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
 </footer>
