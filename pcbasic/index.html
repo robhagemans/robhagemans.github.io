@@ -24,8 +24,10 @@
         var plat_win32 = "Windows";
         var suffix_osx = '-osx.dmg';
         var plat_osx = "OS X";
+        var suffix_deb = '.deb';
+        var plat_deb = "Debian Linux"
         var suffix_src = '.tgz';
-        var plat_src = "Linux and Unix"
+        var plat_src = "installation from source"
 
         switch (window.navigator.platform) {
         case 'Win32':
@@ -37,11 +39,15 @@
             suffix = suffix_osx;
             plat = plat_osx;
             break;
+        case 'Linux x86':
+        case 'Linux x86_64':
+            suffix = suffix_deb;
+            plat = plat_deb;
+            break;
         default:
             suffix = suffix_src;
             plat = plat_src
         }
-        console.log('here');
 
         // get latest release form GitHub
         var json_url = "https://api.github.com/repos/robhagemans/pcbasic/releases";
@@ -49,18 +55,18 @@
         request.open('GET', json_url, true);
 
         request.onload = function() {
-            console.log('onload')
             if (request.status >= 200 && request.status < 400) {
                 var result = JSON.parse(request.responseText);
                 console.log(result);
                 for (var i=0; i < result.length; ++i) {
                     console.log(result[i]);
-                    // results are returned latest first, so first v1 tag is latest stable
-                    if (result[i].tag_name.startsWith('v1')) {
+                    // results are returned latest first, so first v2 tag is latest
+                    // and first v1 tag is latest legacy
+                    if (result[i].tag_name.startsWith('v2')) {
                         console.log(result[i].tag_name);
                         var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
                                         + result[i].tag_name + "/pcbasic-" + result[i].tag_name;
-                        document.getElementById("maindownloaddesc").innerHTML = "Stable release " + result[i].tag_name + " for " + plat;
+                        document.getElementById("maindownloaddesc").innerHTML = "Latest release " + result[i].tag_name + " for " + plat;
                         document.getElementById("maindownload").setAttribute('href', url_base + suffix);
                         document.getElementById("otherdownloads").innerHTML = "[ other operating systems and development releases ]";
                         break;
@@ -81,8 +87,8 @@
         <ul class="pure-menu-list">
             <li class="pure-menu-item pure-menu-selected"><a href="download.html" class="pure-menu-link">Download</a></li>
             <li class="pure-menu-item"><a href="https://github.com/robhagemans/pcbasic/" class="pure-menu-link">Source</a></li>
-            <li class="pure-menu-item"><a href="doc/" class="pure-menu-link">Documentation</a></li>
-            <li class="pure-menu-item"><a href="https://sourceforge.net/p/pcbasic/discussion/" class="pure-menu-link">Discuss</a></li>
+            <li class="pure-menu-item"><a href="doc/2.0/" class="pure-menu-link">Documentation</a></li>
+            <li class="pure-menu-item"><a href="https://github.com/robhagemans/pcbasic/discussions" class="pure-menu-link">Discuss</a></li>
         </ul>
     </nav>
 
