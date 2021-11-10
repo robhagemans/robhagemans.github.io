@@ -18,7 +18,7 @@
     <title>PC-BASIC</title>
 
     <script>
-        function getNewReleaseProperties(tag_name, assets) {
+        function getNewReleaseProperties(release) {
             // insert specific downloads for client OS
             // without JS, generic links are left which is also OK
             const suffix_win32 = '.msi';
@@ -27,7 +27,6 @@
             const plat_osx = "OS X";
             const suffix_deb = '.deb';
             const plat_deb = "Debian Linux"
-            const suffix_src = '.tgz';
             const plat_src = "installation from source"
 
             const releaseProperties = { platform: '', url: null };
@@ -49,17 +48,18 @@
                 releaseProperties.platform = plat_deb;
                 break;
             default:
-                suffix = suffix_src;
+                releaseProperties.url = release.tarball_url;
                 releaseProperties.platform = plat_src;
+                return releaseProperties;
             }
 
-            const url_base = "https://github.com/robhagemans/pcbasic/releases/download/" + tag_name + '/';
+            const url_base = "https://github.com/robhagemans/pcbasic/releases/download/" + release.tag_name + '/';
 
-            for (var i=0; i < assets.length; ++i) {
-                const ext = assets[i].name.slice(-4);
+            for (var i=0; i < release.assets.length; ++i) {
+                const ext = release.assets[i].name.slice(-4);
                 console.log(ext);
                 if (ext == suffix) {
-                    releaseProperties.url = url_base + assets[i].name;
+                    releaseProperties.url = url_base + release.assets[i].name;
                     break;
                 }
             }
@@ -82,7 +82,7 @@
                     // and first v1 tag is latest legacy
                     if (result[i].tag_name.startsWith('v2')) {
                         console.log(result[i].tag_name);
-                        const releaseProperties = getNewReleaseProperties(result[i].tag_name, result[i].assets)
+                        const releaseProperties = getNewReleaseProperties(result[i]);
                         
                         // leave generic HTML in if we weren't able to find an asset URL
                         if (releaseProperties.url == null) {
