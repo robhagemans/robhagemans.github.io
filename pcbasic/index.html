@@ -21,16 +21,16 @@
         function getNewReleaseProperties(tag_name, assets) {
             // insert specific downloads for client OS
             // without JS, generic links are left which is also OK
-            var suffix_win32 = '.msi';
-            var plat_win32 = "Windows";
-            var suffix_osx = '.dmg';
-            var plat_osx = "OS X";
-            var suffix_deb = '.deb';
-            var plat_deb = "Debian Linux"
-            var suffix_src = '.tgz';
-            var plat_src = "installation from source"
+            const suffix_win32 = '.msi';
+            const plat_win32 = "Windows";
+            const suffix_osx = '.dmg';
+            const plat_osx = "OS X";
+            const suffix_deb = '.deb';
+            const plat_deb = "Debian Linux"
+            const suffix_src = '.tgz';
+            const plat_src = "installation from source"
 
-            var releaseProperties = { platform: '', url: null };
+            const releaseProperties = { platform: '', url: null };
             var suffix = '';
 
             switch (window.navigator.platform) {
@@ -53,10 +53,10 @@
                 releaseProperties.platform = plat_src;
             }
 
-            var url_base = "https://github.com/robhagemans/pcbasic/releases/download/" + tag_name + '/';
+            const url_base = "https://github.com/robhagemans/pcbasic/releases/download/" + tag_name + '/';
 
             for (var i=0; i < assets.length; ++i) {
-                var ext = assets[i].name.slice(-4);
+                const ext = assets[i].name.slice(-4);
                 console.log(ext);
                 if (ext == suffix) {
                     releaseProperties.url = url_base + assets[i].name;
@@ -68,8 +68,8 @@
         };
 
         // get latest release from GitHub
-        var json_url = "https://api.github.com/repos/robhagemans/pcbasic/releases";
-        var request = new XMLHttpRequest();
+        const json_url = "https://api.github.com/repos/robhagemans/pcbasic/releases";
+        const request = new XMLHttpRequest();
         request.open('GET', json_url, true);
 
         request.onload = function() {
@@ -82,7 +82,7 @@
                     // and first v1 tag is latest legacy
                     if (result[i].tag_name.startsWith('v2')) {
                         console.log(result[i].tag_name);
-                        var releaseProperties = getNewReleaseProperties(result[i].tag_name, result[i].assets)
+                        const releaseProperties = getNewReleaseProperties(result[i].tag_name, result[i].assets)
                         
                         // leave generic HTML in if we weren't able to find an asset URL
                         if (releaseProperties.url == null) {
