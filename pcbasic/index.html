@@ -30,7 +30,7 @@
             var suffix_src = '.tgz';
             var plat_src = "installation from source"
 
-            var releaseProperties = { platform = '', url = '' };
+            var releaseProperties = { platform = '', url = null };
             var suffix = '';
 
             switch (window.navigator.platform) {
@@ -83,6 +83,12 @@
                     if (result[i].tag_name.startsWith('v2')) {
                         console.log(result[i].tag_name);
                         var releaseProperties = getNewReleaseProperties(result[i].tag_name, result[i].assets)
+                        
+                        // leave generic HTML in if we weren't able to find an asset URL
+                        if (releaseProperties.url == null) {
+                            break;
+                        }
+
                         document.getElementById("maindownloaddesc").innerHTML = "Latest release " + result[i].tag_name + " for " + releaseProperties.platform;
                         document.getElementById("maindownload").setAttribute('href', releaseProperties.url);
                         document.getElementById("otherdownloads").innerHTML = "[ other operating systems and older releases ]";
