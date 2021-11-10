@@ -18,38 +18,56 @@
     <title>PC-BASIC</title>
 
     <script>
-        // insert specific downloads for client OS
-        // without JS, generic links are left which is also OK
-        var suffix_win32 = '-win32.exe';
-        var plat_win32 = "Windows";
-        var suffix_osx = '-osx.dmg';
-        var plat_osx = "OS X";
-        var suffix_deb = '.deb';
-        var plat_deb = "Debian Linux"
-        var suffix_src = '.tgz';
-        var plat_src = "installation from source"
+        function getNewReleaseProperties(tag_name, assets) {
+            // insert specific downloads for client OS
+            // without JS, generic links are left which is also OK
+            var suffix_win32 = '.msi';
+            var plat_win32 = "Windows";
+            var suffix_osx = '.dmg';
+            var plat_osx = "OS X";
+            var suffix_deb = '.deb';
+            var plat_deb = "Debian Linux"
+            var suffix_src = '.tgz';
+            var plat_src = "installation from source"
 
-        switch (window.navigator.platform) {
-        case 'Win32':
-        case 'Win64':
-            suffix = suffix_win32;
-            plat = plat_win32;
-            break;
-        case 'MacIntel':
-            suffix = suffix_osx;
-            plat = plat_osx;
-            break;
-        case 'Linux x86':
-        case 'Linux x86_64':
-            suffix = suffix_deb;
-            plat = plat_deb;
-            break;
-        default:
-            suffix = suffix_src;
-            plat = plat_src
-        }
+            var releaseProperties = { platform = '', url = '' };
+            var suffix = '';
 
-        // get latest release form GitHub
+            switch (window.navigator.platform) {
+            case 'Win32':
+            case 'Win64':
+                suffix = suffix_win32;
+                releaseProperties.platform = plat_win32;
+                break;
+            case 'MacIntel':
+                suffix = suffix_osx;
+                releaseProperties.platform = plat_osx;
+                break;
+            case 'Linux x86':
+            case 'Linux x86_64':
+                suffix = suffix_deb;
+                releaseProperties.platform = plat_deb;
+                break;
+            default:
+                suffix = suffix_src;
+                releaseProperties.platform = plat_src;
+            }
+
+            var url_base = "https://github.com/robhagemans/pcbasic/releases/download/" + tag_name + '/';
+
+            for (var i=0; i < assets.length; ++i) {
+                var ext = assets[i].name.slice(-4);
+                console.log(ext);
+                if (ext == suffix) {
+                    releaseProperties.url = url_base + assets[i].name;
+                    break;
+                }
+            }
+
+            return releaseProperties; 
+        };
+
+        // get latest release from GitHub
         var json_url = "https://api.github.com/repos/robhagemans/pcbasic/releases";
         var request = new XMLHttpRequest();
         request.open('GET', json_url, true);
@@ -64,10 +82,9 @@
                     // and first v1 tag is latest legacy
                     if (result[i].tag_name.startsWith('v2')) {
                         console.log(result[i].tag_name);
-                        var url_base = "https://github.com/robhagemans/pcbasic/releases/download/"
-                                        + result[i].tag_name + "/pcbasic-" + result[i].tag_name;
-                        document.getElementById("maindownloaddesc").innerHTML = "Latest release " + result[i].tag_name + " for " + plat;
-                        document.getElementById("maindownload").setAttribute('href', url_base + suffix);
+                        var releaseProperties = getNewReleaseProperties(result[i].tag_name, result[i].assets)
+                        document.getElementById("maindownloaddesc").innerHTML = "Latest release " + result[i].tag_name + " for " + releaseProperties.platform;
+                        document.getElementById("maindownload").setAttribute('href', releaseProperties.url);
                         document.getElementById("otherdownloads").innerHTML = "[ other operating systems and older releases ]";
                         break;
                     }
