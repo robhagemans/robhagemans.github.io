@@ -29,7 +29,7 @@
 </nav>
 
 <article>
-    <h2 id="top">PC-BASIC 2.0.4</h2>
+    <h2 id="top">PC-BASIC 2.0.5</h2>
     <p>
         <em>A free, cross-platform emulator for the GW-BASIC family of interpreters.</em>
     </p>
@@ -37,7 +37,7 @@
         PC-BASIC is a free, cross-platform interpreter for GW-BASIC, Advanced BASIC (BASICA), PCjr Cartridge Basic and Tandy 1000 GWBASIC. It interprets these BASIC dialects with a high degree of accuracy, aiming for bug-for-bug compatibility. PC-BASIC emulates the most common video and audio hardware on which these BASICs used to run. PC-BASIC runs plain-text, tokenised and protected .BAS files. It implements floating-point arithmetic in the Microsoft Binary Format (MBF) and can therefore read and write binary data files created by GW-BASIC.
     </p>
     <p>
-        This is the documentation for <strong>PC-BASIC 2.0.4</strong>, last updated <em>2021-11-08 20:55:10</em>.<br>
+        This is the documentation for <strong>PC-BASIC 2.0.5</strong>, last updated <em>2022-07-16 18:12:29</em>.<br>
         It consists of the following documents:
     </p>
     <ul>
@@ -69,7 +69,7 @@
     <h2 id="toc">Table of Contents</h2>
 
             <ul>
-                <li><a href="#top">PC-BASIC 2.0.4</a></li>
+                <li><a href="#top">PC-BASIC 2.0.5</a></li>
                 <li><a href="#quick-start-guide">Quick Start Guide</a>
                     <ul>
                         <li><a href="#installation">Installation</a></li>
@@ -112,7 +112,7 @@
                                 <li><a href="#fonts">Fonts</a></li>
                                 <li><a href="#redirecting">Redirecting I/O</a></li>
                                 <li><a href="#cli">Command-line interface</a></li>
-                                <li><a href="#curses">Text-based interface</a></li>
+                                <li><a href="#text-interface">Text-based interface</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -481,6 +481,10 @@ that we've come to expect of modern software.  </p>
 </thead>
 <tbody>
 <tr>
+<td><code>FILES</code></td>
+<td>show current working directory and its contents</td>
+</tr>
+<tr>
 <td><code>LOAD "PROGRAM"</code></td>
 <td>loads the program file named <code>PROGRAM.BAS</code> into memory</td>
 </tr>
@@ -520,7 +524,7 @@ to interrupt a running program.  </p>
 <p>See the <a href="https://github.com/robhagemans/hoard-of-gwbasic">collection of GW-BASIC programs and tutorials</a>.  </p></article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2021 Rob Hagemans
+    Copyright (c) 2014-2022 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -1257,13 +1261,24 @@ to interrupt a running program.  </p>
             <p>
                 The presentation of printed documents is left to your operating system: it
                 will be the default presentation of text files. If you wist to change the way
-                documents are printed, please refer to your OS's settings. On Windows, for example, text files
-                are printed by <code>notepad.exe</code> and changing the default settings in that
-                application will change the way PC-BASIC documents are printed. You will need to set a
-                printer font that includes the characters you need to print. On Unix systems,
-                PC-BASIC will use the <code>paps</code> utility if it is available; this will
-                automatically select fonts that support the characters you need.
+                documents are printed, please refer to your OS's settings.
             </p>
+            <ul>
+                <li>
+                    On Windows, text files are printed the same way as would happen when you drag
+                    a text file and drop it on the printer's icon.
+                    That means the formatting is handled by the application associated to
+                    <code>.txt</code> files; usually this is <code>notepad.exe</code>. To change
+                    the way PC-BASIC documents are printed, change the page setup
+                    in that application. You will need to set a
+                    printer font that includes the characters you need to print.
+                </li>
+                <li>
+                    On Unix systems,
+                    PC-BASIC will use the <code>paps</code> utility if it is available; this will
+                    automatically select fonts that support the characters you need.
+                </li>
+            </ul>
         </section>
         <hr>
 
@@ -1391,11 +1406,12 @@ to interrupt a running program.  </p>
                 save all program files as if encoded in the codepage you select.
             </p>
             <p>
-                It is also possible to load and save programs in the nowadays common UTF-8
-                standard format, by enabling the <code><a href="#--utf8">utf8</a></code> option. When
-                <code>utf8</code> is enabled, plain-text program source will be saved and loaded in
-                standard UTF-8 encoding. Please note that you will still need to select a
-                codepage that provides all the Unicode characters that your program needs.
+                It is also possible to load and save programs in a standard encoding
+                by enabling the <code><a href="#--text-encoding">text-encoding</a></code> option.
+                For example, if <code>--text-encoding=utf-8</code> is set, plain-text program source
+                will be saved and loaded in standard UTF-8 encoding. Please note that you will still
+                need to select a codepage that provides all the Unicode characters that your program
+                needs.
             </p>
             <p>
                 Note that PC-BASIC does not implement the following features relevant to some of these codepages:
@@ -1886,7 +1902,7 @@ to interrupt a running program.  </p>
         <hr>
 
         <section>
-            <h4 id="curses">Text-based interface</h4>
+            <h4 id="text-interface">Text-based interface</h4>
             <p>
                 There is also a full-screen text interface available: enable it
                 by setting <code><a href="#--interface">interface</a>=text</code> (or <code><a href="#-t">-t</a></code>). The text-based
@@ -1914,7 +1930,7 @@ to interrupt a running program.  </p>
 <article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2021 Rob Hagemans
+    Copyright (c) 2014-2022 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -1974,7 +1990,7 @@ to interrupt a running program.  </p>
 <hr>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2021 Rob Hagemans
+    Copyright (c) 2014-2022 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -2030,7 +2046,7 @@ to interrupt a running program.  </p>
 <a href="#--max-reclen" class="option-link">[<b>-s=</b><var>record_length</var>]</a>
 <a href="#--max-reclen" class="option-link">[<b>--max-reclen=</b><var>record_length</var>]</a>
 <a href="#--monitor" class="option-link">[<b>--monitor=</b>{<b>rgb</b>|<b>composite</b>|<b>green</b>|<b>amber</b>|<b>grey</b>|<b>mono</b>}]</a>
-<a href="#--mount" class="option-link">[<b>--mount=</b><var>drive</var><b>:</b><var>path</var><b>,</b>[<var>drive</var><b>:</b><var>path</var> ... ]]</a>
+<a href="#--mount" class="option-link">[<b>--mount=</b>[<var>drive</var><b>:</b><var>path</var>[<b>,</b><var>drive</var><b>:</b><var>path</var> ... ]]]</a>
 <a href="#-n" class="option-link">[<b>-n</b>]</a>
 <a href="#--output" class="option-link">[<b>-o=</b><var>output_file</var>[<b>:append</b>]]</a>
 <a href="#--output" class="option-link">[<b>--output=</b><var>output_file</var>[<b>:append</b>]]</a>
@@ -2040,7 +2056,7 @@ to interrupt a running program.  </p>
 <a href="#--quit" class="option-link">[<b>-q</b>]</a>
 <a href="#--quit" class="option-link">[<b>--quit</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--reserved-memory" class="option-link">[<b>--reserved-memory=</b><var>number_of_bytes</var>]</a>
-<a href="#--resume" class="option-link">[<b>--resume</b>[<b>=True</b>|<b>=False</b>]</a>
+<a href="#--resume" class="option-link">[<b>--resume</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--run" class="option-link">[<b>-r=</b><var>program</var>]</a>
 <a href="#--run" class="option-link">[<b>--run=</b><var>program</var>]</a>
 <a href="#--scaling" class="option-link">[<b>--scaling=</b>{<b>smooth</b>|<b>crisp</b>|<b>native</b>}]</a>
@@ -2440,14 +2456,11 @@ to interrupt a running program.  </p>
             <code><b>--font=</b><var>font_name</var>[<b>,</b><var>font_name</var> ... ]</code></dt>
         <dd>
             Use the specified fonts for the interface. The last fonts specified take precedence, previous ones are
-            fallback. Default is <code><b>unifont,univga,freedos</b></code> (i.e. the
-            <code>freedos</code> font has preference). The available fonts
+            fallback. The available fonts
             are stored in <code>font/</code>. By default, the following fonts are
             available:
             <ul class="compact">
-                <li><code><b>unifont</b></code></li>
-                <li><code><b>univga</b></code></li>
-                <li><code><b>freedos</b></code></li>
+                <li><code><b>default</b></code></li>
                 <li><code><b>cga</b></code></li>
                 <li><code><b>mda</b></code></li>
                 <li><code><b>vga</b></code></li>
@@ -2455,6 +2468,11 @@ to interrupt a running program.  </p>
                 <li><code><b>tandy1</b></code></li>
                 <li><code><b>tandy2</b></code></li>
             </ul>.
+
+            The font names <code>freedos</code>, <code>univga</code>, and <code>unifont</code>
+            are treated as synonyms of <code>default</code> unless a font with one of these names
+            is available. This behaviour is deprecated and these synonyms will be removed in a future version.
+
             See the <a href="#fonts">list of fonts</a> in the User's Guide for details.
         </dd>
 
@@ -2521,17 +2539,20 @@ to interrupt a running program.  </p>
                 <dt><code><b>cli</b></code></dt>
                 <dd>Command-line interface. Also <code><b><a href="#-b">-b</a></b></code>.</dd>
                 <dt><code><b>text</b></code></dt>
-                <dd>Text interface. Also <code><b><a href="#-t">-t</a></b></code>.</dd>
+                <dd>ANSI text interface. Also <code><b><a href="#-t">-t</a></b></code>.</dd>
                 <dt><code><b>graphical</b></code></dt>
-                <dd>Graphical interface.</dd>
-                <dt><code><b>sdl2</b></code></dt>
                 <dd>SDL2 graphical interface.</dd>
-                <dt><code><b>pygame</b></code></dt>
-                <dd>PyGame graphical interface <em>(deprecated, please use SDL2 instead)</em>.</dd>
+            </dl>
+            The following values for this option are deprecated:
+            <dl class="compact">
                 <dt><code><b>ansi</b></code></dt>
-                <dd>ANSI text interface.</dd>
+                <dd>ANSI text interface. Synonym for <code><b>text</b></code>.</dd>
+                <dt><code><b>sdl2</b></code></dt>
+                <dd>SDL2 graphical interface. Synonym for <code><b>graphical</b></code>.</dd>
+                <dt><code><b>pygame</b></code></dt>
+                <dd>PyGame graphical interface. Please use <code><b>graphical</b></code> instead.</dd>
                 <dt><code><b>curses</b></code></dt>
-                <dd>NCurses text interface.</dd>
+                <dd>NCurses text interface. Please use <code><b>text</b></code> instead.</dd>
             </dl>
             The default is <code><b>graphical</b></code>.
         </dd>
@@ -2569,20 +2590,16 @@ to interrupt a running program.  </p>
             <code><b>--lpt1=</b><var>type</var><b>:</b><var>value</var></code>
         </dt>
         <dd>
-            Attach a resource to the <code>LPT1:</code> parallel device.
+            Determine where the output goes when writing to the <code>LPT1:</code> parallel device.
             <code><var>type</var><b>:</b><var>value</var></code> can be
             <dl>
 
                 <dt><code><b>PRINTER:</b>[<var>printer_name</var>][<b>:</b><var>trigger</var>]</code></dt>
                 <dd>
-                    Connect to a Windows, LPR or CUPS printer. If
+                    Output is written to a printer. If
                     <code><var>printer_name</var></code> is not specified, the default
-                    printer is used. <br>
-                    The printer is activated when a file open to it is closed,
-                    a program terminates or PC-BASIC exits. Note that, unlike <code>LPT1:</code>,
-                    printers connected to <code>LPT2:</code> or <code>LPT3:</code>
-                    do <em>not</em> get activated when a program terminates.
-                    If specified, <code><var>trigger</var></code> sets an additional trigger
+                    printer is used. Windows and CUPS printers are supported.<br>
+                    The printer will be activated when a file on <code>LPT1:</code><var>trigger</var> sets an additional trigger
                     to activate the printer:
                     <dl class="compact">
                         <dt><code><b>line</b></code>
@@ -2592,32 +2609,33 @@ to interrupt a running program.  </p>
                         <dt><code><b>close</b></code>
                         </dt><dd>No additional trigger</dd>
                     </dl>
-                    The default behaviour is that of <code><b>close</b></code>.
+                    The default is <code><b>close</b></code>.
                 </dd>
 
                 <dt><code><b>FILE:</b><var>file_name</var></code></dt>
                 <dd>
-                    Connect to any file or device such as
+                    Output is written to a file or character device such as
                     <code><b>/dev/stdout</b></code> on Unix or <code><b>LPT1</b></code> on Windows.
                 </dd>
 
                 <dt><code><b>STDIO:</b>[<b>CRLF</b>]</code></dt>
                 <dd>
-                    Connect to standard output of the calling shell.
+                    Output is written to the standard output of the calling shell.
                     If <code><b>CRLF</b></code> is specified, PC-BASIC replaces <code>CR</code>
                     characters with <code>LF</code> on its output. This is more intuitive on Unix shells.
                 </dd>
 
                 <dt><code><b>PARPORT:</b><var>port_number</var></code></dt>
                 <dd>
-                    Connect to a Centronics parallel port, where <code><var>port_number</var></code>
+                    Output is written to a Centronics parallel port, where <code><var>port_number</var></code>
                     is <code><b>0</b></code> for the first parallel port, etc.
-                    <code><b>PARPORT</b></code> only works with physical parallel ports; for example, a Windows printer or other
-                    device mapped with <code>NET USE LPT1:</code> can only be attached with <code><b>FILE:LPT1</b></code>
+                    This option only works with physical parallel ports. To write to a Windows printer or other
+                    device mapped with <code>NET USE LPT1:</code>, use <code><b>FILE:LPT1</b></code> instead.
                 </dd>
 
             </dl>
-            If this option is not specified, <code>LPT1:</code> is connected to the default printer.
+            The default is <code><b>PRINTER:</b></code>, so that output goes to the default printer
+            specified by the operating system.
         </dd>
 
         <dt id="--lpt2">
@@ -2626,6 +2644,9 @@ to interrupt a running program.  </p>
         <dd>
             Attach a resource to the <code>LPT2:</code> parallel device.
             See <code><b><a href="#--lpt1">--lpt1</a></b></code>.
+            Note that, unlike <code>LPT1:</code>, printers connected to <code>LPT2:</code>
+            do <em>not</em> get activated when a program terminates.
+
             If this option is not specified, <code>LPT2:</code> is unavailable.
         </dd>
 
@@ -2635,6 +2656,9 @@ to interrupt a running program.  </p>
         <dd>
             Attach a resource to the <code>LPT3:</code> parallel device.
             See <code><b><a href="#--lpt1">--lpt1</a></b></code>.
+            Note that, unlike <code>LPT1:</code>, printers connected to <code>LPT3:</code>
+            do <em>not</em> get activated when a program terminates.
+
             If this option is not specified, <code>LPT3:</code> is unavailable.
         </dd>
 
@@ -2714,7 +2738,7 @@ to interrupt a running program.  </p>
         </dd>
 
         <dt id="--mount">
-            <code><b>--mount=</b><var>drive</var><b>:</b><var>path</var><b>,</b>[<var>drive</var><b>:</b><var>path</var> ... ]</code>
+            <code><b>--mount=</b>[<var>drive</var><b>:</b><var>path</var>[<b>,</b><var>drive</var><b>:</b><var>path</var> ... ]]</code>
         </dt>
         <dd>
             Assign the path
@@ -2724,6 +2748,7 @@ to interrupt a running program.  </p>
             If this option is not specified: on Windows, all Windows drive letters
             will be assigned to PC-BASIC drive
             letters; on other systems, the current working directory is assigned to <code>Z:</code>.
+            If this option is specified but empty, do not mount any drives (except the internal device <code>@:</code>).
         </dd>
 
         <dt id="-n">
@@ -2806,7 +2831,7 @@ to interrupt a running program.  </p>
         </dd>
 
         <dt id="--resume">
-            <code><b>--resume</b>[<b>=True</b>|<b>=False</b></code>
+            <code><b>--resume</b>[<b>=True</b>|<b>=False</b>]</code>
         </dt>
         <dd>
             Resume from saved state. Overrides <code><a href="#--run">--run</a></code> and
@@ -2888,16 +2913,27 @@ to interrupt a running program.  </p>
             Choose the sound engine to use.
             Not all sound engines will be available on all systems.
             <dl class="compact">
-                <dt><code><b>none</b></code></dt>
+                <dt><code><b>false</b></code></dt>
                 <dd>Suppress sound output.</dd>
+                <dt><code><b>true</b></code></dt>
+                <dd>Output sound, if a sound driver is available for the interface.</dd>
+            </dl>
+
+            Default is <code><b>interface</b></code>.
+
+            The following values for this option are deprecated; PortAudio will be used by default
+            in the text-based interfaces:
+            <dl class="compact">
+                <dt><code><b>none</b></code></dt>
+                <dd>Suppress sound output. <em>(Use <code><b>false</b></code> instead)</em></dd>
+                <dt><code><b>interface</b></code>  <em>(Use <code><b>true</b></code> instead</em></dt>
+                <dd>Use the native sound engine of the interface, if available.</dd>
                 <dt><code><b>beep</b></code></dt>
                 <dd>Use the built-in speaker.</dd>
                 <dt><code><b>portaudio</b></code></dt>
                 <dd>Use the PortAudio sound generator.</dd>
-                <dt><code><b>interface</b></code></dt>
-                <dd>Use the native sound engine of the interface, if available.</dd>
             </dl>
-            Default is <code><b>interface</b></code>.
+
         </dd>
 
         <dt id="--state">
@@ -2979,7 +3015,7 @@ to interrupt a running program.  </p>
             Set the text encoding to UTF-8.
             <br>
             This option is <em>deprecated</em> and ignored if <code>--text-encoding</code> is set.
-            Use <code><b><a href="#--text-encoding">--text-encoding</a></b></code> instead.
+            Use <code><b><a href="#--text-encoding">--text-encoding</a>=utf-8</b></code> instead.
         </dd>
 
         <dt id="--version">
@@ -3131,7 +3167,7 @@ to interrupt a running program.  </p>
 <hr>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2021 Rob Hagemans
+    Copyright (c) 2014-2022 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -3157,10 +3193,9 @@ to interrupt a running program.  </p>
             package.
         </dd>
 
-        <dt><code><b>pcbasic Foobar.baz --convert=A --utf8</b></code></dt>
+        <dt><code><b>pcbasic Foobar.baz --convert=A --text-encoding=utf-8</b></code></dt>
         <dd>
-            List the main program of package Foobar to standard output as
-            UTF-8.
+            List the main program of package Foobar to standard output as UTF-8.
         </dd>
 
         <dt><code><b>pcbasic MYPROG.BAS --mount=A:./files,B:./morefiles</b></code></dt>
@@ -3216,7 +3251,7 @@ to interrupt a running program.  </p>
 </article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2021 Rob Hagemans
+    Copyright (c) 2014-2022 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -4714,7 +4749,7 @@ to interrupt a running program.  </p>
 </article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2021 Rob Hagemans
+    Copyright (c) 2014-2022 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -7360,6 +7395,15 @@ to interrupt a running program.  </p>
             </li>
             <li>
                 <code><var>col</var></code> is not in <code>[1, <var>width</var>]</code>: <samp>Illegal function call</samp>.
+            </li>
+        </ul>
+        <h5>Notes</h5>
+        <ul>
+            <li>
+                In GW-BASIC, the <code>SCREEN</code> function has anomalous error behaviour:
+                constructions which for other functions would raise <samp>Syntax error</samp> or
+                <samp>Missing operand</samp> instead raise <samp>Illegal function call</samp>. This
+                behaviour is not replicated in PC-BASIC.
             </li>
         </ul>
     </section>
@@ -10709,6 +10753,7 @@ to interrupt a running program.  </p>
             suspension, provided that event handling was switched on prior to suspension.
             The event triggered during suspension is handled immediately after the next <code>KEY() ON</code>
             statement.
+            Event trapping can only be active during execution of a program, it does not work in direct mode.
         </p>
         <h5>Parameters</h5>
         <p>
@@ -10825,7 +10870,7 @@ to interrupt a running program.  </p>
                     <table>
                         <tr>
                             <td><code>CHR$(&amp;h80)</code></td>
-                            <td>Extended</td>
+                            <td>Extended (ignored)</td>
                         </tr>
                         <tr>
                             <td><code>CHR$(&amp;h40)</code></td>
@@ -10834,6 +10879,10 @@ to interrupt a running program.  </p>
                         <tr>
                             <td><code>CHR$(&amp;h20)</code></td>
                             <td><kbd>Num Lock</kbd></td>
+                        </tr>
+                        <tr>
+                            <td><code>CHR$(&amp;h10)</code></td>
+                            <td><kbd>not used</kbd></td>
                         </tr>
                         <tr>
                             <td><code>CHR$(&amp;h08)</code></td>
@@ -10869,6 +10918,15 @@ to interrupt a running program.  </p>
                 (or <code>[1&#8212;12]</code> when <code><a href="#--syntax">syntax</a>=tandy</code>),
                 the statement is interpreted as a
                 <a href="#KEY-def">function-key macro definition</a>.
+            </li>
+            <li>
+                The <em>extended</em> modifier <code>&amp;h80</code> refers to the additional keys
+                that were introduced with the Model M 101-key keyboard in th earea between the main
+                keyboard and the numerical keypad. These are the arrow keys,
+                <kbd>Home</kbd>, <kbd>End</kbd>, <kbd>PgUp</kbd>, <kbd>PgDn</kbd>, <kbd>Ins</kbd>,
+                <kbd>Del</kbd> as separate from the numerical keypad.
+                PC-BASIC ignores this modifier; in a key definition, it does not make a difference
+                whether or not it is set.
             </li>
         </ul>
         <h5>Errors</h5>
@@ -16347,7 +16405,7 @@ to interrupt a running program.  </p>
 </article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2021 Rob Hagemans
+    Copyright (c) 2014-2022 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -19096,7 +19154,7 @@ to interrupt a running program.  </p>
 </article>
 <!--
     PC-BASIC documentation
-    Copyright (c) 2014-2021 Rob Hagemans
+    Copyright (c) 2014-2022 Rob Hagemans
     This work is licensed under a Creative Commons Attribution-ShareAlike 4.0 International License.
     http://creativecommons.org/licenses/by-sa/4.0/legalcode
 -->
@@ -19424,7 +19482,7 @@ behaviour of various Microsoft BASIC dialects.</p>
 <footer>
 <h2 id="licence">Licences</h2>
 <h3 id="pc-basic-interpreter">PC-BASIC interpreter</h3>
-<p><strong>Copyright &#169; 2013&#8212;2021 Rob Hagemans.</strong></p>
+<p><strong>Copyright &#169; 2013&#8212;2022 Rob Hagemans.</strong></p>
 <p><em>Source code available at <a href="https://github.com/robhagemans/pcbasic">https://github.com/robhagemans/pcbasic</a>.</em></p>
 <p>This program is free software: you can redistribute it and/or modify
 it under the terms of the <a href="http://www.gnu.org/licenses/gpl-3.0.en.html">GNU General Public License</a> as published by
@@ -19438,7 +19496,7 @@ GNU General Public License for more details.</p>
 with this program; if not, write to the Free Software Foundation, Inc.,
 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.</p><hr>
 <h3 id="pc-basic-documentation">PC-BASIC documentation</h3>
-<p><strong>Copyright &#169; 2014&#8212;2021 Rob Hagemans.</strong></p>
+<p><strong>Copyright &#169; 2014&#8212;2022 Rob Hagemans.</strong></p>
 <p>This work is licensed under a
 <a href="http://creativecommons.org/licenses/by-sa/4.0/legalcode">Creative Commons Attribution-ShareAlike 4.0 International License</a>.</p>
 </footer>
