@@ -1,16 +1,28 @@
-#!/usr/bin/env python2
-import os, sys, shutil
+#!/usr/bin/env python3
+
+import os, sys, shutil, subprocess
+
 here = os.path.dirname(os.path.realpath(os.path.abspath(__file__)))
 wd = os.path.join(here, '..', '..', '..', '..', 'pc-basic')
 sys.path.insert(0, wd)
-from docsrc import makedoc
+
+from docs import make_htmldoc
+
 # generate online doc
-makedoc(os.path.join(here, 'header.html'), os.path.join(here, 'index.html'), embedded_style=False)
+make_htmldoc(
+    here, 'index.html',
+    header=os.path.join(here, 'header.html'),
+    embedded_style=False
+)
 # generate offline doc
-makedoc()
-shutil.copy(os.path.join(wd, 'doc', 'PC-BASIC_documentation.html'), here)
+make_htmldoc(here, 'PC-BASIC_documentation.html')
+# front page
+shutil.copy(os.path.join(wd, 'docs', 'source', 'cover.png'), here)
 # generate PDF
-os.system('prince %s' % os.path.join(wd, 'doc', 'PC-BASIC_documentation.html'))
-shutil.copy(os.path.join(wd, 'doc', 'PC-BASIC_documentation.pdf'), here)
+subprocess.call(
+    ('prince', os.path.join(here, 'PC-BASIC_documentation.html'))
+)
+#shutil.copy(os.path.join(wd, 'build', 'doc', 'PC-BASIC_documentation.html'), here)
+#shutil.copy(os.path.join(wd, 'build', 'doc', 'PC-BASIC_documentation.pdf'), here)
 # get styles
-shutil.copy(os.path.join(wd, 'docsrc', 'doc.css'), here)
+shutil.copy(os.path.join(wd, 'docs', 'source', 'doc.css'), here)
