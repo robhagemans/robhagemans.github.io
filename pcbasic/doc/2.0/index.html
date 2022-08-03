@@ -29,7 +29,7 @@
 </nav>
 
 <article>
-    <h2 id="top">PC-BASIC 2.0.5</h2>
+    <h2 id="top">PC-BASIC 2.0.6</h2>
     <p>
         <em>A free, cross-platform emulator for the GW-BASIC family of interpreters.</em>
     </p>
@@ -37,7 +37,7 @@
         PC-BASIC is a free, cross-platform interpreter for GW-BASIC, Advanced BASIC (BASICA), PCjr Cartridge Basic and Tandy 1000 GWBASIC. It interprets these BASIC dialects with a high degree of accuracy, aiming for bug-for-bug compatibility. PC-BASIC emulates the most common video and audio hardware on which these BASICs used to run. PC-BASIC runs plain-text, tokenised and protected .BAS files. It implements floating-point arithmetic in the Microsoft Binary Format (MBF) and can therefore read and write binary data files created by GW-BASIC.
     </p>
     <p>
-        This is the documentation for <strong>PC-BASIC 2.0.5</strong>, last updated <em>2022-07-16 18:12:29</em>.<br>
+        This is the documentation for <strong>PC-BASIC 2.0.6</strong>, last updated <em>2022-08-03 22:19:19</em>.<br>
         It consists of the following documents:
     </p>
     <ul>
@@ -69,7 +69,7 @@
     <h2 id="toc">Table of Contents</h2>
 
             <ul>
-                <li><a href="#top">PC-BASIC 2.0.5</a></li>
+                <li><a href="#top">PC-BASIC 2.0.6</a></li>
                 <li><a href="#quick-start-guide">Quick Start Guide</a>
                     <ul>
                         <li><a href="#installation">Installation</a></li>
@@ -2063,7 +2063,7 @@ to interrupt a running program.  </p>
 <a href="#--serial-buffer-size" class="option-link">[<b>--serial-buffer-size=</b><var>size</var>]</a>
 <a href="#--shell" class="option-link">[<b>--shell=</b>[<var>shell-executable</var>]]</a>
 <a href="#--soft-linefeed" class="option-link">[<b>--soft-linefeed</b>[<b>=True</b>|<b>=False</b>]]</a>
-<a href="#--sound" class="option-link">[<b>--sound=</b>[<b>none</b>|<b>beep</b>|<b>portaudio</b>|<b>interface</b>]]</a>
+<a href="#--sound" class="option-link">[<b>--sound</b>[<b>=True</b>|<b>=False</b>]]</a>
 <a href="#--state" class="option-link">[<b>--state=</b><var>state_file</var>]</a>
 <a href="#--syntax" class="option-link">[<b>--syntax=</b>{<b>advanced</b>|<b>pcjr</b>|<b>tandy</b>}]</a>
 <a href="#-t" class="option-link">[<b>-t</b>]</a>
@@ -2907,31 +2907,32 @@ to interrupt a running program.  </p>
         </dd>
 
         <dt id="--sound">
-            <code><b>--sound=</b>[<b>none</b>|<b>beep</b>|<b>portaudio</b>|<b>interface</b>]</code>
+            <code><b>--sound</b>[<b>=True</b>|<b>=False</b>]</code>
         </dt>
         <dd>
-            Choose the sound engine to use.
-            Not all sound engines will be available on all systems.
             <dl class="compact">
-                <dt><code><b>false</b></code></dt>
+                <dt><code><b>False</b></code></dt>
                 <dd>Suppress sound output.</dd>
-                <dt><code><b>true</b></code></dt>
-                <dd>Output sound, if a sound driver is available for the interface.</dd>
+                <dt><code><b>True</b></code></dt>
+                <dd>Output sound, if a sound driver is available (default).</dd>
             </dl>
 
-            Default is <code><b>interface</b></code>.
+            If sound is on, PC-BASIC will
+            try to use the SDL2 library first; if it is not available, it will try PortAudio. If neither is available,
+            sound will be disabled.
 
-            The following values for this option are deprecated; PortAudio will be used by default
-            in the text-based interfaces:
+            The following values for this option are deprecated:
             <dl class="compact">
                 <dt><code><b>none</b></code></dt>
-                <dd>Suppress sound output. <em>(Use <code><b>false</b></code> instead)</em></dd>
-                <dt><code><b>interface</b></code>  <em>(Use <code><b>true</b></code> instead</em></dt>
-                <dd>Use the native sound engine of the interface, if available.</dd>
-                <dt><code><b>beep</b></code></dt>
-                <dd>Use the built-in speaker.</dd>
+                <dd>Suppress sound output. Use <code><b>False</b></code> instead.</dd>
+                <dt><code><b>interface</b></code></dt>
+                <dd>Use the native sound engine of the interface. Use <code><b>True</b></code> instead.</dd>
+                <dt><code><b>sdl2</b></code></dt>
+                <dd>Use the SDL2 sound generator.</dd>
                 <dt><code><b>portaudio</b></code></dt>
                 <dd>Use the PortAudio sound generator.</dd>
+                <dt><code><b>beep</b></code></dt>
+                <dd>Use the built-in speaker.</dd>
             </dl>
 
         </dd>
@@ -4557,7 +4558,7 @@ to interrupt a running program.  </p>
         low memory segment, including the keyboard buffer. Additionally, there is read
         support for font ROM, variable, array and string memory, <code><a href="#FIELD">FIELD</a></code>
         buffers as well as the program code itself. Writing into the program code is
-        disabled by default, but can be enabled with the <code><a href="--allow-code-poke">allow-code-poke</a></code>
+        disabled by default, but can be enabled with the <code><a href="#--allow-code-poke">allow-code-poke</a></code>
         option. A number of machine ports related to keyboard input and
         video modes are supported as well.
     </p>
@@ -7900,11 +7901,14 @@ to interrupt a running program.  </p>
                 <code>VARPTR</code> can be used with <code><a href="#PEEK">PEEK</a></code>
                 to read a variable's internal representation.
             </li>
+            <li>
+                If <code><var>name</var></code> is an undefined array element, it will be implicitly allocated in the same way as if it had been used in an expression.
+            </li>
         </ul>
         <h5>Errors</h5>
         <ul>
             <li>
-                <code><var>name</var></code> has not been previously defined: <samp>Illegal function call</samp>.
+                <code><var>name</var></code> is a scalar that has not been previously defined: <samp>Illegal function call</samp>.
             </li>
             <li>
                 <code><var>file_num</var></code> has a string value: <samp>Type mismatch</samp>.
@@ -7926,6 +7930,7 @@ to interrupt a running program.  </p>
         </code>
         <p>
             Returns the memory address of variable <code><var>name</var></code> in the form of a 3-byte string.
+            <code><var>name</var></code> is a fully indexed array element (which may or may not have been defined) or a previously-defined scalar variable.
             The first byte is the length of the record the pointer points to:
         </p>
         <dl class="compact">
@@ -7945,10 +7950,16 @@ to interrupt a running program.  </p>
             The last two bytes are the pointer address (as returned by
             <code><a href="#VARPTR">VARPTR</a></code>) in little-endian order.
         </p>
+        <h5>Notes</h5>
+        <ul>
+            <li>
+                If <code><var>name</var></code> is an undefined array element, it will be implicitly allocated in the same way as if it had been used in an expression.
+            </li>
+        </ul>
         <h5>Errors</h5>
         <ul>
             <li>
-                <code><var>name</var></code> has not been previously defined: <samp>Illegal function call</samp>.
+                <code><var>name</var></code> is a scalar that has not been previously defined: <samp>Illegal function call</samp>.
             </li>
         </ul>
     </section>
@@ -7983,8 +7994,8 @@ to interrupt a running program.  </p>
             If a program line exists at a generated line number, a <code>*</code> is shown after the
             line number. To avoid overwriting this line, leave it empty and press <kbd>Enter</kbd>.
             To stop automatic line numbering, press <kbd>Ctrl</kbd>+<kbd>Break</kbd> or <kbd>Ctrl</kbd>+<kbd>C</kbd>. The line being edited at
-            that point is not saved. BASIC will return to command mode, even if <code>AUTO</code> was
-            run from a program line.
+            that point is not saved.
+            Also stops program execution and returns control to the user. Any further statements on the line will be ignored, also in direct mode.
         </p>
         <h5>Parameters</h5>
         <ul>
@@ -9011,6 +9022,7 @@ to interrupt a running program.  </p>
             Resumes execution of a program that has been halted by
             <code><a href="#STOP">STOP</a></code>, <code><a href="#END">END</a></code>,
             <kbd>Ctrl</kbd>+<kbd>C</kbd>, or  <kbd>Ctrl</kbd>+<kbd>Break</kbd>.
+            If run from a program, stops program execution and returns control to the user. Any further statements on the line will be ignored, also in direct mode.
         </p>
         <h5>Notes</h5>
         <ul>
@@ -9329,7 +9341,7 @@ to interrupt a running program.  </p>
         </code>
         <p>
             Deletes a range of lines from the program.
-            Also stops program execution and returns control to the user.
+            Also stops program execution and returns control to the user. Any further statements on the line will be ignored, also in direct mode.
         </p>
         <h5>Parameters</h5>
         <ul>
@@ -9629,6 +9641,7 @@ to interrupt a running program.  </p>
             Displays the specified program line with the cursor positioned for editing.
             <code><var>line_number</var></code> must be a line that exists in the program, or a period (.) to
             indicate the last line stored.
+            Also stops program execution and returns control to the user. Any further statements on the line will be ignored, also in direct mode.
         </p>
         <h5>Errors</h5>
         <ul>
@@ -9761,6 +9774,7 @@ to interrupt a running program.  </p>
         </code>
         <p>
             Raises the error with number <code><var>error_number</var></code>.
+            See the <a href="#errors">list of error numbers and messages</a>.
         </p>
         <h5>Parameters</h5>
         <ul>
@@ -11338,8 +11352,9 @@ to interrupt a running program.  </p>
         </code>
         <p>
             Loads the program stored in a file into memory.
-            Existing variables will be cleared and any program in memory will be erased. <code>LOAD</code> implies a
+            Existing variables will be cleared and any program in memory will be erased. <code>LOAD</code> implies
             <code><a href="#CLEAR">CLEAR</a></code>.
+            Also stops program execution and returns control to the user. Any further statements on the line will be ignored, also in direct mode.
         </p>
         <p>
             If <code>,R</code> is specified, keeps all data files open and runs the specified file.
@@ -11566,6 +11581,9 @@ to interrupt a running program.  </p>
         <p>
             Overlays the lines of a program from a plain-text program file into the existing program. The loaded
             lines overwrite existing lines if they have the same line number.
+        </p>
+        <p>
+            Also stops program execution and returns control to the user. Any further statements on the line will be ignored, also in direct mode.
         </p>
         <h5>Parameters</h5>
         <ul>
@@ -13626,6 +13644,9 @@ to interrupt a running program.  </p>
             It is an error to write <code>PLAY "G=VAR;"</code> or <code>PLAY "G=" + VARPTR$(VAR)</code>.
             Use <code>PLAY "G4"</code> or <code>PLAY "L=VAR;G"</code> or <code>PLAY "L=" + VARPTR$(VAR) + "G"</code> instead.
         </p>
+        <p>
+            Commands may optionally be separated by one semicolon <code>;</code>, but not by more than one.
+        </p>
         <h5>Errors</h5>
         <ul>
             <li>
@@ -14062,7 +14083,10 @@ to interrupt a running program.  </p>
                 </tr>
                 <tr>
                     <td><code>^^^^</code></td>
-                    <td>Specify that scientific notation <code>E+00</code> is to be used.</td>
+                    <td>
+                        Specify that scientific notation is to be used, with a mantissa and an exponent represented by <code>E+00</code>.
+                        In scientific notation, thousands separators will not be shown and any <code>,</code> character has the same effect as <code>#</code>.
+                    </td>
                 </tr>
             </table>
         </div>
@@ -14403,6 +14427,7 @@ to interrupt a running program.  </p>
             less than <code><var>old</var></code> remain unchanged.
             <code><var>new</var></code>, <code><var>old</var></code> are line numbers; the dot <code>.</code> signifies the last line edited.
             <code><var>increment</var></code> is a line number but must not be a dot or zero.
+            Also stops program execution and returns control to the user. Any further statements on the line will be ignored, also in direct mode.
         </p>
         <h5>Notes</h5>
         <ul>
@@ -14642,8 +14667,8 @@ to interrupt a running program.  </p>
         </code>
         <p>
             Executes a program.
-            Existing variables will be
-            cleared and any program in memory will be erased. <code>RUN</code> implies a <code><a href="#CLEAR">CLEAR</a></code>
+            Existing variables will be cleared. <code>RUN</code> implies <code><a href="#CLEAR">CLEAR</a></code>.
+            If <code><var>file_spec</var></code> is given, any program in memory will be erased.
             If <code>,R</code> is specified after <code><var>file_spec</var></code>, files are kept open; if not, all files are closed.
         </p>
         <h5>Parameters</h5>
@@ -14689,6 +14714,7 @@ to interrupt a running program.  </p>
             <li>
                 If <code><b>,A</b></code> is specified, the program will be saved in plain text format.
                 In this case, program execution will stop and control will be returned to the user.
+                Any further statements on teh line will be ignored, also in direct mode.
             </li>
             <li>
                 If <code><b>,P</b></code> is specified, the program will be saved in <a href="#protected-file-format">protected format</a>.
@@ -19349,6 +19375,7 @@ sending in patches, and documenting GW-BASIC's behaviour. Thank you all!</p>
 <li><a href="https://pypi.python.org/pypi/setuptools">Setuptools</a></li>
 <li><a href="http://www.libsdl.org">Simple DirectMedia Layer (SDL)</a></li>
 <li><a href="http://www.ferzkopp.net/wordpress/2016/01/02/sdl_gfx-sdl2_gfx/">SDL2_gfx</a></li>
+<li><a href="https://github.com/a-hurst/pysdl2-dll">pysdl2-dll</a></li>
 <li><a href="https://github.com/pyserial/pyserial">PySerial</a></li>
 <li><a href="https://github.com/pyserial/pyparallel">PyParallel</a></li>
 <li><a href="http://people.csail.mit.edu/hubert/pyaudio/">PyAudio</a></li>
