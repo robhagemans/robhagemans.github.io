@@ -649,11 +649,11 @@ dt code {
 
 <header>
     <h1>PC-BASIC documentation</h1>
-    <small>Version 2.0.6</small>
+    <small>Version 2.0.7</small>
 </header>
 
 <article>
-    <h2 id="top">PC-BASIC 2.0.6</h2>
+    <h2 id="top">PC-BASIC 2.0.7</h2>
     <p>
         <em>A free, cross-platform emulator for the GW-BASIC family of interpreters.</em>
     </p>
@@ -661,7 +661,7 @@ dt code {
         PC-BASIC is a free, cross-platform interpreter for GW-BASIC, Advanced BASIC (BASICA), PCjr Cartridge Basic and Tandy 1000 GWBASIC. It interprets these BASIC dialects with a high degree of accuracy, aiming for bug-for-bug compatibility. PC-BASIC emulates the most common video and audio hardware on which these BASICs used to run. PC-BASIC runs plain-text, tokenised and protected .BAS files. It implements floating-point arithmetic in the Microsoft Binary Format (MBF) and can therefore read and write binary data files created by GW-BASIC.
     </p>
     <p>
-        This is the documentation for <strong>PC-BASIC 2.0.6</strong>, last updated <em>2022-08-03 22:19:20</em>.<br>
+        This is the documentation for <strong>PC-BASIC 2.0.7</strong>, last updated <em>2023-04-02 20:43:10</em>.<br>
         It consists of the following documents:
     </p>
     <ul>
@@ -679,7 +679,7 @@ dt code {
     <h2 id="toc">Table of Contents</h2>
 
             <ul>
-                <li><a href="#top">PC-BASIC 2.0.6</a></li>
+                <li><a href="#top">PC-BASIC 2.0.7</a></li>
                 <li><a href="#quick-start-guide">Quick Start Guide</a>
                     <ul>
                         <li><a href="#installation">Installation</a></li>
@@ -1287,11 +1287,11 @@ to interrupt a running program.  </p>
                         <td>Pause. Press another key to resume. The latter key press will not be detected by BASIC.</td>
                     </tr>
                     <tr>
-                        <td><kbd>Ctrl</kbd>+<kbd>Prt Sc</kbd></td>
+                        <td><kbd>Ctrl</kbd>+<kbd>Print Screen</kbd></td>
                         <td>Toggle echoing screen output to the printer (or other device attached to <code>LPT1:</code>).</td>
                     </tr>
                     <tr>
-                        <td><kbd>Shift</kbd>+<kbd>Prt Sc</kbd></td>
+                        <td><kbd>Shift</kbd>+<kbd>Print Screen</kbd></td>
                         <td>Print the screen.</td>
                     </tr>
                     <tr>
@@ -1563,7 +1563,7 @@ to interrupt a running program.  </p>
                     Certain key combinations will be interpreted by the operating system or
                     window manager and cause special actions. For example, on most systems,
                     <kbd>Alt</kbd>+<kbd>F4</kbd> will terminate PC-BASIC unless
-                    the <a href="#--prevent_close"><code>prevent_close</code></a> option is set; <kbd>F1</kbd>
+                    the <a href="#--prevent-close"><code>prevent-close</code></a> option is set; <kbd>F1</kbd>
                     may open your operating system's help system. It may be possible to avoid
                     some of these effects by using the graphical interface in full-screen mode.
                 </li>
@@ -1932,6 +1932,14 @@ to interrupt a running program.  </p>
                 <table>
                     <tr>
                         <th>Preset</th><th>Emulation target</th>
+                    </tr>
+                    <tr>
+                        <td><code>gwbasic</code></td>
+                        <td>Microsoft GW-BASIC 3.23</td>
+                    </tr>
+                    <tr>
+                        <td><code>basica</code></td>
+                        <td>IBM BASICA.</td>
                     </tr>
                     <tr>
                         <td><code>pcjr</code></td>
@@ -3228,11 +3236,9 @@ to interrupt a running program.  </p>
                     <code><b>/dev/stdout</b></code> on Unix or <code><b>LPT1</b></code> on Windows.
                 </dd>
 
-                <dt><code><b>STDIO:</b>[<b>CRLF</b>]</code></dt>
+                <dt><code><b>STDIO:</b></code></dt>
                 <dd>
                     Output is written to the standard output of the calling shell.
-                    If <code><b>CRLF</b></code> is specified, PC-BASIC replaces <code>CR</code>
-                    characters with <code>LF</code> on its output. This is more intuitive on Unix shells.
                 </dd>
 
                 <dt><code><b>PARPORT:</b><var>port_number</var></code></dt>
@@ -3563,7 +3569,10 @@ to interrupt a running program.  </p>
             Choose BASIC dialect. Available dialects are:
             <dl class="compact">
                 <dt><code><b>advanced</b></code></dt>
-                <dd>Microsoft GW-BASIC and IBM BASICA</dd>
+                <dd>IBM BASICA</dd>
+
+                <dt><code><b>gwbasic</b></code></dt>
+                <dd>Microsoft GW-BASIC</dd>
 
                 <dt><code><b>pcjr</b></code></dt>
                 <dd>IBM PCjr Cartridge BASIC</dd>
@@ -11328,8 +11337,8 @@ to interrupt a running program.  </p>
         <ul>
             <li>
                 <code><var>key_id</var></code> is a numeric expression in the range
-                <code>[1&#8212;10]</code> (or <code>[1&#8212;12]</code>
-                when <code><a href="#--syntax">syntax</a>=tandy</code>).
+                <code>[1&#8212;12]</code> (or <code>[1&#8212;10]</code>
+                when <code><a href="#--syntax">syntax</a>=gwbasic</code>).
             </li>
             <li>
                 <code><var>string_value</var></code> is a string expression.
@@ -11445,7 +11454,7 @@ to interrupt a running program.  </p>
             </table>
         </div>
         <p>
-            Keys 15 to 20 are defined using the event trapping
+            Keys 15 to 25 are defined using the event trapping
             <code><a href="#KEY-event-def">KEY</a></code> definition statement.
         </p>
         <h5>Notes</h5>
@@ -11483,8 +11492,9 @@ to interrupt a running program.  </p>
         <ul>
             <li>
                 <code><var>key_id</var></code> is a numeric
-                expression in <code>[15&#8212;20]</code>
-                (or <code>[17&#8212;20]</code> when <code><a href="#--syntax">syntax</a>=tandy</code>).
+                expression in <code>[15&#8212;25]</code>
+                (or <code>[15&#8212;20]</code> when <code><a href="#--syntax">syntax</a>=gwbasic</code>, or
+                <code>[17&#8212;20]</code> when <code><a href="#--syntax">syntax</a>=tandy</code>).
             </li>
             <li>
                 <code><var>two_char_string</var></code> is a string expression of length 2. The first character is interpreted as a modifier
@@ -18830,7 +18840,7 @@ to interrupt a running program.  </p>
                     <td>36</td>
                 </tr>
                 <tr>
-                    <td><kbd>keypad *</kbd> <kbd>PrtSc</kbd></td>
+                    <td><kbd>keypad *</kbd> <kbd>Print Screen</kbd></td>
                     <td>37</td>
                 </tr>
                 <tr>
@@ -19413,7 +19423,7 @@ to interrupt a running program.  </p>
                     <td></td>
                 </tr>
                 <tr>
-                    <td><kbd>PrtSc</kbd></td>
+                    <td><kbd>Print Screen</kbd></td>
                     <td></td>
                     <td></td>
                     <td><code>00 72</code></td>
