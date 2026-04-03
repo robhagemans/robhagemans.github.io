@@ -21,6 +21,7 @@ p {
 
 img {
     margin: 0.2em 0 0.5em 0;
+    image-rendering: pixelated;
 }
 
 h1, h2 {
