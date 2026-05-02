@@ -1,4 +1,4 @@
-#!/usr/bin/env python2
+#!/usr/bin/env python
 
 import os
 import json
@@ -18,14 +18,14 @@ for root, dirs, files in sorted(os.walk('basicode/')):
     for name in sorted(files):
         isbc = [name.lower().endswith(t) for t in types]
         if True in isbc:
-            with open(os.path.join(root, name), 'r') as f:
+            with open(os.path.join(root, name), 'rb') as f:
                 for line in f:
-                    if line.strip().startswith('1000 '):
+                    if line.strip().startswith(b'1000 '):
                         try:
-                            title = line.split('REM')[1].strip() or name
+                            title = line.decode('latin-1').split('REM')[1].strip() or name
                             #title = ''.join(c for c in title if c.isalnum() or c in (' ', '-', '.', ',')).strip().title()
                         except IndexError:
                             title = ''
                         collection[root_name][os.path.join(root, name)] = title
 
-print json.dumps(collection)
+print(json.dumps(collection))
