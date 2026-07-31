@@ -121,7 +121,7 @@ async function showFont(fontobj) {
                 font.get_glyph('a')
             except KeyError:
                 sample = sample.encode('latin-1')
-            image = monobit.render(font, sample, direction='ltr f').as_image()
+            image = monobit.render_text(font, sample, direction='ltr').as_image()
             image = image.resize((image.width*2, image.height*2), resample=Image.NEAREST)
 
             image_path = temp_path + '.png'
